@@ -1,0 +1,247 @@
+.heroSection {
+  position: relative;
+  height: 100vh;
+  width: 100vw;
+  overflow: hidden;
+  background-color: #000;
+  display: flex;
+  align-items: center;
+}
+
+.bgContainer {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+}
+
+.bgVideo {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  filter: brightness(0.6);
+  will-change: transform, filter;
+}
+
+.overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: radial-gradient(circle at center, transparent 0%, rgba(0,0,0,0.4) 100%),
+              linear-gradient(to bottom, rgba(0,0,0,0.2) 0%, rgba(0,0,0,0.8) 100%);
+  z-index: 2;
+}
+
+.mouseGlow {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 800px;
+  height: 800px;
+  background: radial-gradient(circle, rgba(203, 161, 82, 0.15) 0%, rgba(203, 161, 82, 0) 70%);
+  pointer-events: none;
+  z-index: 3;
+  filter: blur(60px);
+}
+
+.contentWrapper {
+  position: relative;
+  z-index: 10;
+  width: 100%;
+  max-width: var(--max-width);
+  margin: 0 auto;
+  padding: 0 var(--container-padding);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.content {
+  max-width: 900px;
+}
+
+.labelWrapper {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+  margin-bottom: 2.5rem;
+}
+
+.labelLine {
+  width: 40px;
+  height: 1px;
+  background-color: var(--gold);
+}
+
+.label {
+  font-size: 0.75rem;
+  letter-spacing: 0.4em;
+  text-transform: uppercase;
+  font-weight: 700;
+  color: var(--gold);
+}
+
+.titleContainer {
+  margin-bottom: 3.5rem;
+}
+
+.title {
+  font-size: clamp(3rem, 8vw, 6.5rem);
+  font-weight: 800;
+  line-height: 1.1;
+  color: var(--foreground);
+  letter-spacing: -0.02em;
+}
+
+.ctaWrapper {
+  display: flex;
+  align-items: center;
+}
+
+.exploreBtn {
+  background: none;
+  border: none;
+  color: var(--foreground);
+  font-size: 0.85rem;
+  font-weight: 700;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  display: flex;
+  align-items: center;
+  gap: 1.2rem;
+  padding: 0;
+  cursor: pointer;
+  position: relative;
+}
+
+.btnLine {
+  width: 60px;
+  height: 1px;
+  background-color: rgba(255, 255, 255, 0.3);
+  position: relative;
+  overflow: hidden;
+}
+
+.btnLine::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background-color: var(--gold);
+  transition: transform 0.6s cubic-bezier(0.19, 1, 0.22, 1);
+}
+
+.exploreBtn:hover .btnLine::after {
+  transform: translateX(100%);
+}
+
+/* Side Info */
+.sideInfo {
+  display: flex;
+  flex-direction: column;
+  gap: 3rem;
+}
+
+.sideItem {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 0.5rem;
+}
+
+.rtl .sideItem {
+  align-items: flex-start;
+}
+
+.sideLabel {
+  font-size: 0.7rem;
+  font-weight: 700;
+  color: var(--gold);
+  opacity: 0.8;
+}
+
+.sideText {
+  font-size: 0.65rem;
+  letter-spacing: 0.2em;
+  font-weight: 600;
+  color: var(--foreground);
+  opacity: 0.4;
+  text-transform: uppercase;
+  writing-mode: vertical-rl;
+}
+
+.rtl .sideText {
+  writing-mode: vertical-lr;
+}
+
+/* Scroll Indicator */
+.scrollIndicator {
+  position: absolute;
+  bottom: 3rem;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.5rem;
+  z-index: 10;
+}
+
+.scrollText {
+  font-size: 0.6rem;
+  letter-spacing: 0.3em;
+  font-weight: 700;
+  color: var(--foreground);
+  opacity: 0.5;
+  text-transform: uppercase;
+}
+
+.scrollLine {
+  width: 1px;
+  height: 60px;
+  background-color: rgba(255, 255, 255, 0.1);
+  position: relative;
+  overflow: hidden;
+}
+
+.scrollProgress {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 30%;
+  background-color: var(--gold);
+}
+
+/* RTL Specifics */
+.rtl .labelWrapper {
+  flex-direction: row-reverse;
+}
+
+.rtl .exploreBtn {
+  flex-direction: row-reverse;
+}
+
+@media (max-width: 1024px) {
+  .sideInfo {
+    display: none;
+  }
+  .content {
+    max-width: 100%;
+  }
+}
+
+@media (max-width: 768px) {
+  .title {
+    font-size: 3.5rem;
+  }
+  .contentWrapper {
+    padding: 0 2rem;
+  }
+}

@@ -1,0 +1,121 @@
+.header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 1000;
+  padding: 1.5rem 0;
+  transition: all 0.3s ease;
+  background-color: transparent;
+  color: white; /* Default to white for transparent hero header */
+}
+
+.header.scrolled {
+  background-color: var(--bg-primary);
+  color: var(--text-primary);
+  padding: 1rem 0;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+}
+
+.container {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 0 2rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.logo {
+  z-index: 1000;
+}
+
+.logo a {
+  text-decoration: none;
+  display: block;
+}
+
+.logoImage {
+  height: 48px;
+  width: auto;
+  transition: transform 0.4s cubic-bezier(0.76, 0, 0.24, 1);
+}
+
+.logoImage:hover {
+  transform: scale(1.05);
+}
+
+.actions {
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+}
+
+.actions:hover button {
+  opacity: 0.5;
+}
+
+.actions button:hover {
+  opacity: 1 !important;
+  transform: scale(1.05);
+}
+
+.langBtn {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-weight: 600;
+  font-size: 0.9rem;
+  background: none;
+  border: none;
+  color: inherit;
+  cursor: pointer;
+  transition: all 0.4s cubic-bezier(0.76, 0, 0.24, 1);
+}
+
+.themeBtn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: none;
+  border: none;
+  color: inherit;
+  cursor: pointer;
+  padding: 0.5rem;
+  border-radius: 50%;
+  transition: all 0.4s cubic-bezier(0.76, 0, 0.24, 1);
+}
+
+.themeBtn svg {
+  transition: transform 0.5s var(--transition-bezier);
+}
+
+.themeBtn:hover svg {
+  transform: rotate(30deg) scale(1.1);
+}
+
+.menuBtn {
+  background: none;
+  border: none;
+  color: inherit;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.4s cubic-bezier(0.76, 0, 0.24, 1);
+}
+
+.menuBtn svg rect {
+  transition: all 0.4s cubic-bezier(0.76, 0, 0.24, 1);
+  transform-origin: right;
+}
+
+.menuBtn:hover svg rect:last-child {
+  width: 28px;
+  x: 0;
+}
+
+[dir="rtl"] .menuBtn svg rect {
+  transform-origin: left;
+}
+

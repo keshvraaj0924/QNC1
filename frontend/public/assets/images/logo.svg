@@ -1,0 +1,23 @@
+<svg width="420" height="120" viewBox="0 0 420 120" xmlns="http://www.w3.org/2000/svg">
+  <!-- Official QNC Emblem (Q-Cube Style) -->
+  <g transform="translate(15, 10)">
+    <!-- Top-Left Segment (Blue) -->
+    <path d="M 5,5 H 75 L 110,40 H 28 V 80 L 5,103 Z" fill="#1A75BB"/>
+    
+    <!-- Right Pillar Segment (Purple) -->
+    <path d="M 82,45 L 115,12 L 115,115 L 82,82 Z" fill="#6658A6"/>
+    
+    <!-- Bottom Base Segment (Green) -->
+    <path d="M 28,90 L 80,90 L 110,120 H 12 Z" fill="#3F8E43" transform="translate(0, -5)"/>
+  </g>
+
+  <!-- High-Fidelity Typography (White for dark enterprise theme) -->
+  <g transform="translate(145, 78)">
+    <text font-family="'Syne', 'Inter', sans-serif" font-weight="900" font-size="78" letter-spacing="-0.04em" fill="#FFFFFF">QNC</text>
+  </g>
+  
+  <!-- Arabic Corporate Name Section -->
+  <g transform="translate(150, 110)">
+    <text font-family="'Cairo', sans-serif" font-weight="800" font-size="22" letter-spacing="0.05em" fill="#FFFFFF">شركة قـدرات الـوطـنـيـة</text>
+  </g>
+</svg>

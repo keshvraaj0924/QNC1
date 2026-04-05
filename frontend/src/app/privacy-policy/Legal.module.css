@@ -1,0 +1,85 @@
+.main {
+  background-color: var(--background);
+  color: var(--foreground);
+  min-height: 100vh;
+}
+
+.heroSection {
+  padding: 15rem 5% 5rem 5%;
+  border-bottom: 1px solid rgba(255,255,255,0.1);
+}
+
+.title {
+  font-size: clamp(3rem, 6vw, 6rem);
+  font-weight: 800;
+  letter-spacing: -0.03em;
+  margin: 0 0 1rem 0;
+}
+
+.lastUpdated {
+  opacity: 0.5;
+  font-family: monospace;
+  font-size: 1rem;
+}
+
+.contentSection {
+  padding: 5rem 5% 10rem 5%;
+}
+
+.container {
+  max-width: 800px; /* Narrow readable width for text */
+}
+
+.prose h2 {
+  font-size: 2rem;
+  font-weight: 700;
+  margin: 3rem 0 1rem 0;
+  color: var(--gold);
+}
+
+.prose h2:first-child {
+  margin-top: 0;
+}
+
+.textContent p {
+  font-size: 1.25rem;
+  line-height: 1.8;
+  opacity: 0.8;
+  margin-bottom: 0.5rem;
+}
+
+.bullet {
+  display: block;
+  padding-left: 1.5rem;
+  margin-bottom: 0.25rem;
+  color: #fff;
+  opacity: 0.9;
+}
+
+.introPara {
+  font-size: 1.35rem;
+  line-height: 1.8;
+  opacity: 0.9;
+  margin-bottom: 1.5rem;
+  color: #fff;
+  font-weight: 400;
+}
+
+.introductionBlock {
+  background: rgba(255, 255, 255, 0.03);
+  padding: 3rem;
+  border-radius: 8px;
+  border-left: 4px solid var(--gold);
+  margin-bottom: 5rem;
+}
+
+.policySection {
+  margin-bottom: 4rem;
+}
+
+.divider {
+  height: 1px;
+  width: 20%;
+  background: rgba(255, 255, 255, 0.1);
+  margin-top: 3rem;
+}

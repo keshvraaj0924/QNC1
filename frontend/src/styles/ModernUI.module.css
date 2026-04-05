@@ -1,0 +1,89 @@
+/* MODERN UI ANIMATION UTILITIES - Inspired by React Bits & Magic UI */
+
+.blurReveal {
+  filter: blur(10px);
+  opacity: 0;
+  transform: translateY(20px);
+}
+
+.spotlightBox {
+  position: relative;
+  overflow: hidden;
+  border-radius: 24px;
+  background: rgba(255, 255, 255, 0.02);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.spotlightBox:hover {
+  border-color: rgba(203, 161, 82, 0.4);
+  background: rgba(255, 255, 255, 0.04);
+  transform: translateY(-8px);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+}
+
+.magnetWrapper {
+  display: inline-block;
+  will-change: transform;
+}
+
+.glow {
+  position: absolute;
+  pointer-events: none;
+  background: radial-gradient(
+    600px circle at var(--x, 0px) var(--y, 0px),
+    rgba(203, 161, 82, 0.1),
+    transparent 40%
+  );
+  z-index: 1;
+  inset: -1px;
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+
+.spotlightBox:hover .glow {
+  opacity: 1;
+}
+
+.shinyText {
+  background: linear-gradient(
+    120deg,
+    rgba(203, 161, 82, 0) 40%,
+    rgba(203, 161, 82, 0.8) 50%,
+    rgba(203, 161, 82, 0) 60%
+  );
+  background-size: 200% 100%;
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  animation: shine 3s infinite linear;
+}
+
+@keyframes shine {
+  0% { background-position: 200% 0; }
+  100% { background-position: -200% 0; }
+}
+
+.borderBeam {
+  position: absolute;
+  inset: 0;
+  border: 2px solid transparent;
+  border-radius: inherit;
+  mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  mask-composite: exclude;
+  pointer-events: none;
+}
+
+.borderBeam::after {
+  content: "";
+  position: absolute;
+  width: 100px;
+  height: 100px;
+  background: linear-gradient(to right, transparent, #CBA152, transparent);
+  offset-path: rect(0 100% 100% 0 round 24px);
+  animation: beam 4s infinite linear;
+}
+
+@keyframes beam {
+  to { offset-distance: 100%; }
+}

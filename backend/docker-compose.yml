@@ -1,0 +1,36 @@
+version: '3.8'
+
+services:
+  # Next.js Frontend 
+  qnc-frontend:
+    build: 
+      context: ../frontend
+      dockerfile: Dockerfile
+    ports:
+      - "3000:3000"
+    environment:
+      - NODE_ENV=production
+    restart: always
+
+  # Node.js API Gateway (Concept)
+  # qnc-api-gateway:
+  #   ...
+
+  # Admin Service (JWT Secured)
+  qnc-admin-service:
+    build:
+      context: ./admin-service
+      dockerfile: Dockerfile
+    ports:
+      - "4000:4000"
+    environment:
+      - NODE_ENV=production
+      - JWT_SECRET=qnc-super-secret-key-2026
+    restart: always
+
+  # Redis for Caching (High Performance)
+  redis:
+    image: redis:alpine
+    ports:
+      - "6379:6379"
+    restart: always

@@ -1,0 +1,271 @@
+.section {
+  position: relative;
+  padding: 15vh 0;
+  background-color: var(--background);
+  z-index: 10;
+  overflow: visible; /* Prevent clipping of parallax elements */
+  transition: background-color 0.5s ease;
+}
+
+.container {
+  max-width: var(--max-width);
+  margin: 0 auto;
+  padding: 0 5%;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: 1.15fr 1fr;
+  gap: clamp(4rem, 10vw, 15rem);
+  align-items: center;
+}
+
+.contentCol {
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  z-index: 20; /* Keep text above the image column */
+}
+
+.title {
+  font-size: clamp(2.5rem, 4.5vw, 4.2rem);
+  font-weight: 900;
+  line-height: 0.95;
+  letter-spacing: -0.04em;
+  color: var(--foreground);
+  text-transform: uppercase;
+  margin: 0 0 3rem 0;
+  max-width: 14ch;
+  position: relative;
+}
+
+.blockWord {
+  display: block;
+  width: 100%;
+}
+
+.description {
+  font-size: 1.15rem;
+  line-height: 1.6;
+  color: var(--sub-text);
+  max-width: 450px;
+  margin-bottom: 4rem;
+}
+
+.talentExcellence {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 3rem;
+  padding: 3rem;
+  background: var(--navy);
+  backdrop-filter: blur(10px);
+  border: 1px solid var(--border-color);
+  border-radius: 20px;
+  max-width: 600px;
+  margin-top: 2rem;
+  transition: transform 0.4s ease, border-color 0.4s ease, background-color 0.5s ease;
+}
+
+.talentExcellence:hover {
+  transform: translateY(-10px);
+  border-color: rgba(255, 255, 255, 0.2);
+}
+
+.talentVisual {
+  position: relative;
+  width: 160px;
+  height: 200px;
+  flex-shrink: 0;
+  clip-path: polygon(15% 0%, 100% 0%, 85% 100%, 0% 100%);
+  overflow: hidden;
+}
+
+.talentImg {
+  object-fit: cover;
+  transition: scale 0.8s ease;
+}
+
+.talentExcellence:hover .talentImg {
+  scale: 1.1;
+}
+
+.talentGlow {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(45deg, rgba(203, 161, 82, 0.1), transparent);
+  pointer-events: none;
+}
+
+.talentInfo {
+  display: flex;
+  flex-direction: column;
+  gap: 0.8rem;
+}
+
+.talentTag {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  font-size: 0.7rem;
+  color: var(--qnc-gold, #CBA152);
+  font-weight: 700;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+}
+
+.tagLine {
+  width: 20px;
+  height: 2px;
+  background-color: var(--qnc-gold, #CBA152);
+}
+
+.talentTitle {
+  font-size: 1.8rem;
+  font-weight: 900;
+  color: var(--foreground);
+  line-height: 1.1;
+  text-transform: uppercase;
+  margin: 0;
+}
+
+.talentText {
+  font-size: 1rem;
+  color: var(--sub-text);
+  line-height: 1.5;
+  margin: 0;
+}
+
+/* Image/Parallax Column */
+.imageCol {
+  position: relative;
+  height: 80vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.parallaxContainer {
+  position: relative;
+  width: 100%;
+  height: 120%; /* Taller for parallax room */
+  overflow: hidden;
+  box-shadow: 0 50px 100px rgba(0,0,0,0.5);
+}
+
+.architectureImg {
+  object-fit: cover;
+}
+
+.imageOverlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(0deg, rgba(0,0,0,0.4) 0%, rgba(0,0,0,0) 40%);
+}
+
+.statsBox {
+  position: absolute;
+  bottom: 8%;
+  right: 0;
+  background-color: var(--qnc-blue);
+  padding: 3rem 4rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  z-index: 10;
+  box-shadow: 0 40px 80px rgba(0,0,0,0.4);
+}
+
+.statNum {
+  font-size: 4.5rem;
+  font-weight: 900;
+  letter-spacing: -0.05em;
+  color: #fff;
+  line-height: 0.8;
+}
+
+.statLabel {
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.3em;
+  color: #fff;
+  margin-top: 1rem;
+  text-transform: uppercase;
+}
+
+[dir="rtl"] .grid {
+  grid-template-columns: 1.25fr 1fr;
+}
+
+[dir="rtl"] .talentExcellence {
+  flex-direction: row-reverse;
+}
+
+[dir="rtl"] .talentVisual {
+  clip-path: polygon(0% 0%, 85% 0%, 100% 100%, 15% 100%);
+}
+
+[dir="rtl"] .talentTag {
+  flex-direction: row-reverse;
+}
+
+[dir="rtl"] .statsBox {
+  right: auto;
+  left: -2rem;
+}
+
+@media (max-width: 1024px) {
+  .grid {
+    grid-template-columns: 1fr;
+    gap: 5rem;
+  }
+  .imageCol {
+    height: 50vh;
+    order: -1;
+  }
+  .statsBox {
+    position: relative;
+    right: 0;
+    left: 0;
+    bottom: 0;
+    margin-top: -3rem;
+    padding: 2rem 3rem;
+    align-self: center;
+  }
+  [dir="rtl"] .statsBox {
+    left: 0;
+  }
+}
+
+@media (max-width: 768px) {
+  .section {
+    padding: 8vh 0;
+  }
+  .title {
+    font-size: 2.8rem;
+  }
+  .talentExcellence {
+    padding: 2rem;
+    gap: 2rem;
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  .talentVisual {
+    width: 100%;
+    height: 140px;
+    clip-path: none;
+    border-radius: 12px;
+  }
+  .talentTitle {
+    font-size: 1.4rem;
+  }
+  .statNum {
+    font-size: 3rem;
+  }
+}

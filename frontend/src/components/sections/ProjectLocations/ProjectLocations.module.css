@@ -1,0 +1,289 @@
+.section {
+  position: relative;
+  padding: 12vh 0;
+  background-color: var(--background);
+  z-index: 10;
+  overflow: hidden;
+  transition: background-color 0.5s ease;
+}
+
+.container {
+  max-width: var(--max-width);
+  margin: 0 auto;
+  padding: 0 var(--container-padding);
+}
+
+.header {
+  margin-bottom: 2rem;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.title {
+  font-size: clamp(2.5rem, 5vw, 4rem);
+  font-weight: 800;
+  line-height: 1;
+  letter-spacing: -0.02em;
+  color: #fff;
+  text-transform: uppercase;
+  margin: 1.5rem 0 0;
+  display: flex;
+  justify-content: center;
+}
+
+.subtitle {
+  font-size: 1.1rem;
+  color: var(--sub-text);
+  max-width: 600px;
+  line-height: 1.6;
+}
+
+.mapWrapper {
+  position: relative;
+  width: 100%;
+  max-width: 900px;
+  margin: 0 auto;
+  aspect-ratio: 16/11;
+}
+
+.mapSvg {
+  width: 100%;
+  height: 100%;
+  overflow: visible;
+}
+
+.mainMapPath {
+  fill: var(--navy);
+  stroke: var(--border-color);
+  stroke-width: 0.5px;
+  transition: all 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.locationGroup {
+  cursor: pointer;
+}
+
+.locationPoint {
+  fill: var(--gold);
+  stroke: #fff;
+  stroke-width: 0.2px;
+  filter: drop-shadow(0 0 8px var(--gold));
+}
+
+.pulseRing {
+  fill: var(--gold);
+  pointer-events: none;
+  transform-origin: center;
+  animation: ping 3s cubic-bezier(0, 0, 0.2, 1) infinite;
+  opacity: 0.4;
+}
+
+@keyframes ping {
+  75%, 100% {
+    transform: scale(2.5);
+    opacity: 0;
+  }
+}
+
+.infoCard {
+  position: absolute;
+  min-width: 220px;
+  background: var(--header-bg);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid var(--border-color);
+  padding: 1.5rem;
+  border-radius: 4px;
+  z-index: 50;
+  pointer-events: none;
+  box-shadow: 0 20px 50px rgba(0,0,0,0.4);
+}
+
+.cardGlow {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: radial-gradient(circle at 50% 0%, rgba(26, 117, 187, 0.2) 0%, transparent 70%);
+  pointer-events: none;
+}
+
+.cardTitle {
+  font-size: 1.1rem;
+  font-weight: 800;
+  color: var(--foreground);
+  margin-bottom: 1rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.projectList {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.projectList li {
+  font-size: 0.75rem;
+  color: var(--sub-text);
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.projectList li::before {
+  content: '';
+  width: 4px;
+  height: 4px;
+  background-color: var(--qnc-blue);
+  border-radius: 50%;
+}
+
+[dir="rtl"] .infoCard {
+  text-align: right;
+}
+
+[dir="rtl"] .projectList li {
+  flex-direction: row-reverse;
+}
+
+/* Industries We Serve Section */
+.mapDivider {
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+  margin: 6rem 0 4rem;
+  opacity: 0.6;
+}
+
+.dividerLine {
+  flex: 1;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+}
+
+.dividerText {
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.3em;
+  color: var(--sub-text);
+  white-space: nowrap;
+}
+
+.sectorsGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 2rem;
+  margin-top: 4rem;
+}
+
+.sectorCardWrapper {
+  border-radius: 24px;
+}
+
+.sectorCard {
+  padding: 2.2rem 1.8rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 1rem;
+  transition: all 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+  height: 100%;
+  position: relative;
+  overflow: hidden;
+  border-radius: 24px;
+}
+
+.sectorCard::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, var(--accent-blue), transparent);
+  transform: translateX(-100%);
+  transition: transform 0.6s ease;
+}
+
+.sectorCard:hover {
+  background: rgba(255, 255, 255, 0.06);
+  border-color: rgba(var(--accent-blue-rgb), 0.4);
+  transform: translateY(-10px);
+  box-shadow: 0 30px 60px rgba(0, 0, 0, 0.4);
+}
+
+.sectorCard:hover::before {
+  transform: translateX(100%);
+}
+
+.sectorIconWrapper {
+  width: 60px;
+  height: 60px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(203, 161, 82, 0.1);
+  border-radius: 16px;
+  color: var(--gold);
+  margin-bottom: 0.5rem;
+  transition: all 0.4s ease;
+}
+
+.sectorCard:hover .sectorIconWrapper {
+  background: var(--gold);
+  color: #000;
+  transform: scale(1.1) rotate(5deg);
+}
+
+.sectorContent {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+
+.sectorTitle {
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: var(--foreground);
+  line-height: 1.3;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+/* Media Queries Addition */
+@media (min-width: 1800px) {
+  .sectorsGrid {
+    grid-template-columns: repeat(4, 1fr);
+    gap: 3rem;
+  }
+}
+
+@media (max-width: 1024px) {
+  .sectorsGrid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 640px) {
+  .sectorsGrid {
+    grid-template-columns: 1fr;
+  }
+  .mapDivider {
+    margin: 4rem 0 3rem;
+  }
+  .sectorCard {
+    padding: 2rem;
+  }
+}
+
+[dir="rtl"] .sectorCard {
+  text-align: center;
+}

@@ -1,0 +1,331 @@
+.main {
+  min-height: 100vh;
+  background: #050505;
+  color: white;
+}
+
+.loader {
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #000;
+  color: #CBA152;
+}
+
+.spin {
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+.heroSection {
+  padding: 160px 0 80px;
+  background: linear-gradient(to bottom, #0a0a0a, #050505);
+  text-align: center;
+}
+
+.heroContent {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 0 24px;
+}
+
+.title {
+  font-size: 56px;
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  margin-bottom: 24px;
+  background: linear-gradient(135deg, #fff 0%, #888 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.subtitle {
+  font-size: 20px;
+  color: #888;
+  line-height: 1.6;
+}
+
+.rolesSection {
+  padding: 80px 0 120px;
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 24px;
+}
+
+.sectionHeader {
+  margin-bottom: 64px;
+  text-align: center;
+}
+
+.sectionTitle {
+  font-size: 32px;
+  font-weight: 700;
+  margin-bottom: 16px;
+}
+
+.titleUnderline {
+  width: 60px;
+  height: 3px;
+  background: #CBA152;
+  margin: 0 auto;
+}
+
+.rolesGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(360px, 1fr));
+  gap: 32px;
+}
+
+.roleCard {
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 20px;
+  padding: 32px;
+  display: flex;
+  flex-direction: column;
+  transition: all 0.3s ease;
+  backdrop-filter: blur(10px);
+}
+
+.roleCard:hover {
+  background: rgba(255, 255, 255, 0.05);
+  border-color: rgba(203, 161, 82, 0.3);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+}
+
+.roleHeader {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin-bottom: 24px;
+}
+
+.roleIcon {
+  color: #CBA152;
+}
+
+.roleTitle {
+  font-size: 20px;
+  font-weight: 700;
+  margin: 0;
+}
+
+.roleMeta {
+  display: flex;
+  gap: 24px;
+  margin-bottom: 20px;
+}
+
+.metaItem {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: #666;
+  font-size: 14px;
+}
+
+.roleDesc {
+  font-size: 15px;
+  color: #999;
+  line-height: 1.6;
+  margin-bottom: 32px;
+  flex-grow: 1;
+}
+
+.applyBtn {
+  background: white;
+  color: black;
+  border: none;
+  padding: 14px 28px;
+  border-radius: 12px;
+  font-weight: 700;
+  font-size: 14px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.applyBtn:hover {
+  background: #CBA152;
+  color: white;
+  transform: translateY(-2px);
+}
+
+/* MODAL */
+.modalOverlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.85);
+  backdrop-filter: blur(20px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 2000;
+  padding: 24px;
+}
+
+.modal {
+  background: #0f0f0f;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 32px;
+  width: 100%;
+  max-width: 500px;
+  padding: 48px;
+  position: relative;
+  box-shadow: 0 30px 60px rgba(0, 0, 0, 0.8);
+}
+
+.closeBtn {
+  position: absolute;
+  top: 24px;
+  right: 24px;
+  background: none;
+  border: none;
+  color: #666;
+  cursor: pointer;
+  transition: color 0.2s ease;
+}
+
+.closeBtn:hover {
+  color: white;
+}
+
+.modalTitle {
+  font-size: 24px;
+  font-weight: 700;
+  margin-bottom: 8px;
+}
+
+.modalSubtitle {
+  font-size: 16px;
+  color: #CBA152;
+  margin-bottom: 32px;
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.field label {
+  font-size: 13px;
+  font-weight: 500;
+  color: #666;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.field input {
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 12px;
+  padding: 14px 18px;
+  color: white;
+  font-size: 15px;
+  transition: all 0.3s ease;
+}
+
+.field input:focus {
+  outline: none;
+  border-color: #CBA152;
+  background: rgba(255, 255, 255, 0.06);
+}
+
+.fileField {
+  margin-top: 8px;
+}
+
+.fileLabel {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 16px;
+  background: rgba(203, 161, 82, 0.05);
+  border: 2px dashed rgba(203, 161, 82, 0.2);
+  border-radius: 12px;
+  color: #CBA152;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.fileLabel:hover {
+  background: rgba(203, 161, 82, 0.1);
+  border-color: #CBA152;
+}
+
+.submitBtn {
+  margin-top: 12px;
+  background: #CBA152;
+  color: white;
+  border: none;
+  padding: 16px;
+  border-radius: 14px;
+  font-weight: 700;
+  font-size: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.submitBtn:hover {
+  background: #e67e22;
+  transform: translateY(-2px);
+  box-shadow: 0 10px 20px rgba(203, 161, 82, 0.3);
+}
+
+.submitBtn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.error {
+  color: #ff4d4d;
+  font-size: 13px;
+  text-align: center;
+}
+
+.successState {
+  text-align: center;
+  padding: 40px 0;
+}
+
+.successIcon {
+  color: #27ae60;
+  margin-bottom: 24px;
+}
+
+/* RESPONSIVE */
+@media (max-width: 768px) {
+  .title {
+    font-size: 40px;
+  }
+  .rolesGrid {
+    grid-template-columns: 1fr;
+  }
+  .modal {
+    padding: 32px 24px;
+  }
+}

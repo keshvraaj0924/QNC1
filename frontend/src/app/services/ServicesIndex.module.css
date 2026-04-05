@@ -1,0 +1,133 @@
+.main {
+  background-color: var(--background);
+  color: var(--foreground);
+  min-height: 100vh;
+}
+
+.heroSection {
+  padding: 15rem 5% 5rem 5%;
+  text-align: center;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.title {
+  font-size: clamp(3rem, 6vw, 6rem);
+  font-weight: 800;
+  letter-spacing: -0.03em;
+  margin: 0 0 1.5rem 0;
+}
+
+.subtitle {
+  font-size: 1.5rem;
+  opacity: 0.7;
+  max-width: 700px;
+  margin: 0 auto;
+}
+
+.gridSection {
+  padding: 5rem 5% 10rem 5%;
+}
+
+.container {
+  max-width: 1400px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 3rem;
+}
+
+.cardWrapper {
+  display: block;
+}
+
+.card {
+  display: flex;
+  flex-direction: column;
+  background: rgba(255, 255, 255, 0.02);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  border-radius: 8px;
+  overflow: hidden;
+  text-decoration: none;
+  color: inherit;
+  transition: transform 0.4s cubic-bezier(0.76, 0, 0.24, 1), border-color 0.4s ease;
+  height: 100%;
+}
+
+.card:hover {
+  transform: translateY(-10px);
+  border-color: var(--qnc-blue);
+}
+
+.imageContainer {
+  position: relative;
+  width: 100%;
+  padding-top: 60%; /* 16:9 aspect ratio */
+  overflow: hidden;
+}
+
+.imageOverlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(to top, rgba(0,0,0,0.8), transparent);
+  z-index: 2;
+  transition: opacity 0.4s ease;
+}
+
+.card:hover .imageOverlay {
+  opacity: 0.4;
+}
+
+.serviceImage {
+  object-fit: cover;
+  z-index: 1;
+  transition: transform 0.6s cubic-bezier(0.76, 0, 0.24, 1);
+}
+
+.card:hover .serviceImage {
+  transform: scale(1.05);
+}
+
+.cardContent {
+  padding: 2.5rem;
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
+
+.cardContent h3 {
+  font-size: 1.5rem;
+  font-weight: 700;
+  margin: 0 0 1rem 0;
+}
+
+.cardContent p {
+  font-size: 1rem;
+  line-height: 1.6;
+  opacity: 0.7;
+  margin: 0 0 2rem 0;
+  flex: 1;
+}
+
+.readMore {
+  font-weight: 600;
+  color: var(--qnc-blue);
+  font-size: 0.95rem;
+  display: block;
+  margin-top: auto;
+}
+
+@media (max-width: 1024px) {
+  .container {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 2rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .container {
+    grid-template-columns: 1fr;
+  }
+}

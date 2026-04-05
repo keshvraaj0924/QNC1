@@ -1,0 +1,54 @@
+.globalHideCursor, 
+.globalHideCursor *, 
+.globalHideCursor a, 
+.globalHideCursor button {
+  cursor: none !important;
+}
+
+.primaryCursor {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 10px;
+  height: 10px;
+  background-color: white;
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 999999;
+  /* Centering math */
+  margin-top: -5px;
+  margin-left: -5px; 
+  will-change: transform;
+}
+
+.secondaryCursor {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 40px;
+  height: 40px;
+  border: 1px solid rgba(255, 255, 255, 0.4);
+  background-color: transparent;
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 999998;
+  mix-blend-mode: difference;
+  
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  
+  /* Centering */
+  margin-top: -20px;
+  margin-left: -20px;
+  will-change: transform, width, height, border, background-color;
+}
+
+.cursorText {
+  color: white;
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+  mix-blend-mode: normal; 
+}

@@ -1,0 +1,143 @@
+.sectorsWrapper {
+  padding: 8rem 5%;
+  background-color: var(--background);
+}
+
+.container {
+  max-width: 1400px;
+  margin: 0 auto;
+}
+
+.headerRow {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  margin-bottom: 4rem;
+  border-bottom: 1px solid rgba(0,0,0,0.1);
+  padding-bottom: 1.5rem;
+}
+
+.sectionTitle {
+  font-size: clamp(2.5rem, 4vw, 4rem);
+  font-weight: 800;
+  margin: 0;
+  color: var(--navy);
+  letter-spacing: -0.02em;
+}
+
+.tabList {
+  display: flex;
+  gap: 3rem;
+}
+
+.tabBtn {
+  background: none;
+  border: none;
+  font-size: 1.15rem;
+  font-weight: 600;
+  color: var(--navy);
+  opacity: 0.5;
+  padding: 0 0 1rem 0;
+  position: relative;
+  transition: opacity 0.3s ease;
+}
+
+.tabBtn:hover, .tabBtn.active {
+  opacity: 1;
+}
+
+.activeIndicator {
+  position: absolute;
+  bottom: -1.6rem; /* aligns with border-bottom of headerRow */
+  left: 0;
+  width: 100%;
+  height: 3px;
+  background-color: var(--gold);
+}
+
+.contentArea {
+  position: relative;
+  min-height: 500px; /* Prevent layout dancing during AnimatePresence exit/enter */
+}
+
+.tabContent {
+  display: grid;
+  grid-template-columns: 1fr 1.2fr;
+  gap: 4rem;
+  align-items: center;
+}
+
+.textContent {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.tabHeadline {
+  font-size: 2.5rem;
+  font-weight: 700;
+  color: var(--navy);
+  margin: 0;
+}
+
+.tabDesc {
+  font-size: 1.25rem;
+  line-height: 1.6;
+  opacity: 0.8;
+  margin: 0;
+}
+
+.exploreBtn {
+  align-self: flex-start;
+  margin-top: 2rem;
+  background: transparent;
+  color: var(--gold);
+  border: 1px solid var(--gold);
+  padding: 1rem 2rem;
+  font-size: 1rem;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  transition: all 0.3s ease;
+}
+
+.exploreBtn:hover {
+  background: var(--gold);
+  color: var(--navy);
+}
+
+.imageContainer {
+  position: relative;
+  aspect-ratio: 16/10;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+}
+
+.tabImage {
+  object-fit: cover;
+}
+
+@media (max-width: 1024px) {
+  .headerRow {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 2rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .tabList {
+    overflow-x: auto;
+    width: 100%;
+    padding-bottom: 5px;
+  }
+  
+  .tabContent {
+    grid-template-columns: 1fr;
+  }
+
+  .contentArea {
+    min-height: auto;
+  }
+}

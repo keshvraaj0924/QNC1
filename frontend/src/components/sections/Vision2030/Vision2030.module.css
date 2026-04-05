@@ -1,0 +1,105 @@
+.visionSection {
+  background-color: var(--background);
+  color: var(--foreground);
+  padding: 8rem 5%;
+  border-top: 1px solid rgba(0,0,0,0.05);
+}
+
+.container {
+  max-width: 1400px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr 1.5fr;
+  gap: 6rem;
+  align-items: center;
+}
+
+.textBlock {
+  max-width: 500px;
+}
+
+.label {
+  color: var(--gold);
+  text-transform: uppercase;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  font-size: 0.9rem;
+  display: block;
+  margin-bottom: 1.5rem;
+}
+
+.headline {
+  font-size: clamp(2.5rem, 4vw, 3.5rem);
+  font-weight: 800;
+  line-height: 1.1;
+  margin-bottom: 2rem;
+  letter-spacing: -0.02em;
+}
+
+.paragraph {
+  font-size: 1.1rem;
+  line-height: 1.6;
+  opacity: 0.8;
+}
+
+.portraits {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2rem;
+}
+
+.portraitCard {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.imageWrapper {
+  position: relative;
+  aspect-ratio: 3/4;
+  overflow: hidden;
+  border-radius: 4px;
+  background-color: #e5e5e5;
+}
+
+.image {
+  object-fit: cover;
+  filter: grayscale(20%) contrast(1.1); /* Dignified corporate treatment */
+  transition: transform 0.6s ease;
+}
+
+.portraitCard:hover .image {
+  transform: scale(1.03);
+}
+
+.leaderTitle {
+  font-size: 0.85rem;
+  text-transform: uppercase;
+  color: var(--gold);
+  letter-spacing: 0.05em;
+  margin: 0 0 0.5rem 0;
+}
+
+.leaderName {
+  font-size: 1.25rem;
+  font-weight: 600;
+  margin: 0;
+}
+
+@media (max-width: 1024px) {
+  .container {
+    grid-template-columns: 1fr;
+    gap: 4rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .portraits {
+    grid-template-columns: 1fr;
+    gap: 4rem;
+  }
+  .imageWrapper {
+    max-width: 400px;
+    margin: 0 auto;
+  }
+}

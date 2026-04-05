@@ -1,0 +1,325 @@
+:root {
+  /* SRMG-Inspired Premium Palette & QNC Logo Colors */
+  --qnc-blue: #1A75BB;
+  --qnc-green: #3F8E43;
+  --qnc-gold: #CBA152;
+  --qnc-purple: #6658A6;
+  
+  --background: #080808; 
+  --foreground: #ffffff;
+  --navy: #080808;
+  --gold: var(--qnc-gold); /* FIX: correctly map gold */
+  
+  --sub-text: rgba(255, 255, 255, 0.6);
+  --border-color: rgba(255, 255, 255, 0.1);
+  --header-bg: rgba(8, 8, 8, 0.8);
+
+  /* Shared Interactive Card tokens */
+  --card-bg: rgba(255, 255, 255, 0.02);
+  --card-bg-hover: rgba(255, 255, 255, 0.04);
+  
+  --font-outfit: var(--font-outfit), 'Inter', sans-serif;
+  --font-syne: var(--font-syne), 'Inter', sans-serif;
+  --font-cairo: var(--font-cairo), sans-serif;
+
+  --font-heading: var(--font-syne);
+  --font-body: var(--font-outfit);
+  
+  --font-size-h1: clamp(4rem, 8vw, 9rem);
+  --font-size-h2: clamp(3rem, 6vw, 5rem);
+  --font-size-body: clamp(1rem, 2vw, 1.25rem);
+  
+  --transition-medium: 0.5s var(--transition-bezier);
+  --transition-slow: 1.2s var(--transition-bezier);
+  --transition-bezier: cubic-bezier(0.76, 0, 0.24, 1);
+  --glass-bg: rgba(255, 255, 255, 0.03);
+  --glass-border: rgba(255, 255, 255, 0.08);
+  
+  --max-width: 1440px;
+  --container-padding: 5%;
+}
+
+@media (min-width: 1800px) {
+  :root {
+    --max-width: 1800px;
+    --container-padding: 8%;
+  }
+}
+
+@media (min-width: 2500px) {
+  :root {
+    --max-width: 2200px;
+    --container-padding: 12%;
+  }
+}
+
+[data-theme="light"] {
+  --background: #f8f9fa;
+  --foreground: #0a0a0a;
+  --navy: #f8f9fa;
+  --sub-text: rgba(10, 10, 10, 0.6);
+  --border-color: rgba(10, 10, 10, 0.1);
+  --header-bg: rgba(248, 249, 250, 0.8);
+  
+  /* Ensure cards have borders in light mode since bg won't blend the same */
+  --card-bg: rgba(0, 0, 0, 0.02);
+  --card-bg-hover: rgba(0, 0, 0, 0.04);
+}
+
+
+/* Base link and primary accent mapping */
+a, button {
+  transition: color 0.3s, background-color 0.3s, border-color 0.3s;
+}
+
+body {
+  transition: background-color 0.5s ease, color 0.5s ease;
+  background-color: var(--background);
+  color: var(--foreground);
+  position: relative;
+}
+
+/* Cinematic Noise Overlay */
+body::after {
+  content: "";
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: url("https://grainy-gradients.vercel.app/noise.svg");
+  opacity: 0.05;
+  pointer-events: none;
+  z-index: 9999;
+  filter: contrast(150%) brightness(100%);
+}
+
+.text-sub {
+  color: var(--sub-text);
+}
+
+.border-theme {
+  border-color: var(--border-color);
+}
+
+[dir="rtl"], .rtl-active {
+  font-family: var(--font-cairo) !important;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-heading);
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  line-height: 1.1;
+}
+
+[dir="rtl"] .line {
+  margin-left: 1rem;
+  margin-right: 0;
+}
+
+* {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+}
+
+html,
+body {
+  max-width: 100vw;
+  overflow-x: hidden;
+  font-family: var(--font-body);
+  background-color: var(--background);
+  color: var(--foreground);
+  -webkit-font-smoothing: antialiased;
+}
+
+[dir="rtl"] html,
+[dir="rtl"] body,
+.rtl-active {
+  font-family: var(--font-cairo) !important;
+}
+
+/* Base link and primary accent mapping */
+a, button {
+  transition: color 0.3s;
+}
+
+::selection {
+  background: var(--gold);
+  color: var(--navy);
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+button {
+  font-family: inherit;
+  border: none;
+  background: none;
+  cursor: pointer;
+}
+
+/* Keyframes for the Infinite Ticker */
+@keyframes marquee {
+  0% {
+    transform: translateX(0%);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+/* Utility to hide scrollbar but keep functionality */
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+.no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+/* Scroll Snap Logic (Relaxed for Lenis) */
+.snapping-container {
+  scroll-behavior: smooth;
+}
+
+.snapping-section {
+  min-height: 100vh;
+  width: 100%;
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
+/* SRMG Section Transitions: Scroll-over / Pinned feel */
+.pinned-section {
+  position: sticky;
+  top: 0;
+  height: 100vh;
+  overflow: hidden;
+}
+
+.reveal-section {
+  position: relative;
+  z-index: 2;
+  background: var(--background);
+  box-shadow: 0 -20px 50px rgba(0,0,0,0.5);
+}
+
+
+/* Masonry Grid Utility */
+.masonry-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+  grid-auto-rows: 200px;
+  grid-auto-flow: dense;
+  gap: 2rem;
+}
+
+.masonry-item-tall {
+  grid-row: span 3;
+}
+
+.masonry-item-wide {
+  grid-column: span 2;
+}
+
+/* SRMG Cinematic Pre-Header */
+.preHeader {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+  font-size: 0.85rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  font-weight: 600;
+  margin-bottom: 2rem;
+  color: var(--gold);
+}
+
+.preHeaderLine {
+  width: 100px;
+  height: 1px;
+  background-color: var(--gold);
+}
+
+[dir="rtl"] .preHeader {
+  flex-direction: row-reverse;
+}
+
+.ltr-content {
+  direction: ltr !important;
+  display: inline-block;
+  unicode-bidi: embed;
+}
+
+/* ================================================
+   GLOBAL RTL / ARABIC LAYOUT SYSTEM
+   Applied when html[dir="rtl"] (set by LanguageContext)
+   ================================================ */
+
+/* Font override — switch everything to Cairo */
+[dir="rtl"] body,
+[dir="rtl"] h1,
+[dir="rtl"] h2,
+[dir="rtl"] h3,
+[dir="rtl"] h4,
+[dir="rtl"] h5,
+[dir="rtl"] h6,
+[dir="rtl"] p,
+[dir="rtl"] span,
+[dir="rtl"] a,
+[dir="rtl"] li,
+[dir="rtl"] button,
+[dir="rtl"] input,
+[dir="rtl"] textarea,
+[dir="rtl"] label,
+[dir="rtl"] div {
+  font-family: var(--font-cairo), 'Cairo', sans-serif !important;
+  unicode-bidi: plaintext;
+}
+
+/* Letter spacing override — Arabic doesn't use letter-spacing */
+[dir="rtl"] h1,
+[dir="rtl"] h2,
+[dir="rtl"] h3,
+[dir="rtl"] h4,
+[dir="rtl"] h5 {
+  letter-spacing: 0 !important;
+}
+
+/* Flex rows reverse for RTL */
+[dir="rtl"] .preHeader {
+  flex-direction: row-reverse;
+}
+
+/* Text direction */
+[dir="rtl"] p,
+[dir="rtl"] li,
+[dir="rtl"] span {
+  text-align: right;
+}
+
+/* Inputs align */
+[dir="rtl"] input,
+[dir="rtl"] textarea {
+  text-align: right;
+  direction: rtl;
+}
+
+/* Section heading block */
+[dir="rtl"] .sectionTitle,
+[dir="rtl"] .title {
+  text-align: right;
+}
+
+/* Numbers (phone, postal codes etc.) keep LTR */
+[dir="rtl"] .ltr-content {
+  direction: ltr !important;
+  display: inline-block;
+  unicode-bidi: embed;
+}

@@ -1,0 +1,378 @@
+/* ================================
+   QNC PREMIUM FOOTER
+================================ */
+
+/* ---- Marquee Band ---- */
+.marqueeOuter {
+  overflow: hidden;
+  border-top: 1px solid var(--border-color);
+  border-bottom: 1px solid var(--border-color);
+  padding: 1.2rem 0;
+  background: transparent;
+}
+
+.marqueeTrack {
+  display: flex;
+  gap: 0;
+  width: max-content;
+  animation: footerMarquee 28s linear infinite;
+}
+
+.marqueeItem {
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: var(--sub-text);
+  white-space: nowrap;
+  padding: 0 3rem;
+}
+
+.marqueeDot {
+  color: var(--gold);
+  font-size: 0.5rem;
+  vertical-align: middle;
+}
+
+@keyframes footerMarquee {
+  from { transform: translateX(0); }
+  to   { transform: translateX(-50%); }
+}
+
+.rtl .marqueeTrack {
+  animation: footerMarqueeRTL 28s linear infinite;
+}
+
+@keyframes footerMarqueeRTL {
+  from { transform: translateX(-50%); }
+  to   { transform: translateX(0); }
+}
+
+/* ---- Big Scroll CTA ---- */
+.bigCtaWrapper {
+  padding: 6rem var(--container-padding) 5rem;
+  max-width: var(--max-width);
+  margin: 0 auto;
+  border-bottom: 1px solid var(--border-color);
+}
+
+.bigCta {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 1.5rem;
+}
+
+.rtl .bigCta {
+  align-items: flex-start;
+}
+
+.bigCtaLabel {
+  font-size: 0.72rem;
+  letter-spacing: 0.4em;
+  font-weight: 700;
+  color: var(--gold);
+  text-transform: uppercase;
+}
+
+.bigCtaText {
+  font-size: clamp(3rem, 7vw, 7rem);
+  font-weight: 900;
+  line-height: 1;
+  letter-spacing: -0.03em;
+  color: var(--foreground);
+}
+
+.ctaBtn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.75rem;
+  margin-top: 0.5rem;
+  background: var(--gold);
+  color: #000;
+  font-size: 0.9rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  padding: 1.1rem 2.4rem;
+  border-radius: 100px;
+  border: none;
+  cursor: pointer;
+  transition: background 0.3s, color 0.3s;
+}
+
+.ctaBtn:hover {
+  background: var(--foreground);
+  color: var(--background);
+}
+
+.ctaBtnArrow {
+  display: inline-block;
+  font-size: 1.1rem;
+  transition: transform 0.3s ease;
+}
+
+/* ---- Footer Section ---- */
+.footerSection {
+  background-color: var(--background);
+  color: var(--foreground);
+  transition: background-color 0.5s ease, color 0.5s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.container {
+  max-width: var(--max-width);
+  margin: 0 auto;
+  padding: 5rem var(--container-padding) 3rem;
+}
+
+/* ---- Top Grid ---- */
+.topGrid {
+  display: grid;
+  grid-template-columns: 1.5fr 0.8fr 0.8fr 0.8fr 1.5fr;
+  gap: 3rem;
+  padding-bottom: 4rem;
+}
+
+/* ---- Brand Column ---- */
+.brandCol {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.logoImage {
+  max-height: 48px;
+  width: auto;
+  max-width: 180px;
+  object-fit: contain;
+  display: block;
+}
+
+.tagline {
+  color: var(--sub-text);
+  font-size: 0.9rem;
+  line-height: 1.6;
+  max-width: 280px;
+}
+
+.socials {
+  display: flex;
+  gap: 0.75rem;
+  margin-top: 0.5rem;
+  flex-wrap: wrap;
+}
+
+.socialBtn {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  border: 1px solid var(--border-color);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--sub-text);
+  transition: border-color 0.3s ease, color 0.3s ease;
+  position: relative;
+  cursor: pointer;
+}
+
+.socialBtn:hover {
+  border-color: var(--gold);
+  color: var(--gold);
+}
+
+.socialTooltip {
+  position: absolute;
+  bottom: calc(100% + 8px);
+  left: 50%;
+  transform: translateX(-50%);
+  background: var(--gold);
+  color: #000;
+  font-size: 0.65rem;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  padding: 4px 8px;
+  border-radius: 4px;
+  white-space: nowrap;
+  pointer-events: none;
+}
+
+/* ---- Links Column ---- */
+.linksCol {
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+}
+
+.colHeading {
+  font-size: 0.68rem;
+  letter-spacing: 0.25em;
+  color: var(--gold);
+  font-weight: 700;
+  margin-bottom: 1.2rem;
+  text-transform: uppercase;
+}
+
+/* ---- Animated Link ---- */
+.linkWrapper {
+  overflow: hidden;
+  position: relative;
+}
+
+.navLink {
+  display: block;
+  overflow: hidden;
+  position: relative;
+  height: 1.5rem;
+  line-height: 1.5rem;
+  text-decoration: none;
+}
+
+.linkText,
+.linkTextClone {
+  display: block;
+  font-size: 0.92rem;
+  color: var(--sub-text);
+  transition: color 0.3s;
+}
+
+.linkTextClone {
+  position: absolute;
+  top: 0;
+  color: var(--foreground);
+}
+
+.linkWrapper:hover .linkText,
+.linkWrapper:hover .linkTextClone {
+  color: var(--foreground);
+}
+
+/* ---- Contact Details Column ---- */
+.contactCol {
+  display: flex;
+  flex-direction: column;
+}
+
+.contactList {
+  display: flex;
+  flex-direction: column;
+  gap: 1.2rem;
+}
+
+.contactItem {
+  display: flex;
+  align-items: flex-start;
+  gap: 1rem;
+  text-decoration: none;
+  color: var(--sub-text);
+  transition: color 0.3s ease;
+}
+
+a.contactItem:hover {
+  color: var(--gold);
+}
+
+.contactIcon {
+  margin-top: 0.2rem;
+  flex-shrink: 0;
+  color: var(--gold);
+  opacity: 0.8;
+}
+
+.contactText {
+  font-size: 0.88rem;
+  line-height: 1.5;
+}
+
+.externalIcon {
+  opacity: 0.5;
+  margin-top: 0.2rem;
+}
+
+/* ---- Divider ---- */
+.divider {
+  height: 1px;
+  background: var(--border-color);
+  transform-origin: left;
+  margin-bottom: 2.5rem;
+}
+
+/* ---- Bottom Bar ---- */
+.bottom {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 1.5rem;
+}
+
+.bottomCopy {
+  font-size: 0.78rem;
+  color: var(--sub-text);
+}
+
+.bottomLinks {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.bottomLink {
+  font-size: 0.78rem;
+  color: var(--sub-text);
+  text-decoration: none;
+  transition: color 0.3s;
+}
+
+.bottomLink:hover {
+  color: var(--gold);
+}
+
+.bottomSep {
+  font-size: 0.7rem;
+  color: var(--border-color);
+}
+
+/* ---- Responsive ---- */
+@media (max-width: 1200px) {
+  .topGrid {
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 3rem 2rem;
+  }
+  .brandCol {
+    grid-column: span 3;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid var(--border-color);
+    padding-bottom: 2rem;
+    margin-bottom: 1rem;
+  }
+  .contactCol {
+    grid-column: span 3;
+    border-top: 1px solid var(--border-color);
+    padding-top: 2rem;
+    margin-top: 1rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .topGrid {
+    grid-template-columns: 1fr;
+    gap: 2.5rem;
+  }
+  .brandCol, .contactCol {
+    grid-column: span 1;
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  .bigCtaText {
+    font-size: 3.5rem;
+  }
+  .bottom {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+}

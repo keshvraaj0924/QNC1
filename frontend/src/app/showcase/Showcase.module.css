@@ -1,0 +1,78 @@
+.main {
+  background-color: var(--background);
+  color: var(--foreground);
+  min-height: 100vh;
+}
+
+.heroSection {
+  padding: 15rem 5% 5rem 5%;
+  text-align: center;
+}
+
+.title {
+  font-size: clamp(3rem, 6vw, 6rem);
+  font-weight: 800;
+  letter-spacing: -0.03em;
+  margin: 0 0 1.5rem 0;
+}
+
+.subtitle {
+  font-size: 1.5rem;
+  opacity: 0.7;
+}
+
+.gallerySection {
+  padding: 5rem 5% 10rem 5%;
+}
+
+.container {
+  max-width: 1600px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 2rem;
+}
+
+.imageCard {
+  width: 100%;
+  aspect-ratio: 4/3;
+  overflow: hidden;
+  border-radius: 8px;
+  cursor: zoom-in;
+}
+
+/* Make some images span larger for a masonry-like feel */
+.imageCard:nth-child(1),
+.imageCard:nth-child(5) {
+  grid-column: span 2;
+  aspect-ratio: 16/9;
+}
+
+.image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 1.2s cubic-bezier(0.76, 0, 0.24, 1), filter 0.5s ease;
+  filter: grayscale(40%);
+}
+
+.imageCard:hover .image {
+  filter: grayscale(0%);
+}
+
+@media (max-width: 1024px) {
+  .container {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .imageCard:nth-child(1),
+  .imageCard:nth-child(5) {
+    grid-column: span 1;
+    aspect-ratio: 4/3;
+  }
+}
+
+@media (max-width: 768px) {
+  .container {
+    grid-template-columns: 1fr;
+  }
+}

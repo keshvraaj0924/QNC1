@@ -1,0 +1,189 @@
+.newsSection {
+  position: relative;
+  padding: 12vh 0;
+  background-color: #080808; /* Dark Mood Transition */
+  z-index: 10;
+}
+
+.container {
+  max-width: var(--max-width);
+  margin: 0 auto;
+  padding: 0 5%;
+}
+
+.header {
+  margin-bottom: 5rem;
+}
+
+.title {
+  font-size: clamp(2.5rem, 5vw, 4.5rem);
+  font-weight: 900;
+  line-height: 0.95;
+  letter-spacing: -0.04em;
+  color: #fff; /* Inverted for Dark Mode */
+  text-transform: uppercase;
+  margin: 0;
+}
+
+.masonryGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+  grid-auto-rows: 300px;
+  gap: 2rem;
+}
+
+.card {
+  position: relative;
+  overflow: hidden;
+  background-color: #111;
+  cursor: pointer;
+}
+
+.tall {
+  grid-row: span 2;
+}
+
+.imageWrapper {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+}
+
+.image {
+  object-fit: cover;
+  transition: transform 1.2s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.card:hover .image {
+  transform: scale(1.08);
+}
+
+.cardOverlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(0deg, rgba(0,0,0,0.95) 0%, rgba(0,0,0,0.2) 60%);
+  z-index: 2;
+  transition: opacity 0.5s ease;
+}
+
+.cardContent {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  padding: 2.5rem;
+  z-index: 3;
+}
+
+.meta {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  margin-bottom: 1rem;
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+.category {
+  color: var(--qnc-blue); /* Theming with QNC Blue */
+}
+
+.date {
+  color: rgba(255,255,255,0.6);
+}
+
+.dot {
+  color: rgba(255,255,255,0.3);
+}
+
+.cardTitle {
+  font-size: clamp(1.2rem, 2vw, 1.8rem);
+  font-weight: 800;
+  line-height: 1.1;
+  color: #fff;
+  margin: 0;
+  text-transform: uppercase;
+}
+
+.footer {
+  margin-top: 5rem;
+  display: flex;
+  justify-content: center;
+}
+
+.seeAllBtn {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+  padding: 1.2rem 3rem;
+  border: 1px solid rgba(255,255,255,0.1); /* Subtle white border for dark mode */
+  font-weight: 700;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  font-size: 0.8rem;
+  color: #fff; /* White text on dark */
+  transition: all 0.4s ease;
+  background-color: transparent;
+}
+
+.seeAllBtn:hover {
+  background-color: #fff;
+  color: #000;
+  border-color: #fff;
+}
+
+/* Specific styling for the Gold CTA button variant if needed later */
+.seeAllBtnPrimary {
+  border-color: var(--qnc-blue);
+  color: var(--qnc-blue);
+}
+
+.seeAllBtnPrimary:hover {
+  background-color: var(--qnc-blue);
+  color: #fff;
+}
+
+.btnIcon {
+  font-size: 1.2rem;
+  transition: transform 0.4s var(--transition-bezier);
+}
+
+.seeAllBtn:hover .btnIcon {
+  transform: translateX(10px);
+}
+
+[dir="rtl"] .seeAllBtn:hover .btnIcon {
+  transform: translateX(-10px);
+}
+
+[dir="rtl"] .header, [dir="rtl"] .cardContent, [dir="rtl"] .meta {
+  text-align: right;
+  flex-direction: row-reverse;
+}
+
+@media (max-width: 768px) {
+  .newsSection {
+    padding: 10vh 0;
+  }
+  .title {
+    font-size: 2.5rem;
+  }
+  .masonryGrid {
+    grid-template-columns: 1fr;
+    grid-auto-rows: 250px;
+  }
+  .tall {
+    grid-row: auto;
+  }
+  .cardContent {
+    padding: 1.5rem;
+  }
+}

@@ -1,0 +1,691 @@
+{
+  "services": {
+    "facilities-management": {
+      "title_en": "Facilities Management",
+      "title_ar": "إدارة المرافق",
+      "description_en": "Full site construction and services (Camps & Tents). Qudrat accelerates through maintaining facilities and managing projects.",
+      "description_ar": "بناء المواقع والخدمات الكاملة (المخيمات والخيام). شركة قدرات تتفوق في صيانة المرافق وإدارة المشاريع الإنشائية.",
+      "image": "http://localhost:4000/uploads/1774868675052-01_facilities.png",
+      "features": [
+        {
+          "en": "Kingdom-wide Camp Logistics",
+          "ar": "الخدمات اللوجستية للمخيمات على مستوى المملكة"
+        },
+        {
+          "en": "Preventative Maintenance",
+          "ar": "بروتوكولات الصيانة الوقائية"
+        }
+      ]
+    },
+    "catering-services": {
+      "title_en": "Catering Services",
+      "title_ar": "خدمات الإعاشة",
+      "description_en": "Qudrat National provides smart and proficient catering services for mega-projects across KSA.",
+      "description_ar": "تقدم قدرات الوطنية خدمات إعاشة ذكية ومحترفة للمشاريع العملاقة في جميع أنحاء المملكة.",
+      "image": "http://localhost:4000/uploads/1774868712939-10_catering.png",
+      "features": [
+        {
+          "en": "Large-scale Workforce Feeding",
+          "ar": "حلول إطعام القوى العاملة واسعة النطاق"
+        },
+        {
+          "en": "ISO Hygiene Compliance",
+          "ar": "الامتثال لمعايير الجودة والآيزو"
+        }
+      ]
+    },
+    "housekeeping-and-maintenance": {
+      "title_en": "Housekeeping & Maintenance",
+      "title_ar": "النظافة والصيانة",
+      "description_en": "Professional housekeeping activities effectively aligned with Saudi Quality marks.",
+      "description_ar": "أنشطة تدبير منزلي احترافية تتماشى بفعالية مع علامات الجودة السعودية.",
+      "image": "http://localhost:4000/uploads/1774868719759-02_housekeeping.png",
+      "features": [
+        {
+          "en": "Industrial Deep Cleaning",
+          "ar": "التنظيف العميق للمنشآت الصناعية"
+        },
+        {
+          "en": "Janitorial Operations",
+          "ar": "عمليات النظافة التخصصية"
+        }
+      ]
+    },
+    "laundry-services": {
+      "title_en": "Laundry Services",
+      "title_ar": "خدمات المغاسل",
+      "description_en": "Industrial laundry services providing extra-care for remote outposts.",
+      "description_ar": "خدمات غسيل صناعية توفر رعاية فائقة للمواقع البعيدة والنائية.",
+      "image": "http://localhost:4000/uploads/1774868725755-03_laundry.png",
+      "features": [
+        {
+          "en": "Industrial Wash Cycles",
+          "ar": "دورات غسيل صناعية عالية الطاقة"
+        },
+        {
+          "en": "Daily Camp Delivery",
+          "ar": "شبكات التوصيل اليومية للمخيمات"
+        }
+      ]
+    },
+    "water-and-sanitation-solutions": {
+      "title_en": "Water & Sanitation Solutions",
+      "title_ar": "حلول المياه والصرف الصحي",
+      "description_en": "Meeting Catering Hygiene Standard (CHS) requirements across Saudi Arabia.",
+      "description_ar": "تلبية متطلبات معايير نظافة الإعاشة (CHS) في جميع أنحاء المملكة العربية السعودية.",
+      "image": "http://localhost:4000/uploads/1774868732308-04_water.png",
+      "features": [
+        {
+          "en": "Potable Water Supply",
+          "ar": "خطوط إمداد المياه الصالح للشرب"
+        },
+        {
+          "en": "Waste Pumping",
+          "ar": "ضخ النفايات في المواقع النائية"
+        }
+      ]
+    },
+    "pest-control-management": {
+      "title_en": "Pest Control Management",
+      "title_ar": "إدارة مكافحة الحشرات",
+      "description_en": "Best practices treatments and safe correct use of pesticides.",
+      "description_ar": "أفضل ممارسات العلاج والاستخدام الآمن والصحيح لمبيدات الآفات.",
+      "image": "http://localhost:4000/uploads/1774868738652-05_pest.png",
+      "features": [
+        {
+          "en": "Desert Eradication",
+          "ar": "استراتيجيات الإبادة في البيئة الصحراوية"
+        },
+        {
+          "en": "Infrastructure Audits",
+          "ar": "عمليات تدقيق روتينية للبنية التحتية"
+        }
+      ]
+    },
+    "manpower-head-hunting": {
+      "title_en": "Manpower Head Hunting",
+      "title_ar": "استقطاب القوى العاملة",
+      "description_en": "Sourcing out multi-nationalities supporting Vision 2030 development.",
+      "description_ar": "توظيف جنسيات متعددة لدعم تطوير رؤية 2030.",
+      "image": "http://localhost:4000/uploads/1774868745948-07_manpower.png",
+      "features": [
+        {
+          "en": "International Sourcing",
+          "ar": "توفير العمالة الدولية"
+        },
+        {
+          "en": "Saudization Compliance",
+          "ar": "استشارية الامتثال لنطاقات (السعودة)"
+        }
+      ]
+    },
+    "logistics-and-transportation": {
+      "title_en": "Logistics And Transportation",
+      "title_ar": "الخدمات اللوجستية والنقل",
+      "description_en": "End-to-End supply chain management for diversified sectors across the Kingdom.",
+      "description_ar": "إدارة سلاسل الإمداد الشاملة لمختلف القطاعات في جميع أنحاء المملكة.",
+      "image": "http://localhost:4000/uploads/1774868832858-06_logistics.png",
+      "features": [
+        {
+          "en": "Machinery Transport",
+          "ar": "أساطيل نقل المعدات الثقيلة"
+        },
+        {
+          "en": "Remote Access Networks",
+          "ar": "شبكات الوصول للمواقع النائية"
+        }
+      ]
+    },
+    "water-and-fuel-supply": {
+      "title_en": "Water and Fuel Supply",
+      "title_ar": "توريد المياه والوقود",
+      "description_en": "Ensuring water and fuel delivery right at the doorstep of your project.",
+      "description_ar": "ضمان توصيل المياه والوقود مباشرة إلى عتبة مشروعك.",
+      "image": "http://localhost:4000/uploads/1774868759630-08_fuel.png",
+      "features": [
+        {
+          "en": "Bulk Fuel Delivery",
+          "ar": "تسليم الوقود بالجملة"
+        },
+        {
+          "en": "Emergency Resupplies",
+          "ar": "إعادة التموين في حالات الطوارئ"
+        }
+      ]
+    },
+    "health-risk-assessment": {
+      "title_en": "Health Risk Assessment",
+      "title_ar": "تقييم المخاطر الصحية",
+      "description_en": "Comprehensive site-specific hazard mapping and crisis management structuring.",
+      "description_ar": "رسم خرائط شاملة للمخاطر الخاصة بالموقع وهيكلة إدارة الأزمات.",
+      "image": "http://localhost:4000/uploads/1774868767399-09_health.png",
+      "features": [
+        {
+          "en": "Hazard Mapping",
+          "ar": "رسم خرائط المخاطر"
+        },
+        {
+          "en": "Crisis Management",
+          "ar": "هيكلة إدارة الأزمات"
+        }
+      ]
+    },
+    "medical-services-health-care": {
+      "title_en": "Medical Services & Health Care",
+      "title_ar": "الخدمات الطبية والرعاية الصحية",
+      "description_en": "Experience and skills to manage the daily care in remote operational zones.",
+      "description_ar": "الخبرة والمهارات لإدارة الرعاية اليومية في مناطق العمليات النائية.",
+      "image": "http://localhost:4000/uploads/1774868775465-11_medical.png",
+      "features": [
+        {
+          "en": "Remote Clinics",
+          "ar": "نشر العيادات الميدانية"
+        },
+        {
+          "en": "24/7 EMT Services",
+          "ar": "خدمات الطوارئ الطبية على مدار الساعة"
+        }
+      ]
+    }
+  },
+  "clients": [
+    {
+      "src": "http://localhost:4000/uploads/1774792144299-CPECC.png",
+      "alt": "Partner Logo",
+      "href": "#"
+    },
+    {
+      "src": "http://localhost:4000/uploads/1774792144300-qudrat-clients_0002_SGB-Dabal.jpg",
+      "alt": "Partner Logo",
+      "href": "#"
+    },
+    {
+      "src": "http://localhost:4000/uploads/1774792144300-qudrat-clients_0003_Layer-1.jpg",
+      "alt": "Partner Logo",
+      "href": "#"
+    },
+    {
+      "src": "http://localhost:4000/uploads/1774792144300-qudrat-clients_0004_StC.jpg",
+      "alt": "Partner Logo",
+      "href": "#"
+    },
+    {
+      "src": "http://localhost:4000/uploads/1774792144300-qudrat-clients_0005_CMCC.jpg",
+      "alt": "Partner Logo",
+      "href": "#"
+    },
+    {
+      "src": "http://localhost:4000/uploads/1774792144300-qudrat-clients_0006_ninja-379x379-1.jpg",
+      "alt": "Partner Logo",
+      "href": "#"
+    },
+    {
+      "src": "http://localhost:4000/uploads/1774792144300-qudrat-clients_0007_Anar-9.jpg",
+      "alt": "Partner Logo",
+      "href": "#"
+    },
+    {
+      "src": "http://localhost:4000/uploads/1774792144300-qudrat-clients_0008_nova-water.jpg",
+      "alt": "Partner Logo",
+      "href": "#"
+    },
+    {
+      "src": "http://localhost:4000/uploads/1774792144300-qudrat-clients_0009_secpco.jpg",
+      "alt": "Partner Logo",
+      "href": "#"
+    },
+    {
+      "src": "http://localhost:4000/uploads/1774792144300-qudrat-clients_0010_Arabian-Drilling.jpg",
+      "alt": "Partner Logo",
+      "href": "#"
+    },
+    {
+      "src": "http://localhost:4000/uploads/1774792144300-qudrat-clients_0011_zpadco.jpg",
+      "alt": "Partner Logo",
+      "href": "#"
+    },
+    {
+      "src": "http://localhost:4000/uploads/1774792144300-qudrat-clients_0012_e-a35RhV_400x400.jpg",
+      "alt": "Partner Logo",
+      "href": "#"
+    },
+    {
+      "src": "http://localhost:4000/uploads/1774792144300-qudrat-clients_0013_5fa710f362097d68115ad323_Member-logos-350x182-PowerChina.jpg",
+      "alt": "Partner Logo",
+      "href": "#"
+    },
+    {
+      "src": "http://localhost:4000/uploads/1774792144300-qudrat-clients_0014_Qiddiya-3.jpg",
+      "alt": "Partner Logo",
+      "href": "#"
+    },
+    {
+      "src": "http://localhost:4000/uploads/1774792144300-qudrat-clients_0015_Neom.jpg",
+      "alt": "Partner Logo",
+      "href": "#"
+    },
+    {
+      "src": "http://localhost:4000/uploads/1774792144302-qudrat-clients_0016_aic_logo-379x379-1.jpg",
+      "alt": "Partner Logo",
+      "href": "#"
+    },
+    {
+      "src": "http://localhost:4000/uploads/1774792144302-qudrat-clients_0017_index.jpg",
+      "alt": "Partner Logo",
+      "href": "#"
+    },
+    {
+      "src": "http://localhost:4000/uploads/1774792144302-qudrat-clients_0018_Logo-Dark@2x.jpg",
+      "alt": "Partner Logo",
+      "href": "#"
+    },
+    {
+      "src": "http://localhost:4000/uploads/1774792144302-qudrat-clients_0019_Hungerstationwikiar.svg_.jpg",
+      "alt": "Partner Logo",
+      "href": "#"
+    },
+    {
+      "src": "http://localhost:4000/uploads/1774792144302-qudrat-clients_0020_big-logo.jpg",
+      "alt": "Partner Logo",
+      "href": "#"
+    },
+    {
+      "src": "http://localhost:4000/uploads/1774792144302-qudrat-clients_0021_Kalpa-Taru.jpg",
+      "alt": "Partner Logo",
+      "href": "#"
+    },
+    {
+      "src": "http://localhost:4000/uploads/1774792144304-qudrat-clients_0022_LT.jpg",
+      "alt": "Partner Logo",
+      "href": "#"
+    },
+    {
+      "src": "http://localhost:4000/uploads/1774792144304-qudrat-clients_0023_saipem.jpg",
+      "alt": "Partner Logo",
+      "href": "#"
+    },
+    {
+      "src": "http://localhost:4000/uploads/1774792144304-qudrat-clients_0024_Tecnicas-Reunidas.jpg",
+      "alt": "Partner Logo",
+      "href": "#"
+    },
+    {
+      "src": "http://localhost:4000/uploads/1774792144304-qudrat-clients_0025_s.s.e.m.jpg",
+      "alt": "Partner Logo",
+      "href": "#"
+    },
+    {
+      "src": "http://localhost:4000/uploads/1774792144304-qudrat-clients_0026_royal-humantirian-foundation.jpg",
+      "alt": "Partner Logo",
+      "href": "#"
+    },
+    {
+      "src": "http://localhost:4000/uploads/1774792144305-qudrat-clients_0027_Lamprell-Group.jpg",
+      "alt": "Partner Logo",
+      "href": "#"
+    },
+    {
+      "src": "http://localhost:4000/uploads/1774792144305-qudrat-clients_0028_acgc-logo-new.jpg",
+      "alt": "Partner Logo",
+      "href": "#"
+    },
+    {
+      "src": "http://localhost:4000/uploads/1774792144305-qudrat-clients_0029_1628582818790.jpg",
+      "alt": "Partner Logo",
+      "href": "#"
+    },
+    {
+      "src": "http://localhost:4000/uploads/1774792144305-qudrat-clients_0030_armed-forces.jpg",
+      "alt": "Partner Logo",
+      "href": "#"
+    },
+    {
+      "src": "http://localhost:4000/uploads/1774792144305-qudrat-clients_0031_USCG-Jeddah.jpg",
+      "alt": "Partner Logo",
+      "href": "#"
+    },
+    {
+      "src": "http://localhost:4000/uploads/1774792144306-qudrat-clients_0032_Layer-2.jpg",
+      "alt": "Partner Logo",
+      "href": "#"
+    }
+  ],
+  "home": {
+    "hero": {
+      "title_en": "Precision and Professionalism",
+      "title_ar": "الدقة والاحترافية",
+      "video_url": "http://localhost:4000/uploads/1775373993966-C0469.MP4"
+    },
+    "mission_vision": [
+      {
+        "id": "vision",
+        "title_en": "Vision",
+        "title_ar": "رؤيتنا",
+        "content_en": "To be the nationwide premier Total Integrated Facility Management (TIFM) partner in Saudi Arabia, innovating sustainable and efficient solutions that set new industry benchmarks.",
+        "content_ar": "أن نكون الشريك الرائد على مستوى المملكة في الإدارة المتكاملة للمرافق (TIFM) في المملكة العربية السعودية، من خلال ابتكار حلول مستدامة وفعالة تضع معايير جديدة للصناعة.",
+        "color": "#1A75BB"
+      },
+      {
+        "id": "mission",
+        "title_en": "Mission",
+        "title_ar": "مهمتنا",
+        "content_en": "Uphold safety standards and quality assurance in delivering services that exceed client expectations.",
+        "content_ar": "الحفاظ على معايير السلامة وضمان الجودة في تقديم الخدمات التي تفوق توقعات العملاء.",
+        "color": "#3F8E43"
+      },
+      {
+        "id": "values",
+        "title_en": "Values",
+        "title_ar": "قيمنا",
+        "content_en": "Delivering safe, high-quality, and innovative FM solutions that consistently exceed client expectations.",
+        "content_ar": "تقديم حلول إدارة مرافق آمنة وعالية الجودة ومبتكرة تفوق توقعات العملاء باستمرار.",
+        "color": "#CBA152"
+      }
+    ],
+    "vision": {
+      "title_en": "Saudi Vision 2030 Impact",
+      "title_ar": "أثر رؤية السعودية 2030",
+      "image_arch": "http://localhost:4000/uploads/vision-2030-arch.png",
+      "image_leadership": "http://localhost:4000/uploads/saudi-leadership.png"
+    },
+    "map": {
+      "sectors": [
+        {
+          "id": "gov",
+          "title_en": "Government",
+          "title_ar": "القطاع الحكومي",
+          "icon": "Building2",
+          "desc_en": "Trusted operations partner for national logistics and facility maintenance for government departments.",
+          "desc_ar": "شريك عمليات موثوق للخدمات اللوجستية الوطنية وصيانة المرافق للإدارات الحكومية."
+        },
+        {
+          "id": "mil",
+          "title_en": "Military Installations",
+          "title_ar": "المنشآت العسكرية",
+          "icon": "Shield",
+          "desc_en": "Specialized field support and infrastructure services for strategic defense and military facilities.",
+          "desc_ar": "دعم ميداني متخصص وخدمات بنية تحتية للمنشآت الدفاعية والعسكرية الاستراتيجية."
+        },
+        {
+          "id": "oil",
+          "title_en": "Oil & Gas",
+          "title_ar": "النفط والغاز",
+          "icon": "Fuel",
+          "desc_en": "Precision industrial support and facility management for the upstream and downstream energy sector.",
+          "desc_ar": "دعم صناعي دقيق وإدارة مرافق لقطاع الطاقة في مراحل الاستخراج والتكرير."
+        },
+        {
+          "id": "health",
+          "title_en": "Healthcare Sector",
+          "title_ar": "قطاع الرعاية الصحية",
+          "icon": "HeartPulse",
+          "desc_en": "Total facility maintenance and specialized sanitation solutions for modern medical institutions.",
+          "desc_ar": "صيانة كاملة للمرافق وحلول تعقيم متخصصة للمؤسسات الطبية الحديثة."
+        },
+        {
+          "id": "remote",
+          "title_en": "Remote Field Locations",
+          "title_ar": "المواقع الميدانية النائية",
+          "icon": "Tent",
+          "desc_en": "Logistical excellence and camp management in the Kingdom's most challenging geographical terrains.",
+          "desc_ar": "تميز لوجستي وإدارة مخيمات في أكثر التضاريس الجغرافية تحدياً في المملكة."
+        },
+        {
+          "id": "private",
+          "title_en": "Private & Industrial",
+          "title_ar": "القطاع الصناعي والخاص",
+          "icon": "Factory",
+          "desc_en": "Corporate HQ and industrial zone facility management and project support for private enterprises.",
+          "desc_ar": "إدارة مرافق المقار الرئيسية والمناطق الصناعية ودعم المشاريع للمؤسسات الخاصة."
+        },
+        {
+          "id": "aviation",
+          "title_en": "Aviation Industry",
+          "title_ar": "صناعة الطيران",
+          "icon": "Plane",
+          "desc_en": "Specialized ground support and critical facility maintenance for the Kingdom's aviation hubs.",
+          "desc_ar": "دعم أرضي متخصص وصيانة مرافق حيوية لمحاور الطيران في المملكة."
+        },
+        {
+          "id": "edu",
+          "title_en": "Education",
+          "title_ar": "قطاع التعليم",
+          "icon": "GraduationCap",
+          "desc_en": "Supporting academic excellence through integrated facility management for universities and campuses.",
+          "desc_ar": "دعم التميز الأكاديمي من خلال إدارة المرافق المتكاملة للجامعات والمجمعات التعليمية."
+        }
+      ],
+      "locations": [
+        {
+          "id": "riyadh",
+          "name": "Riyadh",
+          "nameAr": "الرياض",
+          "x": 57.2,
+          "y": 47.1,
+          "projects": [
+            "Corporate Hub",
+            "Government Infrastructure"
+          ]
+        },
+        {
+          "id": "jeddah",
+          "name": "Jeddah",
+          "nameAr": "جدة",
+          "x": 21.6,
+          "y": 67.1,
+          "projects": [
+            "Port Logistics",
+            "Aviation Services"
+          ]
+        },
+        {
+          "id": "dammam",
+          "name": "Dammam",
+          "nameAr": "الدمام",
+          "x": 73.5,
+          "y": 36.3,
+          "projects": [
+            "Eastern Industrial Support",
+            "Oil & Gas Services"
+          ]
+        },
+        {
+          "id": "tabuk",
+          "name": "Tabuk",
+          "nameAr": "تبوك",
+          "x": 9.2,
+          "y": 23.9,
+          "projects": [
+            "Northern Expansion Projects",
+            "Field Logistics"
+          ]
+        },
+        {
+          "id": "aljawf",
+          "name": "Al-Jawf",
+          "nameAr": "الجوف",
+          "x": 28,
+          "y": 18,
+          "projects": [
+            "Agricultural Support",
+            "Remote Field Housing"
+          ]
+        },
+        {
+          "id": "arar",
+          "name": "Arar",
+          "nameAr": "عرعر",
+          "x": 30.5,
+          "y": 7.5,
+          "projects": [
+            "Northern Border Operations",
+            "Military Installations"
+          ]
+        },
+        {
+          "id": "madinah",
+          "name": "Madinah",
+          "nameAr": "المدينة المنورة",
+          "x": 23.5,
+          "y": 48.3,
+          "projects": [
+            "Religious Tourism Facilities",
+            "Urban Development"
+          ]
+        },
+        {
+          "id": "makkah",
+          "name": "Makkah",
+          "nameAr": "مكة المكرمة",
+          "x": 24.8,
+          "y": 68.1,
+          "projects": [
+            "Mega-Infrastructure Services",
+            "Hospitality Support"
+          ]
+        },
+        {
+          "id": "taif",
+          "name": "Taif",
+          "nameAr": "الطائف",
+          "x": 28,
+          "y": 72,
+          "projects": [
+            "Regional Logistics",
+            "Educational Support"
+          ]
+        },
+        {
+          "id": "albahah",
+          "name": "Al-Bahah",
+          "nameAr": "الباحة",
+          "x": 30,
+          "y": 78,
+          "projects": [
+            "Southwestern Infrastructure",
+            "Healthcare Support"
+          ]
+        },
+        {
+          "id": "abha",
+          "name": "Abha",
+          "nameAr": "أبها",
+          "x": 37.4,
+          "y": 88.2,
+          "projects": [
+            "Asir Regional Operations",
+            "Tourism Logistics"
+          ]
+        },
+        {
+          "id": "jazan",
+          "name": "Jazan",
+          "nameAr": "جازان",
+          "x": 37.6,
+          "y": 96.6,
+          "projects": [
+            "Jazan Economic City Services",
+            "Sanitation Portfollo"
+          ]
+        },
+        {
+          "id": "najran",
+          "name": "Najran",
+          "nameAr": "نجران",
+          "x": 45.1,
+          "y": 92.8,
+          "projects": [
+            "Southern Border Logistics",
+            "Fuel Supply Operations"
+          ]
+        },
+        {
+          "id": "buraidah",
+          "name": "Buraidah",
+          "nameAr": "بريدة",
+          "x": 50,
+          "y": 42,
+          "projects": [
+            "Al-Qassim Distribution Hub",
+            "Food Safety Audits"
+          ]
+        },
+        {
+          "id": "hail",
+          "name": "Ha'il",
+          "nameAr": "حائل",
+          "x": 42,
+          "y": 35,
+          "projects": [
+            "Central Logistics Network",
+            "Field Maintenance"
+          ]
+        }
+      ]
+    },
+    "capabilities": {
+      "title_en": "Enterprise Capabilities",
+      "title_ar": "قدرات المؤسسة"
+    }
+  },
+  "about": {
+    "profile": {
+      "text_en": "Qudrat National is an industry leader in Total Facilities Management. Our legacy is built on relentless dedication to perfection across the energy, corporate, and healthcare sectors.",
+      "text_ar": "تعد قدرات الوطنية شركة رائدة في مجال إدارة المرافق المتكاملة. إرثنا مبني على التفاني المستمر للتميز في قطاعات الطاقة والشركات والرعاية الصحية."
+    },
+    "certificates": [
+      {
+        "id": 1,
+        "title_en": "ISO 9001:2015 Quality Management",
+        "title_ar": "نظام إدارة الجودة آيزو 9001",
+        "image": "https://images.unsplash.com/photo-1589156229687-496a31ad1d1f?auto=format&fit=crop&q=80"
+      }
+    ]
+  },
+  "settings": {
+    "contact_email": "info@qudratnational.com",
+    "careers_email": "hr@qudratnational.com",
+    "maintenance_mode": false,
+    "logo": "http://localhost:4000/uploads/1775376246801-QNCLogo.svg"
+  },
+  "careers": {
+    "open_roles": [
+      {
+        "id": "role-1",
+        "title_en": "Senior Facilities Manager",
+        "title_ar": "مدير مرافق أول",
+        "department_en": "Operations",
+        "department_ar": "العمليات",
+        "location_en": "Al Khobar (Verified)",
+        "location_ar": "الخبر",
+        "description_en": "Leading large-scale facility maintenance and service delivery across industrial sites.",
+        "description_ar": "قيادة صيانة المرافق واسعة النطاق وتقديم الخدمات في المواقع الصناعية."
+      },
+      {
+        "id": "role-2",
+        "title_en": "Safety & Compliance Officer",
+        "title_ar": "مسؤول السلامة والامتثال",
+        "department_en": "QHSE",
+        "department_ar": "الجودة والصحة والسلامة والبيئة",
+        "location_en": "Dammam",
+        "location_ar": "الدمام",
+        "description_en": "Ensuring all operations meet Saudi Aramco and international safety benchmarks.",
+        "description_ar": "التأكد من أن جميع العمليات تلبي معايير أرامكو السعودية ومقاييس السلامة الدولية."
+      },
+      {
+        "id": "role-3",
+        "title_en": "Logistics Coordinator",
+        "title_ar": "منسق لوجستي",
+        "department_en": "Supply Chain",
+        "department_ar": "سلسلة التوريد",
+        "location_en": "KAEC",
+        "location_ar": "مدينة الملك عبدالله الاقتصادية",
+        "description_en": "Managing complex workforce logistics and supply chains for remote campsites.",
+        "description_ar": "إدارة اللوجستيات المعقدة للقوى العاملة وسلاسل التوريد للمواقع النائية."
+      }
+    ]
+  },
+  "site": {
+    "logo": "http://localhost:4000/uploads/1775374249652-QNCLogo.svg"
+  }
+}

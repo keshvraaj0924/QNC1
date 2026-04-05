@@ -1,0 +1,101 @@
+.hero {
+  position: relative;
+  width: 100vw;
+  height: 100vh;
+  min-height: 800px;
+  background-size: cover;
+  background-position: center;
+  display: flex;
+  align-items: center;
+  color: var(--text-inverse); 
+  overflow: hidden;
+}
+
+.overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, rgba(10, 90, 151, 0.4) 0%, rgba(0, 0, 0, 0.7) 100%);
+  z-index: 1;
+}
+
+.contentContainer {
+  position: relative;
+  z-index: 2;
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 0 6%;
+  width: 100%;
+}
+
+.title {
+  font-size: clamp(3rem, 5vw, 5.5rem);
+  font-weight: 700;
+  line-height: 1.1;
+  margin-bottom: 2rem;
+  max-width: 900px;
+  letter-spacing: -0.02em;
+}
+
+.subtitle {
+  font-size: clamp(1.2rem, 2vw, 1.5rem);
+  font-weight: 300;
+  line-height: 1.6;
+  margin-bottom: 3rem;
+  max-width: 700px;
+  opacity: 0.9;
+}
+
+.primaryButton {
+  display: inline-flex;
+  align-items: center;
+  gap: 16px;
+  padding: 18px 40px;
+  background-color: var(--qnc-blue);
+  border: none;
+  border-radius: 50px; 
+  color: white;
+  font-size: 1.125rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  overflow: hidden;
+  position: relative;
+}
+
+.primaryButton::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: var(--qnc-green);
+  transform: translateX(-100%);
+  transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  z-index: 0;
+}
+
+.hero[dir='rtl'] .primaryButton::before {
+  transform: translateX(100%);
+}
+
+.primaryButton:hover::before {
+  transform: translateX(0);
+}
+
+.btnText, .arrowIcon {
+  position: relative;
+  z-index: 1;
+}
+
+.arrowIcon {
+  transition: transform 0.3s ease;
+}
+
+.primaryButton:hover .arrowIcon {
+  transform: translateX(6px); /* Animate arrow on hover */
+}
+
+.hero[dir='rtl'] .primaryButton:hover .arrowIcon {
+  transform: translateX(-6px); /* Reverse arrow animation for Arabic */
+}

@@ -1,0 +1,9 @@
+[
+  {
+    "id": "1",
+    "username": "admin",
+    "password": "$2b$10$usS4G8w/pqNwxcSH/iUqfOCRH..6VLZJSAlP/b0PvqwxOcSqDfxQm",
+    "role": "admin",
+    "email": "admin@qnc.com"
+  }
+]
