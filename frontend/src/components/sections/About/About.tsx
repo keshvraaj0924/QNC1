@@ -13,9 +13,9 @@ export default function About({ content }: { content?: any }) {
   const containerRef = useRef<HTMLDivElement>(null);
   
   const DEFAULT_CERTIFICATES = [
-    { title: { en: 'ISO 9001:2015', ar: 'آيزو 9001:2015' }, img: '/assets/images/certs/iso_9001.png' },
-    { title: { en: 'ISO 14001:2015', ar: 'آيزو 14001:2015' }, img: '/assets/images/certs/iso_14001.png' },
-    { title: { en: 'OHSAS 18001:2007', ar: 'أوشاس 18001:2007' }, img: '/assets/images/certs/iso_45001.png' },
+    { title: { en: 'ISO 9001:2015', ar: 'آيزو 9001:2015' }, img: '/assets/images/certificates/iso_9001.png' },
+    { title: { en: 'ISO 14001:2015', ar: 'آيزو 14001:2015' }, img: '/assets/images/certificates/iso_14001.png' },
+    { title: { en: 'OHSAS 18001:2007', ar: 'أوشاس 18001:2007' }, img: '/assets/images/certificates/iso_45001.png' },
   ];
 
   const certificates = content?.certificates && content.certificates.length > 0 
