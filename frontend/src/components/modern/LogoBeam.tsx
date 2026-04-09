@@ -9,6 +9,7 @@ interface LogoBeamProps {
   vertical?: boolean;
   delay?: number;
   className?: string;
+  color?: string;
 }
 
 export default function LogoBeam({
@@ -17,6 +18,7 @@ export default function LogoBeam({
   vertical = false,
   delay = 0,
   className = "",
+  color,
 }: LogoBeamProps) {
   const { isRTL } = useLanguage();
 
@@ -42,10 +44,10 @@ export default function LogoBeam({
         style={{
           width: '100%',
           height: '100%',
-          background: 'linear-gradient(90deg, #1A75BB, #3F8E43, #CBA152, #1A75BB)',
-          backgroundSize: '300% 100%'
+          background: color || 'linear-gradient(90deg, #1A75BB, #3F8E43, #CBA152, #1A75BB)',
+          backgroundSize: color ? '100% 100%' : '300% 100%'
         }}
-        animate={{
+        animate={color ? {} : {
           backgroundPosition: isRTL ? ['100% 0%', '0% 0%'] : ['0% 0%', '100% 0%']
         }}
         transition={{ 

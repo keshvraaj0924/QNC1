@@ -5,9 +5,9 @@ import Link from 'next/link';
 import styles from './Capabilities.module.css';
 import { useLanguage } from '@/context/LanguageContext';
 import SpotlightCard from '@/components/modern/SpotlightCard';
-import BlurReveal from '@/components/modern/BlurReveal';
 import LogoBeam from '@/components/modern/LogoBeam';
 import MotionCurve from '@/components/modern/MotionCurve';
+import BlurText from '@/components/modern/BlurText';
 
 /**
  * Subcomponent for 3D Tilt Logic
@@ -66,6 +66,34 @@ function BentoCard({ service, idx }: { service: any, idx: number }) {
   );
 }
 
+const DEFAULT_SERVICES = [
+  {
+    id: 'facility-management',
+    title: { en: 'Total Facility Management', ar: 'إدارة المرافق المتكاملة' },
+    image: '/assets/images/services/fm.jpg'
+  },
+  {
+    id: 'operations-maintenance',
+    title: { en: 'Operations & Maintenance', ar: 'التشغيل والصيانة' },
+    image: '/assets/images/services/om.jpg'
+  },
+  {
+    id: 'security-services',
+    title: { en: 'Security Solutions', ar: 'الحلول الأمنية' },
+    image: '/assets/images/services/security.jpg'
+  },
+  {
+    id: 'janitorial-services',
+    title: { en: 'Janitorial & Sanitation', ar: 'النظافة والتعقيم' },
+    image: '/assets/images/services/cleaning.jpg'
+  },
+  {
+    id: 'landscaping',
+    title: { en: 'Landscaping & Irrigation', ar: 'تنسيق الحدائق والري' },
+    image: '/assets/images/services/landscape.jpg'
+  }
+];
+
 /**
  * Premium Capabilities Section
  * Dynamic: Fetches all pillars directly from the CMS services collection.
@@ -73,11 +101,13 @@ function BentoCard({ service, idx }: { service: any, idx: number }) {
 export default function Capabilities({ content }: { content?: any }) {
   const { language, t } = useLanguage();
 
-  const services = content ? Object.entries(content).map(([id, data]: [string, any]) => ({
-    id,
-    title: { en: data.title_en, ar: data.title_ar },
-    image: data.image
-  })) : [];
+  const services = content && Object.keys(content).length > 0
+    ? Object.entries(content).map(([id, data]: [string, any]) => ({
+        id,
+        title: { en: data.title_en, ar: data.title_ar },
+        image: data.image
+      }))
+    : DEFAULT_SERVICES;
 
   const titleText = t('cap_title');
 
@@ -106,9 +136,14 @@ export default function Capabilities({ content }: { content?: any }) {
           <span>{t('cap_preheader')}</span>
         </motion.div>
 
-        <BlurReveal delay={0.2} className={styles.title}>
-          {titleText}
-        </BlurReveal>
+        <div className={styles.title}>
+          <BlurText 
+            text={titleText}
+            delay={50}
+            animateBy="words"
+            direction="top"
+          />
+        </div>
 
         <MotionCurve 
           d="M0 100 C 150 0, 250 200, 400 100" 

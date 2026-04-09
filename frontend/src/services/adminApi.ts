@@ -110,36 +110,21 @@ export const adminApi = {
     return res.json();
   },
 
-  // Public Access (Static Showcase Mode)
+  // Public Access
   async getPublicService(slug: string) {
-    try {
-      const { MOCK_CONTENT } = await import('../data/mockData');
-      const service = (MOCK_CONTENT.services as any)[slug];
-      if (service) return service;
-
-      const res = await fetch(`http://localhost:4000/api/v1/public/services/${slug}`, {
-        cache: 'no-store'
-      });
-      if (!res.ok) throw new Error('Service not found');
-      return res.json();
-    } catch (err) {
-       const { MOCK_CONTENT } = await import('../data/mockData');
-       return (MOCK_CONTENT.services as any)[slug] || null;
-    }
+    const res = await fetch(`http://localhost:4000/api/v1/public/services/${slug}`, {
+      cache: 'no-store'
+    });
+    if (!res.ok) throw new Error('Service not found');
+    return res.json();
   },
 
   async getPublicContent() {
-    try {
-      // In Showcase Mode, we prioritize local high-fidelity data
-      const { MOCK_CONTENT } = await import('../data/mockData');
-      return MOCK_CONTENT;
-    } catch (err) {
-      const res = await fetch(`http://localhost:4000/api/v1/public/content`, {
-        cache: 'no-store'
-      });
-      if (!res.ok) throw new Error('Failed to fetch content');
-      return res.json();
-    }
+    const res = await fetch(`http://localhost:4000/api/v1/public/content`, {
+      cache: 'no-store'
+    });
+    if (!res.ok) throw new Error('Failed to fetch content');
+    return res.json();
   },
 
   async changePassword(currentPassword: any, newPassword: any) {

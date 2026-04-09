@@ -4,11 +4,11 @@ import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import styles from './ProjectLocations.module.css';
 import { useLanguage } from '@/context/LanguageContext';
-import BlurReveal from '@/components/modern/BlurReveal';
 import SpotlightCard from '@/components/modern/SpotlightCard';
 import MagnetButton from '@/components/modern/MagnetButton';
 import LogoBeam from '@/components/modern/LogoBeam';
 import MotionCurve from '@/components/modern/MotionCurve';
+import BlurText from '@/components/modern/BlurText';
 import { Building2, Shield, Fuel, HeartPulse, Activity } from 'lucide-react';
 
 const ICON_MAP: any = {
@@ -67,9 +67,14 @@ export default function ProjectLocations({ content }: { content?: any }) {
             <LogoBeam width="60px" delay={0.2} />
             <span>{t('footprint_label')}</span>
           </motion.div>
-          <BlurReveal delay={0.2} className={styles.title}>
-            {t('footprint_title')}
-          </BlurReveal>
+          <div className={styles.title}>
+            <BlurText 
+              text={t('footprint_title')}
+              delay={50}
+              animateBy="words"
+              direction="top"
+            />
+          </div>
         </div>
 
         <div className={styles.mapWrapper}>

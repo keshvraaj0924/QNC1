@@ -7,6 +7,7 @@ import styles from './NationalVision.module.css';
 import { useLanguage } from '@/context/LanguageContext';
 import LogoBeam from '@/components/modern/LogoBeam';
 import MotionCurve from '@/components/modern/MotionCurve';
+import BlurText from '@/components/modern/BlurText';
 
 export default function NationalVision({ content }: { content?: any }) {
   const { language, t } = useLanguage();
@@ -72,25 +73,29 @@ export default function NationalVision({ content }: { content?: any }) {
               <span>{t('vision_label')}</span>
             </motion.div>
 
-            <motion.h2 
-              className={styles.title}
-              variants={containerVariants}
-              initial="hidden"
-              whileInView="show"
-              viewport={{ once: true, amount: 0.5 }}
-            >
-              {words.map((word: string, i: number) => {
-                const isImpact = word.toLowerCase().includes('impact');
-                return (
-                  <span key={i + language} className={`${styles.wordWrapper} ${isImpact ? styles.blockWord : ''}`}>
-                    <motion.span variants={wordVariants} className={styles.word}>
-                      {word}&nbsp;
-                    </motion.span>
-                    {isImpact && <br />}
-                  </span>
-                );
-              })}
-            </motion.h2>
+            <div className={styles.titleWrapper}>
+              <div className={styles.title}>
+                <BlurText 
+                  text={title}
+                  delay={50}
+                  animateBy="words"
+                  direction="top"
+                />
+              </div>
+              <motion.div 
+                className={styles.vision2030Branding}
+                initial={{ opacity: 0, scale: 0.8 }}
+                whileInView={{ opacity: 1, scale: 1 }}
+                viewport={{ once: true }}
+                transition={{ duration: 1, delay: 0.6 }}
+              >
+                <img 
+                  src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/1a/Saudi_Vision_2030_logo.svg/2560px-Saudi_Vision_2030_logo.svg.png" 
+                  alt="Saudi Vision 2030" 
+                  className={styles.vision2030Logo}
+                />
+              </motion.div>
+            </div>
 
             <motion.p 
               className={styles.description}

@@ -12,6 +12,7 @@ import MissionVision from '@/components/sections/MissionVision/MissionVision';
 import DomeGallery from '@/components/modern/DomeGallery';
 import ScrollReveal from '@/components/modern/ScrollReveal';
 import MotionCurve from '@/components/modern/MotionCurve';
+import BlurText from '@/components/modern/BlurText';
 import { useLanguage } from '@/context/LanguageContext';
 import styles from './page.module.css';
 
@@ -78,7 +79,14 @@ export default function HomeContent({ content }: { content: any }) {
               <div className="preHeader" style={{ justifyContent: 'center' }}>
                 <span>{t('dome_label')}</span>
               </div>
-              <h2 className={styles.domeTitle}>{t('dome_title')}</h2>
+              <h2 className={styles.domeTitle}>
+                <BlurText 
+                  text={t('dome_title')}
+                  delay={50}
+                  animateBy="words"
+                  direction="top"
+                />
+              </h2>
               <p className={styles.domeDesc}>{t('dome_description')}</p>
             </div>
           </ScrollReveal>

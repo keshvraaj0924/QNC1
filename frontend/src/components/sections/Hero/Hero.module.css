@@ -93,7 +93,7 @@
   font-size: clamp(3rem, 8vw, 6.5rem);
   font-weight: 800;
   line-height: 1.1;
-  color: var(--foreground);
+  color: #ffffff;
   letter-spacing: -0.02em;
 }
 
@@ -105,7 +105,7 @@
 .exploreBtn {
   background: none;
   border: none;
-  color: var(--foreground);
+  color: #ffffff;
   font-size: 0.85rem;
   font-weight: 700;
   letter-spacing: 0.15em;
@@ -170,7 +170,7 @@
   font-size: 0.65rem;
   letter-spacing: 0.2em;
   font-weight: 600;
-  color: var(--foreground);
+  color: #ffffff;
   opacity: 0.4;
   text-transform: uppercase;
   writing-mode: vertical-rl;
@@ -197,7 +197,7 @@
   font-size: 0.6rem;
   letter-spacing: 0.3em;
   font-weight: 700;
-  color: var(--foreground);
+  color: #ffffff;
   opacity: 0.5;
   text-transform: uppercase;
 }

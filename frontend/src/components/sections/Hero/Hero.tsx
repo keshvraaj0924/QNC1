@@ -4,7 +4,7 @@ import { motion, useScroll, useTransform, useSpring } from 'framer-motion';
 import { useRef, useState, useEffect } from 'react';
 import styles from './Hero.module.css';
 import { useLanguage } from '@/context/LanguageContext';
-import BlurReveal from '@/components/modern/BlurReveal';
+import BlurText from '@/components/modern/BlurText';
 import MagnetButton from '@/components/modern/MagnetButton';
 import BackgroundBeams from '@/components/modern/BackgroundBeams';
 
@@ -105,10 +105,11 @@ export default function Hero({ content }: { content?: any }) {
             className={styles.titleContainer}
           >
             <h1 className={styles.title}>
-              <BlurReveal 
-                children={title}
-                delay={0.2} 
-                duration={1}
+              <BlurText 
+                text={title}
+                delay={50}
+                animateBy="words"
+                direction="top"
               />
             </h1>
           </motion.div>

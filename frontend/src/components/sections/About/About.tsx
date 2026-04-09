@@ -7,20 +7,11 @@ import { useLanguage } from '@/context/LanguageContext';
 import { useRef } from 'react';
 import LogoBeam from '@/components/modern/LogoBeam';
 import MotionCurve from '@/components/modern/MotionCurve';
+import BlurText from '@/components/modern/BlurText';
 
 export default function About({ content }: { content?: any }) {
   const { language, t } = useLanguage();
   const containerRef = useRef<HTMLDivElement>(null);
-  
-  const DEFAULT_CERTIFICATES = [
-    { title: { en: 'ISO 9001:2015', ar: 'آيزو 9001:2015' }, img: '/assets/images/certificates/iso_9001.png' },
-    { title: { en: 'ISO 14001:2015', ar: 'آيزو 14001:2015' }, img: '/assets/images/certificates/iso_14001.png' },
-    { title: { en: 'OHSAS 18001:2007', ar: 'أوشاس 18001:2007' }, img: '/assets/images/certificates/iso_45001.png' },
-  ];
-
-  const certificates = content?.certificates && content.certificates.length > 0 
-    ? content.certificates 
-    : DEFAULT_CERTIFICATES;
   
   const headline = language === 'en' 
     ? (content?.headline_en || t('about_headline')) 
@@ -80,21 +71,14 @@ export default function About({ content }: { content?: any }) {
               className={styles.aboutCurve}
             />
 
-            <motion.h2 
-              className={styles.headline}
-              variants={titleContainerVariants}
-              initial="hidden"
-              whileInView="show"
-              viewport={{ once: true, amount: 0.5 }}
-            >
-              {words.map((word: string, i: number) => (
-                <span key={i + language} className={styles.wordWrapper}>
-                  <motion.span variants={wordVariants} className={styles.word}>
-                    {word}&nbsp;
-                  </motion.span>
-                </span>
-              ))}
-            </motion.h2>
+            <div className={styles.headline}>
+              <BlurText 
+                text={headline}
+                delay={50}
+                animateBy="words"
+                direction="top"
+              />
+            </div>
 
             <motion.p 
               className={styles.description}
@@ -121,32 +105,6 @@ export default function About({ content }: { content?: any }) {
               priority
             />
           </motion.div>
-        </div>
-
-        <div className={styles.certificatesWrapper}>
-          {certificates.map((cert: any, i: number) => (
-            <motion.div 
-              key={i} 
-              className={styles.certCard}
-              initial={{ opacity: 0, y: 40 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 1, delay: 0.2 + (i * 0.1) }}
-            >
-              <div className={styles.certImgBox}>
-                <Image
-                  src={cert.img || '/assets/images/certs/placeholder.png'}
-                  alt={cert.title?.en || 'Certificate'}
-                  width={80}
-                  height={80}
-                  className={styles.certImg}
-                />
-              </div>
-              <span className={styles.certTitle}>
-                {language === 'en' ? (cert.title?.en || cert.name) : (cert.title?.ar || cert.name_ar || cert.name)}
-              </span>
-            </motion.div>
-          ))}
         </div>
       </div>
     </section>

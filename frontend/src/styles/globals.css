@@ -5,10 +5,15 @@
   --qnc-gold: #CBA152;
   --qnc-purple: #6658A6;
   
+  --qnc-blue-rgb: 26, 117, 187;
+  --qnc-green-rgb: 63, 142, 67;
+  --qnc-gold-rgb: 203, 161, 82;
+  
   --background: #080808; 
   --foreground: #ffffff;
   --navy: #080808;
-  --gold: var(--qnc-gold); /* FIX: correctly map gold */
+  --gold: var(--qnc-gold);
+  --gold-rgb: var(--qnc-gold-rgb);
   
   --sub-text: rgba(255, 255, 255, 0.6);
   --border-color: rgba(255, 255, 255, 0.1);

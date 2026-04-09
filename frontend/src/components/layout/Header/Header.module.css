@@ -4,16 +4,16 @@
   left: 0;
   width: 100%;
   z-index: 1000;
-  padding: 1.5rem 0;
+  padding: 1.8rem 0; /* Slightly more padding for the larger logo */
   transition: all 0.3s ease;
   background-color: transparent;
-  color: white; /* Default to white for transparent hero header */
+  color: white; 
 }
 
 .header.scrolled {
   background-color: var(--bg-primary);
   color: var(--text-primary);
-  padding: 1rem 0;
+  padding: 0.8rem 0; /* Tighter when scrolled */
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
 }
 
@@ -36,7 +36,7 @@
 }
 
 .logoImage {
-  height: 48px;
+  height: 60px; /* Increased from 48px */
   width: auto;
   transition: transform 0.4s cubic-bezier(0.76, 0, 0.24, 1);
 }

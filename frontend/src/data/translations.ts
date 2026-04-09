@@ -95,6 +95,20 @@ export const translations: Record<string, Record<string, string>> = {
     'contact_placeholder_name': 'Your Name',
     'contact_placeholder_email': 'your@email.com',
     'contact_placeholder_msg': 'How can Qudrat assist your project?',
+    
+    // Compliance
+    'compliance_label': 'STANDARDS & TRUST',
+    'compliance_title': 'Compliance and Certifications',
+    'cert_iso_14001': 'Environmental Management System',
+    'cert_iso_9001': 'Quality Management System',
+    'cert_iso_45001_hs': 'Health & Safety Management System',
+    'cert_iso_45001_fm': 'Facility Management system',
+    'cert_iso_22000': 'Food Safety Management system',
+    'cert_bicsc': 'The British Institute of Cleaning Science',
+    'cert_sfma': 'Saudi Facility Management Association',
+    'cert_aramco': 'Saudi Aramco',
+    'cert_achilles': 'Achilles 2025',
+    'cert_haccp': 'HACCP Certified',
   },
   ar: {
     // Navigation
@@ -192,5 +206,19 @@ export const translations: Record<string, Record<string, string>> = {
     'contact_placeholder_name': 'اسمك الكامل',
     'contact_placeholder_email': 'بريدك الإلكتروني',
     'contact_placeholder_msg': 'كيف يمكن لقدرات مساعدة مشروعك؟',
+
+    // Compliance
+    'compliance_label': 'المعايير والثقة',
+    'compliance_title': 'الامتثال والشهادات',
+    'cert_iso_14001': 'نظام إدارة البيئة',
+    'cert_iso_9001': 'نظام إدارة الجودة',
+    'cert_iso_45001_hs': 'نظام إدارة الصحة والسلامة',
+    'cert_iso_45001_fm': 'نظام إدارة المرافق',
+    'cert_iso_22000': 'نظام إدارة سلامة الغذاء',
+    'cert_bicsc': 'المعهد البريطاني لعلوم التنظيف',
+    'cert_sfma': 'الجمعية السعودية لادارة المرافق',
+    'cert_aramco': 'أرامكو السعودية',
+    'cert_achilles': 'أكيليس 2025',
+    'cert_haccp': 'شهادة الهاسيب (HACCP)',
   }
 };

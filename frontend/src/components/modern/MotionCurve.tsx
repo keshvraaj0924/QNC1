@@ -30,6 +30,7 @@ export default function MotionCurve({
 }: MotionCurveProps) {
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, amount: 0.2 });
+  const gradientId = `curveGradient-${d.length}-${strokeWidth}`;
 
   return (
     <div 
@@ -50,10 +51,10 @@ export default function MotionCurve({
       >
         {useGradient && (
           <defs>
-            <linearGradient id="curveGradient" x1="0%" y1="0%" x2="100%" y2="0%">
-              <stop offset="0%" stopColor="#1A75BB" />
-              <stop offset="50%" stopColor="#3F8E43" />
-              <stop offset="100%" stopColor="#CBA152" />
+            <linearGradient id={gradientId} x1="0%" y1="0%" x2="100%" y2="0%">
+              <stop offset="0%" stopColor="#1373B9" />
+              <stop offset="50%" stopColor="#3E813E" />
+              <stop offset="100%" stopColor="#6359A6" />
             </linearGradient>
             <filter id="glow">
               <feGaussianBlur stdDeviation="2" result="coloredBlur"/>
@@ -68,7 +69,7 @@ export default function MotionCurve({
         <motion.path
           ref={ref}
           d={d}
-          stroke={useGradient ? "url(#curveGradient)" : "var(--qnc-gold)"}
+          stroke={useGradient ? `url(#${gradientId})` : "var(--qnc-gold)"}
           strokeWidth={strokeWidth}
           strokeLinecap="round"
           filter={useGradient ? "url(#glow)" : "none"}

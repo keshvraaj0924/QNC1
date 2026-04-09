@@ -26,7 +26,7 @@
   font-weight: 800;
   line-height: 1;
   letter-spacing: -0.02em;
-  color: #fff;
+  color: var(--foreground);
   text-transform: uppercase;
   margin: 1.5rem 0 0;
   display: flex;
@@ -55,7 +55,7 @@
 }
 
 .mainMapPath {
-  fill: var(--navy);
+  fill: var(--card-bg);
   stroke: var(--border-color);
   stroke-width: 0.5px;
   transition: all 0.6s cubic-bezier(0.16, 1, 0.3, 1);
@@ -67,7 +67,7 @@
 
 .locationPoint {
   fill: var(--gold);
-  stroke: #fff;
+  stroke: var(--background);
   stroke-width: 0.2px;
   filter: drop-shadow(0 0 8px var(--gold));
 }
@@ -165,7 +165,7 @@
 .dividerLine {
   flex: 1;
   height: 1px;
-  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+  background: linear-gradient(90deg, transparent, var(--border-color), transparent);
 }
 
 .dividerText {
@@ -214,7 +214,7 @@
 }
 
 .sectorCard:hover {
-  background: rgba(255, 255, 255, 0.06);
+  background: var(--card-bg-hover);
   border-color: rgba(var(--accent-blue-rgb), 0.4);
   transform: translateY(-10px);
   box-shadow: 0 30px 60px rgba(0, 0, 0, 0.4);

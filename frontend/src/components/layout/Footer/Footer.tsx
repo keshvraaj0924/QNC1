@@ -1,6 +1,6 @@
 'use client';
 
-import { useRef, useState } from 'react';
+import { useRef, useState, useEffect } from 'react';
 import Link from 'next/link';
 import { motion, useInView, useScroll, useTransform, AnimatePresence } from 'framer-motion';
 import styles from './Footer.module.css';
@@ -117,6 +117,7 @@ export default function Footer() {
   const footerRef = useRef<HTMLDivElement>(null);
   const isInView = useInView(footerRef, { once: true, margin: '-100px' });
   const [hoveredSocial, setHoveredSocial] = useState<string | null>(null);
+  const [glintKey, setGlintKey] = useState(0);
 
   const { scrollYProgress } = useScroll({
     target: footerRef,
@@ -125,6 +126,14 @@ export default function Footer() {
 
   const bigTextY = useTransform(scrollYProgress, [0, 1], ['20%', '0%']);
   const bigTextOpacity = useTransform(scrollYProgress, [0, 0.5], [0, 1]);
+
+  // Handle glint effect timing
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setGlintKey(prev => prev + 1);
+    }, 10000); // Trigger glint every 10 seconds (aligned with rotation duration)
+    return () => clearInterval(interval);
+  }, []);
 
   const containerVariants = {
     hidden: {},
@@ -138,6 +147,29 @@ export default function Footer() {
 
   return (
     <footer className={`${styles.footerSection} ${isRTL ? styles.rtl : ''}`} ref={footerRef}>
+      {/* 3D Revolving Logo Background Element */}
+      <div className={styles.revolvingBrandingContainer}>
+        <motion.div 
+          className={styles.revolvingSymbolWrapper}
+          animate={{ rotateY: 360 }}
+          transition={{ duration: 10, repeat: Infinity, ease: "linear" }}
+        >
+          <img 
+            src="/assets/images/QLogoSymbol/TransaparentQ.png" 
+            alt="QNC Revolving" 
+            className={styles.revolvingSymbol}
+          />
+          {/* Glint Reflection Overlay */}
+          <motion.div 
+            key={glintKey}
+            className={styles.glintOverlay}
+            initial={{ left: '-100%' }}
+            animate={{ left: '100%' }}
+            transition={{ duration: 1.5, ease: "easeInOut", delay: 0 }}
+          />
+        </motion.div>
+      </div>
+
       {/* Marquee Band */}
       <MarqueeText language={language} />
 
@@ -147,14 +179,16 @@ export default function Footer() {
           className={styles.bigCta}
           style={{ y: bigTextY, opacity: bigTextOpacity }}
         >
-          <p className={styles.bigCtaLabel}>{language === 'ar' ? 'هل أنت مستعد للشراكة؟' : 'READY TO PARTNER?'}</p>
-          <h2 className={styles.bigCtaText}>
-            {language === 'ar' ? (
-              <>لنقم بالبناء<br />معاً.</>
-            ) : (
-              <>Let's Build<br />Together.</>
-            )}
-          </h2>
+          <div className={styles.ctaHeaderRows}>
+            <p className={styles.bigCtaLabel}>{language === 'ar' ? 'هل أنت مستعد للشراكة؟' : 'READY TO PARTNER?'}</p>
+            <h2 className={styles.bigCtaText}>
+              {language === 'ar' ? (
+                <>لنقم بالبناء<br />معاً.</>
+              ) : (
+                <>Let's Build<br />Together.</>
+              )}
+            </h2>
+          </div>
           <Link href="/contact">
             <motion.button
               className={styles.ctaBtn}
