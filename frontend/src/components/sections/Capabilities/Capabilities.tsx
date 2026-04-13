@@ -41,7 +41,7 @@ const ALL_SERVICES: Service[] = [
   { id: '12', slug: 'facility-help-desk', titleEn: 'Help Desk', titleAr: 'مكتب المساعدة', descEn: 'Central hub for tracking all facility requests.', descAr: 'مركز لتسجيل ومتابعة طلبات المنشأة.', type: 'SOFT', icon: 'Headphones', image: '/assets/images/services/helpdesk.png' }
 ];
 
-export default function Capabilities() {
+export default function Capabilities({ content }: { content?: any }) {
   const { language, isRTL, t } = useLanguage();
   const { theme } = useTheme();
   const sectionRef = useRef<HTMLDivElement>(null);

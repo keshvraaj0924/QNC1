@@ -13,7 +13,7 @@ const UI_CARDS = [
   { id: 'sensors', labelEn: 'IoT Assets', labelAr: 'أصول إنترنت الأشياء', value: '1,240', trend: 'up', color: '#6658A6' }
 ];
 
-const Alef360 = () => {
+const Alef360 = ({ content }: { content?: any }) => {
   const { language, isRTL } = useLanguage();
   const { theme } = useTheme();
   const sectionRef = React.useRef<HTMLDivElement>(null);
