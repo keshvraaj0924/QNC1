@@ -3,7 +3,11 @@ import { LocalizedString } from './content';
 export interface NavLink {
   name: LocalizedString;
   path: string;
-  subPages: { name: LocalizedString; path: string }[];
+  subPages: { 
+    name: LocalizedString; 
+    path: string;
+    group?: LocalizedString; 
+  }[];
 }
 
 export const menuLinks: NavLink[] = [
@@ -25,17 +29,21 @@ export const menuLinks: NavLink[] = [
     name: { en: 'Services', ar: 'الخدمات' }, 
     path: '/services', 
     subPages: [
-      { name: { en: 'Facilities Management', ar: 'إدارة المرافق' }, path: '/services/facilities-management' },
-      { name: { en: 'Manpower Head Hunting', ar: 'استقطاب القوى العاملة' }, path: '/services/manpower-head-hunting' },
-      { name: { en: 'Water & Fuel Supply', ar: 'توريد المياه والوقود' }, path: '/services/water-and-fuel-supply' },
-      { name: { en: 'Logistics & Transportation', ar: 'الخدمات اللوجستية والنقل' }, path: '/services/logistics-and-transportation' },
-      { name: { en: 'Pest Control', ar: 'مكافحة الحشرات' }, path: '/services/pest-control-management' },
-      { name: { en: 'Water & Sanitation', ar: 'المياه والصرف الصحي' }, path: '/services/water-and-sanitation-solutions' },
-      { name: { en: 'Laundry Services', ar: 'خدمات المغاسل' }, path: '/services/laundry-services' },
-      { name: { en: 'Housekeeping', ar: 'النظافة والصيانة' }, path: '/services/housekeeping-and-maintenance' },
-      { name: { en: 'Catering Services', ar: 'خدمات الإعاشة' }, path: '/services/catering-services' },
-      { name: { en: 'Health Risk Assessment', ar: 'تقييم المخاطر الصحية' }, path: '/services/health-risk-assessment' },
-      { name: { en: 'Medical Services', ar: 'الخدمات الطبية' }, path: '/services/medical-services-health-care' }
+      // HARD SERVICES
+      { group: { en: 'Hard Services', ar: 'الخدمات الصلبة' }, name: { en: 'HVAC Services', ar: 'التكييف والتهوية' }, path: '/services/hvac-services' },
+      { group: { en: 'Hard Services', ar: 'الخدمات الصلبة' }, name: { en: 'MEP Engineering', ar: 'الهندسة الكهروميكانيكية' }, path: '/services/mep-engineering' },
+      { group: { en: 'Hard Services', ar: 'الخدمات الصلبة' }, name: { en: 'Civil Works', ar: 'الأعمال المدنية' }, path: '/services/civil-construction' },
+      { group: { en: 'Hard Services', ar: 'الخدمات الصلبة' }, name: { en: 'Low Current', ar: 'التيار المنخفض' }, path: '/services/low-current-systems' },
+      { group: { en: 'Hard Services', ar: 'الخدمات الصلبة' }, name: { en: 'Renovation', ar: 'التجديد والتجهيز' }, path: '/services/renovation-and-fitout' },
+      { group: { en: 'Hard Services', ar: 'الخدمات الصلبة' }, name: { en: '3rd Party Management', ar: 'إدارة الموردين' }, path: '/services/third-party-management' },
+      
+      // SOFT SERVICES
+      { group: { en: 'Soft Services', ar: 'الخدمات الناعمة' }, name: { en: 'Housekeeping', ar: 'النظافة والصيانة' }, path: '/services/housekeeping-and-maintenance' },
+      { group: { en: 'Soft Services', ar: 'الخدمات الناعمة' }, name: { en: 'Catering Services', ar: 'الخدمات الغذائية' }, path: '/services/catering-services' },
+      { group: { en: 'Soft Services', ar: 'الخدمات الناعمة' }, name: { en: 'Facade Cleaning', ar: 'تنظيف الواجهات' }, path: '/services/facade-cleaning' },
+      { group: { en: 'Soft Services', ar: 'الخدمات الناعمة' }, name: { en: 'Landscaping', ar: 'تنسيق الحدائق' }, path: '/services/landscaping-services' },
+      { group: { en: 'Soft Services', ar: 'الخدمات الناعمة' }, name: { en: 'Pest Control', ar: 'مكافحة الحشرات' }, path: '/services/pest-control-management' },
+      { group: { en: 'Soft Services', ar: 'الخدمات الناعمة' }, name: { en: '24/7 Helpdesk', ar: 'مكتب مساعدة 24/7' }, path: '/services/facility-help-desk' }
     ] 
   },
   { 

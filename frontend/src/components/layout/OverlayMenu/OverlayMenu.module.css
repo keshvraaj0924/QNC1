@@ -20,6 +20,64 @@
   padding: 2.5rem 5%;
 }
 
+.headerActions {
+  display: flex;
+  align-items: center;
+  gap: 3rem;
+}
+
+.cmsToggleWrapper {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  cursor: pointer;
+  padding: 0.5rem 1rem;
+  border-radius: 30px;
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  transition: all 0.3s ease;
+}
+
+.cmsToggleWrapper:hover {
+  background: rgba(255, 255, 255, 0.08);
+  border-color: var(--gold);
+}
+
+.cmsLabel {
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.15em;
+  color: #fff;
+  opacity: 0.6;
+  white-space: nowrap;
+}
+
+.cmsToggleWrapper:hover .cmsLabel {
+  opacity: 1;
+}
+
+.toggleTrack {
+  width: 48px;
+  height: 24px;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 12px;
+  position: relative;
+  padding: 2px;
+  transition: background 0.4s ease;
+}
+
+.toggleTrack.active {
+  background: var(--gold);
+}
+
+.toggleThumb {
+  width: 20px;
+  height: 20px;
+  background: #fff;
+  border-radius: 50%;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
+}
+
 .logoImage {
   height: 54px;
   width: auto;
@@ -139,6 +197,31 @@
 }
 
 .subGrid {
+  display: flex;
+  flex-direction: column;
+  gap: 3rem;
+}
+
+.groupSection {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.groupTitle {
+  font-size: 0.85rem;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: var(--gold);
+  font-weight: 700;
+  opacity: 0.9;
+  margin-bottom: 0.5rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  padding-bottom: 0.75rem;
+  width: 100%;
+}
+
+.groupLinks {
   display: flex;
   flex-direction: column;
   gap: 1.25rem;

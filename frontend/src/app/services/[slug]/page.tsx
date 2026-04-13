@@ -9,28 +9,78 @@ import Image from 'next/image';
 import { notFound } from 'next/navigation';
 import styles from './ServicePage.module.css';
 import { useLanguage } from '@/context/LanguageContext';
+import { useSettings } from '@/context/SettingsContext';
 import { adminApi } from '@/services/adminApi';
+import { servicesData } from '@/data/content';
 
 export default function ServicePage({ params }: { params: Promise<{ slug: string }> }) {
   const resolvedParams = use(params);
   const { language, t } = useLanguage();
+  const { cmsMode } = useSettings();
   const [service, setService] = useState<any>(null);
   const [loading, setLoading] = useState(true);
   const lang = language as 'en' | 'ar';
 
   useEffect(() => {
     const loadService = async () => {
+      setLoading(true);
+      
+      // 1. Try Local Content first if CMS Mode is off
+      if (!cmsMode) {
+        const local = servicesData.find(s => s.slug === resolvedParams.slug);
+        if (local) {
+          // Map local ServiceDetails to the structure expected by the page
+          setService({
+            title_en: local.title.en,
+            title_ar: local.title.ar,
+            description_en: local.description.en,
+            description_ar: local.description.ar,
+            features: local.features,
+            image: local.image
+          });
+          setLoading(false);
+          return;
+        }
+      }
+
+      // 2. Try CMS if Mode is on OR local not found
       try {
         const data = await adminApi.getPublicService(resolvedParams.slug);
-        setService(data);
+        if (data) {
+          setService(data);
+        } else {
+          // Fallback to local if CMS returned null
+          const localFallback = servicesData.find(s => s.slug === resolvedParams.slug);
+          if (localFallback) {
+             setService({
+               title_en: localFallback.title.en,
+               title_ar: localFallback.title.ar,
+               description_en: localFallback.description.en,
+               description_ar: localFallback.description.ar,
+               features: localFallback.features,
+               image: localFallback.image
+             });
+          }
+        }
       } catch (err) {
-        console.error('Service not found in CMS:', err);
+        console.error('Service load error, checking local fallback:', err);
+        const localFallback = servicesData.find(s => s.slug === resolvedParams.slug);
+        if (localFallback) {
+           setService({
+             title_en: localFallback.title.en,
+             title_ar: localFallback.title.ar,
+             description_en: localFallback.description.en,
+             description_ar: localFallback.description.ar,
+             features: localFallback.features,
+             image: localFallback.image
+           });
+        }
       } finally {
         setLoading(false);
       }
     };
     loadService();
-  }, [resolvedParams.slug]);
+  }, [resolvedParams.slug, cmsMode]);
 
   if (loading) return <div style={{height: '100vh', background: 'black'}} />;
   if (!service) notFound();

@@ -9,6 +9,7 @@ import { useLanguage } from '@/context/LanguageContext';
 import { useSiteLogo } from '@/hooks/useSiteLogo';
 import { menuLinks } from '@/data/navigation';
 import MagnetButton from '@/components/modern/MagnetButton';
+import { useSettings } from '@/context/SettingsContext';
 
 const featuredNews = [
   {
@@ -27,6 +28,7 @@ const featuredNews = [
 
 export default function OverlayMenu({ isOpen, onClose }: { isOpen: boolean; onClose: () => void }) {
   const { language, t } = useLanguage();
+  const { cmsMode, toggleCmsMode } = useSettings();
   const logoSrc = useSiteLogo();
   const [activeLink, setActiveLink] = useState('Services');
 
@@ -58,6 +60,14 @@ export default function OverlayMenu({ isOpen, onClose }: { isOpen: boolean; onCl
   const activeMenuLink = menuLinks.find((l) => l.name.en === activeLink);
   const activeSubpages = activeMenuLink?.subPages || [];
 
+  // Group subpages by their 'group' property
+  const groupedSubpages = activeSubpages.reduce((acc: any, sub) => {
+    const groupName = sub.group ? sub.group[language] : 'General';
+    if (!acc[groupName]) acc[groupName] = [];
+    acc[groupName].push(sub);
+    return acc;
+  }, {});
+
   return (
     <AnimatePresence>
       {isOpen && (
@@ -70,11 +80,23 @@ export default function OverlayMenu({ isOpen, onClose }: { isOpen: boolean; onCl
         >
           <div className={styles.overlayHeader}>
             <img src={logoSrc} alt="Qudrat National Company" className={styles.logoImage} />
-            <MagnetButton strength={0.3}>
-              <button onClick={onClose} className={styles.closeBtn} data-cursor="hover">
-                <X size={36} strokeWidth={1.5} />
-              </button>
-            </MagnetButton>
+            <div className={styles.headerActions}>
+              <div className={styles.cmsToggleWrapper} onClick={toggleCmsMode} data-cursor="hover">
+                <span className={styles.cmsLabel}>{cmsMode ? 'CMS MODE' : 'LOCAL MODE'}</span>
+                <div className={`${styles.toggleTrack} ${cmsMode ? styles.active : ''}`}>
+                  <motion.div 
+                    className={styles.toggleThumb}
+                    animate={{ x: cmsMode ? 24 : 0 }}
+                    transition={{ type: "spring", stiffness: 500, damping: 30 }}
+                  />
+                </div>
+              </div>
+              <MagnetButton strength={0.3}>
+                <button onClick={onClose} className={styles.closeBtn} data-cursor="hover">
+                  <X size={36} strokeWidth={1.5} />
+                </button>
+              </MagnetButton>
+            </div>
           </div>
 
           <div className={styles.menuContainer} data-lenis-prevent="true">
@@ -107,17 +129,28 @@ export default function OverlayMenu({ isOpen, onClose }: { isOpen: boolean; onCl
                   variants={staggerVariants}
                 >
                   {activeSubpages.length > 0 ? (
-                    activeSubpages.map((sub, idx) => (
-                      <motion.div key={idx} variants={itemVariants}>
-                        <Link 
-                          href={sub.path}
-                          className={styles.subLink}
-                          data-cursor="hover"
-                          onClick={onClose}
-                        >
-                          {sub.name[language]}
-                        </Link>
-                      </motion.div>
+                    Object.entries(groupedSubpages).map(([groupName, subs]: [string, any]) => (
+                      <div key={groupName} className={styles.groupSection}>
+                        {groupName !== 'General' && (
+                          <motion.h4 variants={itemVariants} className={styles.groupTitle}>
+                            {groupName}
+                          </motion.h4>
+                        )}
+                        <div className={styles.groupLinks}>
+                          {subs.map((sub: any, idx: number) => (
+                            <motion.div key={idx} variants={itemVariants}>
+                              <Link 
+                                href={sub.path}
+                                className={styles.subLink}
+                                data-cursor="hover"
+                                onClick={onClose}
+                              >
+                                {sub.name[language]}
+                              </Link>
+                            </motion.div>
+                          ))}
+                        </div>
+                      </div>
                     ))
                   ) : (
                     <motion.div variants={itemVariants} className={styles.contextPanel}>

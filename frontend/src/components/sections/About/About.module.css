@@ -72,6 +72,7 @@
 }
 
 .headline {
+  font-family: var(--font-heading), var(--font-syne), sans-serif;
   font-size: clamp(2.5rem, 6vw, 5rem);
   font-weight: 800;
   line-height: 1;
@@ -106,6 +107,7 @@
 }
 
 .description {
+  font-family: var(--font-body), var(--font-outfit), sans-serif;
   font-size: 1.15rem;
   line-height: 1.6;
   color: var(--sub-text);

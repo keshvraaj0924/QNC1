@@ -68,12 +68,9 @@ export default function ProjectLocations({ content }: { content?: any }) {
             <span>{t('footprint_label')}</span>
           </motion.div>
           <div className={styles.title}>
-            <BlurText 
-              text={t('footprint_title')}
-              delay={50}
-              animateBy="words"
-              direction="top"
-            />
+            <h2 style={{ fontSize: 'clamp(2rem, 4vw, 3.5rem)', fontWeight: 800, textTransform: 'uppercase', letterSpacing: '-0.02em' }}>
+              {t('footprint_title')}
+            </h2>
           </div>
         </div>
 

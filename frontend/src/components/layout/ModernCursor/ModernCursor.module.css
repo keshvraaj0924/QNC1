@@ -1,0 +1,47 @@
+.cursorWrapper {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  pointer-events: none;
+  z-index: 9999;
+  mix-blend-mode: difference;
+  transition: opacity 0.3s ease;
+}
+
+.cursorRing {
+  position: absolute;
+  top: -20px;
+  left: -20px;
+  width: 40px;
+  height: 40px;
+  border: 1px solid rgba(255, 255, 255, 0.8);
+  border-radius: 50%;
+  pointer-events: none;
+  background-color: transparent;
+  will-change: transform;
+}
+
+.cursorDot {
+  position: absolute;
+  top: -4px;
+  left: -4px;
+  width: 8px;
+  height: 8px;
+  background-color: #fff;
+  border-radius: 50%;
+  pointer-events: none;
+  will-change: transform;
+}
+
+/* Ensure native cursor is hidden everywhere except when needed */
+:global(body) {
+  cursor: none !important;
+}
+
+:global(a), :global(button), :global([role="button"]) {
+  cursor: none !important;
+}
+
+/* Optional scale-up for magnetic regions can be defined here */

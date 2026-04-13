@@ -79,8 +79,13 @@ export const translations: Record<string, Record<string, string>> = {
 
     // Footprint
     'footprint_label': 'OUR FOOTPRINT',
-    'footprint_title': 'PROJECT LOCATIONS',
+    'footprint_title': 'Our Strategic Geographic Presence',
     'footprint_industries': 'KEY INDUSTRIES',
+    'btn_explore_service': 'EXPLORE',
+
+    // Kinetic Phase Titles
+    'cap_phase_hard': 'HARD SERVICES',
+    'cap_phase_soft': 'SOFT SERVICES',
 
     // Contact Form
     'contact_title': 'Connect With Us',
@@ -109,6 +114,12 @@ export const translations: Record<string, Record<string, string>> = {
     'cert_aramco': 'Saudi Aramco',
     'cert_achilles': 'Achilles 2025',
     'cert_haccp': 'HACCP Certified',
+
+    // Stats
+    'stats_workforce': 'Workforce',
+    'stats_projects': 'Active Projects',
+    'stats_sqm': 'SQM Managed',
+    'stats_years': 'Years of Excellence',
   },
   ar: {
     // Navigation
@@ -190,8 +201,13 @@ export const translations: Record<string, Record<string, string>> = {
 
     // Footprint
     'footprint_label': 'تواجدنا',
-    'footprint_title': 'مواقع المشاريع',
+    'footprint_title': 'تواجدنا الجغرافي الاستراتيجي',
     'footprint_industries': 'الصناعات الرئيسية',
+    'btn_explore_service': 'استكشاف',
+
+    // Kinetic Phase Titles
+    'cap_phase_hard': 'الخدمات الصلبة',
+    'cap_phase_soft': 'الخدمات الناعمة',
 
     // Contact Form
     'contact_title': 'تواصل معنا',
@@ -220,5 +236,11 @@ export const translations: Record<string, Record<string, string>> = {
     'cert_aramco': 'أرامكو السعودية',
     'cert_achilles': 'أكيليس 2025',
     'cert_haccp': 'شهادة الهاسيب (HACCP)',
+
+    // Stats
+    'stats_workforce': 'القوى العاملة',
+    'stats_projects': 'المشاريع القائمة',
+    'stats_sqm': 'مساحة مدارة',
+    'stats_years': 'سنوات من التميز',
   }
 };

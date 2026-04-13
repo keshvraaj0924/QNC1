@@ -30,40 +30,48 @@ function TunnelLogo({ src, index, xOffset, containerWidth, totalLogos }: { src: 
   const totalWidth = totalLogos * logoWidth;
   const initialX = index * logoWidth;
   
-  // Calculate relative X position with infinite wrap
-  const relativeX = useTransform(xOffset, (latest: number) => {
-    let rawPos = (initialX + latest) % totalWidth;
-    if (rawPos < -logoWidth) rawPos += totalWidth;
-    if (rawPos > containerWidth + logoWidth) rawPos -= totalWidth;
-    return rawPos;
+  // Calculate relative X position with center-clinging infinite wrap
+  // This algorithm ensures that each logo always maps to the physical copy
+  // closest to the center of the viewport, eliminating "invisible gaps".
+  const relativeX = useTransform(xOffset, (latestValue: number) => {
+    const rawPos = initialX + latestValue;
+    const viewportCenter = containerWidth / 2;
+    const itemOffset = logoWidth / 2;
+    const targetPos = viewportCenter - itemOffset;
+    
+    // Map the infinite raw scroll to a range centered around targetPos
+    const wrapped = ((rawPos - targetPos + totalWidth / 2) % totalWidth + totalWidth) % totalWidth - totalWidth / 2 + targetPos;
+    
+    return wrapped;
   });
 
-  // Interpolate values based on distance from center (containerWidth / 2)
+  // Symmetric visibility and transformation ramps
   const centerPos = containerWidth / 2 - logoWidth / 2;
+  const visibilityRange = containerWidth * 0.6; // Wider range for smoother enter/exit
   
   const opacity = useTransform(relativeX, 
-    [0, centerPos, containerWidth - logoWidth], 
+    [centerPos - visibilityRange, centerPos, centerPos + visibilityRange], 
     [0, 1, 0]
   );
   
   const scale = useTransform(relativeX, 
-    [0, centerPos, containerWidth - logoWidth], 
-    [0.8, 1.3, 0.8]
+    [centerPos - visibilityRange, centerPos, centerPos + visibilityRange], 
+    [0.6, 1.3, 0.6]
   );
   
   const blur = useTransform(relativeX, 
-    [0, centerPos, containerWidth - logoWidth], 
-    [10, 0, 10]
+    [centerPos - visibilityRange, centerPos, centerPos + visibilityRange], 
+    [20, 0, 20]
   );
 
   const z = useTransform(relativeX, 
-    [0, centerPos, containerWidth - logoWidth], 
-    [-200, 100, -200]
+    [centerPos - visibilityRange, centerPos, centerPos + visibilityRange], 
+    [-400, 100, -400]
   );
 
   const rotateY = useTransform(relativeX, 
-    [0, centerPos, containerWidth - logoWidth], 
-    [45, 0, -45]
+    [centerPos - visibilityRange, centerPos, centerPos + visibilityRange], 
+    [70, 0, -70]
   );
 
   const yFloating = useTransform(xOffset, (latest: number) => {
@@ -117,10 +125,11 @@ export default function MajorClients({ content }: { content?: any[] }) {
 
   const xOffset = useMotionValue(0);
   
-  // Continuous Motion Logic
+  // Continuous Motion Logic (Direction-aware)
   useAnimationFrame((time, delta) => {
     const moveBy = delta * 0.05; // Speed adjustment
-    xOffset.set(xOffset.get() - moveBy);
+    const direction = language === 'ar' ? 1 : -1;
+    xOffset.set(xOffset.get() + (moveBy * direction));
   });
 
   const label = t('section_partners_label');

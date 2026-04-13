@@ -111,8 +111,8 @@ body::after {
   font-family: var(--font-cairo) !important;
 }
 
-h1, h2, h3, h4, h5, h6 {
-  font-family: var(--font-heading);
+h1, h2, h3, h4, h5, h6, .syne-heading {
+  font-family: var(--font-heading), var(--font-syne), sans-serif;
   font-weight: 700;
   letter-spacing: -0.02em;
   line-height: 1.1;
@@ -265,9 +265,29 @@ button {
 /* ================================================
    GLOBAL RTL / ARABIC LAYOUT SYSTEM
    Applied when html[dir="rtl"] (set by LanguageContext)
-   ================================================ */
+/* Global Font Defaults : EN (Syne for headings, Outfit for body) */
+html[lang="en"] h1,
+html[lang="en"] h2,
+html[lang="en"] h3,
+html[lang="en"] h4,
+html[lang="en"] h5,
+html[lang="en"] h6,
+html[lang="en"] .syne-heading {
+  font-family: var(--font-syne), 'Inter', sans-serif !important;
+}
 
-/* Font override — switch everything to Cairo */
+html[lang="en"] body,
+html[lang="en"] p,
+html[lang="en"] span,
+html[lang="en"] a,
+html[lang="en"] li,
+html[lang="en"] div,
+html[lang="en"] button {
+  font-family: var(--font-outfit), 'Inter', sans-serif !important;
+}
+
+/* Global Font Defaults : AR (Cairo for everything) */
+[dir="rtl"], 
 [dir="rtl"] body,
 [dir="rtl"] h1,
 [dir="rtl"] h2,
@@ -282,10 +302,9 @@ button {
 [dir="rtl"] button,
 [dir="rtl"] input,
 [dir="rtl"] textarea,
-[dir="rtl"] label,
-[dir="rtl"] div {
+[dir="rtl"] label {
   font-family: var(--font-cairo), 'Cairo', sans-serif !important;
-  unicode-bidi: plaintext;
+  letter-spacing: 0 !important;
 }
 
 /* Letter spacing override — Arabic doesn't use letter-spacing */

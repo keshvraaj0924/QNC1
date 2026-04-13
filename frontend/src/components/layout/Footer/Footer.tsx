@@ -117,7 +117,6 @@ export default function Footer() {
   const footerRef = useRef<HTMLDivElement>(null);
   const isInView = useInView(footerRef, { once: true, margin: '-100px' });
   const [hoveredSocial, setHoveredSocial] = useState<string | null>(null);
-  const [glintKey, setGlintKey] = useState(0);
 
   const { scrollYProgress } = useScroll({
     target: footerRef,
@@ -127,13 +126,6 @@ export default function Footer() {
   const bigTextY = useTransform(scrollYProgress, [0, 1], ['20%', '0%']);
   const bigTextOpacity = useTransform(scrollYProgress, [0, 0.5], [0, 1]);
 
-  // Handle glint effect timing
-  useEffect(() => {
-    const interval = setInterval(() => {
-      setGlintKey(prev => prev + 1);
-    }, 10000); // Trigger glint every 10 seconds (aligned with rotation duration)
-    return () => clearInterval(interval);
-  }, []);
 
   const containerVariants = {
     hidden: {},
@@ -158,14 +150,6 @@ export default function Footer() {
             src="/assets/images/QLogoSymbol/TransaparentQ.png" 
             alt="QNC Revolving" 
             className={styles.revolvingSymbol}
-          />
-          {/* Glint Reflection Overlay */}
-          <motion.div 
-            key={glintKey}
-            className={styles.glintOverlay}
-            initial={{ left: '-100%' }}
-            animate={{ left: '100%' }}
-            transition={{ duration: 1.5, ease: "easeInOut", delay: 0 }}
           />
         </motion.div>
       </div>

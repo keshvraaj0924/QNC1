@@ -244,12 +244,12 @@
 }
 
 .cardContent {
+  font-family: var(--font-body), var(--font-outfit), sans-serif;
   font-size: 1.15rem;
   line-height: 1.6;
   color: var(--sub-text);
   margin: 0;
   font-weight: 400;
-  font-family: var(--font-outfit);
 }
 
 .rtl .cardContent {

@@ -47,27 +47,8 @@
   width: 100%;
   height: 100%;
   object-fit: contain;
-  filter: drop-shadow(0 0 30px rgba(99, 89, 166, 0.3));
 }
 
-.glintOverlay {
-  position: absolute;
-  top: 0;
-  width: 150%;
-  height: 150%;
-  background: linear-gradient(
-    105deg,
-    transparent 30%,
-    rgba(255, 255, 255, 0.4) 45%,
-    rgba(255, 255, 255, 0.7) 50%,
-    rgba(255, 255, 255, 0.4) 55%,
-    transparent 70%
-  );
-  z-index: 5;
-  pointer-events: none;
-  mix-blend-mode: overlay;
-  transform: rotate(-15deg);
-}
 
 /* ---- Marquee Band ---- */
 .marqueeOuter {

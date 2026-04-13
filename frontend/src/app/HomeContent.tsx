@@ -6,9 +6,11 @@ import Hero from '@/components/sections/Hero/Hero';
 import About from '@/components/sections/About/About';
 import NationalVision from '@/components/sections/NationalVision/NationalVision';
 import Capabilities from '@/components/sections/Capabilities/Capabilities';
-import ProjectLocations from '@/components/sections/ProjectLocations/ProjectLocations';
+import RegionalPresence from '@/components/sections/ProjectLocations/RegionalPresence';
 import MajorClients from '@/components/sections/MajorClients/MajorClients';
 import MissionVision from '@/components/sections/MissionVision/MissionVision';
+import Alef360 from '@/components/sections/Alef360/Alef360';
+import Stats from '@/components/sections/Stats/Stats';
 import DomeGallery from '@/components/modern/DomeGallery';
 import ScrollReveal from '@/components/modern/ScrollReveal';
 import MotionCurve from '@/components/modern/MotionCurve';
@@ -31,6 +33,8 @@ export default function HomeContent({ content }: { content: any }) {
       </div>
 
       <div className={styles.revealContent}>
+        <Stats />
+        
         <ScrollReveal delay={0.2}>
           <About content={about} />
         </ScrollReveal>
@@ -53,9 +57,7 @@ export default function HomeContent({ content }: { content: any }) {
           <NationalVision content={home.vision} />
         </ScrollReveal>
 
-        <ScrollReveal delay={0.1}>
-          <Capabilities content={content?.services} />
-        </ScrollReveal>
+        <Capabilities content={content?.services} />
 
         <div className={styles.globalThread}>
           <MotionCurve 
@@ -69,9 +71,7 @@ export default function HomeContent({ content }: { content: any }) {
           />
         </div>
 
-        <ScrollReveal delay={0.2}>
-          <ProjectLocations content={home.map} />
-        </ScrollReveal>
+        <RegionalPresence />
 
         <section className={styles.domeSection}>
           <ScrollReveal delay={0.2}>
@@ -115,6 +115,8 @@ export default function HomeContent({ content }: { content: any }) {
             ]} 
           />
         </section>
+
+        <Alef360 />
 
         <ScrollReveal delay={0.3}>
           <MajorClients content={clients} />

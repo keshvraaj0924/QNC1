@@ -8,8 +8,9 @@ const syne = Syne({ subsets: ["latin"], variable: '--font-syne' });
 const cairo = Cairo({ subsets: ["arabic"], variable: '--font-cairo' });
 
 import SmoothScroll from '@/components/layout/SmoothScroll/SmoothScroll';
-import MagnetCursor from '@/components/layout/MagnetCursor/MagnetCursor';
+import ModernCursor from '@/components/layout/ModernCursor/ModernCursor';
 import { ThemeProvider } from "@/context/ThemeContext";
+import { SettingsProvider } from "@/context/SettingsContext";
 
 export const metadata: Metadata = {
   title: "Qudrat National Company (QNC)",
@@ -24,14 +25,16 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning>
       <body className={`${outfit.variable} ${syne.variable} ${cairo.variable}`}>
-        <ThemeProvider>
-          <LanguageProvider>
-            <SmoothScroll>
-              <MagnetCursor />
-              {children}
-            </SmoothScroll>
-          </LanguageProvider>
-        </ThemeProvider>
+        <SettingsProvider>
+          <ThemeProvider>
+            <LanguageProvider>
+              <SmoothScroll>
+                <ModernCursor />
+                {children}
+              </SmoothScroll>
+            </LanguageProvider>
+          </ThemeProvider>
+        </SettingsProvider>
       </body>
     </html>
   );

@@ -1,213 +1,367 @@
-.section {
+.kineticSection {
   position: relative;
-  padding: 12vh 0;
-  background-color: var(--background);
-  z-index: 10;
-  transition: background-color 0.5s ease;
+  width: 100%;
+  background-color: #050505;
+  color: #fff;
+  overflow: visible; /* Ensure pinning markers/shadows aren't clipped */
+  z-index: 50; /* Higher than Map section */
 }
 
-.container {
-  max-width: var(--max-width);
-  margin: 0 auto;
-  padding: 0 var(--container-padding);
-}
-
-.title {
-  font-size: clamp(2.5rem, 5vw, 4rem);
-  font-weight: 800;
-  line-height: 1;
-  letter-spacing: -0.02em;
-  color: var(--foreground);
-  text-transform: uppercase;
-  margin: 0 0 2rem 0;
+.stickyTrack {
+  position: relative;
+  height: 100vh;
+  width: 100%;
+  overflow: hidden;
   display: flex;
+  flex-direction: column;
+  justify-content: flex-end; /* Weighs the cards slightly lower to clear title */
+  padding-bottom: 8vh; /* Bottom buffer */
+  align-items: center;
+  z-index: 5;
+}
+
+/* Reactive Background Logo */
+.kineticLogoWrapper {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 60vh;
+  height: 60vh;
+  z-index: 1;
+  pointer-events: none;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  opacity: 0.15;
+}
+
+.kineticSvg {
+  width: 100%;
+  height: 100%;
+  filter: drop-shadow(0 0 40px rgba(203, 161, 82, 0.2));
+}
+
+/* Header Overlay */
+.railHeader {
+  position: absolute;
+  top: 2vh; /* Anchor to extreme top */
+  width: 100%;
+  z-index: 10;
+  text-align: center;
+}
+
+.railMainTitle {
+  font-size: clamp(2.5rem, 6vw, 5rem);
+  font-weight: 900;
+  letter-spacing: -0.05em;
+  text-transform: uppercase;
+  font-family: var(--font-syne), sans-serif;
+  margin-top: 0.5rem;
+  color: #fff; /* Default */
+  transition: color 0.4s ease;
+}
+
+[data-theme="light"] .railMainTitle {
+  color: #0c0c0c !important;
+}
+
+/* The Rail Viewport */
+.railViewport {
+  position: relative;
+  width: 100%;
+  height: 70vh;
+  z-index: 5;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.kineticCardFrame {
+  position: absolute;
+  width: 90%;
+  max-width: 1200px;
+  height: min(600px, 70vh);
+  perspective: 2000px;
+  opacity: 0;
+  display: flex;
+  align-items: center;
   justify-content: center;
 }
 
-.bentoGrid {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  grid-auto-rows: 280px;
-  gap: 1.5rem;
-}
-
-.gridItem {
-  position: relative;
-  border-radius: 24px;
-  background: var(--card-bg);
-}
-
-.tall {
-  grid-row: span 2;
-}
-
-.wide {
-  grid-column: span 2;
-}
-
-.bentoCardWrapper {
-  width: 100%;
+.visualPart {
+  flex: 1;
   height: 100%;
-  border-radius: 24px;
-}
-
-.bentoCard {
   position: relative;
-  width: 100%;
-  height: 100%;
+  transform-style: preserve-3d;
   display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  padding: 2.5rem;
+  justify-content: center;
+  align-items: center;
+}
+
+.floatingCard {
+  width: 100%;
+  max-width: 450px;
+  height: 100%;
+  border-radius: 40px;
   overflow: hidden;
-  transition: all 0.6s cubic-bezier(0.16, 1, 0.3, 1);
-  text-decoration: none;
+  box-shadow: 0 50px 100px rgba(0,0,0,0.6);
+  position: relative;
+  border: 1px solid rgba(255, 255, 255, 0.1);
 }
 
-.cardOverlay {
+.cardVisual {
   position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: linear-gradient(180deg, rgba(8,8,8,0.4) 0%, rgba(8,8,8,0.8) 100%);
-  z-index: 2;
-  transition: opacity 0.5s ease;
-}
-
-.cardBg {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
+  inset: 0;
   background-size: cover;
   background-position: center;
-  z-index: 1;
-  filter: grayscale(1) brightness(0.6);
-  transition: transform 1.2s var(--transition-bezier), filter 0.8s ease;
+  filter: brightness(0.8);
 }
 
-.cardContent {
+.cardGlow {
+  position: absolute;
+  inset: 0;
+  border-radius: 40px;
+  box-shadow: inset 0 0 50px rgba(203, 161, 82, 0.2);
+  pointer-events: none;
+}
+
+/* Modernized Information Box */
+.infoPart {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 40px;
+  opacity: 0; /* Animated in GSAP */
+}
+
+.modernizedBox {
+  width: 100%;
+  background: rgba(13, 15, 20, 0.6);
+  backdrop-filter: blur(20px);
+  border: 1px solid rgba(203, 161, 82, 0.15);
+  border-radius: 32px;
+  padding: 50px;
   position: relative;
-  z-index: 3;
+  box-shadow: 0 30px 60px rgba(0,0,0,0.4);
+  transition: all 0.5s cubic-bezier(0.76, 0, 0.24, 1);
+  text-decoration: none;
+  cursor: pointer;
+  display: block;
+}
+
+.modernizedBox:hover {
+  background: rgba(203, 161, 82, 0.05);
+  border-color: var(--gold);
+  transform: translateY(-10px) scale(1.02);
+}
+
+.modernizedBox::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
   width: 100%;
   height: 100%;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
+  background: radial-gradient(circle at top left, rgba(203, 161, 82, 0.05), transparent);
+  border-radius: 32px;
+  pointer-events: none;
 }
 
 .cardHeader {
   display: flex;
   justify-content: space-between;
-  align-items: flex-start;
+  margin-bottom: 30px;
+  opacity: 0.6;
 }
 
-.id {
-  font-size: 0.75rem;
-  font-weight: 700;
-  opacity: 0.3;
-  color: #fff; /* Keeping ID white as it is over an image generally */
-}
-
-.category {
-  font-size: 0.65rem;
-  font-weight: 700;
-  letter-spacing: 0.2em;
-  color: var(--gold);
-  text-transform: uppercase;
-}
-
-.capTitle {
-  font-size: clamp(1.4rem, 2vw, 2.2rem);
-  font-weight: 800;
-  line-height: 1.1;
-  color: #fff; /* Keeping title white because it sits on top of a dark image overlay */
-  margin: 2rem 0 auto 0;
-  max-width: 15ch;
-  transition: transform 0.6s var(--transition-bezier);
-}
-
-.cardFooter {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  opacity: 0.5;
-  transition: all 0.5s ease;
-}
-
-.exploreText {
-  font-size: 0.7rem;
-  font-weight: 700;
-  color: #fff; /* keeping white due to dark image background */
-  text-transform: uppercase;
+.cardId {
+  font-family: 'JetBrains Mono', monospace;
+  color: var(--primary-gold, #cba152);
+  font-size: 0.85rem;
   letter-spacing: 0.1em;
 }
 
-.icon {
-  width: 32px;
-  height: 32px;
+.refTag {
+  font-size: 0.65rem;
+  letter-spacing: 0.2em;
+  font-weight: 800;
+  padding: 4px 12px;
+  background: rgba(203, 161, 82, 0.1);
+  color: var(--gold);
+  border-radius: 4px;
+  border: 1px solid rgba(203, 161, 82, 0.3);
+}
+
+.cardTitle {
+  font-size: clamp(2rem, 4vw, 3.5rem);
+  font-weight: 900;
+  line-height: 1.1;
+  margin-bottom: 20px;
+  font-family: var(--font-syne), sans-serif;
+  text-transform: uppercase;
+  background: linear-gradient(135deg, #fff 0%, rgba(255,255,255,0.7) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.cardDesc {
+  font-family: var(--font-body), var(--font-outfit), sans-serif;
+  font-size: 1.1rem;
+  line-height: 1.7;
+  color: rgba(255,255,255,0.6);
+  margin-bottom: 40px;
+}
+
+.cardFooter {
+  border-top: 1px solid rgba(255, 255, 255, 0.05);
+  padding-top: 30px;
+  display: flex;
+  justify-content: flex-end;
+}
+
+.exploreBtn {
+  font-size: 0.9rem;
+  font-weight: 800;
+  letter-spacing: 0.1em;
+  color: var(--gold);
   display: flex;
   align-items: center;
-  justify-content: center;
-  border: 1px solid rgba(255,255,255,0.2);
-  border-radius: 50%;
-  transition: all 0.5s var(--transition-bezier);
+  gap: 1rem;
+  transition: gap 0.3s ease;
 }
 
-/* Hover Effects */
-.bentoCard:hover {
-  border-color: rgba(203, 161, 82, 0.5);
-  box-shadow: 0 30px 60px rgba(0, 0, 0, 0.4);
-  background-color: rgba(25, 30, 38, 0.8);
+.modernizedBox:hover .exploreBtn {
+  gap: 1.5rem;
 }
 
-.bentoCard:hover .cardBg {
-  transform: scale(1.08);
-  filter: grayscale(0) brightness(0.8);
+.arrow {
+  font-size: 1.2rem;
+  transition: transform 0.3s ease;
 }
 
-.bentoCard:hover .capTitle {
-  transform: translateY(-8px);
-  color: var(--gold);
+.modernizedBox:hover .arrow {
+  transform: translate(5px, -5px);
 }
 
-.bentoCard:hover .cardFooter {
-  opacity: 1;
+/* Transition Titles */
+.railPhaseTitle {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 15;
+  pointer-events: none;
+  opacity: 0;
+  width: 100%;
+  text-align: center;
+}
+
+.glitchText {
+  font-size: clamp(3rem, 10vw, 8rem);
+  font-weight: 900;
+  font-family: var(--font-syne), sans-serif;
   color: #fff;
-  transform: translateY(-5px);
+  position: relative;
+  text-shadow: 0.05em 0 0 #cba152, -0.025em -0.05em 0 #675EA7;
+  animation: glitch 1s infinite;
+  transition: color 0.4s ease;
 }
 
-.bentoCard:hover .icon {
-  background: var(--gold);
-  border-color: var(--gold);
-  color: #000;
-  transform: rotate(45deg) scale(1.1);
+[data-theme="light"] .glitchText {
+  color: #0c0c0c !important;
+  text-shadow: 0.05em 0 0 rgba(203, 161, 82, 0.3), -0.025em -0.05em 0 rgba(103, 94, 167, 0.3);
 }
 
-@media (max-width: 1200px) {
-  .bentoGrid {
-    grid-template-columns: repeat(2, 1fr);
+@keyframes glitch {
+  0% { transform: translate(0) }
+  20% { transform: translate(-2px, 2px) }
+  40% { transform: translate(-2px, -2px) }
+  60% { transform: translate(2px, 2px) }
+  80% { transform: translate(2px, -2px) }
+  100% { transform: translate(0) }
+}
+
+/* Footer & Progress */
+.railFooter {
+  position: absolute;
+  bottom: 8vh;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  z-index: 10;
+}
+
+.progressBar {
+  width: 300px;
+  height: 2px;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 2px;
+  overflow: hidden;
+  margin-bottom: 20px;
+}
+
+.progressInner {
+  width: 100%;
+  height: 100%;
+  background: var(--primary-gold, #cba152);
+  transform: scaleX(0);
+  transform-origin: left;
+}
+
+.scrollHint {
+  font-size: 0.7rem;
+  text-transform: uppercase;
+  letter-spacing: 4px;
+  opacity: 0.3;
+}
+
+/* Responsive & RTL */
+@media (max-width: 1024px) {
+  .railViewport {
+    height: 85vh; /* More vertical space for content stack */
   }
+  .kineticCardFrame {
+    flex-direction: column;
+    height: auto;
+    width: 90%;
+    justify-content: flex-start;
+    padding-top: 5vh;
+  }
+  .visualPart, .infoPart { 
+    width: 100%; 
+    flex: none; 
+    padding: 0;
+  }
+  .floatingCard { 
+    height: clamp(250px, 40vh, 350px); 
+    max-width: 100%;
+  }
+  .modernizedBox { 
+    padding: 25px; 
+    margin-top: -40px; 
+    border-radius: 24px;
+    z-index: 10;
+  }
+  .cardTitle { font-size: 1.8rem; }
+  .cardDesc { font-size: 0.95rem; }
 }
 
 @media (max-width: 768px) {
-  .bentoGrid {
-    grid-template-columns: 1fr;
-    grid-auto-rows: 320px;
-  }
-  .tall, .wide {
-    grid-row: auto;
-    grid-column: auto;
-  }
-  .capTitle {
-    font-size: 1.8rem;
-  }
+  .railHeader { top: 1vh; }
+  .railMainTitle { font-size: 2rem; }
+  .modernizedBox { padding: 20px; }
+  .cardTitle { font-size: 1.5rem; }
+  .cardDesc { font-size: 0.85rem; line-height: 1.5; }
 }
 
-[dir="rtl"] .title,
-[dir="rtl"] .capTitle,
-[dir="rtl"] .category {
+[dir="rtl"] .cardTitle,
+[dir="rtl"] .cardDesc {
   text-align: right;
+}
+
+[dir="rtl"] .cardHeader {
+  flex-direction: row-reverse;
 }
