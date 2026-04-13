@@ -35,13 +35,5 @@
   will-change: transform;
 }
 
-/* Ensure native cursor is hidden everywhere except when needed */
-:global(body) {
-  cursor: none !important;
-}
-
-:global(a), :global(button), :global([role="button"]) {
-  cursor: none !important;
-}
 
 /* Optional scale-up for magnetic regions can be defined here */

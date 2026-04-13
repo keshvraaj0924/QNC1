@@ -164,7 +164,18 @@ button {
   font-family: inherit;
   border: none;
   background: none;
-  cursor: pointer;
+}
+
+/* Site-wide Custom Cursor Reset (Only on Desktop/Mouse) */
+@media (pointer: fine) {
+  body, 
+  a, 
+  button, 
+  [role="button"], 
+  [data-cursor],
+  [data-cursor-text] {
+    cursor: none !important;
+  }
 }
 
 /* Keyframes for the Infinite Ticker */
