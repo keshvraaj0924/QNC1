@@ -6,7 +6,6 @@ import styles from './ModernCursor.module.css';
 
 export default function ModernCursor() {
   const cursorRef = useRef<HTMLDivElement>(null);
-  const dotRef = useRef<HTMLDivElement>(null);
   const [isVisible, setIsVisible] = useState(false);
 
   useEffect(() => {
@@ -16,15 +15,15 @@ export default function ModernCursor() {
     }
 
     const cursor = cursorRef.current;
-    const dot = dotRef.current;
-    if (!cursor || !dot) return;
+    if (!cursor) return;
 
-    // Standard high-end lerp following
+    // Standard high-end lerp following using GSAP QuickSetter for performance
     const mouse = { x: 0, y: 0 };
     const pos = { x: 0, y: 0 };
-    const dotPos = { x: 0, y: 0 };
-    const ratio = 0.15;
-    const dotRatio = 0.25;
+    const ratio = 0.12; // Damping ratio (lag effect)
+
+    const xSetter = gsap.quickSetter(cursor, "x", "px");
+    const ySetter = gsap.quickSetter(cursor, "y", "px");
 
     const onMouseMove = (e: MouseEvent) => {
       if (!isVisible) setIsVisible(true);
@@ -33,61 +32,60 @@ export default function ModernCursor() {
     };
 
     const updateCursor = () => {
-      // Smoothly follow the mouse with LERP
+      // Damped lag follower logic
       pos.x += (mouse.x - pos.x) * ratio;
       pos.y += (mouse.y - pos.y) * ratio;
-      
-      dotPos.x += (mouse.x - dotPos.x) * dotRatio;
-      dotPos.y += (mouse.y - dotPos.y) * dotRatio;
 
-      gsap.set(cursor, { x: pos.x, y: pos.y });
-      gsap.set(dot, { x: dotPos.x, y: dotPos.y });
+      xSetter(pos.x);
+      ySetter(pos.y);
       
       requestAnimationFrame(updateCursor);
     };
 
     const onMouseEnter = (e: MouseEvent) => {
       const target = e.target as HTMLElement;
-      const isHoverable = target.closest('a, button, [data-cursor="hover"]');
-      const isMagnetic = target.closest('[data-cursor="magnetic"]');
+      const isHoverable = target.closest('a, button, [data-cursor="hover"], .hover-reveal');
 
       if (isHoverable) {
         gsap.to(cursor, {
-          scale: 2.5,
+          scale: 2.2,
           duration: 0.4,
           ease: 'power3.out',
-          backgroundColor: 'rgba(255, 255, 255, 0.1)'
+          backgroundColor: 'rgba(255, 255, 255, 0.15)',
+          backdropFilter: 'blur(2px)'
         });
-        gsap.to(dot, { scale: 0, duration: 0.2 });
-      }
-
-      if (isMagnetic) {
-        // Simple magnetic pull logic can be added here if needed, 
-        // but often handled by specific component hooks
       }
     };
 
     const onMouseLeave = (e: MouseEvent) => {
       const target = e.target as HTMLElement;
-      const isHoverable = target.closest('a, button, [data-cursor="hover"]');
+      const isHoverable = target.closest('a, button, [data-cursor="hover"], .hover-reveal');
       
       if (isHoverable) {
         gsap.to(cursor, {
           scale: 1,
           duration: 0.4,
           ease: 'power3.out',
-          backgroundColor: 'transparent'
+          backgroundColor: 'white',
+          backdropFilter: 'blur(0px)'
         });
-        gsap.to(dot, { scale: 1, duration: 0.2 });
       }
     };
 
     const onMouseDown = () => {
-      gsap.to(cursor, { scale: 0.8, duration: 0.2 });
+      gsap.to(cursor, { 
+        scale: 0.7, 
+        duration: 0.2,
+        ease: 'power2.out'
+      });
     };
 
     const onMouseUp = () => {
-      gsap.to(cursor, { scale: 1, duration: 0.2 });
+      gsap.to(cursor, { 
+        scale: 1, 
+        duration: 0.4,
+        ease: 'elastic.out(1, 0.75)'
+      });
     };
 
     window.addEventListener('mousemove', onMouseMove);
@@ -110,8 +108,8 @@ export default function ModernCursor() {
 
   return (
     <div className={styles.cursorWrapper} style={{ opacity: isVisible ? 1 : 0 }}>
-      <div ref={cursorRef} className={styles.cursorRing} />
-      <div ref={dotRef} className={styles.cursorDot} />
+      {/* Follower Circle */}
+      <div ref={cursorRef} className={styles.cursorCircle} />
     </div>
   );
 }

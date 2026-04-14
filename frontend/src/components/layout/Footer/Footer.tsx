@@ -10,22 +10,31 @@ import { Mail, Phone, MapPin, Globe, Smartphone, ArrowUpRight } from 'lucide-rea
 
 const navLinks = {
   company: [
+    { label: 'Home', href: '/', key: 'nav_home' },
     { label: 'About Us', href: '/about-us', key: 'nav_about' },
-    { label: 'Our Team', href: '/about-us/team', key: 'nav_team' },
-    { label: 'Certificates', href: '/certificates', key: 'nav_certificates' },
-    { label: 'Showcase', href: '/showcase', key: 'nav_showcase' },
-  ],
-  services: [
-    { label: 'All Services', href: '/services', key: 'nav_services' },
-    { label: 'Logistics', href: '/services/logistics-and-transportation', key: 'service_logistics' },
-    { label: 'FM Solutions', href: '/services/facilities-management', key: 'service_fm' },
-    { label: 'Manpower', href: '/services/manpower-supply', key: 'service_manpower' },
-  ],
-  connect: [
-    { label: 'Contact Us', href: '/contact', key: 'nav_contact' },
+    { label: 'Photo Gallery', href: '/showcase', key: 'nav_showcase' },
     { label: 'Careers', href: '/careers', key: 'nav_careers' },
+    { label: 'Contact Us', href: '/contact', key: 'nav_contact' },
     { label: 'Privacy Policy', href: '/privacy-policy', key: 'nav_privacy' },
   ],
+  services: {
+    hard: [
+      { label: 'HVAC Services', href: '/services/hvac-services', key: 'nav_hvac' },
+      { label: 'MEP Engineering', href: '/services/mep-engineering', key: 'nav_mep' },
+      { label: 'Civil Works', href: '/services/civil-construction', key: 'nav_civil' },
+      { label: 'Low Current', href: '/services/low-current-systems', key: 'nav_low_current' },
+      { label: 'Renovation', href: '/services/renovation-and-fitout', key: 'nav_renovation' },
+      { label: '3rd Party Management', href: '/services/third-party-management', key: 'nav_third_party' },
+    ],
+    soft: [
+      { label: 'Housekeeping', href: '/services/housekeeping-and-maintenance', key: 'nav_housekeeping' },
+      { label: 'Catering Services', href: '/services/catering-services', key: 'nav_catering' },
+      { label: 'Facade Cleaning', href: '/services/facade-cleaning', key: 'nav_facade' },
+      { label: 'Landscaping', href: '/services/landscaping-services', key: 'nav_landscaping' },
+      { label: 'Pest Control', href: '/services/pest-control-management', key: 'nav_pest_control' },
+      { label: '24/7 Helpdesk', href: '/services/facility-help-desk', key: 'nav_helpdesk' },
+    ]
+  }
 };
 
 const socials = [
@@ -58,33 +67,38 @@ const socials = [
   },
 ];
 
-function AnimatedLink({ href, children, isRTL }: { href: string; children: React.ReactNode; isRTL: boolean }) {
+const AnimatedLink = ({ href, children, isRTL, small }: { href: string; children: React.ReactNode; isRTL?: boolean; small?: boolean }) => {
   return (
     <motion.div
-      className={styles.linkWrapper}
-      whileHover="hover"
       initial="rest"
+      whileHover="hover"
+      animate="rest"
+      className={`${styles.navLink} ${small ? styles.small : ''}`}
     >
-      <Link href={href} className={styles.navLink}>
+      <Link href={href} style={{ textDecoration: 'none' }}>
         <motion.span
           className={styles.linkText}
           variants={{
             rest: { y: 0 },
-            hover: { y: -100 + '%' },
+            hover: { y: '-100%' },
           }}
-          transition={{ duration: 0.4, ease: [0.76, 0, 0.24, 1] }}
+          transition={{ duration: 0.4, ease: [0.76, 0, 0.24, 1] as any }}
         >
           {children}
         </motion.span>
         <motion.span
           className={styles.linkTextClone}
           aria-hidden
-          style={{ left: isRTL ? 'auto' : 0, right: isRTL ? 0 : 'auto' }}
+          style={{ 
+            left: isRTL ? 'auto' : 0, 
+            right: isRTL ? 0 : 'auto',
+            textAlign: isRTL ? 'right' : 'left'
+          }}
           variants={{
             rest: { y: '100%' },
             hover: { y: 0 },
           }}
-          transition={{ duration: 0.4, ease: [0.76, 0, 0.24, 1] }}
+          transition={{ duration: 0.4, ease: [0.76, 0, 0.24, 1] as any }}
         >
           {children}
         </motion.span>
@@ -258,15 +272,21 @@ export default function Footer() {
 
           <motion.div className={styles.linksCol} variants={itemVariants}>
             <h4 className={styles.colHeading}>{language === 'ar' ? 'الخدمات' : 'SERVICES'}</h4>
-            {navLinks.services.map((l) => (
-              <AnimatedLink key={l.href} href={l.href} isRTL={isRTL}>{t(l.key) || l.label}</AnimatedLink>
+            
+            {/* Hard Services Sub-group */}
+            <div className={styles.subCategoryHeading}>
+              {t('nav_hard_services')}
+            </div>
+            {navLinks.services.hard.map((l) => (
+              <AnimatedLink key={l.href} href={l.href} isRTL={isRTL} small>{t(l.key) || l.label}</AnimatedLink>
             ))}
-          </motion.div>
 
-          <motion.div className={styles.linksCol} variants={itemVariants}>
-            <h4 className={styles.colHeading}>{language === 'ar' ? 'تواصل' : 'CONNECT'}</h4>
-            {navLinks.connect.map((l) => (
-              <AnimatedLink key={l.href} href={l.href} isRTL={isRTL}>{t(l.key) || l.label}</AnimatedLink>
+            {/* Soft Services Sub-group */}
+            <div className={styles.subCategoryHeading} style={{ marginTop: '1.5rem' }}>
+              {t('nav_soft_services')}
+            </div>
+            {navLinks.services.soft.map((l) => (
+              <AnimatedLink key={l.href} href={l.href} isRTL={isRTL} small>{t(l.key) || l.label}</AnimatedLink>
             ))}
           </motion.div>
 
@@ -275,30 +295,40 @@ export default function Footer() {
             <h4 className={styles.colHeading}>{language === 'ar' ? 'معلومات التواصل' : 'CONTACT DETAILS'}</h4>
             
             <div className={styles.contactList}>
-              <div className={styles.contactItem}>
-                <MapPin size={16} className={styles.contactIcon} />
-                <span className={styles.contactText}>{t('footer_headquarter')}</span>
-              </div>
-              
               <a href={`mailto:${t('footer_email')}`} className={styles.contactItem}>
                 <Mail size={16} className={styles.contactIcon} />
-                <span className={styles.contactText}>{t('footer_email')}</span>
+                <span className={styles.contactText} dir="ltr">{t('footer_email')}</span>
               </a>
               
-              <div className={styles.contactItem}>
+              <a href={`tel:${t('footer_phone_office').split(' ')[0]}`} className={styles.contactItem}>
                 <Phone size={16} className={styles.contactIcon} />
-                <span className={styles.contactText}>{t('footer_phone_office')}</span>
-              </div>
+                <span className={styles.contactText} dir="ltr">{t('footer_phone_office')}</span>
+              </a>
               
-              <div className={styles.contactItem}>
+              <a href={`tel:${t('footer_phone_mobile').replace(/\s/g, '')}`} className={styles.contactItem}>
                 <Smartphone size={16} className={styles.contactIcon} />
-                <span className={styles.contactText}>{t('footer_phone_mobile')}</span>
-              </div>
+                <span className={styles.contactText} dir="ltr">{t('footer_phone_mobile')}</span>
+              </a>
               
               <a href={`https://${t('footer_website')}`} target="_blank" rel="noopener noreferrer" className={styles.contactItem}>
                 <Globe size={16} className={styles.contactIcon} />
-                <span className={styles.contactText}>{t('footer_website')}</span>
-                <ArrowUpRight size={12} className={styles.externalIcon} />
+                <span className={styles.contactText} dir="ltr">{t('footer_website')}</span>
+              </a>
+
+              {/* Stylized Map Marker Action */}
+              <a 
+                href="https://www.google.com/maps/search/?api=1&query=Qudrat+National+Company+Al+Khobar" 
+                target="_blank" 
+                rel="noopener noreferrer" 
+                className={styles.mapActionLink}
+              >
+                <div className={styles.pulseContainer}>
+                  <MapPin size={22} className={styles.markerIcon} />
+                  <div className={styles.pulseCircle}></div>
+                </div>
+                <div className={styles.mapLabelContainer}>
+                  <span className={styles.mapLabelMain}>{t('nav_map_location')}</span>
+                </div>
               </a>
             </div>
           </motion.div>

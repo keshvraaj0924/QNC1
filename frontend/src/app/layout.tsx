@@ -11,6 +11,7 @@ import SmoothScroll from '@/components/layout/SmoothScroll/SmoothScroll';
 import ModernCursor from '@/components/layout/ModernCursor/ModernCursor';
 import { ThemeProvider } from "@/context/ThemeContext";
 import { SettingsProvider } from "@/context/SettingsContext";
+import ScrollNavigation from '@/components/layout/ScrollNavigation/ScrollNavigation';
 
 export const metadata: Metadata = {
   title: "Qudrat National Company (QNC)",
@@ -30,6 +31,7 @@ export default function RootLayout({
             <LanguageProvider>
               <SmoothScroll>
                 <ModernCursor />
+                <ScrollNavigation />
                 {children}
               </SmoothScroll>
             </LanguageProvider>

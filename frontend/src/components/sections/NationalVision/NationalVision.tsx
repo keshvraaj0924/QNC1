@@ -82,17 +82,22 @@ export default function NationalVision({ content }: { content?: any }) {
                   direction="top"
                 />
               </div>
+              
+              {/* Modernized Cinematic Vision 2030 Logo */}
               <motion.div 
-                className={styles.vision2030Branding}
-                initial={{ opacity: 0, scale: 0.8 }}
-                whileInView={{ opacity: 1, scale: 1 }}
-                viewport={{ once: true }}
-                transition={{ duration: 1, delay: 0.6 }}
+                className={styles.visionLogoModernContainer}
+                style={{
+                  scale: useTransform(scrollYProgress, [0.1, 0.4], [0.8, 1.1]),
+                  opacity: useTransform(scrollYProgress, [0.1, 0.3, 0.5], [0, 1, 0.8]),
+                  y: useTransform(scrollYProgress, [0, 1], [40, -40]),
+                }}
               >
+                <div className={styles.glassBackdrop} />
+                <div className={styles.logoShimmer} />
                 <img 
-                  src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/1a/Saudi_Vision_2030_logo.svg/2560px-Saudi_Vision_2030_logo.svg.png" 
+                  src="/images/vision/Vision2030Logo.jpg" 
                   alt="Saudi Vision 2030" 
-                  className={styles.vision2030Logo}
+                  className={styles.visionLogoModern}
                 />
               </motion.div>
             </div>
@@ -107,8 +112,9 @@ export default function NationalVision({ content }: { content?: any }) {
               {description}
             </motion.p>
 
+            {/* CEO Message Box */}
             <motion.div 
-              className={styles.talentExcellence}
+              className={styles.ceoMessage}
               initial={{ opacity: 0, scale: 0.95 }}
               whileInView={{ opacity: 1, scale: 1 }}
               viewport={{ once: true }}
@@ -116,8 +122,8 @@ export default function NationalVision({ content }: { content?: any }) {
             >
               <div className={styles.talentVisual}>
                 <Image 
-                  src={imageLeadership} 
-                  alt="Saudi Business Leadership" 
+                  src="https://images.unsplash.com/photo-1556155092-490a1ba16284?auto=format&fit=crop&q=80&w=400" 
+                  alt="CEO Qudrat National" 
                   fill 
                   className={styles.talentImg}
                 />
@@ -125,15 +131,19 @@ export default function NationalVision({ content }: { content?: any }) {
               </div>
               <div className={styles.talentInfo}>
                 <div className={styles.talentTag}>
-                  <LogoBeam width="40px" delay={0.3} />
-                  <span>{t('about_label')}</span>
+                  <div className={styles.multiLabels}>
+                    <span className={styles.leadershipLabel}>{t('vision_leadership_label')}</span>
+                    <span className={styles.legacyLabel}>{t('about_label')}</span>
+                  </div>
                 </div>
-                <h3 className={styles.talentTitle}>{t('vision_talent_title')}</h3>
-                <p className={styles.talentText}>
-                  {t('vision_talent_text')}
-                </p>
+                <h3 className={styles.talentTitle}>{t('vision_ceo_label')}</h3>
+                <div className={styles.quoteWrapper}>
+                  <span className={styles.quoteMark}>"</span>
+                  <p className={styles.talentText}>
+                    {t('vision_ceo_quote')}
+                  </p>
+                </div>
               </div>
-              <div className={styles.talentGlow} />
             </motion.div>
 
             {/* Animated Brand Curved Thread */}

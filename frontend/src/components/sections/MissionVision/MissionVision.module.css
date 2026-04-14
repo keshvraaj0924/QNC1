@@ -189,6 +189,13 @@
               inset 0 0 0 1px rgba(255, 255, 255, 0.05);
 }
 
+[data-theme='light'] .cardBase {
+  background: rgba(0, 0, 0, 0.03);
+  border-color: rgba(0, 0, 0, 0.1);
+  box-shadow: 0 40px 80px rgba(0, 0, 0, 0.08), 
+              inset 0 0 0 1px rgba(0, 0, 0, 0.02);
+}
+
 .cardGlow {
   position: absolute;
   top: -10%;
@@ -297,26 +304,52 @@
 
 @media (max-width: 1024px) {
   .section {
-    padding: 80px 0;
+    padding: 60px 0;
   }
   .contentLayout {
     grid-template-columns: 1fr;
-    gap: 4rem;
+    gap: 3rem;
     min-height: auto;
-  }
-  .rtl .contentLayout {
-    direction: rtl;
   }
   .orbitColumn {
     order: 1 !important;
-    height: 450px;
+    height: auto;
+    aspect-ratio: auto;
+    padding: 2rem 0;
   }
   .cardsColumn {
     order: 2 !important;
     justify-content: center;
+    min-height: 500px;
   }
   .swapContainer {
-    height: 500px;
+    height: 480px;
+  }
+}
+
+@media (max-width: 768px) {
+  .section {
+    padding: var(--header-clearance-mobile, 140px) 0 60px;
+  }
+  .mainTitle {
+    font-size: 2.1rem;
+  }
+  .headerRow {
+    margin-bottom: 2rem;
+  }
+  .orbitColumn {
+    padding: 1rem 0;
+  }
+  .cardsColumn {
+    min-height: 400px;
+  }
+  .swapContainer {
+    height: 420px;
+  }
+  .cardBase {
+    width: 95vw !important;
+    height: 380px !important;
+    padding: 2rem;
   }
 }
 
@@ -355,4 +388,165 @@
     height: 350px !important;
     padding: 1.5rem;
   }
+}
+
+/* Talent & Excellence Box Styles */
+.talentExcellence {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 2.5rem;
+  padding: 2.5rem;
+  /* Premium Branded Gradient */
+  background: linear-gradient(135deg, var(--navy) 0%, rgba(var(--qnc-gold-rgb), 0.08) 100%);
+  backdrop-filter: blur(15px);
+  border: 1px solid rgba(var(--qnc-gold-rgb), 0.2);
+  border-radius: 20px;
+  width: 100%;
+  max-width: 580px;
+  margin: 0 auto 2rem;
+  transition: all 0.5s var(--transition-bezier);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3), 
+              0 0 20px rgba(var(--qnc-gold-rgb), 0.05);
+}
+
+[data-theme='light'] .talentExcellence {
+  background: linear-gradient(135deg, #ffffff 0%, rgba(var(--qnc-gold-rgb), 0.1) 100%);
+  border-color: rgba(var(--qnc-gold-rgb), 0.3);
+  box-shadow: 0 15px 35px rgba(var(--qnc-gold-rgb), 0.1), 
+              0 0 15px rgba(255, 255, 255, 0.5);
+}
+
+.talentExcellence:hover {
+  transform: translateY(-10px) scale(1.01);
+  border-color: var(--qnc-gold);
+  box-shadow: 0 30px 60px rgba(0, 0, 0, 0.4), 
+              0 0 30px rgba(var(--qnc-gold-rgb), 0.2);
+}
+
+.talentVisual {
+  position: relative;
+  width: 130px;
+  height: 160px;
+  flex-shrink: 0;
+  clip-path: polygon(15% 0%, 100% 0%, 85% 100%, 0% 100%);
+  overflow: hidden;
+  border-right: 2px solid var(--qnc-gold);
+}
+
+.talentImg {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.8s ease;
+}
+
+.talentExcellence:hover .talentImg {
+  transform: scale(1.1);
+}
+
+.talentGlow {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(45deg, rgba(var(--qnc-gold-rgb), 0.15), transparent);
+  pointer-events: none;
+}
+
+.talentInfo {
+  display: flex;
+  flex-direction: column;
+  gap: 0.8rem;
+}
+
+.talentTag {
+  display: flex;
+  align-items: center;
+}
+
+.multiLabels {
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+}
+
+.leadershipLabel {
+  font-size: 0.6rem;
+  color: var(--qnc-gold, #CBA152);
+  font-weight: 800;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  opacity: 1;
+}
+
+.legacyLabel {
+  font-size: 0.7rem;
+  color: var(--foreground);
+  font-weight: 700;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  opacity: 0.8;
+}
+
+.talentTitle {
+  font-family: var(--font-heading), var(--font-syne), sans-serif;
+  font-size: 1.5rem;
+  font-weight: 900;
+  color: var(--foreground);
+  line-height: 1.1;
+  text-transform: uppercase;
+  margin: 0;
+}
+
+.talentText {
+  font-size: 0.95rem;
+  color: var(--sub-text);
+  line-height: 1.6;
+  margin: 0;
+}
+
+[dir="rtl"] .talentVisual {
+  clip-path: polygon(0% 0%, 85% 0%, 100% 100%, 15% 100%);
+  border-right: none;
+  border-left: 2px solid var(--qnc-gold);
+}
+
+[dir="rtl"] .talentTitle,
+[dir="rtl"] .talentText {
+  text-align: right;
+}
+
+@media (max-width: 1200px) {
+  .talentExcellence {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+}
+
+.learnMoreLink {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  margin-top: 1rem;
+  font-weight: 700;
+  font-size: 0.85rem;
+  color: var(--qnc-gold);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  transition: gap 0.3s ease;
+}
+
+.interlinkBox {
+  cursor: none !important; /* Managed by custom cursor */
+}
+
+.interlinkBox:hover .learnMoreLink {
+  gap: 1rem;
+}
+
+.arrow {
+  font-family: serif;
+  font-size: 1.2rem;
 }

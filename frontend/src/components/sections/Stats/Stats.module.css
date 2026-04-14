@@ -116,7 +116,7 @@
 
 @media (max-width: 600px) {
   .statsSection {
-    padding: 60px 0;
+    padding: var(--header-clearance-mobile, 100px) 0 60px;
   }
   
   .grid {

@@ -5,35 +5,27 @@
   width: 100vw;
   height: 100vh;
   pointer-events: none;
-  z-index: 9999;
+  z-index: 99999;
   mix-blend-mode: difference;
-  transition: opacity 0.3s ease;
+  transition: opacity 0.4s ease;
 }
 
-.cursorRing {
+.cursorCircle {
   position: absolute;
-  top: -20px;
-  left: -20px;
-  width: 40px;
-  height: 40px;
-  border: 1px solid rgba(255, 255, 255, 0.8);
-  border-radius: 50%;
-  pointer-events: none;
-  background-color: transparent;
-  will-change: transform;
-}
-
-.cursorDot {
-  position: absolute;
-  top: -4px;
-  left: -4px;
-  width: 8px;
-  height: 8px;
+  top: -16px;
+  left: -16px;
+  width: 32px;
+  height: 32px;
   background-color: #fff;
   border-radius: 50%;
   pointer-events: none;
   will-change: transform;
+  /* Soft feathered edges like SRMG */
+  filter: blur(0.5px);
+  box-shadow: 0 0 10px rgba(255, 255, 255, 0.1);
 }
 
-
-/* Optional scale-up for magnetic regions can be defined here */
+/* Ensure child elements don't show hardware cursor */
+:global(*) {
+  cursor: none !important;
+}

@@ -2,6 +2,7 @@
 
 import { useRef } from 'react';
 import { motion, useInView, useScroll, useTransform } from 'framer-motion';
+import Link from 'next/link';
 import styles from './MissionVision.module.css';
 import { useLanguage } from '@/context/LanguageContext';
 import LogoBeam from '@/components/modern/LogoBeam';
@@ -53,7 +54,7 @@ const DEFAULT_PURPOSES = [
 ];
 
 export default function MissionVision({ content }: { content?: any }) {
-  const { language, isRTL } = useLanguage();
+  const { language, isRTL, t } = useLanguage();
   const sectionRef = useRef<HTMLElement>(null);
   const isInView = useInView(sectionRef, { once: true, margin: "-100px" });
 
@@ -136,50 +137,41 @@ export default function MissionVision({ content }: { content?: any }) {
         </div>
 
         <div className={styles.contentLayout}>
-          {/* Left Column: 3D Orbiting Gallery */}
+          {/* Left Column: About Us Interlink (Previously Talent Box) */}
           <motion.div 
             className={styles.orbitColumn}
             initial={{ opacity: 0, x: isRTL ? 50 : -50 }}
             animate={isInView ? { opacity: 1, x: 0 } : {}}
             transition={{ duration: 1, delay: 0.4 }}
           >
-            <OrbitImages
-              images={ORBIT_IMAGES}
-              shape="ellipse"
-              radiusX={340}
-              radiusY={100}
-              rotation={isRTL ? 8 : -8}
-              duration={35}
-              itemSize={100}
-              responsive={true}
-              radius={160}
-              fill
-              showPath
-              pathColor="rgba(99, 89, 166, 0.4)"
-              pathWidth={2}
-              centerContent={
-                <motion.div
-                  className={styles.orbitCenterLogo}
-                  animate={{ 
-                    scale: [0.95, 1.05, 0.95],
-                    rotateY: [0, 10, -10, 0],
-                    rotateX: [0, -5, 5, 0]
-                  }}
-                  transition={{ 
-                    duration: 6, 
-                    repeat: Infinity, 
-                    ease: "easeInOut" 
-                  }}
-                >
+            <Link href="/about-us">
+              <div className={`${styles.talentExcellence} ${styles.interlinkBox}`}>
+                <div className={styles.talentVisual}>
                   <img 
-                    src="/assets/images/QLogoSymbol/TransaparentQ.png" 
-                    alt="QNC Symbol" 
-                    className={styles.centerSymbol}
+                    src="/images/vision/leadership.png" 
+                    alt="About Qudrat National" 
+                    className={styles.talentImg}
                   />
-                  <div className={styles.centerGlow} />
-                </motion.div>
-              }
-            />
+                  <div className={styles.talentGlow} />
+                </div>
+                <div className={styles.talentInfo}>
+                  <div className={styles.talentTag}>
+                    <div className={styles.multiLabels}>
+                      <span className={styles.leadershipLabel}>{language === 'ar' ? 'اكتشف المزيد' : 'DISCOVER MORE'}</span>
+                      <span className={styles.legacyLabel}>{t('nav_about')}</span>
+                    </div>
+                  </div>
+                  <h3 className={styles.talentTitle}>{language === 'ar' ? 'تعرف علينا' : 'About QNC'}</h3>
+                  <p className={styles.talentText}>
+                    {t('about_description').substring(0, 100)}...
+                  </p>
+                  <div className={styles.learnMoreLink}>
+                    <span>{language === 'ar' ? 'عرض التفاصيل' : 'Learn More'}</span>
+                    <span className={styles.arrow}>→</span>
+                  </div>
+                </div>
+              </div>
+            </Link>
           </motion.div>
 
           {/* Right Column: Moving Swap Cards */}
@@ -195,7 +187,7 @@ export default function MissionVision({ content }: { content?: any }) {
                 height="100%"
                 cardDistance={50}
                 verticalDistance={60}
-                delay={5500}
+                delay={2000}
                 pauseOnHover={true}
               >
                 {purposes.map((item, index) => (

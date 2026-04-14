@@ -36,7 +36,7 @@
 }
 
 .logoImage {
-  height: 60px; /* Increased from 48px */
+  height: 75px; /* Increased from 60px for better visibility */
   width: auto;
   transition: transform 0.4s cubic-bezier(0.76, 0, 0.24, 1);
 }

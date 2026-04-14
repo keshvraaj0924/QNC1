@@ -174,6 +174,11 @@ export default function Capabilities({ content }: { content?: any }) {
             <circle cx="50" cy="50" r="30" />
             <path d="M50 20 L80 50 L50 80 L20 50 Z" />
           </svg>
+          <img 
+            src="/assets/images/QLogoSymbol/TransaparentQ.png" 
+            alt="Q Symbol" 
+            className={styles.stableQImage} 
+          />
         </div>
 
         <div className={styles.railViewport}>

@@ -42,6 +42,16 @@
   filter: drop-shadow(0 0 40px rgba(203, 161, 82, 0.2));
 }
 
+.stableQImage {
+  position: absolute;
+  width: 44%;
+  height: auto;
+  opacity: 0.95;
+  z-index: 2;
+  filter: drop-shadow(0 0 30px rgba(203, 161, 82, 0.5)) contrast(1.1);
+  pointer-events: none;
+}
+
 /* Header Overlay */
 .railHeader {
   position: absolute;
@@ -60,6 +70,33 @@
   margin-top: 0.5rem;
   color: #fff; /* Default */
   transition: color 0.4s ease;
+  line-height: 1; /* Added to keep header compact */
+}
+
+@media (max-width: 1024px) {
+  .railHeader {
+    top: 150px; /* Standardized offset for tablet */
+    padding: 0 5%;
+  }
+
+  .railMainTitle {
+    font-size: clamp(1.4rem, 5vw, 2rem);
+  }
+}
+
+@media (max-width: 480px) {
+  .railHeader {
+    top: 160px; /* Aggressive offset to clear fixed logo and menu icons */
+  }
+
+  .railMainTitle {
+    font-size: 1.2rem; 
+    letter-spacing: 0.1em;
+  }
+
+  .glitchText {
+    font-size: 2.5rem; 
+  }
 }
 
 [data-theme="light"] .railMainTitle {
@@ -203,6 +240,7 @@
   text-transform: uppercase;
   background: linear-gradient(135deg, #fff 0%, rgba(255,255,255,0.7) 100%);
   -webkit-background-clip: text;
+  background-clip: text;
   -webkit-text-fill-color: transparent;
 }
 
