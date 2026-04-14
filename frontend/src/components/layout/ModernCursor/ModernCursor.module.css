@@ -25,7 +25,4 @@
   box-shadow: 0 0 10px rgba(255, 255, 255, 0.1);
 }
 
-/* Ensure child elements don't show hardware cursor */
-:global(*) {
-  cursor: none !important;
-}
+

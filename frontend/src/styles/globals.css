@@ -369,3 +369,13 @@ html[lang="en"] button {
   display: inline-block;
   unicode-bidi: embed;
 }
+
+/* Global cursor suppression for custom cursor experience */
+* {
+  cursor: none !important;
+}
+
+/* Ensure interactive elements also don't show OS cursor */
+a, button, input, textarea, select {
+  cursor: none !important;
+}
