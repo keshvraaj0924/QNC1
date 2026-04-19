@@ -232,7 +232,7 @@ export default function RegionalPresence() {
               exit={{ opacity: 0, scale: 1.05 }}
               transition={{ duration: 1.2, ease: "easeOut" }}
               className={styles.bgImageLayer}
-              style={{ backgroundImage: `url(/assets/images/placeholder.jpg)` }} // Path would be activeHub.bgImage in prod
+              // Removed placeholder.jpg to fix 404. Relying on the inner <img> for dynamic content.
             >
               {/* Fallback for generated images located in artifacts path during dev */}
               <img 
@@ -300,24 +300,21 @@ export default function RegionalPresence() {
               );
             })}
 
-            {/* Q Logo stays anchored to the hub */}
+            {/* Q Logo Inline SVG (Zero-Box Solution) */}
             <motion.g 
                 animate={{ 
                     x: activeHub.logoPos.x, 
                     y: activeHub.logoPos.y,
-                    scale: activeStage === 'OVERVIEW' ? 0.8 : 1.2
+                    scale: activeStage === 'OVERVIEW' ? 0.25 : 0.45
                 }}
                 transition={{ type: 'spring', stiffness: 50, damping: 15 }}
+                className={styles.qMarkerWrapper}
             >
-                <foreignObject width="100" height="100" x="-50" y="-50">
-                  <div className={styles.qMarker}>
-                    <img 
-                      src="/assets/images/QLogoSymbol/TransaparentQ.png" 
-                      alt="QNC" 
-                      className={styles.logoImage} 
-                    />
-                  </div>
-                </foreignObject>
+              <g transform="translate(-322.5, -193.5)"> {/* Center the 645x387 logo */}
+                <path d="M 253.22 195.75 C253.01,247.16 252.67,261.99 251.72,261.97 C249.72,261.91 199.77,210.23 196.32,204.65 C194.58,201.82 192.21,196.13 191.07,192.02 C189.07,184.80 189.00,182.23 189.00,119.27 L 189.00 54.00 L 251.25 54.01 C288.04,54.01 316.16,54.43 320.00,55.02 C323.80,55.61 329.62,57.58 334.00,59.76 C340.86,63.17 343.81,65.82 368.66,90.99 C383.59,106.12 395.61,118.82 395.36,119.22 C395.12,119.62 365.43,119.96 329.38,119.99 C326.53,119.99 323.79,119.99 321.16,119.99 C268.36,120.02 261.25,120.02 257.83,123.57 C257.13,124.30 256.58,125.18 255.83,126.23 L 253.50 129.50 Z" fill="#0672c4"/>
+                <path d="M 414.90 302.25 L 443.37 331.00 L 387.93 330.93 C327.28,330.86 327.40,330.87 315.61,324.85 C310.58,322.27 304.70,316.85 282.31,294.14 C267.35,278.96 255.30,266.37 255.52,266.14 C255.75,265.92 283.73,265.81 317.71,265.90 L 379.50 266.07 L 382.97 269.78 C384.88,271.83 399.25,286.44 414.90,302.25 Z" fill="#39a259"/>
+                <path d="M 461.79 244.00 C461.96,270.67 461.96,296.67 461.80,301.78 L 461.50 311.05 L 396.93 246.36 L 397.04 183.68 C397.09,149.21 397.45,121.01 397.82,121.01 C398.95,121.04 451.32,175.02 453.96,178.89 C455.31,180.88 457.56,185.43 458.95,189.00 L 461.48 195.50 Z" fill="#7a57ba"/>
+              </g>
             </motion.g>
           </motion.svg>
         </div>

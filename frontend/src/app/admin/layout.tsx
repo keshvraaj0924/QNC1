@@ -13,7 +13,8 @@ import {
   Settings,
   Briefcase,
   FileText,
-  Image as ImageIcon
+  Image as ImageIcon,
+  Newspaper
 } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 import styles from './AdminLayout.module.css';
@@ -52,6 +53,7 @@ function AdminLayoutInner({ children }: { children: React.ReactNode }) {
         { name: 'Home Page', href: '/admin/content?view=home', view: 'home', icon: Globe, role: 'editor' },
         { name: 'About Us', href: '/admin/content?view=about', view: 'about', icon: FileText, role: 'editor' },
         { name: 'Services Pillars', href: '/admin/content?view=services', view: 'services', icon: Briefcase, role: 'editor' },
+        { name: 'News & Events', href: '/admin/content?view=news', view: 'news', icon: Newspaper, role: 'editor' },
         { name: 'Partner Suite', href: '/admin/content?view=partners', view: 'partners', icon: ImageIcon, role: 'editor' },
       ]
     },

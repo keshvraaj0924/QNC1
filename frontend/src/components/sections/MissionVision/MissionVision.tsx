@@ -1,6 +1,6 @@
 'use client';
 
-import { useRef } from 'react';
+import { useRef, useState, useEffect } from 'react';
 import { motion, useInView, useScroll, useTransform } from 'framer-motion';
 import Link from 'next/link';
 import styles from './MissionVision.module.css';
@@ -57,6 +57,15 @@ export default function MissionVision({ content }: { content?: any }) {
   const { language, isRTL, t } = useLanguage();
   const sectionRef = useRef<HTMLElement>(null);
   const isInView = useInView(sectionRef, { once: true, margin: "-100px" });
+
+  const [isMobile, setIsMobile] = useState(false);
+  
+  useEffect(() => {
+    const checkMobile = () => setIsMobile(window.innerWidth < 768);
+    checkMobile();
+    window.addEventListener('resize', checkMobile);
+    return () => window.removeEventListener('resize', checkMobile);
+  }, []);
 
   const { scrollYProgress } = useScroll({
     target: sectionRef,
@@ -183,10 +192,10 @@ export default function MissionVision({ content }: { content?: any }) {
           >
             <div className={styles.swapContainer}>
               <CardSwap
-                width="100%"
-                height="100%"
-                cardDistance={50}
-                verticalDistance={60}
+                width={isMobile ? "100%" : 500}
+                height={isMobile ? 320 : 500}
+                cardDistance={isMobile ? 15 : 50}
+                verticalDistance={isMobile ? 25 : 60}
                 delay={2000}
                 pauseOnHover={true}
               >

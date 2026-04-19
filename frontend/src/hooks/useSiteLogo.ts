@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from 'react';
 
-const FALLBACK_LOGO = '/assets/images/QLogoSymbol/QNCLogoBg removed.png';
+const FALLBACK_LOGO = '/assets/images/FinalQNCLogo.svg';
 
 /**
  * Returns the site logo URL — from CMS if set, otherwise falls back to the

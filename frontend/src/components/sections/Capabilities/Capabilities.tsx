@@ -26,7 +26,6 @@ interface Service {
 }
 
 const ALL_SERVICES: Service[] = [
-  // ... (Full service list stays consistent)
   { id: '01', slug: 'hvac-services', titleEn: 'HVAC', titleAr: 'التكييف والتهوية', descEn: 'Maintenance and servicing of heating, ventilation, and air conditioning systems.', descAr: 'صيانة أنظمة التكييف والتهوية.', type: 'HARD', icon: 'Thermometer', image: '/assets/images/services/hvac.png' },
   { id: '02', slug: 'mep-engineering', titleEn: 'MEP', titleAr: 'الكهروميكانيكية', descEn: 'Integrated maintenance for Mechanical, Electrical, and Plumbing systems.', descAr: 'صيانة الأنظمة الميكانيكية والكهربائية والسباكة.', type: 'HARD', icon: 'Zap', image: '/assets/images/services/mep.png' },
   { id: '03', slug: 'civil-construction', titleEn: 'Civil Works', titleAr: 'الأعمال المدنية', descEn: 'General repair and maintenance to keep building structures safe.', descAr: 'الإصلاح العام للحفاظ على هياكل المباني.', type: 'HARD', icon: 'HardHat', image: '/assets/images/services/civil.png' },
@@ -41,20 +40,46 @@ const ALL_SERVICES: Service[] = [
   { id: '12', slug: 'facility-help-desk', titleEn: 'Help Desk', titleAr: 'مكتب المساعدة', descEn: 'Central hub for tracking all facility requests.', descAr: 'مركز لتسجيل ومتابعة طلبات المنشأة.', type: 'SOFT', icon: 'Headphones', image: '/assets/images/services/helpdesk.png' }
 ];
 
+const HARD_SERVICES: Service[] = ALL_SERVICES.filter(s => s.type === 'HARD');
+const SOFT_SERVICES: Service[] = ALL_SERVICES.filter(s => s.type === 'SOFT');
+
 export default function Capabilities({ content }: { content?: any }) {
   const { language, isRTL, t } = useLanguage();
   const { theme } = useTheme();
+  
+  return (
+    <>
+      <ServiceRail 
+        type="HARD" 
+        services={HARD_SERVICES} 
+        language={language} 
+        isRTL={isRTL} 
+        t={t} 
+        theme={theme} 
+      />
+      <ServiceRail 
+        type="SOFT" 
+        services={SOFT_SERVICES} 
+        language={language} 
+        isRTL={isRTL} 
+        t={t} 
+        theme={theme} 
+        hideMainHeader={true}
+      />
+    </>
+  );
+}
+
+function ServiceRail({ type, services, language, isRTL, t, theme, hideMainHeader }: any) {
   const sectionRef = useRef<HTMLDivElement>(null);
   const logoRef = useRef<SVGSVGElement>(null);
-  const hardTitleRef = useRef<HTMLDivElement>(null);
-  const softTitleRef = useRef<HTMLDivElement>(null);
+  const titleRef = useRef<HTMLDivElement>(null);
   const progressRef = useRef<HTMLDivElement>(null);
   
   const frameRefs = useRef<(HTMLDivElement | null)[]>([]);
   const visualRefs = useRef<(HTMLDivElement | null)[]>([]);
   const infoRefs = useRef<(HTMLDivElement | null)[]>([]);
 
-  // Persistent Logo Rotation (Does not reset on language switch)
   useLayoutEffect(() => {
     const ctx = gsap.context(() => {
       gsap.to(logoRef.current, {
@@ -63,69 +88,104 @@ export default function Capabilities({ content }: { content?: any }) {
         repeat: -1,
         ease: "none"
       });
+      
+      gsap.set(logoRef.current, { 
+        stroke: "#cba152", 
+        filter: "drop-shadow(0 0 50px rgba(203,161,82,0.6))" 
+      });
     }, logoRef);
     return () => ctx.revert();
-  }, []);
+  }, [type]);
 
   useLayoutEffect(() => {
     const ctx = gsap.context(() => {
-      // Main Scrollytelling Timeline
+      const isMobile = window.innerWidth < 768;
+
       const tl = gsap.timeline({
         scrollTrigger: {
           trigger: sectionRef.current,
-          start: "top top",
-          end: "+=1200%",
-          pin: true,
-          pinSpacing: true,
+          start: isMobile ? "top 80%" : "top top",
+          end: isMobile ? "bottom 20%" : `+=${services.length * 150}%`,
+          pin: !isMobile,
+          pinSpacing: !isMobile,
           scrub: 1.2,
           anticipatePin: 1,
-          refreshPriority: 1
         }
       });
 
-      // HARD Intro
-      tl.fromTo(hardTitleRef.current, 
-        { opacity: 0, scale: 0.8, filter: "blur(20px)" },
-        { opacity: 1, scale: 1, filter: "blur(0px)", duration: 1.5 }
-      )
-      .to(hardTitleRef.current, { opacity: 0, scale: 1.1, filter: "blur(20px)", duration: 1, delay: 0.5 });
+      // Intro (Fades out only on desktop where it's a transition phase)
+      tl.fromTo(titleRef.current, 
+        { opacity: 0, scale: 0.8 },
+        { opacity: 1, scale: 1, duration: 1.5 }
+      );
 
-      // Settle Logic for All Cards
-      ALL_SERVICES.forEach((service, index) => {
+      if (!isMobile) {
+        tl.to(titleRef.current, { opacity: 0, scale: 1.1, duration: 1, delay: 0.5 });
+      }
+
+      // Cards
+      services.forEach((service: any, index: number) => {
         const frame = frameRefs.current[index];
         const visual = visualRefs.current[index];
         const info = infoRefs.current[index];
 
         if (!frame || !visual || !info) return;
 
-        // If it's the start of Soft Services, add the title transition
-        if (index === 6) {
-          tl.fromTo(softTitleRef.current, 
-            { opacity: 0, scale: 0.8, filter: "blur(20px)" },
-            { opacity: 1, scale: 1.2, filter: "blur(0px)", duration: 1.5, onEnter: () => {
-                gsap.to(logoRef.current, { stroke: "#cba152", filter: "drop-shadow(0 0 50px rgba(203,161,82,0.6))" });
-            }}
-          )
-          .to(softTitleRef.current, { opacity: 0, scale: 1.4, filter: "blur(20px)", duration: 1, delay: 0.5 });
-        }
+        // Desktop settled positions: offset left/right
+        // Mobile settled positions: perfectly center (handled by simple fade)
+        const settleX_Visual = isMobile ? 0 : (isRTL ? 25 : -25);
+        const settleX_Info = isMobile ? 0 : (isRTL ? -25 : 25);
+        
+        // Vertical offsets: disabled for stable flow standard scrolling
+        const fromY_Visual = isMobile ? 20 : 0; 
+        const fromY_Info = isMobile ? 40 : 0; 
 
-        const settleX_Visual = isRTL ? 25 : -25;
-        const settleX_Info = isRTL ? -25 : 25;
-
-        tl.fromTo(frame, { opacity: 0 }, { opacity: 1, duration: 0.5 })
+        tl.fromTo(frame, { opacity: 0 }, { opacity: 1, duration: 0.8 })
           .fromTo(visual, 
-            { xPercent: isRTL ? -100 : 100, rotateY: isRTL ? 45 : -45, opacity: 0 },
-            { xPercent: settleX_Visual, rotateY: 0, opacity: 1, duration: 1.2, ease: "power3.out" },
+            { 
+              xPercent: isMobile ? 0 : (isRTL ? -100 : 100), 
+              yPercent: fromY_Visual,
+              rotateY: isMobile ? 0 : (isRTL ? 45 : -45), 
+              opacity: 0 
+            },
+            { 
+              xPercent: settleX_Visual, 
+              yPercent: 0,
+              rotateY: 0, 
+              opacity: 1, 
+              duration: 1.2, 
+              ease: "power3.out" 
+            },
             "-=0.4"
           )
           .fromTo(info,
-            { xPercent: isRTL ? 100 : -100, opacity: 0, filter: "blur(10px)" },
-            { xPercent: settleX_Info, opacity: 1, filter: "blur(0px)", duration: 1.2, ease: "power3.out" },
+            { 
+              xPercent: isMobile ? 0 : (isRTL ? 100 : -100), 
+              yPercent: fromY_Info,
+              opacity: 0 
+            },
+            { 
+              xPercent: settleX_Info, 
+              yPercent: 0,
+              opacity: 1, 
+              duration: 1.2, 
+              ease: "power3.out" 
+            },
             "-=1"
           )
-          .to([visual, info], { duration: 1.5 }) // Focus linger
-          .to(visual, { xPercent: isRTL ? 150 : -150, opacity: 0, duration: 1 })
-          .to(info, { xPercent: isRTL ? -150 : 150, opacity: 0, duration: 1 }, "-=1")
+          .to([visual, info], { duration: 1.5 }) 
+          .to(visual, { 
+            xPercent: isMobile ? 0 : (isRTL ? 150 : -150), 
+            yPercent: isMobile ? -50 : 0,
+            opacity: 0, 
+            duration: 1 
+          })
+          .to(info, { 
+            xPercent: isMobile ? 0 : (isRTL ? -150 : 150), 
+            yPercent: isMobile ? 50 : 0,
+            opacity: 0, 
+            duration: 1 
+          }, "-=1")
           .to(frame, { opacity: 0, duration: 0.3 });
       });
 
@@ -133,38 +193,30 @@ export default function Capabilities({ content }: { content?: any }) {
     }, sectionRef);
 
     return () => ctx.revert();
-  }, [isRTL]);
-
-  // Forced Refresh on Language Change (Corrects RTL Skip)
-  useLayoutEffect(() => {
-    const timer = setTimeout(() => {
-      ScrollTrigger.refresh();
-    }, 500); // Give time for Font/RTL layout to settle
-    return () => clearTimeout(timer);
-  }, [isRTL, language]);
+  }, [isRTL, services.length, type]);
 
   return (
-    <section ref={sectionRef} className={styles.kineticSection} id="capabilities-rail" data-theme={theme}>
+    <section ref={sectionRef} className={styles.kineticSection} data-theme={theme}>
       <div className={styles.stickyTrack}>
-        
-        <div className={styles.railHeader}>
-          <div className={styles.scrollHint} data-theme={theme}>
-             {language === 'en' ? 'SCROLL TO EXPLORE' : 'مرر للاستكشاف'}
+        {!hideMainHeader && (
+          <div className={styles.railHeader}>
+            <div className={styles.railPreHeader}>
+              - {language === 'en' ? 'OUR SERVICES' : 'خدماتنا'}
+            </div>
+            <div className={styles.scrollHint}>
+               {language === 'en' ? 'SCROLL TO EXPLORE' : 'مرر للاستكشاف'}
+            </div>
+            <h2 className={styles.railMainTitle}>
+              {language === 'en' ? 'Kinetic Excellence' : 'التفوق الحركي'}
+            </h2>
           </div>
-          <h2 className={styles.railMainTitle} data-theme={theme}>
-            {language === 'en' ? 'Kinetic Excellence' : 'التفوق الحركي'}
-          </h2>
-        </div>
+        )}
 
-        <div ref={hardTitleRef} className={styles.railPhaseTitle}>
-          <div className={styles.glitchText} data-theme={theme}>
-            {language === 'en' ? 'HARD SERVICES' : 'الخدمات الصلبة'}
-          </div>
-        </div>
-
-        <div ref={softTitleRef} className={styles.railPhaseTitle} style={{ opacity: 0 }}>
-          <div className={styles.glitchText} data-theme={theme}>
-            {language === 'en' ? 'SOFT SERVICES' : 'الخدمات اللينة'}
+        <div ref={titleRef} className={styles.railPhaseTitle} style={hideMainHeader ? { top: '35%' } : {}}>
+          <div className={styles.glitchText}>
+            {type === 'HARD' 
+              ? (language === 'en' ? 'HARD SERVICES' : 'الخدمات الصلبة')
+              : (language === 'en' ? 'SOFT SERVICES' : 'الخدمات اللينة')}
           </div>
         </div>
 
@@ -182,9 +234,8 @@ export default function Capabilities({ content }: { content?: any }) {
         </div>
 
         <div className={styles.railViewport}>
-          {ALL_SERVICES.map((service, idx) => (
+          {services.map((service: any, idx: number) => (
             <div key={service.id} ref={el => { frameRefs.current[idx] = el; }} className={styles.kineticCardFrame}>
-              {/* Visual Part (Left settle) */}
               <div ref={el => { visualRefs.current[idx] = el; }} className={styles.visualPart}>
                 <div className={styles.floatingCard}>
                   <div className={styles.cardVisual} style={{ backgroundImage: `url(${service.image})` }} />
@@ -192,17 +243,10 @@ export default function Capabilities({ content }: { content?: any }) {
                 </div>
               </div>
 
-              {/* Info Part (Right settle) */}
               <div ref={el => { infoRefs.current[idx] = el; }} className={styles.infoPart}>
-                <Link 
-                  href={`/services/${service.slug}`} 
-                  className={styles.modernizedBox} 
-                  data-cursor="hover" 
-                  data-cursor-text={language === 'en' ? 'OPEN REF' : 'فتح المرجع'}
-                >
+                <Link href={`/services/${service.slug}`} className={styles.modernizedBox}>
                   <div className={styles.cardHeader}>
                     <span className={styles.cardId}>{service.id} — REF_{service.id}</span>
-                    <span className={styles.refTag}>SERVICE REFERENCE</span>
                   </div>
                   <h3 className={styles.cardTitle}>
                     {language === 'en' ? service.titleEn : service.titleAr}
@@ -210,14 +254,6 @@ export default function Capabilities({ content }: { content?: any }) {
                   <p className={styles.cardDesc}>
                     {language === 'en' ? service.descEn : service.descAr}
                   </p>
-                  <div className={styles.cardFooter}>
-                     <span className={styles.exploreBtn}>
-                       {language === 'en' 
-                          ? `${t('btn_explore_service')} ${service.titleEn.toUpperCase()}` 
-                          : `${t('btn_explore_service')} ${service.titleAr}`}
-                       <span className={styles.arrow}>↗</span>
-                     </span>
-                  </div>
                 </Link>
               </div>
             </div>
@@ -228,8 +264,8 @@ export default function Capabilities({ content }: { content?: any }) {
           <div className={styles.progressBar}>
             <div ref={progressRef} className={styles.progressInner} />
           </div>
-          <div className={styles.scrollHint} data-theme={theme}>
-            QNC CORE CAPABILITIES / INDUSTRIAL SOLUTIONS
+          <div className={styles.scrollHint}>
+            QNC CORE CAPABILITIES / {type} SOLUTIONS
           </div>
         </div>
       </div>

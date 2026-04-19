@@ -146,5 +146,29 @@ export const adminApi = {
     const data = await res.json();
     if (!res.ok) throw new Error(data.error || 'Reset failed');
     return data;
+  },
+
+  // News & Events CRUD Stubs
+  async getNews() {
+    // In a real scenario, this would fetch from /api/v1/admin/news
+    // For now, we will expose the integrated News module in the Content Editor
+    const headers = await this.getAuthHeaders();
+    const res = await fetch(`${API_BASE}/news`, { headers });
+    if (!res.ok) {
+       // If backend doesn't support news endpoint yet, we return mock/local fallback
+       return null;
+    }
+    return res.json();
+  },
+
+  async updateNews(newsData: any) {
+    const headers = await this.getAuthHeaders();
+    const res = await fetch(`${API_BASE}/news`, {
+      method: 'POST',
+      headers,
+      body: JSON.stringify(newsData)
+    });
+    if (!res.ok) throw new Error('Failed to update news');
+    return res.json();
   }
 };

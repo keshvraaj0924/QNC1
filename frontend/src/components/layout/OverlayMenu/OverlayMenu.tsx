@@ -11,20 +11,9 @@ import { menuLinks } from '@/data/navigation';
 import MagnetButton from '@/components/modern/MagnetButton';
 import { useSettings } from '@/context/SettingsContext';
 
-const featuredNews = [
-  {
-    kicker: { en: 'Impact', ar: 'تأثير' },
-    title: { en: 'Qudrat National expands Catering Operations to King Abdullah Economic City.', ar: 'قدرات الوطنية توسع عمليات الإعاشة في مدينة الملك عبد الله الاقتصادية.' },
-    image: 'https://images.unsplash.com/photo-1577219491135-ce391730fb2c?auto=format&fit=crop&q=80&w=800',
-    date: { en: 'Dec 12, 2025', ar: '12 ديسمبر 2025' }
-  },
-  {
-    kicker: { en: 'Growth', ar: 'نمو' },
-    title: { en: 'New Manpower Logistics HQ opens supporting Vision 2030 megaprojects.', ar: 'افتتاح مقر لوجستي جديد للقوى العاملة لدعم مشاريع رؤية 2030.' },
-    image: 'https://images.unsplash.com/photo-1504328345606-18bbc8c9d7d1?auto=format&fit=crop&q=80&w=800',
-    date: { en: 'Jan 04, 2026', ar: '04 يناير 2026' }
-  }
-];
+import { newsData } from '@/data/newsData';
+
+const featuredNews = newsData.slice(0, 2);
 
 export default function OverlayMenu({ isOpen, onClose }: { isOpen: boolean; onClose: () => void }) {
   const { language, t } = useLanguage();
@@ -183,28 +172,37 @@ export default function OverlayMenu({ isOpen, onClose }: { isOpen: boolean; onCl
 
             <motion.div className={styles.featuredNewsColumn} variants={staggerVariants} initial="hidden" animate="visible">
                <motion.span variants={itemVariants} className={styles.featuredTitle}>{t('section_news_title')}</motion.span>
-               <div className={styles.newsGrid}>
-                 {featuredNews.map((news, idx) => (
-                   <motion.div 
-                     key={idx} 
-                     variants={itemVariants} 
-                     className={styles.newsCard}
-                     data-cursor="hover"
-                   >
-                      <div className={styles.newsImageWrapper}>
-                        <img src={news.image} alt={news.title[language]} className={styles.newsImage} />
-                      </div>
-                      <div className={styles.newsContent}>
-                        <div className={styles.newsMeta}>
-                          <span className={styles.newsKicker}>{news.kicker[language]}</span>
-                          <span className={styles.newsSeparator}>•</span>
-                          <span className={styles.newsDate}>{news.date[language]}</span>
+                <div className={styles.newsGrid}>
+                  {featuredNews.map((news, idx) => (
+                    <motion.div 
+                      key={idx} 
+                      variants={itemVariants} 
+                      className={styles.newsCard}
+                      data-cursor="hover"
+                    >
+                      <Link href={`/news/${news.slug}`} onClick={onClose} className={styles.newsCardLink}>
+                        <div className={styles.newsImageWrapper}>
+                          <img src={news.mainImage} alt={news.title[language]} className={styles.newsImage} />
                         </div>
-                        <h4 className={styles.newsHeadline}>{news.title[language]}</h4>
-                      </div>
-                   </motion.div>
-                 ))}
-               </div>
+                        <div className={styles.newsContent}>
+                          <div className={styles.newsMeta}>
+                            <span className={styles.newsKicker}>{news.category[language]}</span>
+                            <span className={styles.newsSeparator}>•</span>
+                            <span className={styles.newsDate}>{news.date[language]}</span>
+                          </div>
+                          <h4 className={styles.newsHeadline}>{news.title[language]}</h4>
+                        </div>
+                      </Link>
+                    </motion.div>
+                  ))}
+                </div>
+                <motion.div variants={itemVariants} className={styles.viewAllWrapper}>
+                   <MagnetButton strength={0.1}>
+                     <Link href="/news" className={styles.viewAllBtn} onClick={onClose} data-cursor="hover">
+                       {language === 'en' ? 'VIEW ALL NEWS & EVENTS' : 'عرض جميع الأخبار والفعاليات'} ↗
+                     </Link>
+                   </MagnetButton>
+                </motion.div>
             </motion.div>
           </div>
         </motion.div>

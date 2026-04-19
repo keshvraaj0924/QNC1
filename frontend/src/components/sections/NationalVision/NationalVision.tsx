@@ -1,8 +1,8 @@
 'use client';
 
-import { useRef, useEffect } from 'react';
+import { useRef, useEffect, useState } from 'react';
 import Image from 'next/image';
-import { motion, useScroll, useTransform, useInView, useMotionValue, animate } from 'framer-motion';
+import { motion, useScroll, useTransform, useInView, useMotionValue, animate, AnimatePresence } from 'framer-motion';
 import styles from './NationalVision.module.css';
 import { useLanguage } from '@/context/LanguageContext';
 import LogoBeam from '@/components/modern/LogoBeam';
@@ -11,19 +11,23 @@ import BlurText from '@/components/modern/BlurText';
 
 export default function NationalVision({ content }: { content?: any }) {
   const { language, t } = useLanguage();
+  const [isModalOpen, setIsModalOpen] = useState(false);
   const containerRef = useRef<HTMLDivElement>(null);
   const isInView = useInView(containerRef, { once: true, amount: 0.3 });
-  
-  // Count up logic for 2030
-  const count = useMotionValue(0);
-  const rounded = useTransform(count, (latest) => Math.round(latest));
 
+  // Prevent background scrolling when modal is open
   useEffect(() => {
-    if (isInView) {
-      const controls = animate(count, 2030, { duration: 2.5, ease: "easeOut" });
-      return controls.stop;
+    if (isModalOpen) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = 'unset';
     }
-  }, [isInView, count]);
+    return () => {
+      document.body.style.overflow = 'unset';
+    };
+  }, [isModalOpen]);
+  
+  /* Removed count-up logic for 2030 as it is replaced by logo image */
   
   const title = language === 'en' ? (content?.title_en || t('vision_title')) : (content?.title_ar || t('vision_title'));
   const description = language === 'en' ? (content?.description_en || t('vision_description')) : (content?.description_ar || t('vision_description'));
@@ -82,24 +86,6 @@ export default function NationalVision({ content }: { content?: any }) {
                   direction="top"
                 />
               </div>
-              
-              {/* Modernized Cinematic Vision 2030 Logo */}
-              <motion.div 
-                className={styles.visionLogoModernContainer}
-                style={{
-                  scale: useTransform(scrollYProgress, [0.1, 0.4], [0.8, 1.1]),
-                  opacity: useTransform(scrollYProgress, [0.1, 0.3, 0.5], [0, 1, 0.8]),
-                  y: useTransform(scrollYProgress, [0, 1], [40, -40]),
-                }}
-              >
-                <div className={styles.glassBackdrop} />
-                <div className={styles.logoShimmer} />
-                <img 
-                  src="/images/vision/Vision2030Logo.jpg" 
-                  alt="Saudi Vision 2030" 
-                  className={styles.visionLogoModern}
-                />
-              </motion.div>
             </div>
 
             <motion.p 
@@ -111,7 +97,6 @@ export default function NationalVision({ content }: { content?: any }) {
             >
               {description}
             </motion.p>
-
             {/* CEO Message Box */}
             <motion.div 
               className={styles.ceoMessage}
@@ -140,7 +125,16 @@ export default function NationalVision({ content }: { content?: any }) {
                 <div className={styles.quoteWrapper}>
                   <span className={styles.quoteMark}>"</span>
                   <p className={styles.talentText}>
-                    {t('vision_ceo_quote')}
+                    {t('vision_ceo_tagline_main')}
+                    <span 
+                      className={styles.ceoReadMore} 
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        setIsModalOpen(true);
+                      }}
+                    >
+                      {t('vision_ceo_tagline_link')}
+                    </span>
                   </p>
                 </div>
               </div>
@@ -182,13 +176,69 @@ export default function NationalVision({ content }: { content?: any }) {
               viewport={{ once: true }}
               transition={{ duration: 1.2, delay: 0.5 }}
             >
-              <motion.span className={styles.statNum}>{rounded}</motion.span>
-              <span className={styles.statLabel}>{t('vision_shared')}</span>
+              <Image 
+                src="/images/vision/Vision2030Logo.jpg" 
+                alt="Saudi Vision 2030" 
+                fill
+                className={styles.visionLogoEmbedded}
+              />
             </motion.div>
           </div>
 
         </div>
       </div>
+      <AnimatePresence>
+        {isModalOpen && (
+          <motion.div 
+            className={styles.modalOverlay}
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            onClick={() => setIsModalOpen(false)}
+          >
+            <motion.div 
+              className={styles.modalContent}
+              initial={{ scale: 0.9, opacity: 0, y: 20 }}
+              animate={{ scale: 1, opacity: 1, y: 0 }}
+              exit={{ scale: 0.9, opacity: 0, y: 20 }}
+              onClick={(e) => e.stopPropagation()}
+            >
+              <button 
+                className={styles.closeBtn}
+                onClick={() => setIsModalOpen(false)}
+                aria-label="Close modal"
+              >
+                ×
+              </button>
+
+              <div className={styles.modalWatermark}>
+                <Image 
+                  src="/assets/images/FinalQNCLogo.svg" 
+                  alt="" 
+                  width={600} 
+                  height={600}
+                />
+              </div>
+
+              <div className={styles.modalScrollArea}>
+                <div className={styles.modalBody}>
+                  {t('vision_ceo_full').split('\n\n').map((paragraph, idx) => (
+                    <p key={idx} className={styles.modalParagraph}>
+                      {paragraph}
+                    </p>
+                  ))}
+                </div>
+
+                <div className={styles.modalSignature}>
+                  <h4 className={styles.sigName}>{t('vision_ceo_name')}</h4>
+                  <p className={styles.sigTitle}>{t('vision_ceo_title')}</p>
+                  <p className={styles.sigCompany}>{t('vision_ceo_company')}</p>
+                </div>
+              </div>
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </section>
   );
 }

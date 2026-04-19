@@ -41,9 +41,11 @@
 
 .headerRow {
   width: 100%;
-  margin-bottom: 4rem;
+  margin-bottom: 4.5rem;
   border-left: 1px solid var(--border-color);
   padding-left: 2.5rem;
+  position: relative;
+  z-index: 100; /* Dominant layer to prevent overlap */
 }
 
 .rtl .headerRow {
@@ -329,25 +331,38 @@
 
 @media (max-width: 768px) {
   .section {
-    padding: var(--header-clearance-mobile, 140px) 0 60px;
+    display: block; /* Linear document flow instead of centered flex */
+    padding: var(--header-clearance-mobile) 5% 60px;
+    background-color: var(--background);
+    z-index: 10;
   }
-  .mainTitle {
-    font-size: 2.1rem;
+  .container {
+    padding: 0;
   }
-  .headerRow {
-    margin-bottom: 2rem;
+  .contentLayout {
+    display: flex;
+    flex-direction: column;
+    gap: 4.5rem;
+    margin-top: 4rem; /* Physical separation from header */
+    min-height: auto;
   }
   .orbitColumn {
+    order: 1 !important;
+    height: auto;
+    aspect-ratio: auto;
     padding: 1rem 0;
+    justify-content: flex-start;
   }
   .cardsColumn {
-    min-height: 400px;
+    order: 2 !important;
+    justify-content: center;
+    min-height: auto;
   }
   .swapContainer {
-    height: 420px;
+    height: 400px;
   }
   .cardBase {
-    width: 95vw !important;
+    width: 100% !important;
     height: 380px !important;
     padding: 2rem;
   }
@@ -427,7 +442,7 @@
 .talentVisual {
   position: relative;
   width: 130px;
-  height: 160px;
+  height: 140px; /* Reduced to prevent vertical sprawl on mobile */
   flex-shrink: 0;
   clip-path: polygon(15% 0%, 100% 0%, 85% 100%, 0% 100%);
   overflow: hidden;

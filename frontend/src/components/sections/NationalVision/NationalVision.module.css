@@ -140,6 +140,7 @@
   transition: all 0.5s var(--transition-bezier);
   box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3), 
               0 0 20px rgba(var(--qnc-gold-rgb), 0.05);
+  cursor: pointer;
 }
 
 [data-theme='light'] .talentExcellence, 
@@ -254,8 +255,26 @@
   color: var(--sub-text);
   line-height: 1.6;
   margin: 0;
-  font-style: italic;
   font-weight: 400;
+}
+
+.ceoReadMore {
+  display: inline-block;
+  margin-left: 0.5rem;
+  color: var(--qnc-gold);
+  font-weight: 700;
+  text-decoration: underline;
+  cursor: pointer;
+  transition: opacity 0.3s ease;
+}
+
+.ceoReadMore:hover {
+  opacity: 0.8;
+}
+
+[dir="rtl"] .ceoReadMore {
+  margin-left: 0;
+  margin-right: 0.5rem;
 }
 
 /* Image/Parallax Column */
@@ -293,10 +312,13 @@
   bottom: 8%;
   right: 0;
   background-color: var(--qnc-blue);
-  padding: 3rem 4rem;
+  width: clamp(240px, 20vw, 320px);
+  height: clamp(160px, 14vw, 220px);
+  padding: 0;
   display: flex;
-  flex-direction: column;
+  overflow: hidden;
   align-items: center;
+  justify-content: center;
   z-index: 10;
   box-shadow: 0 40px 80px rgba(0,0,0,0.4);
 }
@@ -317,6 +339,17 @@
   color: #fff;
   margin-top: 1rem;
   text-transform: uppercase;
+}
+
+.visionLogoEmbedded {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.6s var(--transition-bezier);
+}
+
+.statsBox:hover .visionLogoEmbedded {
+  transform: scale(1.05);
 }
 
 [dir="rtl"] .grid {
@@ -355,7 +388,9 @@
     left: 0;
     bottom: 0;
     margin-top: -3rem;
-    padding: 2rem 3rem;
+    padding: 0;
+    width: 280px;
+    height: 180px;
     align-self: center;
   }
   [dir="rtl"] .statsBox {
@@ -407,7 +442,174 @@
   .talentText {
     font-size: 0.95rem;
   }
-  .statNum {
-    font-size: 3rem;
+}
+
+/* Modal Styles */
+.modalOverlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.9);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  display: flex;
+  align-items: flex-start; /* Start from top to allow scrolling down */
+  justify-content: center;
+  z-index: 999999; 
+  padding: 5vh 2rem;
+  overflow-y: auto; /* The overlay is the scroll parent */
+  overscroll-behavior: contain;
+}
+
+.modalContent {
+  position: relative;
+  background: var(--qnc-gold, #CBA152);
+  width: 95%;
+  max-width: 800px;
+  height: auto; /* Let it grow naturally */
+  min-height: 400px;
+  border-radius: 40px;
+  box-shadow: 0 40px 100px rgba(0, 0, 0, 0.8);
+  display: flex;
+  flex-direction: column;
+  color: #1a1a1a;
+  margin: auto 0; /* Center vertically if content is small */
+}
+
+.closeBtn {
+  position: absolute;
+  top: 2rem;
+  right: 2rem;
+  z-index: 100; /* Above watermark and scroll */
+  background: rgba(0, 0, 0, 0.05);
+  border: none;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  font-size: 2.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  color: #1a1a1a;
+  transition: all 0.3s ease;
+}
+
+[dir="rtl"] .closeBtn {
+  right: auto;
+  left: 2rem;
+}
+
+.closeBtn:hover {
+  background: rgba(0, 0, 0, 0.1);
+  transform: rotate(90deg);
+}
+
+.modalWatermark {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 80%;
+  height: 80%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0.18; /* Increased visibility as requested */
+  pointer-events: none;
+  z-index: 0;
+}
+
+.modalWatermark img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+.modalScrollArea {
+  padding: 8rem 4rem 5rem;
+  position: relative;
+  z-index: 10;
+  width: 100%;
+}
+
+.modalScrollArea::-webkit-scrollbar {
+  width: 8px;
+}
+
+.modalScrollArea::-webkit-scrollbar-thumb {
+  background: rgba(0, 0, 0, 0.2);
+  border-radius: 10px;
+}
+
+.modalBody {
+  font-family: var(--font-body), var(--font-outfit), sans-serif;
+  font-size: 1.25rem;
+  line-height: 1.8;
+  margin-bottom: 3rem;
+  max-width: 650px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.modalParagraph {
+  margin-bottom: 2rem;
+}
+
+.modalSignature {
+  border-top: 2px solid rgba(0, 0, 0, 0.05);
+  padding-top: 2rem;
+  max-width: 650px;
+  margin: 0 auto;
+}
+
+.sigName {
+  font-family: var(--font-heading), var(--font-syne), sans-serif;
+  font-size: 1.8rem;
+  font-weight: 800;
+  margin: 0;
+  text-transform: uppercase;
+}
+
+.sigTitle {
+  font-size: 1.1rem;
+  font-weight: 600;
+  margin: 0.3rem 0;
+  opacity: 0.8;
+}
+
+.sigCompany {
+  font-size: 0.9rem;
+  font-weight: 700;
+  margin: 0;
+  opacity: 0.7;
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+}
+
+@media (max-width: 768px) {
+  .modalContent {
+    border-radius: 30px;
+    max-height: 90vh;
+  }
+  .modalScrollArea {
+    padding: 4rem 2rem 3rem;
+  }
+  .modalBody {
+    font-size: 1.1rem;
+    line-height: 1.6;
+  }
+  .sigName {
+    font-size: 1.5rem;
+  }
+  .closeBtn {
+    top: 1rem;
+    right: 1rem;
+    width: 40px;
+    height: 40px;
+  }
+  [dir="rtl"] .closeBtn {
+    left: 1rem;
   }
 }
+
+

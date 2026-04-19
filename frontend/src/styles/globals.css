@@ -45,7 +45,7 @@
 
   /* Layout Breakpoints & Offsets */
   --header-height-mobile: 80px;
-  --header-clearance-mobile: 140px;
+  --header-clearance-mobile: 210px; /* Aggressive clearance to prevent title overlap with fixed branding */
 }
 
 @media (min-width: 1800px) {
@@ -135,7 +135,8 @@ h1, h2, h3, h4, h5, h6, .syne-heading {
 
 html,
 body {
-  max-width: 100vw;
+  width: 100%;
+  max-width: 100%;
   overflow-x: hidden;
   font-family: var(--font-body);
   background-color: var(--background);

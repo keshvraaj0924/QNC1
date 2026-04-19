@@ -71,9 +71,9 @@
 
 .logoItem {
   flex-shrink: 0;
-  width: 200px;
-  height: 120px;
-  margin: 0 40px;
+  width: 140px; /* Reduced from 200px */
+  height: 80px;  /* Reduced from 120px */
+  margin: 0 50px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -83,6 +83,7 @@
 .clientLogo {
   width: 100%;
   height: 100%;
+  max-width: 80%; /* Ensure internal logo padding */
   object-fit: contain;
   transition: filter 0.5s ease;
 }
@@ -119,7 +120,7 @@
   width: 100%;
   height: auto;
   opacity: 0.5;
-  backdrop-filter: blur(2px);
+  /* backdrop-filter removed per global sharpness request */
 }
 
 [dir="rtl"] .header {
@@ -138,9 +139,9 @@
     width: 90vw;
   }
   .logoItem {
-    width: 120px;
-    height: 80px;
-    margin: 0 20px;
+    width: 85px; /* Reduced from 120px */
+    height: 50px; /* Reduced from 80px */
+    margin: 0 25px;
   }
   .header {
     padding-left: 1.5rem;

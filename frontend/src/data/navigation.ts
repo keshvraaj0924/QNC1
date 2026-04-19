@@ -26,6 +26,11 @@ export const menuLinks: NavLink[] = [
     ] 
   },
   { 
+    name: { en: 'News & Events', ar: 'الأخبار والفعاليات' }, 
+    path: '/news', 
+    subPages: [] 
+  },
+  { 
     name: { en: 'Services', ar: 'الخدمات' }, 
     path: '/services', 
     subPages: [

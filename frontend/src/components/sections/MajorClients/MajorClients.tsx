@@ -56,13 +56,11 @@ function TunnelLogo({ src, index, xOffset, containerWidth, totalLogos }: { src: 
   
   const scale = useTransform(relativeX, 
     [centerPos - visibilityRange, centerPos, centerPos + visibilityRange], 
-    [0.6, 1.3, 0.6]
+    [0.7, 1.25, 0.7]
   );
   
-  const blur = useTransform(relativeX, 
-    [centerPos - visibilityRange, centerPos, centerPos + visibilityRange], 
-    [20, 0, 20]
-  );
+  // Blur removed per user request for global sharpness
+  const blur = useMotionValue(0);
 
   const z = useTransform(relativeX, 
     [centerPos - visibilityRange, centerPos, centerPos + visibilityRange], 
@@ -87,7 +85,7 @@ function TunnelLogo({ src, index, xOffset, containerWidth, totalLogos }: { src: 
         scale,
         z,
         rotateY,
-        filter: useTransform(blur, (v) => `blur(${v}px)`),
+        filter: 'none',
         y: yFloating,
         position: 'absolute',
         transformStyle: 'preserve-3d'
@@ -100,6 +98,7 @@ function TunnelLogo({ src, index, xOffset, containerWidth, totalLogos }: { src: 
         height={80} 
         className={styles.clientLogo}
         priority={index < 5}
+        style={{ height: 'auto', width: 'auto' }}
       />
     </motion.div>
   );

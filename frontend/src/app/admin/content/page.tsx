@@ -8,10 +8,11 @@ import {
   Languages, Save, Loader2, Sparkles, CheckCircle, 
   Plus, Trash2, Globe, Users, LogOut, LayoutDashboard,
   ShieldCheck, UserPlus, Briefcase, FileText, Image as ImageIcon,
-  ChevronRight, AlertCircle, Menu, X
+  ChevronRight, AlertCircle, Menu, X, Newspaper, Edit, Search, Calendar, Tag
 } from 'lucide-react';
 import FileUpload from '@/components/admin/FileUpload';
 import styles from './ContentEditor.module.css';
+import { newsData as initialNewsData, NewsItem } from '@/data/newsData';
 
 function ContentEditorInner() {
   const router = useRouter();
@@ -47,6 +48,8 @@ function ContentEditorInner() {
   });
   const [careersData, setCareersData] = useState<any>({ open_roles: [] });
   const [settingsData, setSettingsData] = useState<any>({ contact_email: '', careers_email: '' });
+  const [newsArticles, setNewsArticles] = useState<NewsItem[]>([]);
+  const [selectedNewsId, setSelectedNewsId] = useState<string | null>(null);
   const [uploadingSvcs, setUploadingSvcs] = useState<Record<string, boolean>>({});
   
   const [isSaving, setIsSaving] = useState(false);
@@ -95,6 +98,13 @@ function ContentEditorInner() {
         setCareersData(content.careers || { open_roles: [] });
       } else if (view === 'settings' && user?.role === 'admin') {
         setSettingsData(content.settings || {});
+      } else if (view === 'news') {
+        const storedNews = localStorage.getItem('qnc_cms_news');
+        if (storedNews) {
+          setNewsArticles(JSON.parse(storedNews));
+        } else {
+          setNewsArticles(content.news || initialNewsData);
+        }
       } else if (view === 'users' && user?.role === 'admin') {
         fetchUsers();
       }
@@ -155,6 +165,12 @@ function ContentEditorInner() {
       } else if (view === 'settings') {
         await adminApi.updateContent('settings', settingsData);
         setMsg('Global configurations updated');
+      } else if (view === 'news') {
+        // Simulation for now - Save to localStorage and notify UI
+        // In a real scenario, this calls adminApi.updateNews(newsArticles)
+        localStorage.setItem('qnc_cms_news', JSON.stringify(newsArticles));
+        await adminApi.updateContent('news', newsArticles); 
+        setMsg('News articles synchronized');
       } else if (view === 'services') {
         const result = await adminApi.updateContent(selectedService, formData, syncSource || undefined);
         setMsg(`${selectedService.replace(/-/g, ' ')} updated`);
@@ -292,7 +308,10 @@ function ContentEditorInner() {
           {view === 'home' && (
             <div className={styles.formContainer}>
               <div className={styles.viewHeader}>
-                <h1>Homepage Management</h1>
+                <div>
+                  <h1>Homepage Command Center</h1>
+                  <p className={styles.viewDescription}>Manage hero visuals, national vision modules, and global operations.</p>
+                </div>
                 <TranslationSync />
               </div>
               <div className={styles.tabsHeader}>
@@ -456,6 +475,7 @@ function ContentEditorInner() {
           {view === 'services' && (
             <div className={styles.servicesModule}>
               <div className={styles.moduleSidebar}>
+                 <div className={styles.sidebarTitle}>SERVICE PILLARS</div>
                  {Object.keys(content.services).map((key) => (
                    <button 
                      key={key} 
@@ -467,10 +487,13 @@ function ContentEditorInner() {
                  ))}
               </div>
               <div className={styles.moduleEditor}>
-                 <div className={styles.contentCard}>
-                    <div className={styles.formHeader}>
-                       <h2 className={styles.moduleTitle}>{selectedService.replace(/-/g, ' ')}</h2>
+                 <div className={styles.viewHeader}>
+                    <div>
+                      <h1>Operations Registry: {selectedService.replace(/-/g, ' ').toUpperCase()}</h1>
+                      <p className={styles.viewDescription}>Manage technical descriptions, imagery, and capabilities for this pillar.</p>
                     </div>
+                 </div>
+                 <div className={styles.contentCard}>
                     <FileUpload 
                       label="Service Hero Asset"
                       currentImage={formData.image}
@@ -495,7 +518,10 @@ function ContentEditorInner() {
           {view === 'about' && (
             <div className={styles.formContainer}>
               <div className={styles.viewHeader}>
-                <h1>Corporate Profile & Certificates</h1>
+                <div>
+                  <h1>Corporate Identity & Standards</h1>
+                  <p className={styles.viewDescription}>Refine the QNC narrative and manage professional certifications.</p>
+                </div>
                 <TranslationSync />
               </div>
                <div className={styles.tabsHeader}>
@@ -591,7 +617,10 @@ function ContentEditorInner() {
           {view === 'careers' && (
             <div className={styles.formContainer}>
                <div className={styles.viewHeader}>
-                <h1>Talent Acquisition</h1>
+                <div>
+                  <h1>Talent Acquisition Portal</h1>
+                  <p className={styles.viewDescription}>Govern the enterprise job board and career pipeline.</p>
+                </div>
                 <TranslationSync />
               </div>
                <div className={styles.contentCard}>
@@ -702,6 +731,233 @@ function ContentEditorInner() {
                     </div>
                   </div>
                </div>
+            </div>
+          )}
+          
+          {view === 'news' && (
+            <div className={styles.formContainer}>
+              <div className={styles.viewHeader}>
+                <h1>News & Events Command Center</h1>
+                {!selectedNewsId ? (
+                   <button 
+                    onClick={() => {
+                      const newId = `news-${Date.now()}`;
+                      const newItem: NewsItem = {
+                        id: newId,
+                        slug: '',
+                        date: { en: '', ar: '' },
+                        category: { en: '', ar: '' },
+                        title: { en: '', ar: '' },
+                        description: { en: '', ar: '' },
+                        content: { en: '', ar: '' },
+                        mainImage: ''
+                      };
+                      setNewsArticles([newItem, ...newsArticles]);
+                      setSelectedNewsId(newId);
+                    }} 
+                    className={styles.addBtn}
+                  >
+                    <Plus size={18} /> Add New Article
+                  </button>
+                ) : (
+                  <button onClick={() => setSelectedNewsId(null)} className={styles.toolBtn}>
+                    <ChevronRight className={styles.backIcon} size={18} style={{ transform: 'rotate(180deg)' }} /> Back to All Articles
+                  </button>
+                )}
+              </div>
+
+              {!selectedNewsId ? (
+                <div className={styles.contentCard}>
+                  <div className={styles.newsListHeader}>
+                    <h3>Published Articles</h3>
+                    <div className={styles.searchBox}>
+                      <Search size={16} />
+                      <input type="text" placeholder="Search by title or category..." />
+                    </div>
+                  </div>
+                  <div className={styles.newsGridAdmin}>
+                    {newsArticles.map((article) => (
+                      <div key={article.id} className={styles.newsCardAdmin}>
+                        <div className={styles.newsAdminThumb}>
+                          {article.mainImage ? (
+                            <img src={article.mainImage} alt="" />
+                          ) : (
+                            <div className={styles.placeholderThumb}><ImageIcon size={24} /></div>
+                          )}
+                          <div className={styles.newsCardOverlay}>
+                            <button onClick={() => setSelectedNewsId(article.id)} className={styles.editCardBtn}><Edit size={16} /></button>
+                            <button onClick={() => setNewsArticles(newsArticles.filter(a => a.id !== article.id))} className={styles.deleteCardBtn}><Trash2 size={16} /></button>
+                          </div>
+                        </div>
+                        <div className={styles.newsAdminMeta}>
+                          <h4 className={styles.articleTitle}>{article.title.en || 'Untitled Article'}</h4>
+                          <div className={styles.articleTags}>
+                            <span>{article.category.en || 'Uncategorized'}</span>
+                            <span>{article.date.en || 'No Date'}</span>
+                          </div>
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              ) : (
+                <div className={styles.articleEditor}>
+                  {(() => {
+                    const articleIndex = newsArticles.findIndex(a => a.id === selectedNewsId);
+                    const article = newsArticles[articleIndex];
+                    if (!article) return null;
+
+                    const updateArticle = (field: keyof NewsItem, value: any) => {
+                      const updated = [...newsArticles];
+                      updated[articleIndex] = { ...article, [field]: value };
+                      setNewsArticles(updated);
+                    };
+
+                    const updateNested = (field: 'title' | 'date' | 'category' | 'description' | 'content', lang: 'en' | 'ar', value: string) => {
+                      const updated = [...newsArticles];
+                      const updatedItem = { 
+                        ...article, 
+                        [field]: { ...article[field], [lang]: value } 
+                      };
+                      
+                      // Auto-generate slug when English title changes
+                      if (field === 'title' && lang === 'en') {
+                        updatedItem.slug = value
+                          .toLowerCase()
+                          .trim()
+                          .replace(/[^\w\s-]/g, '')
+                          .replace(/[\s_-]+/g, '-')
+                          .replace(/^-+|-+$/g, '');
+                      }
+                      
+                      updated[articleIndex] = updatedItem;
+                      setNewsArticles(updated);
+                    };
+
+                    return (
+                      <div className={styles.editorContent}>
+                        {/* THEME SELECTOR FOR PREVIEW */}
+                        <div className={styles.contentCard}>
+                          <div className={styles.cardHeader}>
+                            <h3>Article Settings</h3>
+                            <div className={styles.badge}>Auto-Generated SEO</div>
+                          </div>
+                          <div className={styles.row}>
+                             <div className={styles.field}>
+                               <label>Reference Slug (Auto-updates with title)</label>
+                               <input type="text" value={article.slug} disabled className={styles.disabledInput} placeholder="Slug will appear here..." />
+                             </div>
+                             <div className={styles.field}>
+                               <label>Main Poster Image</label>
+                               <FileUpload 
+                                currentImage={article.mainImage} 
+                                onUploadSuccess={(url) => updateArticle('mainImage', url)} 
+                               />
+                             </div>
+                          </div>
+                          
+                          <div className={styles.row}>
+                            <div className={styles.field}>
+                              <label>Article Title (EN)</label>
+                              <input type="text" value={article.title.en} onChange={(e) => updateNested('title', 'en', e.target.value)} />
+                            </div>
+                            <div className={styles.field}>
+                              <label>Article Title (AR)</label>
+                              <input type="text" dir="rtl" value={article.title.ar} onChange={(e) => updateNested('title', 'ar', e.target.value)} className={styles.rtlInput} />
+                            </div>
+                          </div>
+
+                          <div className={styles.row}>
+                            <div className={styles.field}>
+                              <label>Display Date (EN)</label>
+                              <input type="text" placeholder="January 15, 2026" value={article.date.en} onChange={(e) => updateNested('date', 'en', e.target.value)} />
+                            </div>
+                            <div className={styles.field}>
+                              <label>Display Date (AR)</label>
+                              <input type="text" dir="rtl" value={article.date.ar} onChange={(e) => updateNested('date', 'ar', e.target.value)} className={styles.rtlInput} />
+                            </div>
+                          </div>
+
+                          <div className={styles.row}>
+                            <div className={styles.field}>
+                              <label>Category (EN)</label>
+                              <input type="text" placeholder="Strategic Partnership" value={article.category.en} onChange={(e) => updateNested('category', 'en', e.target.value)} />
+                            </div>
+                            <div className={styles.field}>
+                              <label>Category (AR)</label>
+                              <input type="text" dir="rtl" value={article.category.ar} onChange={(e) => updateNested('category', 'ar', e.target.value)} className={styles.rtlInput} />
+                            </div>
+                          </div>
+                        </div>
+
+                        <div className={styles.contentCard}>
+                          <div className={styles.cardHeader}>
+                            <h3>Article Narrative</h3>
+                            <span className={styles.hint}>Supports multi-paragraph descriptions</span>
+                          </div>
+                          <div className={styles.row}>
+                             <div className={styles.field}>
+                               <label>Short Excerpt (EN) - Visible in Cards</label>
+                               <textarea rows={3} value={article.description.en} onChange={(e) => updateNested('description', 'en', e.target.value)} />
+                             </div>
+                             <div className={styles.field}>
+                               <label>Short Excerpt (AR) - Visible in Cards</label>
+                               <textarea rows={3} dir="rtl" value={article.description.ar} onChange={(e) => updateNested('description', 'ar', e.target.value)} className={styles.rtlInput} />
+                             </div>
+                          </div>
+                          <hr className={styles.divider} />
+                          <div className={styles.field}>
+                            <label>Full Content (EN)</label>
+                            <textarea rows={12} value={article.content.en} onChange={(e) => updateNested('content', 'en', e.target.value)} />
+                          </div>
+                          <div className={styles.field} style={{ marginTop: '24px' }}>
+                            <label>Full Content (AR)</label>
+                            <textarea rows={12} dir="rtl" value={article.content.ar} onChange={(e) => updateNested('content', 'ar', e.target.value)} className={styles.rtlInput} />
+                          </div>
+                        </div>
+
+                        {/* GALLERY MANAGER */}
+                        <div className={styles.contentCard}>
+                          <div className={styles.cardHeader}>
+                            <h3>Asset Gallery</h3>
+                            <p className={styles.hint}>Used for "Special Highlights" or "New Contract" display galleries</p>
+                          </div>
+                          <div className={styles.galleryGridAdmin}>
+                            {(article.gallery || []).map((img, gidx) => (
+                              <div key={gidx} className={styles.galleryItemAdmin}>
+                                <img src={img} alt="" />
+                                <button 
+                                  className={styles.miniDelete} 
+                                  onClick={() => {
+                                    const newGallery = (article.gallery || []).filter((_, i) => i !== gidx);
+                                    updateArticle('gallery', newGallery);
+                                  }}
+                                >×</button>
+                              </div>
+                            ))}
+                            <label className={styles.addGalleryBtn}>
+                              <Plus size={32} />
+                              <span>Add Image</span>
+                              <input 
+                                type="file" 
+                                className={styles.hiddenFileInput} 
+                                onChange={async (e) => {
+                                  const files = e.target.files;
+                                  if (files && files[0]) {
+                                    const result = await adminApi.uploadImage(files[0]);
+                                    const newUrl = `http://localhost:4000${result.url}`;
+                                    updateArticle('gallery', [...(article.gallery || []), newUrl]);
+                                  }
+                                }} 
+                              />
+                            </label>
+                          </div>
+                        </div>
+                      </div>
+                    );
+                  })()}
+                </div>
+              )}
             </div>
           )}
           
