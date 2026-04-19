@@ -1,0 +1,58 @@
+.preloader {
+  position: fixed;
+  inset: 0;
+  width: 100vw;
+  height: 100vh;
+  background: #000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 99999; /* Above everything including menu and cursor */
+  overflow: hidden;
+  transition: opacity 1s cubic-bezier(0.7, 0, 0.3, 1), visibility 1s;
+}
+
+.fadeOut {
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+}
+
+.video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  max-width: 100%;
+  display: block;
+  animation: videoFadeIn 1s ease-out;
+}
+
+@keyframes videoFadeIn {
+  from { opacity: 0; transform: scale(1.05); filter: blur(10px); }
+  to { opacity: 1; transform: scale(1); filter: blur(0); }
+}
+
+/* RESPONSIVE TUNING */
+@media (max-width: 768px) {
+  .video {
+    object-fit: contain; /* Ensures the whole frame is visible without any cropping */
+    width: 100%;
+    height: 100%;
+    background: #000; /* Blends perfectly with the preloader background */
+  }
+}
+
+@media (min-width: 1024px) {
+  .video {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+}
+
+@media (min-width: 1920px) {
+  .video {
+    width: 70%; /* Optimized cinematic range */
+    height: auto;
+  }
+}

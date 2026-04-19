@@ -12,6 +12,7 @@ import ModernCursor from '@/components/layout/ModernCursor/ModernCursor';
 import { ThemeProvider } from "@/context/ThemeContext";
 import { SettingsProvider } from "@/context/SettingsContext";
 import ScrollNavigation from '@/components/layout/ScrollNavigation/ScrollNavigation';
+import LogoPreloader from '@/components/layout/Preloader/LogoPreloader';
 
 export const metadata: Metadata = {
   title: "Qudrat National Company (QNC)",
@@ -26,6 +27,7 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning>
       <body className={`${outfit.variable} ${syne.variable} ${cairo.variable}`}>
+        <LogoPreloader />
         <SettingsProvider>
           <ThemeProvider>
             <LanguageProvider>
