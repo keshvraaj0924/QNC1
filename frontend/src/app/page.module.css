@@ -6,18 +6,23 @@
 .stickyHero {
   position: sticky;
   top: 0;
+  left: 0;
+  width: 100%;
   height: 100vh;
   z-index: 1;
+  overflow: hidden;
 }
 
 .revealContent {
   position: relative;
   z-index: 10;
+  width: 100%;
   /* Next sections should have solid backgrounds to cover the sticky hero */
   background-color: var(--background);
   border-top: 1px solid var(--border-color);
   box-shadow: 0 -20px 80px rgba(0,0,0,0.4);
   transition: background-color 0.5s ease;
+  overflow: hidden;
 }
 
 .domeSection {

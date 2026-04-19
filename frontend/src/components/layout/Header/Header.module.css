@@ -4,7 +4,7 @@
   left: 0;
   width: 100%;
   z-index: 1000;
-  padding: 1.8rem 0; /* Slightly more padding for the larger logo */
+  padding: 1.8rem 0; /* Reduced from 2.5rem for slightly smaller logo */
   transition: all 0.3s ease;
   background-color: transparent;
   color: white; 
@@ -36,13 +36,38 @@
 }
 
 .logoImage {
-  height: 75px; /* Increased from 60px for better visibility */
+  height: 90px; /* Reduced from 110px as requested */
   width: auto;
   transition: transform 0.4s cubic-bezier(0.76, 0, 0.24, 1);
 }
 
 .logoImage:hover {
   transform: scale(1.05);
+}
+
+@media (max-width: 1024px) {
+  .header {
+    padding: 1.2rem 0;
+  }
+  .logoImage {
+    height: 70px;
+  }
+}
+
+@media (max-width: 768px) {
+  .header {
+    padding: 0.8rem 0;
+  }
+  .logoImage {
+    height: 55px;
+  }
+  .actions {
+    gap: 1rem !important; /* Tighter gap prevents overflow on switch toggle */
+  }
+  .langBtn {
+    min-width: 45px; /* Ensures layout doesn't jump when switching between EN and Arabic */
+    justify-content: center;
+  }
 }
 
 .actions {

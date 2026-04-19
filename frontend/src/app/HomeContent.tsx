@@ -117,7 +117,7 @@ export default function HomeContent({ content }: { content: any }) {
         </section>
 
         <Alef360 />
-
+        
         <ScrollReveal delay={0.3}>
           <MajorClients content={clients} />
         </ScrollReveal>

@@ -3,12 +3,13 @@
 ================================ */
 
 .footerSection {
-  background-color: var(--background);
+  background-color: var(--background); /* Ensure solid background to block Hero */
   color: var(--foreground);
   transition: background-color 0.5s ease, color 0.5s ease;
   position: relative;
   overflow: hidden;
   padding-bottom: 2rem;
+  z-index: 20; /* Ensure it stays above revealContent (z:10) and Hero (z:1) */
 }
 
 /* ---- 3D Revolving Branding ---- */
@@ -148,8 +149,8 @@
 }
 
 [data-theme='light'] .bigCtaText {
-  color: #000000 !important;
-  text-shadow: 0 10px 30px rgba(0,0,0,0.1);
+  color: #0c0c0c !important; /* High-contrast black for readability */
+  text-shadow: 0 4px 15px rgba(0,0,0,0.05);
 }
 
 .ctaBtn {
@@ -489,8 +490,13 @@
     grid-template-columns: 1fr;
     gap: 3.5rem;
   }
+  .bigCtaWrapper {
+    padding: 120px var(--container-padding) 60px;
+  }
   .bigCtaText {
-    font-size: 4rem;
+    font-size: clamp(2rem, 10vw, 3.5rem); /* Tighter fluid scaling for small screens */
+    line-height: 1;
+    letter-spacing: -0.04em;
   }
   .bottom {
     flex-direction: column;

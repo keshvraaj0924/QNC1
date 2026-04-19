@@ -9,18 +9,15 @@ export default function ModernCursor() {
   const [isVisible, setIsVisible] = useState(false);
 
   useEffect(() => {
-    // Disable on touch devices
-    if (window.matchMedia('(pointer: coarse)').matches) {
-      return;
-    }
+    if (window.matchMedia('(pointer: coarse)').matches) return;
 
     const cursor = cursorRef.current;
     if (!cursor) return;
 
-    // Standard high-end lerp following using GSAP QuickSetter for performance
+    // High-precision tracking refs
     const mouse = { x: 0, y: 0 };
     const pos = { x: 0, y: 0 };
-    const ratio = 0.12; // Damping ratio (lag effect)
+    const ratio = 0.15; // Refined damping for a crisp yet fluid feel
 
     const xSetter = gsap.quickSetter(cursor, "x", "px");
     const ySetter = gsap.quickSetter(cursor, "y", "px");
@@ -31,15 +28,15 @@ export default function ModernCursor() {
       mouse.y = e.clientY;
     };
 
+    // Movement engine using GSAP Ticker for sub-pixel smoothness and zero jitter
     const updateCursor = () => {
-      // Damped lag follower logic
-      pos.x += (mouse.x - pos.x) * ratio;
-      pos.y += (mouse.y - pos.y) * ratio;
+      const dt = 1.0 - Math.pow(1.0 - ratio, gsap.ticker.deltaRatio());
+      
+      pos.x += (mouse.x - pos.x) * dt;
+      pos.y += (mouse.y - pos.y) * dt;
 
       xSetter(pos.x);
       ySetter(pos.y);
-      
-      requestAnimationFrame(updateCursor);
     };
 
     const onMouseEnter = (e: MouseEvent) => {
@@ -48,11 +45,13 @@ export default function ModernCursor() {
 
       if (isHoverable) {
         gsap.to(cursor, {
-          scale: 2.2,
-          duration: 0.4,
-          ease: 'power3.out',
-          backgroundColor: 'rgba(255, 255, 255, 0.15)',
-          backdropFilter: 'blur(2px)'
+          scale: 2.5,
+          duration: 0.3,
+          ease: 'power2.out',
+          backgroundColor: 'rgba(255, 255, 255, 0.2)',
+          filter: 'none',
+          backdropFilter: 'none',
+          overwrite: true
         });
       }
     };
@@ -64,27 +63,31 @@ export default function ModernCursor() {
       if (isHoverable) {
         gsap.to(cursor, {
           scale: 1,
-          duration: 0.4,
-          ease: 'power3.out',
+          duration: 0.3,
+          ease: 'power2.out',
           backgroundColor: 'white',
-          backdropFilter: 'blur(0px)'
+          filter: 'none',
+          backdropFilter: 'none',
+          overwrite: true
         });
       }
     };
 
     const onMouseDown = () => {
       gsap.to(cursor, { 
-        scale: 0.7, 
+        scale: 0.8, 
         duration: 0.2,
-        ease: 'power2.out'
+        ease: 'power2.out',
+        overwrite: true
       });
     };
 
     const onMouseUp = () => {
       gsap.to(cursor, { 
         scale: 1, 
-        duration: 0.4,
-        ease: 'elastic.out(1, 0.75)'
+        duration: 0.3,
+        ease: 'back.out(2)',
+        overwrite: true
       });
     };
 
@@ -94,7 +97,7 @@ export default function ModernCursor() {
     window.addEventListener('mousedown', onMouseDown);
     window.addEventListener('mouseup', onMouseUp);
     
-    const animationFrame = requestAnimationFrame(updateCursor);
+    gsap.ticker.add(updateCursor);
 
     return () => {
       window.removeEventListener('mousemove', onMouseMove);
@@ -102,7 +105,7 @@ export default function ModernCursor() {
       window.removeEventListener('mouseout', onMouseLeave);
       window.removeEventListener('mousedown', onMouseDown);
       window.removeEventListener('mouseup', onMouseUp);
-      cancelAnimationFrame(animationFrame);
+      gsap.ticker.remove(updateCursor);
     };
   }, [isVisible]);
 

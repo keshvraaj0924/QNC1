@@ -138,7 +138,7 @@ export default function Footer() {
   });
 
   const bigTextY = useTransform(scrollYProgress, [0, 1], ['20%', '0%']);
-  const bigTextOpacity = useTransform(scrollYProgress, [0, 0.5], [0, 1]);
+  const bigTextOpacity = useTransform(scrollYProgress, [0, 0.4], [0.1, 1]);
 
 
   const containerVariants = {
@@ -161,7 +161,7 @@ export default function Footer() {
           transition={{ duration: 10, repeat: Infinity, ease: "linear" }}
         >
           <img 
-            src="/assets/images/QLogoSymbol/TransaparentQ.png" 
+            src="/assets/images/FinalQNCLogo.svg" 
             alt="QNC Revolving" 
             className={styles.revolvingSymbol}
           />

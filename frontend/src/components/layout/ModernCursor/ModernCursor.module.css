@@ -20,9 +20,10 @@
   border-radius: 50%;
   pointer-events: none;
   will-change: transform;
-  /* Soft feathered edges like SRMG */
-  filter: blur(0.5px);
-  box-shadow: 0 0 10px rgba(255, 255, 255, 0.1);
+  filter: none !important;
+  /* Box-shadow removed to eliminate "blurry" halo */
+  border: 1px solid rgba(255, 255, 255, 0.8); /* Sharp subtle border for modern feel */
+  box-shadow: none !important;
 }
 
 
