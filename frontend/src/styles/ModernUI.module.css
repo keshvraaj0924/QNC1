@@ -16,7 +16,7 @@
 }
 
 .spotlightBox:hover {
-  border-color: rgba(203, 161, 82, 0.4);
+  border-color: rgba(var(--gold-rgb), 0.4);
   background: rgba(255, 255, 255, 0.04);
   transform: translateY(-8px);
   box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
@@ -32,7 +32,7 @@
   pointer-events: none;
   background: radial-gradient(
     600px circle at var(--x, 0px) var(--y, 0px),
-    rgba(203, 161, 82, 0.1),
+    rgba(var(--gold-rgb), 0.1),
     transparent 40%
   );
   z-index: 1;
@@ -48,9 +48,9 @@
 .shinyText {
   background: linear-gradient(
     120deg,
-    rgba(203, 161, 82, 0) 40%,
-    rgba(203, 161, 82, 0.8) 50%,
-    rgba(203, 161, 82, 0) 60%
+    rgba(var(--gold-rgb), 0) 40%,
+    rgba(var(--gold-rgb), 0.8) 50%,
+    rgba(var(--gold-rgb), 0) 60%
   );
   background-size: 200% 100%;
   -webkit-background-clip: text;
@@ -79,7 +79,7 @@
   position: absolute;
   width: 100px;
   height: 100px;
-  background: linear-gradient(to right, transparent, #CBA152, transparent);
+  background: linear-gradient(to right, transparent, var(--gold), transparent);
   offset-path: rect(0 100% 100% 0 round 24px);
   animation: beam 4s infinite linear;
 }

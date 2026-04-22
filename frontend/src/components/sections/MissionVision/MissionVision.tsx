@@ -167,7 +167,6 @@ export default function MissionVision({ content }: { content?: any }) {
                   <div className={styles.talentTag}>
                     <div className={styles.multiLabels}>
                       <span className={styles.leadershipLabel}>{language === 'ar' ? 'اكتشف المزيد' : 'DISCOVER MORE'}</span>
-                      <span className={styles.legacyLabel}>{t('nav_about')}</span>
                     </div>
                   </div>
                   <h3 className={styles.talentTitle}>{language === 'ar' ? 'تعرف علينا' : 'About QNC'}</h3>
@@ -192,12 +191,13 @@ export default function MissionVision({ content }: { content?: any }) {
           >
             <div className={styles.swapContainer}>
               <CardSwap
-                width={isMobile ? "100%" : 500}
-                height={isMobile ? 320 : 500}
-                cardDistance={isMobile ? 15 : 50}
-                verticalDistance={isMobile ? 25 : 60}
-                delay={2000}
+                width={isMobile ? "100%" : 480}
+                height={isMobile ? 350 : 350}
+                cardDistance={isMobile ? 0 : 70}
+                verticalDistance={isMobile ? 0 : 80}
+                delay={3000}
                 pauseOnHover={true}
+                skewAmount={isMobile ? 0 : 2}
               >
                 {purposes.map((item, index) => (
                   <Card 

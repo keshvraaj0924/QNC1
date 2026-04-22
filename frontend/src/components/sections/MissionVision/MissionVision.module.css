@@ -93,10 +93,10 @@
   width: 100%;
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 4rem;
+  gap: 6rem;
   align-items: center;
   position: relative;
-  min-height: 700px;
+  min-height: 800px;
 }
 
 .rtl .contentLayout {
@@ -174,8 +174,8 @@
   position: absolute;
   top: 50%;
   left: 50%;
-  width: 520px !important;
-  height: 420px !important;
+  width: 480px !important;
+  height: 350px !important;
   border-radius: 24px;
   border: 1px solid var(--border-color);
   background: var(--card-bg);
@@ -213,7 +213,8 @@
 .cardHeader {
   display: flex;
   align-items: center;
-  gap: 1.5rem;
+  gap: 1.2rem;
+  margin-bottom: 1.5rem;
 }
 
 .numberBadge {
@@ -232,7 +233,7 @@
 }
 
 .cardTitle {
-  font-size: 2.8rem;
+  font-size: 2.2rem;
   font-weight: 900;
   color: var(--foreground);
   margin: 0;
@@ -342,8 +343,8 @@
   .contentLayout {
     display: flex;
     flex-direction: column;
-    gap: 4.5rem;
-    margin-top: 4rem; /* Physical separation from header */
+    gap: 5rem;
+    margin-top: 8rem; /* Significant gap to separate from VALUES THAT DRIVE US */
     min-height: auto;
   }
   .orbitColumn {
@@ -357,13 +358,14 @@
     order: 2 !important;
     justify-content: center;
     min-height: auto;
+    margin-top: 8rem; /* Even larger separation between About box and Cards */
   }
   .swapContainer {
     height: 400px;
   }
   .cardBase {
     width: 100% !important;
-    height: 380px !important;
+    height: 350px !important;
     padding: 2rem;
   }
 }
@@ -410,26 +412,25 @@
   position: relative;
   display: flex;
   align-items: center;
-  gap: 2.5rem;
-  padding: 2.5rem;
+  gap: 3rem;
+  padding: 3.5rem;
   /* Premium Branded Gradient */
-  background: linear-gradient(135deg, var(--navy) 0%, rgba(var(--qnc-gold-rgb), 0.08) 100%);
+  background: linear-gradient(135deg, var(--navy) 0%, rgba(var(--gold-rgb), 0.12) 100%);
   backdrop-filter: blur(15px);
-  border: 1px solid rgba(var(--qnc-gold-rgb), 0.2);
-  border-radius: 20px;
+  border: 1px solid rgba(var(--gold-rgb), 0.3);
+  border-radius: 24px;
   width: 100%;
-  max-width: 580px;
+  max-width: 680px;
   margin: 0 auto 2rem;
   transition: all 0.5s var(--transition-bezier);
-  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3), 
-              0 0 20px rgba(var(--qnc-gold-rgb), 0.05);
+  box-shadow: 0 40px 80px rgba(0, 0, 0, 0.4), 
+              0 0 30px rgba(var(--gold-rgb), 0.1);
 }
 
 [data-theme='light'] .talentExcellence {
-  background: linear-gradient(135deg, #ffffff 0%, rgba(var(--qnc-gold-rgb), 0.1) 100%);
-  border-color: rgba(var(--qnc-gold-rgb), 0.3);
-  box-shadow: 0 15px 35px rgba(var(--qnc-gold-rgb), 0.1), 
-              0 0 15px rgba(255, 255, 255, 0.5);
+  background: linear-gradient(135deg, #ffffff 0%, rgba(var(--gold-rgb), 0.15) 100%);
+  border-color: rgba(var(--gold-rgb), 0.4);
+  box-shadow: 0 20px 50px rgba(var(--gold-rgb), 0.15);
 }
 
 .talentExcellence:hover {
@@ -441,12 +442,12 @@
 
 .talentVisual {
   position: relative;
-  width: 130px;
-  height: 140px; /* Reduced to prevent vertical sprawl on mobile */
+  width: 160px;
+  height: 180px;
   flex-shrink: 0;
   clip-path: polygon(15% 0%, 100% 0%, 85% 100%, 0% 100%);
   overflow: hidden;
-  border-right: 2px solid var(--qnc-gold);
+  border-right: 3px solid var(--gold);
 }
 
 .talentImg {
@@ -488,26 +489,25 @@
 }
 
 .leadershipLabel {
-  font-size: 0.6rem;
-  color: var(--qnc-gold, #CBA152);
+  font-size: 0.8rem;
+  color: var(--gold);
   font-weight: 800;
   letter-spacing: 0.15em;
   text-transform: uppercase;
-  opacity: 1;
 }
 
 .legacyLabel {
-  font-size: 0.7rem;
+  font-size: 1rem;
   color: var(--foreground);
   font-weight: 700;
   letter-spacing: 0.25em;
   text-transform: uppercase;
-  opacity: 0.8;
+  opacity: 0.9;
 }
 
 .talentTitle {
   font-family: var(--font-heading), var(--font-syne), sans-serif;
-  font-size: 1.5rem;
+  font-size: 2.2rem;
   font-weight: 900;
   color: var(--foreground);
   line-height: 1.1;
@@ -536,7 +536,25 @@
 @media (max-width: 1200px) {
   .talentExcellence {
     flex-direction: column;
-    align-items: flex-start;
+    align-items: center;
+    text-align: center;
+    padding: 2.5rem;
+    max-width: 90%;
+  }
+}
+
+@media (max-width: 768px) {
+  .talentTitle {
+    font-size: 1.8rem;
+  }
+  .talentVisual {
+    width: 140px;
+    height: 150px;
+    border-right: none;
+    border-bottom: 3px solid var(--gold);
+    margin-bottom: 1rem;
+    clip-path: none;
+    border-radius: 20px;
   }
 }
 

@@ -6,12 +6,13 @@ import Hero from '@/components/sections/Hero/Hero';
 import About from '@/components/sections/About/About';
 import NationalVision from '@/components/sections/NationalVision/NationalVision';
 import Capabilities from '@/components/sections/Capabilities/Capabilities';
+import IntelligentEcosystem from '@/components/sections/IntelligentEcosystem/IntelligentEcosystem';
+import PartnersGroup from '@/components/sections/PartnersGroup/PartnersGroup';
 import RegionalPresence from '@/components/sections/ProjectLocations/RegionalPresence';
 import MajorClients from '@/components/sections/MajorClients/MajorClients';
 import MissionVision from '@/components/sections/MissionVision/MissionVision';
 import Alef360 from '@/components/sections/Alef360/Alef360';
 import Stats from '@/components/sections/Stats/Stats';
-import DomeGallery from '@/components/modern/DomeGallery';
 import ScrollReveal from '@/components/modern/ScrollReveal';
 import MotionCurve from '@/components/modern/MotionCurve';
 import BlurText from '@/components/modern/BlurText';
@@ -73,48 +74,9 @@ export default function HomeContent({ content }: { content: any }) {
 
         <RegionalPresence />
 
-        <section className={styles.domeSection}>
-          <ScrollReveal delay={0.2}>
-            <div className={styles.domeHeader}>
-              <div className="preHeader" style={{ justifyContent: 'center' }}>
-                <span>{t('dome_label')}</span>
-              </div>
-              <h2 className={styles.domeTitle}>
-                <BlurText 
-                  text={t('dome_title')}
-                  delay={50}
-                  animateBy="words"
-                  direction="top"
-                />
-              </h2>
-              <p className={styles.domeDesc}>{t('dome_description')}</p>
-            </div>
-          </ScrollReveal>
-          
-          <DomeGallery 
-            images={[
-              '/Dome/C0437T01.JPG',
-              '/Dome/C0440T01.JPG',
-              '/Dome/C0442T01.JPG',
-              '/Dome/C0443T01.JPG',
-              '/Dome/C0448T01.JPG',
-              '/Dome/C0450T01.JPG',
-              '/Dome/C0451T01.JPG',
-              '/Dome/C0458T01.JPG',
-              '/Dome/C0462T01.JPG',
-              '/Dome/C0463T01.JPG',
-              '/Dome/C0467T01.JPG',
-              '/Dome/C0471T01.JPG',
-              '/Dome/C0476T01.JPG',
-              '/Dome/C0482T01.JPG',
-              '/Dome/C0484T01.JPG',
-              '/Dome/DSC03873.JPG',
-              '/Dome/DSC03880.JPG',
-              '/Dome/DSC03882.JPG',
-              '/Dome/DSC03886.JPG'
-            ]} 
-          />
-        </section>
+        <IntelligentEcosystem />
+
+        <PartnersGroup />
 
         <Alef360 />
         

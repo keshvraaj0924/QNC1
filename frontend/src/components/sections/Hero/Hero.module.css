@@ -42,7 +42,7 @@
   left: 0;
   width: 800px;
   height: 800px;
-  background: radial-gradient(circle, rgba(203, 161, 82, 0.15) 0%, rgba(203, 161, 82, 0) 70%);
+  background: radial-gradient(circle, rgba(var(--gold-rgb), 0.15) 0%, rgba(var(--gold-rgb), 0) 70%);
   pointer-events: none;
   z-index: 3;
   filter: blur(60px);
@@ -54,10 +54,11 @@
   width: 100%;
   max-width: var(--max-width);
   margin: 0 auto;
-  padding: 0 var(--container-padding);
+  padding: var(--header-height) var(--container-padding) 0;
   display: flex;
   justify-content: space-between;
   align-items: center;
+  min-height: 100vh;
 }
 
 .content {
@@ -239,10 +240,16 @@
 
 @media (max-width: 768px) {
   .title {
-    font-size: clamp(2.2rem, 11vw, 3.5rem); /* Dynamically shrinks for smaller phones */
-    overflow-wrap: break-word; /* Prevents long words like PROFESSIONALISM from clipping */
-    hyphens: auto;
-    line-height: 1.2;
+    font-size: clamp(2rem, 10vw, 3.2rem); 
+    overflow-wrap: normal;
+    word-break: normal;
+    hyphens: none;
+    line-height: 1.1;
+    text-wrap: balance;
+  }
+  .heroSection {
+    height: 100vh !important;
+    margin-bottom: 2rem;
   }
   .contentWrapper {
     padding: 0 1.5rem;

@@ -7,12 +7,13 @@ import styles from './Stats.module.css';
 
 interface StatItemProps {
   target: number;
+  prefix?: string;
   suffix?: string;
   label: string;
   delay?: number;
 }
 
-const AnimatedNumber = ({ target, suffix = '', label, delay = 0 }: StatItemProps) => {
+const AnimatedNumber = ({ target, prefix = '', suffix = '', label, delay = 0 }: StatItemProps) => {
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, margin: "-100px" });
   
@@ -43,6 +44,7 @@ const AnimatedNumber = ({ target, suffix = '', label, delay = 0 }: StatItemProps
       transition={{ duration: 0.8, delay: delay }}
     >
       <div className={styles.numberRow}>
+        <span className={styles.prefix}>{prefix}</span>
         <motion.span className={styles.number}>{displayValue}</motion.span>
         <span className={styles.suffix}>{suffix}</span>
       </div>
@@ -56,10 +58,10 @@ const Stats = () => {
   const { t } = useLanguage();
 
   const statsData = [
-    { target: 6800, suffix: '+', label: t('stats_workforce'), delay: 0.1 },
-    { target: 450, suffix: '+', label: t('stats_projects'), delay: 0.2 },
-    { target: 12, suffix: 'M+', label: t('stats_sqm'), delay: 0.3 },
-    { target: 25, suffix: '+', label: t('stats_years'), delay: 0.4 },
+    { target: 3500, prefix: '+', label: t('stats_workforce'), delay: 0.1 },
+    { target: 100, prefix: '+', label: t('stats_projects'), delay: 0.2 },
+    { target: 100, prefix: '+', label: t('stats_clients'), delay: 0.3 },
+    { target: 17, prefix: '+', suffix: 'M', label: t('stats_managed'), delay: 0.4 },
   ];
 
   return (

@@ -12,8 +12,8 @@
   --background: #080808; 
   --foreground: #ffffff;
   --navy: #080808;
-  --gold: var(--qnc-gold);
-  --gold-rgb: var(--qnc-gold-rgb);
+  --gold: var(--qnc-blue);
+  --gold-rgb: var(--qnc-blue-rgb);
   
   --sub-text: rgba(255, 255, 255, 0.6);
   --border-color: rgba(255, 255, 255, 0.1);
@@ -44,8 +44,25 @@
   --container-padding: 5%;
 
   /* Layout Breakpoints & Offsets */
+  --header-height: 120px;
+  --header-height-tablet: 100px;
   --header-height-mobile: 80px;
-  --header-clearance-mobile: 210px; /* Aggressive clearance to prevent title overlap with fixed branding */
+  --header-clearance: var(--header-height);
+  
+  --header-bg-solid: var(--header-bg);
+  --header-transition: all 0.4s cubic-bezier(0.76, 0, 0.24, 1);
+}
+
+@media (max-width: 1024px) {
+  :root {
+    --header-clearance: var(--header-height-tablet);
+  }
+}
+
+@media (max-width: 768px) {
+  :root {
+    --header-clearance: var(--header-height-mobile);
+  }
 }
 
 @media (min-width: 1800px) {
@@ -142,6 +159,7 @@ body {
   background-color: var(--background);
   color: var(--foreground);
   -webkit-font-smoothing: antialiased;
+  position: relative; /* Fixed: Essential for ScrollTrigger pinning coordinate calculations */
 }
 
 /* Hide cursor only on desktop for custom cursor experience */

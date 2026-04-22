@@ -47,11 +47,11 @@ function TunnelLogo({ src, index, xOffset, containerWidth, totalLogos }: { src: 
 
   // Symmetric visibility and transformation ramps
   const centerPos = containerWidth / 2 - logoWidth / 2;
-  const visibilityRange = containerWidth * 0.6; // Wider range for smoother enter/exit
+  const visibilityRange = containerWidth * 0.85; // Significantly wider range for better visualization
   
   const opacity = useTransform(relativeX, 
-    [centerPos - visibilityRange, centerPos, centerPos + visibilityRange], 
-    [0, 1, 0]
+    [centerPos - visibilityRange, centerPos - visibilityRange * 0.5, centerPos + visibilityRange * 0.5, centerPos + visibilityRange], 
+    [0, 1, 1, 0]
   );
   
   const scale = useTransform(relativeX, 
@@ -168,34 +168,6 @@ export default function MajorClients({ content }: { content?: any[] }) {
           ))}
         </div>
 
-        {/* Layer 2 (Middle): Depth Overlays */}
-        <div className={styles.overlayFaders} />
-
-        {/* Layer 3 (Top): Central Logo Frame */}
-        <div className={styles.centralFrame}>
-          <motion.div
-            animate={{ 
-              scale: [1, 1.05, 1],
-              opacity: [0.5, 0.7, 0.5],
-              rotateX: [0, 5, -5, 0],
-              rotateY: [0, -5, 5, 0]
-            }}
-            transition={{ 
-              duration: 10, 
-              repeat: Infinity, 
-              ease: "easeInOut" 
-            }}
-          >
-            <Image 
-              src="/assets/images/QLogoSymbol/TransaparentQ.png" 
-              alt="QNC Symbol" 
-              width={1321} 
-              height={794} 
-              className={styles.svgSymbol}
-              priority
-            />
-          </motion.div>
-        </div>
       </div>
     </section>
   );

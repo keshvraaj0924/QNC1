@@ -97,8 +97,8 @@ export default function About({ content }: { content?: any }) {
           >
             <div className={styles.imageOverlay} />
             <Image
-              src="/assets/images/QNC_About.jpg"
-              alt="QNC Legacy"
+              src="/assets/images/qnc_legacy_branding.png"
+              alt="QNC Human Values Power Operational Excellence"
               width={800}
               height={1000}
               className={styles.legacyImage}

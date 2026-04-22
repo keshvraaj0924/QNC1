@@ -97,8 +97,8 @@
   background: linear-gradient(
     90deg,
     var(--background) 0%,
-    transparent 20%,
-    transparent 80%,
+    transparent 8%,
+    transparent 92%,
     var(--background) 100%
   );
 }

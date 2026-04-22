@@ -4,17 +4,20 @@
   left: 0;
   width: 100%;
   z-index: 1000;
-  padding: 1.8rem 0; /* Reduced from 2.5rem for slightly smaller logo */
-  transition: all 0.3s ease;
+  padding: clamp(1rem, 2vh, 1.8rem) 0;
+  transition: var(--header-transition);
   background-color: transparent;
-  color: white; 
+  color: white;
 }
 
 .header.scrolled {
-  background-color: var(--bg-primary);
-  color: var(--text-primary);
-  padding: 0.8rem 0; /* Tighter when scrolled */
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+  background-color: var(--header-bg-solid);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  color: var(--foreground);
+  padding: 0.8rem 0;
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.15);
+  border-bottom: 1px solid var(--border-color);
 }
 
 .container {
@@ -36,7 +39,7 @@
 }
 
 .logoImage {
-  height: 90px; /* Reduced from 110px as requested */
+  height: clamp(50px, 8vh, 90px);
   width: auto;
   transition: transform 0.4s cubic-bezier(0.76, 0, 0.24, 1);
 }
@@ -47,10 +50,10 @@
 
 @media (max-width: 1024px) {
   .header {
-    padding: 1.2rem 0;
+    padding: 1rem 0;
   }
   .logoImage {
-    height: 70px;
+    height: clamp(45px, 6vh, 70px);
   }
 }
 
@@ -59,7 +62,7 @@
     padding: 0.8rem 0;
   }
   .logoImage {
-    height: 55px;
+    height: 48px;
   }
   .actions {
     gap: 1rem !important; /* Tighter gap prevents overflow on switch toggle */

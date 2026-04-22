@@ -26,18 +26,18 @@ interface Service {
 }
 
 const ALL_SERVICES: Service[] = [
-  { id: '01', slug: 'hvac-services', titleEn: 'HVAC', titleAr: 'التكييف والتهوية', descEn: 'Maintenance and servicing of heating, ventilation, and air conditioning systems.', descAr: 'صيانة أنظمة التكييف والتهوية.', type: 'HARD', icon: 'Thermometer', image: '/assets/images/services/hvac.png' },
-  { id: '02', slug: 'mep-engineering', titleEn: 'MEP', titleAr: 'الكهروميكانيكية', descEn: 'Integrated maintenance for Mechanical, Electrical, and Plumbing systems.', descAr: 'صيانة الأنظمة الميكانيكية والكهربائية والسباكة.', type: 'HARD', icon: 'Zap', image: '/assets/images/services/mep.png' },
-  { id: '03', slug: 'civil-construction', titleEn: 'Civil Works', titleAr: 'الأعمال المدنية', descEn: 'General repair and maintenance to keep building structures safe.', descAr: 'الإصلاح العام للحفاظ على هياكل المباني.', type: 'HARD', icon: 'HardHat', image: '/assets/images/services/civil.png' },
-  { id: '04', slug: 'low-current-systems', titleEn: 'Low Current', titleAr: 'التيار المنخفض', descEn: 'Support for CCTV, access control, and fire alarm systems.', descAr: 'دعم أنظمة الدوائر التلفزيونية والإنذار.', type: 'HARD', icon: 'Radio', image: '/assets/images/services/lowcurrent.png' },
-  { id: '05', slug: 'renovation-and-fitout', titleEn: 'Renovation', titleAr: 'التجديد والتجهيز', descEn: 'Upgrade and interior modification works.', descAr: 'أعمال الترقية والتعديل الداخلي.', type: 'HARD', icon: 'Hammer', image: '/assets/images/services/renovation.png' },
-  { id: '06', slug: 'third-party-management', titleEn: '3rd Party', titleAr: 'إدارة الموردين', descEn: 'Coordination and oversight of specialized external vendors.', descAr: 'التنسيق والإشراف على الموردين الخارجيين.', type: 'HARD', icon: 'Users', image: '/assets/images/services/3rdparty.png' },
-  { id: '07', slug: 'housekeeping-and-maintenance', titleEn: 'Housekeeping', titleAr: 'التنظيف والدعم', descEn: 'Daily cleaning and office support services.', descAr: 'خدمات التنظيف اليومي والدعم المكتبي.', type: 'SOFT', icon: 'Sparkles', image: '/assets/images/services/housekeeping.png' },
-  { id: '08', slug: 'catering-services', titleEn: 'Catering', titleAr: 'خدمات الإعاشة', descEn: 'Quality food services and hospitality catering.', descAr: 'خدمات غذائية وضيافة مخصصة.', type: 'SOFT', icon: 'Coffee', image: '/assets/images/services/catering.png' },
-  { id: '09', slug: 'facade-cleaning', titleEn: 'Facade Clean', titleAr: 'تنظيف الواجهات', descEn: 'Specialized high-rise and glass cleaning.', descAr: 'تنظيف النوافذ والواجهات الزجاجية.', type: 'SOFT', icon: 'Wind', image: '/assets/images/services/facade.png' },
-  { id: '10', slug: 'landscaping-services', titleEn: 'Landscaping', titleAr: 'تنسيق الحدائق', descEn: 'Design and maintenance of greenery outdoor spaces.', descAr: 'تصميم وصيانة المساحات الخضراء.', type: 'SOFT', icon: 'TreePine', image: '/assets/images/services/landscaping.png' },
-  { id: '11', slug: 'pest-control-management', titleEn: 'Pest Control', titleAr: 'مكافحة الحشرات', descEn: 'Expert treatment and prevention services.', descAr: 'خدمات العلاج والوقاية المتخصصة.', type: 'SOFT', icon: 'ShieldAlert', image: '/assets/images/services/pestcontrol.png' },
-  { id: '12', slug: 'facility-help-desk', titleEn: 'Help Desk', titleAr: 'مكتب المساعدة', descEn: 'Central hub for tracking all facility requests.', descAr: 'مركز لتسجيل ومتابعة طلبات المنشأة.', type: 'SOFT', icon: 'Headphones', image: '/assets/images/services/helpdesk.png' }
+  { id: '01', slug: 'hvac-services', titleEn: 'HVAC', titleAr: 'التكييف والتهوية', descEn: 'Maintenance and servicing of heating, ventilation, and air conditioning systems.', descAr: 'صيانة أنظمة التكييف والتهوية.', type: 'HARD', icon: 'Thermometer', image: '/assets/QNCHardandSoft/Gemini_Generated_Image_rdhr24rdhr24rdhr.png' },
+  { id: '02', slug: 'mep-engineering', titleEn: 'MEP', titleAr: 'الكهروميكانيكية', descEn: 'Integrated maintenance for Mechanical, Electrical, and Plumbing systems.', descAr: 'صيانة الأنظمة الميكانيكية والكهربائية والسباكة.', type: 'HARD', icon: 'Zap', image: '/assets/QNCHardandSoft/Gemini_Generated_Image_5wljv05wljv05wlj.png' },
+  { id: '03', slug: 'civil-construction', titleEn: 'Civil Works', titleAr: 'الأعمال المدنية', descEn: 'General repair and maintenance to keep building structures safe.', descAr: 'الإصلاح العام للحفاظ على هياكل المباني.', type: 'HARD', icon: 'HardHat', image: '/assets/QNCHardandSoft/Gemini_Generated_Image_gqph12gqph12gqph.png' },
+  { id: '04', slug: 'low-current-systems', titleEn: 'Low Current', titleAr: 'التيار المنخفض', descEn: 'Support for CCTV, access control, and fire alarm systems.', descAr: 'دعم أنظمة الدوائر التلفزيونية والإنذار.', type: 'HARD', icon: 'Radio', image: '/assets/QNCHardandSoft/Gemini_Generated_Image_d84ktdd84ktdd84k.png' },
+  { id: '05', slug: 'renovation-and-fitout', titleEn: 'Renovation', titleAr: 'التجديد والتجهيز', descEn: 'Upgrade and interior modification works.', descAr: 'أعمال الترقية والتعديل الداخلي.', type: 'HARD', icon: 'Hammer', image: '/assets/QNCHardandSoft/Gemini_Generated_Image_vlm0khvlm0khvlm0.png' },
+  { id: '06', slug: 'third-party-management', titleEn: '3rd Party', titleAr: 'إدارة الموردين', descEn: 'Coordination and oversight of specialized external vendors.', descAr: 'التنسيق والإشراف على الموردين الخارجيين.', type: 'HARD', icon: 'Users', image: '/assets/QNCHardandSoft/Gemini_Generated_Image_7r05vk7r05vk7r05.png' },
+  { id: '07', slug: 'housekeeping-and-maintenance', titleEn: 'Housekeeping', titleAr: 'التنظيف والدعم', descEn: 'Daily cleaning and office support services.', descAr: 'خدمات التنظيف اليومي والدعم المكتبي.', type: 'SOFT', icon: 'Sparkles', image: '/assets/QNCHardandSoft/Gemini_Generated_Image_j529vdj529vdj529.png' },
+  { id: '08', slug: 'catering-services', titleEn: 'Catering', titleAr: 'خدمات الإعاشة', descEn: 'Quality food services and hospitality catering.', descAr: 'خدمات غذائية وضيافة مخصصة.', type: 'SOFT', icon: 'Coffee', image: '/assets/QNCHardandSoft/Gemini_Generated_Image_p1kxf7p1kxf7p1kx.png' },
+  { id: '09', slug: 'facade-cleaning', titleEn: 'Facade Clean', titleAr: 'تنظيف الواجهات', descEn: 'Specialized high-rise and glass cleaning.', descAr: 'تنظيف النوافذ والواجهات الزجاجية.', type: 'SOFT', icon: 'Wind', image: '/assets/QNCHardandSoft/Gemini_Generated_Image_1aoqjk1aoqjk1aoq.png' },
+  { id: '10', slug: 'landscaping-services', titleEn: 'Landscaping', titleAr: 'تنسيق الحدائق', descEn: 'Design and maintenance of greenery outdoor spaces.', descAr: 'تصميم وصيانة المساحات الخضراء.', type: 'SOFT', icon: 'TreePine', image: '/assets/QNCHardandSoft/Gemini_Generated_Image_pz9pukpz9pukpz9p.png' },
+  { id: '11', slug: 'pest-control-management', titleEn: 'Pest Control', titleAr: 'مكافحة الحشرات', descEn: 'Expert treatment and prevention services.', descAr: 'خدمات العلاج والوقاية المتخصصة.', type: 'SOFT', icon: 'ShieldAlert', image: '/assets/QNCHardandSoft/Gemini_Generated_Image_g1rmqug1rmqug1rm.png' },
+  { id: '12', slug: 'facility-help-desk', titleEn: 'Help Desk', titleAr: 'مكتب المساعدة', descEn: 'Central hub for tracking all facility requests.', descAr: 'مركز لتسجيل ومتابعة طلبات المنشأة.', type: 'SOFT', icon: 'Headphones', image: '/assets/QNCHardandSoft/Gemini_Generated_Image_2r7fg2r7fg2r7fg2.png' }
 ];
 
 const HARD_SERVICES: Service[] = ALL_SERVICES.filter(s => s.type === 'HARD');
@@ -105,23 +105,42 @@ function ServiceRail({ type, services, language, isRTL, t, theme, hideMainHeader
         scrollTrigger: {
           trigger: sectionRef.current,
           start: isMobile ? "top 80%" : "top top",
-          end: isMobile ? "bottom 20%" : `+=${services.length * 150}%`,
+          end: isMobile ? "bottom 20%" : `+=${services.length * 80}%`,
           pin: !isMobile,
           pinSpacing: !isMobile,
-          scrub: 1.2,
+          snap: !isMobile ? {
+            snapTo: 1 / (services.length + 0.5), // Offset for title sequence
+            duration: { min: 0.2, max: 0.4 },
+            delay: 0.05,
+            ease: "power1.inOut"
+          } : undefined,
+          scrub: 0.5,
           anticipatePin: 1,
         }
       });
 
-      // Intro (Fades out only on desktop where it's a transition phase)
+      // Center and Hold Phase Title
       tl.fromTo(titleRef.current, 
-        { opacity: 0, scale: 0.8 },
-        { opacity: 1, scale: 1, duration: 1.5 }
+        { opacity: 0, scale: 0.8, yPercent: 50 },
+        { opacity: 1, scale: 1, yPercent: 0, duration: 2, ease: "power2.out" }
       );
 
       if (!isMobile) {
-        tl.to(titleRef.current, { opacity: 0, scale: 1.1, duration: 1, delay: 0.5 });
+        // Stay in center for a while
+        tl.to(titleRef.current, { duration: 1.5 });
+      } else {
+        // Shorter hold for mobile flow
+        tl.to(titleRef.current, { duration: 0.8 });
       }
+
+      // Fade out as content comes in (Unified for all viewports)
+      tl.to(titleRef.current, { 
+        opacity: 0, 
+        yPercent: -40, 
+        scale: 0.95, 
+        duration: 0.8,
+        ease: "power2.in"
+      });
 
       // Cards
       services.forEach((service: any, index: number) => {
@@ -140,23 +159,25 @@ function ServiceRail({ type, services, language, isRTL, t, theme, hideMainHeader
         const fromY_Visual = isMobile ? 20 : 0; 
         const fromY_Info = isMobile ? 40 : 0; 
 
-        tl.fromTo(frame, { opacity: 0 }, { opacity: 1, duration: 0.8 })
+        tl.fromTo(frame, { opacity: 0 }, { opacity: 1, duration: 0.6 }, index === 0 ? "-=1.5" : "-=1.2")
           .fromTo(visual, 
             { 
               xPercent: isMobile ? 0 : (isRTL ? -100 : 100), 
               yPercent: fromY_Visual,
               rotateY: isMobile ? 0 : (isRTL ? 45 : -45), 
-              opacity: 0 
+              opacity: 0,
+              scale: 0.8
             },
             { 
               xPercent: settleX_Visual, 
               yPercent: 0,
               rotateY: 0, 
               opacity: 1, 
-              duration: 1.2, 
+              scale: 1,
+              duration: 1, 
               ease: "power3.out" 
             },
-            "-=0.4"
+            index === 0 ? "-=1.5" : "-=0.8"
           )
           .fromTo(info,
             { 
@@ -168,25 +189,25 @@ function ServiceRail({ type, services, language, isRTL, t, theme, hideMainHeader
               xPercent: settleX_Info, 
               yPercent: 0,
               opacity: 1, 
-              duration: 1.2, 
+              duration: 1, 
               ease: "power3.out" 
             },
-            "-=1"
+            "-=0.8"
           )
-          .to([visual, info], { duration: 1.5 }) 
+          .to([visual, info], { duration: 0.8 }) 
           .to(visual, { 
             xPercent: isMobile ? 0 : (isRTL ? 150 : -150), 
             yPercent: isMobile ? -50 : 0,
             opacity: 0, 
-            duration: 1 
+            duration: 0.8 
           })
           .to(info, { 
             xPercent: isMobile ? 0 : (isRTL ? -150 : 150), 
             yPercent: isMobile ? 50 : 0,
             opacity: 0, 
-            duration: 1 
-          }, "-=1")
-          .to(frame, { opacity: 0, duration: 0.3 });
+            duration: 0.8 
+          }, "-=0.8")
+          .to(frame, { opacity: 0, duration: 0.3 }, "-=0.3");
       });
 
       tl.to(progressRef.current, { scaleX: 1, duration: tl.duration(), ease: "none" }, 0);

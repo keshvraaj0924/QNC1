@@ -57,6 +57,16 @@ export const translations: Record<string, Record<string, string>> = {
     'section_partners_label': 'OUR PARTNERS',
     'section_clients_title': 'MAJOR CLIENTS',
     'section_clients_subtitle': 'Trusted by Industry Leaders',
+    'section_ecosystem_title': 'INTELLIGENT ECOSYSTEM',
+    'section_ecosystem_subtitle': 'CAFM | CMMS-Enabled Service Delivery',
+    'ecosystem_desc': 'Through our strategic partnership with DisruptX UAE, QNC delivers unparalleled Total Facilities Management powered by advanced cognitive CAFM solutions. We ensure real-time transparency, predictive maintenance, and data-driven operational excellence.',
+    'section_group_label': 'OUR GROUP & PARTNERS',
+    'group_title': 'Strategic Group Synergy',
+    'group_desc': 'As a proud member of Lamar Holding, and in partnership with global industry leaders like Audio Technology and Gardenia, QNC drives integrated excellence across Saudi Arabia\'s most ambitious projects.',
+    'partner_disruptx': 'DisruptX',
+    'partner_audio_tech': 'Audio Technology',
+    'partner_gardenia': 'Gardenia',
+    'partner_lamar': 'Lamar Holding',
     
     // Dome Gallery
     'dome_label': 'OPERATIONAL EXCELLENCE',
@@ -77,8 +87,8 @@ export const translations: Record<string, Record<string, string>> = {
 
     // About
     'about_label': 'OUR LEGACY',
-    'about_headline': 'Building the Standards of National Industry',
-    'about_description': "Qudrat National Company (QNC) stands as a cornerstone of industrial excellence in Saudi Arabia. With a legacy spanning decades, we provide end-to-end solutions that power the Kingdom's most vital sectors.",
+    'about_headline': 'Human Values Power Operational Excellence',
+    'about_description': "QNC was built on a commitment to elevate the standards of Facility Management across the Kingdom — delivering reliability, integrity, and value in every service we provide. Our people are the foundation of our success. Their dedication, expertise, and passion drive QNC’s growth and shape the future of our industry.",
     
     // Vision
     'vision_label': 'NATIONAL IMPACT',
@@ -146,10 +156,10 @@ export const translations: Record<string, Record<string, string>> = {
     'cert_haccp': 'HACCP Certified',
 
     // Stats
-    'stats_workforce': 'Workforce',
-    'stats_projects': 'Active Projects',
-    'stats_sqm': 'SQM Managed',
-    'stats_years': 'Years of Excellence',
+    'stats_workforce': 'WORKFORCE',
+    'stats_projects': 'ACTIVE PROJECTS',
+    'stats_clients': 'TRUSTED CLIENTS',
+    'stats_managed': 'SQM MANAGED',
   },
   ar: {
     // Navigation
@@ -209,6 +219,16 @@ export const translations: Record<string, Record<string, string>> = {
     'section_partners_label': 'شركاؤنا',
     'section_clients_title': 'كبار العملاء',
     'section_clients_subtitle': 'موثوقون من قادة الصناعة',
+    'section_ecosystem_title': 'النظام البيئي الذكي',
+    'section_ecosystem_subtitle': 'تقديم الخدمات معزز بأنظمة CAFM | CMMS',
+    'ecosystem_desc': 'من خلال شراكتنا الاستراتيجية مع شركة ديزرابت إكس (DisruptX) في الإمارات العربية المتحدة، تقدم شركة قدرات (QNC) خدمات إدارة مرافق شاملة لا مثيل لها مدعومة بحلول CAFM المعرفية المتقدمة. نحن نضمن الشفافية في الوقت الحقيقي، والصيانة التنبئية، والتميز التشغيلي القائم على البيانات.',
+    'section_group_label': 'مجموعتنا وشركاؤنا',
+    'group_title': 'التآزر الاستراتيجي للمجموعة',
+    'group_desc': 'كعضو فخور في مجموعة لامار القابضة (Lamar Holding)، وبالشراكة مع قادة الصناعة العالميين مثل أوديو تكنولوجي (Audio Technology) وجاردينيا (Gardenia)، تقود شركة قدرات التميز المتكامل عبر أكثر مشاريع المملكة العربية السعودية طموحاً.',
+    'partner_disruptx': 'ديزرابت إكس',
+    'partner_audio_tech': 'أوديو تكنولوجي',
+    'partner_gardenia': 'جاردينيا',
+    'partner_lamar': 'لامار القابضة',
     
     // Dome Gallery
     'dome_label': 'التميز التشغيلي',
@@ -229,8 +249,8 @@ export const translations: Record<string, Record<string, string>> = {
 
     // About
     'about_label': 'إرثنا',
-    'about_headline': 'بناء معايير الصناعة الوطنية',
-    'about_description': 'تقف شركة قدرات الوطنية (QNC) كحجر زاوية للتميز الصناعي في المملكة العربية السعودية. مع إرث يمتد لعقود، نقدم حلولاً متكاملة تدعم أهم القطاعات الحيوية في المملكة.',
+    'about_headline': 'القيم الإنسانية تدفع التميز التشغيلي',
+    'about_description': 'تأسست شركة قدرات الوطنية بناءً على الالتزام برفع معايير إدارة المرافق في جميع أنحاء المملكة - وتقديم الموثوقية والنزاهة والقيمة في كل خدمة نقدمها. موظفونا هم أساس نجاحنا؛ فتفانيهم وخبراتهم وشغفهم يدفعون نمو الشركة ويشكلون مستقبل صناعتنا.',
 
     // Vision
     'vision_label': 'الأثر الوطني',
@@ -300,7 +320,7 @@ export const translations: Record<string, Record<string, string>> = {
     // Stats
     'stats_workforce': 'القوى العاملة',
     'stats_projects': 'المشاريع القائمة',
-    'stats_sqm': 'مساحة مدارة',
-    'stats_years': 'سنوات من التميز',
+    'stats_clients': 'عملاء موثوقون',
+    'stats_managed': 'مساحة مدارة',
   }
 };

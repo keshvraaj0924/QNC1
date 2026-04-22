@@ -1,0 +1,177 @@
+.groupSection {
+  position: relative;
+  width: 100%;
+  padding: 8rem 0;
+  background: var(--bg-primary);
+  overflow: hidden;
+  border-top: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.container {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 0 5%;
+  position: relative;
+  z-index: 2;
+}
+
+.header {
+  text-align: center;
+  margin-bottom: 4rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+}
+
+.label {
+  font-family: var(--font-body), var(--font-outfit), sans-serif;
+  font-size: 0.75rem;
+  letter-spacing: 0.4em;
+  text-transform: uppercase;
+  font-weight: 700;
+  color: var(--gold, var(--accent-gold));
+}
+
+.title {
+  font-family: var(--font-heading), var(--font-syne), sans-serif;
+  font-size: clamp(2.5rem, 6vw, 5rem);
+  font-weight: 800;
+  line-height: 1.15;
+  color: var(--foreground, var(--text-primary));
+  text-transform: uppercase;
+  margin-bottom: 1rem;
+}
+
+.description {
+  font-family: var(--font-body), var(--font-outfit), sans-serif;
+  font-size: clamp(1rem, 1.5vw, 1.25rem);
+  line-height: 1.7;
+  color: var(--sub-text, var(--text-secondary));
+  max-width: 800px;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 2rem;
+}
+
+.partnerCard {
+  position: relative;
+  background: var(--surface-primary);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  border-radius: 4px;
+  overflow: hidden;
+  transition: transform 0.4s ease, box-shadow 0.4s ease;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.partnerCard:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+  border-color: rgba(203, 161, 82, 0.3);
+}
+
+.imageWrapper {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 16/9;
+  background: #000;
+}
+
+.partnerImage {
+  object-fit: cover;
+  transition: transform 0.7s ease;
+}
+
+.partnerCard:hover .partnerImage {
+  transform: scale(1.05);
+}
+
+.logoWrapper {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 120px;
+  height: 120px;
+  background: rgba(255, 255, 255, 0.95);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+  padding: 1.5rem;
+}
+
+.lamarLogo {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+.cardContent {
+  padding: 2rem;
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  background: var(--surface-primary);
+}
+
+.cardTitle {
+  font-family: var(--font-heading);
+  font-size: 1.5rem;
+  color: var(--text-primary);
+  text-align: center;
+}
+
+.roleText {
+  display: block;
+  font-family: var(--font-body);
+  font-size: 0.875rem;
+  color: var(--accent-gold);
+  text-align: center;
+  margin-top: 0.5rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+/* RTL Support */
+[dir="rtl"] .title {
+  line-height: 1.35;
+}
+
+[dir="rtl"] .label,
+[dir="rtl"] .title,
+[dir="rtl"] .roleText {
+  letter-spacing: 0;
+}
+
+[dir="rtl"] .description {
+  text-align: right;
+}
+
+/* Responsive adjustments */
+@media (max-width: 1024px) {
+  .grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 768px) {
+  .groupSection {
+    padding: 5rem 0;
+  }
+  
+  .grid {
+    grid-template-columns: 1fr;
+  }
+
+  [dir="rtl"] .description {
+    text-align: center;
+  }
+}

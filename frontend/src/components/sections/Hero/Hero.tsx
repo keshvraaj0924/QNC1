@@ -6,7 +6,6 @@ import styles from './Hero.module.css';
 import { useLanguage } from '@/context/LanguageContext';
 import BlurText from '@/components/modern/BlurText';
 import MagnetButton from '@/components/modern/MagnetButton';
-import BackgroundBeams from '@/components/modern/BackgroundBeams';
 
 /**
  * Enhanced Modern Hero Component
@@ -72,7 +71,6 @@ export default function Hero({ content }: { content?: any }) {
           src={videoUrl}
         />
         <div className={styles.overlay} />
-        <BackgroundBeams />
       </motion.div>
 
       {/* Interactive Light Layer */}

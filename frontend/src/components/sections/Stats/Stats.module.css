@@ -62,6 +62,7 @@
   letter-spacing: -0.05em;
 }
 
+.prefix,
 .suffix {
   font-family: var(--font-outfit);
   font-size: clamp(1.5rem, 2vw, 2.5rem);

@@ -155,20 +155,22 @@ export default function RegionalPresence() {
   const vbH = useSpring(600, { stiffness: 40, damping: 15 });
 
   useEffect(() => {
-    const ctx = gsap.context(() => {
+    const mm = gsap.matchMedia();
+
+    mm.add("(min-width: 1025px)", () => {
       ScrollTrigger.create({
         trigger: sectionRef.current,
         start: 'top top',
-        end: `+=${REGIONS_DATA.length * 300}%`, // Extended scroll for multi-stage beats
+        end: `+=${REGIONS_DATA.length * 300}%`,
         pin: true,
-        scrub: 1.5, // Slightly smoother scrub to prevent jumps
-        anticipatePin: 1, // Fixes white space/jump issues with pinned elements
+        scrub: 1.5,
+        anticipatePin: 1,
         onUpdate: (self) => {
           const totalStages = REGIONS_DATA.length;
-          const progress = self.progress; // 0 to 1
+          const progress = self.progress;
           const hubProgressRaw = progress * totalStages;
           const hubIdx = Math.min(Math.floor(hubProgressRaw), totalStages - 1);
-          const localProgress = hubProgressRaw % 1; // 0 to 1 within this hub's slot
+          const localProgress = hubProgressRaw % 1;
 
           const hub = REGIONS_DATA[hubIdx];
           const [zX, zY, zW, zH] = hub.zoomViewBox.split(' ').map(Number);
@@ -177,31 +179,35 @@ export default function RegionalPresence() {
           setActiveHubIndex(hubIdx);
 
           if (localProgress < 0.15) {
-            // Stage: Overview National View
             setActiveStage('OVERVIEW');
             vbX.set(oX); vbY.set(oY); vbW.set(oW); vbH.set(oH);
           } else if (localProgress < 0.45) {
-            // Stage: Zooming In
             setActiveStage('ZOOMING');
             vbX.set(zX); vbY.set(zY); vbW.set(zW); vbH.set(zH);
           } else if (localProgress < 0.85) {
-            // Stage: Immersive Content Active
             setActiveStage('REGION_ACTIVE');
             vbX.set(zX); vbY.set(zY); vbW.set(zW); vbH.set(zH);
           } else {
-            // Stage: Zooming Out
             setActiveStage('ZOOMING_OUT');
             vbX.set(oX); vbY.set(oY); vbW.set(oW); vbH.set(oH);
           }
         }
       });
+    });
 
-      // Force a refresh to ensure preceding section heights are accurately accounted for
-      ScrollTrigger.refresh();
-    }, sectionRef);
+    mm.add("(max-width: 1024px)", () => {
+      // Simplified behavior for mobile - no pinning, simple reveal
+      ScrollTrigger.create({
+        trigger: sectionRef.current,
+        start: 'top 80%',
+        onEnter: () => setActiveStage('REGION_ACTIVE')
+      });
+    });
 
-    return () => ctx.revert();
-  }, [vbX, vbY, vbW, vbH]);
+    ScrollTrigger.refresh();
+    
+    return () => mm.revert();
+  }, [vbX, vbY, vbW, vbH, language]);
 
   const activeHub = REGIONS_DATA[activeHubIndex];
   const isImmersive = activeStage === 'REGION_ACTIVE' || activeStage === 'ZOOMING';

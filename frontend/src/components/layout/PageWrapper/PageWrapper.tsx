@@ -30,6 +30,7 @@ export default function PageWrapper({ children, className = '' }: { children: Re
       exit="exit"
       variants={pageVariants}
       className={className}
+      style={{ paddingTop: 'var(--header-clearance)' }}
     >
       {children}
     </motion.div>

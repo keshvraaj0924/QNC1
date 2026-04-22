@@ -55,7 +55,7 @@
 /* Header Overlay */
 .railHeader {
   position: absolute;
-  top: 120px; /* Precise placement below fixed brand header */
+  top: 100px; /* Precise placement below fixed brand header */
   width: 100%;
   z-index: 500; /* Absolute dominance to prevent card overlap */
   text-align: center;
@@ -91,7 +91,7 @@
   }
 
   .railMainTitle {
-    font-size: clamp(1.4rem, 5vw, 2rem);
+    font-size: clamp(1.4rem, 4vw, 1.8rem);
   }
 }
 
@@ -101,8 +101,9 @@
   }
 
   .railMainTitle {
-    font-size: 1.4rem; 
+    font-size: 1.3rem; 
     letter-spacing: 0.05em;
+    padding: 0 10%;
   }
 
   .glitchText {
@@ -119,7 +120,7 @@
   position: relative;
   width: 100%;
   height: 50vh; /* Reduced height to keep cards in the lower half */
-  margin-top: 25vh; /* Large top-buffer to ensure zero overlap with title area */
+  margin-top: 15vh; /* Reduced to bring content in sooner and avoid empty look */
   z-index: 5;
   display: flex;
   justify-content: center;
@@ -151,13 +152,14 @@
 
 .floatingCard {
   width: 100%;
-  max-width: 450px;
-  height: 100%;
-  border-radius: 40px;
+  max-width: 480px;
+  height: 320px; /* Fixed height for consistency */
+  border-radius: 32px;
   overflow: hidden;
-  box-shadow: 0 50px 100px rgba(0,0,0,0.6);
+  box-shadow: 0 40px 80px rgba(0,0,0,0.5);
   position: relative;
   border: 1px solid rgba(255, 255, 255, 0.1);
+  background: #111;
 }
 
 .cardVisual {
@@ -188,16 +190,19 @@
 
 .modernizedBox {
   width: 100%;
-  background: rgba(13, 15, 20, 0.9); /* More opaque since blur is removed */
+  min-height: 320px; /* Matching visual height for balance */
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  background: rgba(13, 15, 20, 0.95);
   border: 1px solid rgba(203, 161, 82, 0.15);
   border-radius: 32px;
-  padding: 50px;
+  padding: 40px 50px;
   position: relative;
   box-shadow: 0 30px 60px rgba(0,0,0,0.4);
   transition: all 0.5s cubic-bezier(0.76, 0, 0.24, 1);
   text-decoration: none;
   cursor: pointer;
-  display: block;
 }
 
 .modernizedBox:hover {
@@ -221,8 +226,9 @@
 .cardHeader {
   display: flex;
   justify-content: space-between;
-  margin-bottom: 30px;
-  opacity: 0.6;
+  align-items: center;
+  margin-bottom: 20px;
+  opacity: 0.8;
 }
 
 .cardId {
@@ -244,24 +250,30 @@
 }
 
 .cardTitle {
-  font-size: clamp(2rem, 4vw, 3.5rem);
+  font-size: clamp(1.8rem, 3.5vw, 2.5rem);
   font-weight: 900;
-  line-height: 1.1;
-  margin-bottom: 20px;
+  line-height: 1;
+  margin-bottom: 15px;
   font-family: var(--font-syne), sans-serif;
   text-transform: uppercase;
   background: linear-gradient(135deg, #fff 0%, rgba(255,255,255,0.7) 100%);
   -webkit-background-clip: text;
   background-clip: text;
   -webkit-text-fill-color: transparent;
+  width: 100%;
 }
 
 .cardDesc {
   font-family: var(--font-body), var(--font-outfit), sans-serif;
-  font-size: 1.1rem;
-  line-height: 1.7;
+  font-size: 1rem;
+  line-height: 1.6;
   color: rgba(255,255,255,0.6);
-  margin-bottom: 40px;
+  margin-bottom: 20px;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
 }
 
 .cardFooter {
@@ -409,11 +421,20 @@
   .railHeader { 
     position: relative !important;
     top: 0 !important; 
-    padding: 100px 20px 40px;
+    padding: 100px 10% 40px;
     z-index: 10;
   }
 
-  .railMainTitle { font-size: 1.8rem; line-height: 1.2; }
+  .railMainTitle { 
+    font-size: clamp(1.2rem, 8vw, 1.6rem); 
+    line-height: 1.1; 
+    overflow-wrap: normal;
+    word-break: normal;
+    hyphens: none;
+    text-wrap: balance;
+    text-align: center;
+    width: 100%;
+  }
 
   .railViewport {
     margin-top: 0 !important;
@@ -451,7 +472,17 @@
     border: 1px solid rgba(203, 161, 82, 0.2);
   }
 
-  .cardTitle { font-size: 1.6rem; margin-bottom: 15px; }
+  .cardTitle { 
+    font-size: 1.35rem; 
+    line-height: 1.2;
+    margin-bottom: 12px;
+    letter-spacing: 0.02em;
+    width: 100%;
+    overflow-wrap: normal;
+    word-break: normal;
+    hyphens: none;
+    text-wrap: balance;
+  }
   .cardDesc { font-size: 1rem; line-height: 1.6; margin-bottom: 25px; }
 
   .railPhaseTitle {
@@ -466,14 +497,22 @@
   }
 
   .glitchText {
-    font-size: 1.8rem !important; /* Standardized for mobile category title */
-    color: var(--gold) !important;
-    text-shadow: none !important; /* Cleaner for static list */
-    animation: none !important;
+    font-size: 2.2rem !important; /* Premium size for mobile category title */
+    color: #fff !important;
+    text-shadow: 0.05em 0 0 #cba152, -0.025em -0.05em 0 #675EA7;
+    animation: glitch 1s infinite !important;
   }
 
-  /* Hide elements that only make sense in the pinned view */
-  .kineticLogoWrapper, .railFooter {
+  /* Premium elements restored for mobile */
+  .kineticLogoWrapper {
+    display: flex;
+    width: 35vh;
+    height: 35vh;
+    opacity: 0.08;
+    position: fixed; /* Keep it as a subtle background element */
+  }
+
+  .railFooter {
     display: none;
   }
 }
