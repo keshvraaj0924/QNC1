@@ -350,6 +350,8 @@
 
 .contactText {
   font-size: 0.95rem;
+  direction: ltr;
+  unicode-bidi: isolate;
 }
 
 .mapActionLink {

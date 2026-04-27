@@ -43,9 +43,10 @@ export const translations: Record<string, Record<string, string>> = {
     'footer_tagline': 'Leading Saudi Arabian Facilities Management and Manpower Solutions scaling Vision 2030 development.',
     'footer_rights': 'All Rights Reserved.',
     'footer_headquarter': 'Headquarter: EAGA8862, Dhahran, Saudi Arabia',
-    'footer_email': 'info@QNC.com',
-    'footer_phone_office': '+966-138312059 Ext:111',
-    'footer_phone_mobile': '+966 53 919 1380',
+    'footer_email': 'info@QNC.sa',
+    'footer_email_careers': 'HR@QNC.sa',
+    'footer_phone_office': '\u200E+966-138312059 Ext:111',
+    'footer_phone_mobile': '\u200E+966 53 919 1380',
     'footer_website': 'www.QNC.sa',
     
     // Sections
@@ -230,9 +231,10 @@ export const translations: Record<string, Record<string, string>> = {
     'footer_tagline': 'الشركة السعودية الرائدة في إدارة المرافق وحلول القوى العاملة لدعم رؤية 2030.',
     'footer_rights': 'جميع الحقوق محفوظة.',
     'footer_headquarter': 'المقر الرئيسي: EAGA8862، الظهران، المملكة العربية السعودية',
-    'footer_email': 'info@QNC.com',
-    'footer_phone_office': '+966-138312059 تحويلة: 111',
-    'footer_phone_mobile': '+966 53 919 1380',
+    'footer_email': 'info@QNC.sa',
+    'footer_email_careers': 'HR@QNC.sa',
+    'footer_phone_office': '\u200E+966-138312059 تحويلة: 111',
+    'footer_phone_mobile': '\u200E+966 53 919 1380',
     'footer_website': 'www.QNC.sa',
     
     // Sections

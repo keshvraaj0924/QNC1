@@ -47,8 +47,8 @@ export const accountDeletionContent = {
     {
       title: { en: "2. How to Request Deletion", ar: "2. كيفية طلب الحذف" },
       content: {
-        en: "To initiate a deletion request, please email our compliance team at privacy@qudratnational.com.",
-        ar: "لبدء طلب الحذف، يرجى مراسلة فريق الامتثال لدينا على البريد الإلكتروني privacy@qudratnational.com."
+        en: "To initiate a deletion request, please email our compliance team at info@QNC.sa.",
+        ar: "لبدء طلب الحذف، يرجى مراسلة فريق الامتثال لدينا على البريد الإلكتروني info@QNC.sa."
       }
     }
   ]

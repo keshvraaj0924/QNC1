@@ -109,6 +109,7 @@ export default function CareersPage() {
     submitData.append('roleId', selectedRole.id);
     submitData.append('roleTitle', language === 'en' ? selectedRole.title_en : selectedRole.title_ar);
     submitData.append('resume', file);
+    submitData.append('destination_email', 'HR@QNC.sa');
 
     try {
       const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL || 'http://localhost:4000'}/api/v1/public/apply`, {
@@ -127,7 +128,7 @@ export default function CareersPage() {
         setSubmitted(false);
         setFormData({ name: '', email: '' });
         setFile(null);
-      }, 3000);
+      }, 8000);
     } catch (err: any) {
       if (err.name === 'TypeError') {
         setError(language === 'en' ? 'Server is currently offline. Please try again later.' : 'الخادم غير متصل حالياً. يرجى المحاولة لاحقاً.');

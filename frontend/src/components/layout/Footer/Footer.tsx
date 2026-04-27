@@ -297,17 +297,17 @@ export default function Footer() {
             <div className={styles.contactList}>
               <a href={`mailto:${t('footer_email')}`} className={styles.contactItem}>
                 <Mail size={16} className={styles.contactIcon} />
-                <span className={styles.contactText} dir="ltr">{t('footer_email')}</span>
+                <span className={`${styles.contactText} ltr-content`}>{t('footer_email')}</span>
               </a>
               
               <a href={`tel:${t('footer_phone_office').split(' ')[0]}`} className={styles.contactItem}>
                 <Phone size={16} className={styles.contactIcon} />
-                <span className={styles.contactText} dir="ltr">{t('footer_phone_office')}</span>
+                <span className={`${styles.contactText} ltr-content`}>{t('footer_phone_office')}</span>
               </a>
               
               <a href={`tel:${t('footer_phone_mobile').replace(/\s/g, '')}`} className={styles.contactItem}>
                 <Smartphone size={16} className={styles.contactIcon} />
-                <span className={styles.contactText} dir="ltr">{t('footer_phone_mobile')}</span>
+                <span className={`${styles.contactText} ltr-content`}>{t('footer_phone_mobile')}</span>
               </a>
               
               <a href={`https://${t('footer_website')}`} target="_blank" rel="noopener noreferrer" className={styles.contactItem}>

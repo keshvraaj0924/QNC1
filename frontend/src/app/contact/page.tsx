@@ -34,12 +34,13 @@ export default function ContactPage() {
       const res = await fetch('http://localhost:4000/api/v1/public/contact', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(form)
+        body: JSON.stringify({ ...form, destination_email: 'info@QNC.sa' })
       });
       if (res.ok) {
         setSuccess(true);
         setForm({ name: '', email: '', message: '' });
-        setTimeout(() => setSuccess(false), 5000);
+        // Keeping success message longer for user assurance
+        setTimeout(() => setSuccess(false), 8000);
       }
     } catch (err) {
       console.error('Contact Error:', err);
@@ -89,11 +90,11 @@ export default function ContactPage() {
               </div>
               <div className={styles.contactBlock}>
                 <h4>{t('contact_email')}</h4>
-                <a href="mailto:info@qudratnational.com">info@qudratnational.com</a>
+                <a href={`mailto:${t('footer_email')}`}>{t('footer_email')}</a>
               </div>
               <div className={styles.contactBlock}>
                 <h4>{t('contact_phone')}</h4>
-                <p dir="ltr" className="ltr-content">+966 13 000 0000</p>
+                <p className="ltr-content">{t('footer_phone_mobile')}</p>
               </div>
 
             </ScrollReveal>

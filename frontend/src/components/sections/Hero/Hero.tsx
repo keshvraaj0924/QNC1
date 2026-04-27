@@ -4,6 +4,7 @@ import { motion, useScroll, useTransform, useSpring } from 'framer-motion';
 import { useRef, useState, useEffect } from 'react';
 import styles from './Hero.module.css';
 import { useLanguage } from '@/context/LanguageContext';
+import Link from 'next/link';
 import BlurText from '@/components/modern/BlurText';
 import MagnetButton from '@/components/modern/MagnetButton';
 
@@ -118,12 +119,14 @@ export default function Hero({ content }: { content?: any }) {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 1.2 }}
           >
-            <MagnetButton>
-              <button className={styles.exploreBtn}>
-                <span>{t('hero_explore')}</span>
-                <div className={styles.btnLine} />
-              </button>
-            </MagnetButton>
+            <Link href="/about-us">
+              <MagnetButton>
+                <button className={styles.exploreBtn}>
+                  <span>{t('hero_explore')}</span>
+                  <div className={styles.btnLine} />
+                </button>
+              </MagnetButton>
+            </Link>
           </motion.div>
         </div>
 
