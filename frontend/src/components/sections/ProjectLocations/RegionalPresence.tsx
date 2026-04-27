@@ -311,7 +311,7 @@ export default function RegionalPresence() {
                 animate={{ 
                     x: activeHub.logoPos.x, 
                     y: activeHub.logoPos.y,
-                    scale: activeStage === 'OVERVIEW' ? 0.25 : 0.45
+                    scale: activeStage === 'OVERVIEW' ? 0.15 : 0.28
                 }}
                 transition={{ type: 'spring', stiffness: 50, damping: 15 }}
                 className={styles.qMarkerWrapper}

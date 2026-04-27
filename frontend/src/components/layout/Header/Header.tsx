@@ -11,8 +11,6 @@ import { usePathname } from 'next/navigation';
 import { Sun, Moon } from 'lucide-react';
 
 export default function Header() {
-  const pathname = usePathname();
-  const isHome = pathname === '/' || pathname === '/en' || pathname === '/ar' || pathname === '/en/' || pathname === '/ar/';
   
   const [scrolled, setScrolled] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
@@ -29,7 +27,7 @@ export default function Header() {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  const headerClass = `${styles.header} ${scrolled || isHome ? styles.scrolled : ''} ${isHome ? styles.homeHeader : ''}`;
+  const headerClass = `${styles.header} ${scrolled ? styles.scrolled : ''}`;
 
 
 

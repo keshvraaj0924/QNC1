@@ -19,15 +19,22 @@ const LogoPreloader = () => {
     // Lock scroll when preloader is active
     if (isVisible) {
       document.body.style.overflow = 'hidden';
+      // Explicitly try to play the video to bypass some browser autoPlay quirks
+      if (videoRef.current) {
+        videoRef.current.play().catch(() => {
+          // If play fails (e.g. strict policy), the backup timer will handle it
+        });
+      }
     } else {
       document.body.style.overflow = '';
       sessionStorage.setItem('qnc_preloader_run', 'true');
     }
 
-    // Backup timer in case video fails to fire onEnded (e.g. browser policy)
+    // Backup timer in case video fails to fire onEnded or hangs
+    // Increased to 20s to prioritize full playback as requested by user
     const backupTimer = setTimeout(() => {
       handleTransition();
-    }, 3000); // Reduced from 6s to 3s for snappier feel
+    }, 20000); 
 
     return () => {
       document.body.style.overflow = '';
@@ -36,11 +43,12 @@ const LogoPreloader = () => {
   }, [isVisible]);
 
   const handleTransition = () => {
-    if (!isFading) {
+    if (!isFading && isVisible) {
       setIsFading(true);
+      document.body.style.overflow = '';
       setTimeout(() => {
         setIsVisible(false);
-      }, 1000); // Match CSS transition duration
+      }, 800); 
     }
   };
 
@@ -53,7 +61,9 @@ const LogoPreloader = () => {
         autoPlay
         muted
         playsInline
+        preload="auto"
         onEnded={handleTransition}
+        onError={handleTransition} 
         className={styles.video}
         aria-hidden="true"
       >

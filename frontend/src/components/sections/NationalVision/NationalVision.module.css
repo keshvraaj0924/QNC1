@@ -309,8 +309,8 @@
 
 .statsBox {
   position: absolute;
-  bottom: 8%;
-  right: 0;
+  bottom: -3rem;
+  right: -4rem;
   background-color: var(--qnc-blue);
   width: clamp(240px, 20vw, 320px);
   height: clamp(160px, 14vw, 220px);
@@ -321,6 +321,8 @@
   justify-content: center;
   z-index: 10;
   box-shadow: 0 40px 80px rgba(0,0,0,0.4);
+  border: 2px solid var(--qnc-gold);
+  border-radius: 12px;
 }
 
 .statNum {
@@ -370,7 +372,7 @@
 
 [dir="rtl"] .statsBox {
   right: auto;
-  left: -2rem;
+  left: -4rem;
 }
 
 @media (max-width: 1024px) {
