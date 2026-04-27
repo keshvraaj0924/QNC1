@@ -184,6 +184,7 @@ export const translations: Record<string, Record<string, string>> = {
     'industries_label': 'Across Industries',
     'industries_subtitle': 'Serving diverse industries with reliable manpower and integrated support solutions',
     'industries_footer': 'Trusted across sectors. Preferred by leading businesses.',
+    'last_updated': 'Last Updated',
   },
   ar: {
     // Navigation
@@ -370,5 +371,6 @@ export const translations: Record<string, Record<string, string>> = {
     'industries_label': 'عبر الصناعات',
     'industries_subtitle': 'خدمة صناعات متنوعة بقوى عاملة موثوقة وحلول دعم متكاملة',
     'industries_footer': 'موثوق به عبر القطاعات. مفضل من قبل الشركات الرائدة.',
+    'last_updated': 'آخر تحديث',
   }
 };

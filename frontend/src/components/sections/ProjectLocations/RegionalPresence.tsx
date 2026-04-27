@@ -23,7 +23,19 @@ const SVG_PATHS: { [key: string]: string } = {
 
 };
 
-const REGIONS_DATA = [
+interface Region {
+  id: string;
+  nameEn: string;
+  nameAr: string;
+  unifiedPath: string;
+  stats: { labelEn: string; labelAr: string; value: number; suffix: string }[];
+  logoPos: { x: number; y: number };
+  logoScale?: number;
+  zoomViewBox: string;
+  bgImage: string;
+}
+
+const REGIONS_DATA: Region[] = [
   {
     id: 'eastern',
     nameEn: 'Eastern Province',
@@ -33,7 +45,8 @@ const REGIONS_DATA = [
       { labelEn: 'Hub Center', labelAr: 'المركز الرئيسي', value: 1, suffix: ' Hub' },
       { labelEn: 'Employees', labelAr: 'الموظفين', value: 3500, suffix: '+' }
     ],
-    logoPos: { x: 545, y: 351 },
+    logoPos: { x: 540, y: 340 },
+    logoScale: 0.20,
     zoomViewBox: "400 200 280 280",
     bgImage: "/assets/images/hubs/eastern_hub_industry_1775891030113.png"
   },
@@ -46,7 +59,8 @@ const REGIONS_DATA = [
       { labelEn: 'Operations', labelAr: 'العمليات', value: 92, suffix: '%' },
       { labelEn: 'Branches', labelAr: 'الفروع', value: 14, suffix: '' }
     ],
-    logoPos: { x: 367, y: 342 },
+    logoPos: { x: 360, y: 360 },
+    logoScale: 0.20,
     zoomViewBox: "220 220 280 280",
     bgImage: "/assets/images/hubs/central_hub_business_1775891045774.png"
   },
@@ -59,7 +73,8 @@ const REGIONS_DATA = [
       { labelEn: 'Logistics', labelAr: 'الخدمات اللوجستية', value: 45, suffix: ' Units' },
       { labelEn: 'Efficiency', labelAr: 'الكفاءة', value: 98, suffix: '%' }
     ],
-    logoPos: { x: 256, y: 217 },
+    logoPos: { x: 260, y: 240 },
+    logoScale: 0.18,
     zoomViewBox: "120 100 280 280",
     bgImage: "/assets/images/hubs/north_central_tech_1775891061266.png"
   },
@@ -72,7 +87,8 @@ const REGIONS_DATA = [
       { labelEn: 'Border Assets', labelAr: 'الأصول الحدودية', value: 240, suffix: '+' },
       { labelEn: 'Coverage', labelAr: 'التغطية', value: 100, suffix: '%' }
     ],
-    logoPos: { x: 229, y: 91 },
+    logoPos: { x: 240, y: 105 },
+    logoScale: 0.16,
     zoomViewBox: "100 -20 280 280",
     bgImage: "/assets/images/hubs/northern_hub_logistics_1775891075544.png"
   },
@@ -85,7 +101,8 @@ const REGIONS_DATA = [
       { labelEn: 'Industrial', labelAr: 'الصناعية', value: 15, suffix: ' Sites' },
       { labelEn: 'Response', labelAr: 'الاستجابة', value: 8, suffix: 'm' }
     ],
-    logoPos: { x: 171, y: 286 },
+    logoPos: { x: 175, y: 310 },
+    logoScale: 0.11,
     zoomViewBox: "50 150 280 280",
     bgImage: "/assets/images/hubs/yanbu_refinery_night_1775891092477.png"
   },
@@ -98,7 +115,8 @@ const REGIONS_DATA = [
       { labelEn: 'Ports Supported', labelAr: 'دعم الموانئ', value: 3, suffix: '' },
       { labelEn: 'Staff', labelAr: 'طاقم العمل', value: 1200, suffix: '+' }
     ],
-    logoPos: { x: 245, y: 439 },
+    logoPos: { x: 265, y: 410 },
+    logoScale: 0.14,
     zoomViewBox: "120 320 280 280",
     bgImage: "/assets/images/hubs/jeddah_seaport_sunset_1775891106783.png"
   },
@@ -111,7 +129,8 @@ const REGIONS_DATA = [
       { labelEn: 'South Hub', labelAr: 'مركز الجنوب', value: 50, suffix: '+' },
       { labelEn: 'Local Base', labelAr: 'القاعدة المحلية', value: 20, suffix: '' }
     ],
-    logoPos: { x: 319, y: 549 },
+    logoPos: { x: 300, y: 525 },
+    logoScale: 0.14,
     zoomViewBox: "180 420 280 280",
     bgImage: "/assets/images/hubs/jazan_economic_city_1775891125787.png"
   }
@@ -311,7 +330,7 @@ export default function RegionalPresence() {
                 animate={{ 
                     x: activeHub.logoPos.x, 
                     y: activeHub.logoPos.y,
-                    scale: activeStage === 'OVERVIEW' ? 0.15 : 0.28
+                    scale: activeStage === 'OVERVIEW' ? 0.10 : activeHub.logoScale || 0.18
                 }}
                 transition={{ type: 'spring', stiffness: 50, damping: 15 }}
                 className={styles.qMarkerWrapper}
@@ -328,7 +347,7 @@ export default function RegionalPresence() {
         {/* HUD Info Box */}
         <div className={styles.infoOverlay}>
           <AnimatePresence mode="wait">
-            {activeStage === 'REGION_ACTIVE' && (
+            {activeStage === 'REGION_ACTIVE' && activeHub && (
               <motion.div 
                 key={activeHub.id}
                 className={styles.infoCard}
