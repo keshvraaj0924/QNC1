@@ -9,19 +9,24 @@ const LogoPreloader = () => {
   const videoRef = useRef<HTMLVideoElement>(null);
 
   useEffect(() => {
-    // Check if preloader has already run in this session
+    // Temporarily disabled to allow the user to see the preloader on every refresh during testing
+    /*
     const hasRun = sessionStorage.getItem('qnc_preloader_run');
     if (hasRun === 'true') {
       setIsVisible(false);
       return;
     }
+    */
 
     // Lock scroll when preloader is active
     if (isVisible) {
       document.body.style.overflow = 'hidden';
       // Explicitly try to play the video to bypass some browser autoPlay quirks
       if (videoRef.current) {
-        videoRef.current.play().catch(() => {
+        videoRef.current.play().then(() => {
+          // Video started successfully
+        }).catch((err) => {
+          console.warn("Autoplay was prevented:", err);
           // If play fails (e.g. strict policy), the backup timer will handle it
         });
       }
@@ -31,7 +36,7 @@ const LogoPreloader = () => {
     }
 
     // Backup timer in case video fails to fire onEnded or hangs
-    // Increased to 20s to prioritize full playback as requested by user
+    // Increased to 20s to prioritize full playback
     const backupTimer = setTimeout(() => {
       handleTransition();
     }, 20000); 

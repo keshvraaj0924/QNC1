@@ -34,7 +34,7 @@ const REGIONS_DATA = [
       { labelEn: 'Employees', labelAr: 'الموظفين', value: 3500, suffix: '+' }
     ],
     logoPos: { x: 545, y: 351 },
-    zoomViewBox: "450 200 300 300",
+    zoomViewBox: "400 200 280 280",
     bgImage: "/assets/images/hubs/eastern_hub_industry_1775891030113.png"
   },
   {
@@ -47,7 +47,7 @@ const REGIONS_DATA = [
       { labelEn: 'Branches', labelAr: 'الفروع', value: 14, suffix: '' }
     ],
     logoPos: { x: 367, y: 342 },
-    zoomViewBox: "280 250 250 250",
+    zoomViewBox: "220 220 280 280",
     bgImage: "/assets/images/hubs/central_hub_business_1775891045774.png"
   },
   {
@@ -60,7 +60,7 @@ const REGIONS_DATA = [
       { labelEn: 'Efficiency', labelAr: 'الكفاءة', value: 98, suffix: '%' }
     ],
     logoPos: { x: 256, y: 217 },
-    zoomViewBox: "150 100 250 250",
+    zoomViewBox: "120 100 280 280",
     bgImage: "/assets/images/hubs/north_central_tech_1775891061266.png"
   },
   {
@@ -73,7 +73,7 @@ const REGIONS_DATA = [
       { labelEn: 'Coverage', labelAr: 'التغطية', value: 100, suffix: '%' }
     ],
     logoPos: { x: 229, y: 91 },
-    zoomViewBox: "30 -20 300 300",
+    zoomViewBox: "100 -20 280 280",
     bgImage: "/assets/images/hubs/northern_hub_logistics_1775891075544.png"
   },
   {
@@ -86,7 +86,7 @@ const REGIONS_DATA = [
       { labelEn: 'Response', labelAr: 'الاستجابة', value: 8, suffix: 'm' }
     ],
     logoPos: { x: 171, y: 286 },
-    zoomViewBox: "40 180 250 250",
+    zoomViewBox: "50 150 280 280",
     bgImage: "/assets/images/hubs/yanbu_refinery_night_1775891092477.png"
   },
   {
@@ -99,7 +99,7 @@ const REGIONS_DATA = [
       { labelEn: 'Staff', labelAr: 'طاقم العمل', value: 1200, suffix: '+' }
     ],
     logoPos: { x: 245, y: 439 },
-    zoomViewBox: "40 320 300 300",
+    zoomViewBox: "120 320 280 280",
     bgImage: "/assets/images/hubs/jeddah_seaport_sunset_1775891106783.png"
   },
   {
@@ -112,7 +112,7 @@ const REGIONS_DATA = [
       { labelEn: 'Local Base', labelAr: 'القاعدة المحلية', value: 20, suffix: '' }
     ],
     logoPos: { x: 319, y: 549 },
-    zoomViewBox: "180 440 250 200",
+    zoomViewBox: "180 420 280 280",
     bgImage: "/assets/images/hubs/jazan_economic_city_1775891125787.png"
   }
 ];
