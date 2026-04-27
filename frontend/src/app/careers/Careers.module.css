@@ -1,7 +1,7 @@
 .main {
   min-height: 100vh;
-  background: #050505;
-  color: white;
+  background: var(--background);
+  color: var(--foreground);
 }
 
 .loader {
@@ -9,8 +9,8 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  background: #000;
-  color: #CBA152;
+  background: var(--background);
+  color: var(--gold);
 }
 
 .spin {
@@ -23,15 +23,45 @@
 }
 
 .heroSection {
-  padding: 160px 0 80px;
-  background: linear-gradient(to bottom, #0a0a0a, #050505);
+  position: relative;
+  height: 50vh;
+  min-height: 500px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
   text-align: center;
 }
 
+.heroImageContainer {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 120%;
+  z-index: 1;
+  will-change: transform;
+}
+
+.heroImage {
+  object-fit: cover;
+}
+
+.imageOverlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(to bottom, rgba(0,0,0,0.6), rgba(0,0,0,0.85));
+  z-index: 2;
+}
+
 .heroContent {
-  max-width: 800px;
-  margin: 0 auto;
-  padding: 0 24px;
+  position: relative;
+  z-index: 3;
+  max-width: 900px;
+  padding: 0 5%;
 }
 
 .title {
@@ -39,15 +69,13 @@
   font-weight: 800;
   letter-spacing: -0.02em;
   margin-bottom: 24px;
-  background: linear-gradient(135deg, #fff 0%, #888 100%);
-  -webkit-background-clip: text;
-  background-clip: text;
-  -webkit-text-fill-color: transparent;
+  color: #ffffff; /* Force visibility on dark hero bg */
 }
 
 .subtitle {
   font-size: 20px;
-  color: #888;
+  color: #ffffff; /* Force visibility on dark hero bg */
+  opacity: 0.8;
   line-height: 1.6;
 }
 
@@ -70,6 +98,7 @@
   font-size: 32px;
   font-weight: 700;
   margin-bottom: 16px;
+  color: var(--foreground);
 }
 
 .titleUnderline {
@@ -86,8 +115,8 @@
 }
 
 .roleCard {
-  background: rgba(255, 255, 255, 0.03);
-  border: 1px solid rgba(255, 255, 255, 0.08);
+  background: var(--card-bg);
+  border: 1px solid var(--card-border);
   border-radius: 20px;
   padding: 32px;
   display: flex;
@@ -117,6 +146,7 @@
   font-size: 20px;
   font-weight: 700;
   margin: 0;
+  color: var(--foreground);
 }
 
 .roleMeta {
@@ -129,13 +159,13 @@
   display: flex;
   align-items: center;
   gap: 8px;
-  color: #666;
+  color: var(--sub-text);
   font-size: 14px;
 }
 
 .roleDesc {
   font-size: 15px;
-  color: #999;
+  color: var(--sub-text);
   line-height: 1.6;
   margin-bottom: 32px;
   flex-grow: 1;
@@ -176,14 +206,14 @@
 }
 
 .modal {
-  background: #0f0f0f;
-  border: 1px solid rgba(255, 255, 255, 0.1);
+  background: var(--background);
+  border: 1px solid var(--card-border);
   border-radius: 32px;
   width: 100%;
   max-width: 500px;
   padding: 48px;
   position: relative;
-  box-shadow: 0 30px 60px rgba(0, 0, 0, 0.8);
+  box-shadow: 0 30px 60px rgba(0, 0, 0, 0.4);
 }
 
 .closeBtn {
@@ -318,14 +348,53 @@
 }
 
 /* RESPONSIVE */
+@media (max-width: 1024px) {
+  .rolesGrid {
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 24px;
+  }
+}
+
 @media (max-width: 768px) {
+  .heroSection {
+    padding: 120px 0 60px;
+  }
   .title {
-    font-size: 40px;
+    font-size: 36px;
+  }
+  .subtitle {
+    font-size: 16px;
   }
   .rolesGrid {
     grid-template-columns: 1fr;
   }
+  .roleCard {
+    padding: 24px;
+  }
+  .modalOverlay {
+    padding: 12px;
+  }
   .modal {
-    padding: 32px 24px;
+    padding: 32px 20px;
+    max-height: 90vh;
+    overflow-y: auto;
+    border-radius: 24px;
+  }
+  .modalTitle {
+    font-size: 20px;
+  }
+}
+
+@media (max-width: 480px) {
+  .title {
+    font-size: 32px;
+  }
+  .roleMeta {
+    flex-direction: column;
+    gap: 12px;
+  }
+  .submitBtn {
+    padding: 14px;
+    font-size: 14px;
   }
 }

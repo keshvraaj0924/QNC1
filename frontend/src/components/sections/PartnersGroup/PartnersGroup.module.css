@@ -2,9 +2,9 @@
   position: relative;
   width: 100%;
   padding: 8rem 0;
-  background: var(--bg-primary);
+  background: var(--surface-primary);
   overflow: hidden;
-  border-top: 1px solid rgba(255, 255, 255, 0.05);
+  border-top: 1px solid var(--border-color);
 }
 
 .container {
@@ -59,8 +59,8 @@
 
 .partnerCard {
   position: relative;
-  background: var(--surface-primary);
-  border: 1px solid rgba(255, 255, 255, 0.05);
+  background: var(--card-bg);
+  border: 1px solid var(--card-border);
   border-radius: 4px;
   overflow: hidden;
   transition: transform 0.4s ease, box-shadow 0.4s ease;
@@ -79,7 +79,7 @@
   position: relative;
   width: 100%;
   aspect-ratio: 16/9;
-  background: #000;
+  background: var(--background);
 }
 
 .partnerImage {
@@ -119,7 +119,7 @@
   display: flex;
   flex-direction: column;
   justify-content: center;
-  background: var(--surface-primary);
+  background: transparent;
 }
 
 .cardTitle {

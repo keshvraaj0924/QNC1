@@ -8,8 +8,10 @@ import { useLanguage } from '@/context/LanguageContext';
 import LogoBeam from '@/components/modern/LogoBeam';
 import MotionCurve from '@/components/modern/MotionCurve';
 import BlurText from '@/components/modern/BlurText';
+import { useTheme } from '@/context/ThemeContext';
 import CardSwap, { Card } from './CardSwap';
 import OrbitImages from '@/components/modern/OrbitImages';
+import ScrollReveal from '@/components/modern/ScrollReveal';
 
 const ORBIT_IMAGES = [
   '/assets/images/purpose/purpose_vision_future_1775624699579.png',
@@ -29,7 +31,7 @@ const DEFAULT_PURPOSES = [
       en: 'To be the nationwide premier Total Integrated Facility Management (TIFM) partner in Saudi Arabia, innovating sustainable and efficient solutions that set new industry benchmarks.',
       ar: 'أن نكون الشريك الرائد على مستوى المملكة في الإدارة المتكاملة للمرافق (TIFM) في المملكة العربية السعودية، من خلال ابتكار حلول مستدامة وفعالة تضع معايير جديدة للصناعة.'
     },
-    color: '#1373B9'
+    color: '#1A75BB' // QNC Blue
   },
   {
     id: 'mission',
@@ -39,7 +41,7 @@ const DEFAULT_PURPOSES = [
       en: 'Uphold safety standards and quality assurance in delivering services that exceed client expectations.',
       ar: 'الحفاظ على معايير السلامة وضمان الجودة في تقديم الخدمات التي تفوق توقعات العملاء.'
     },
-    color: '#3E813E'
+    color: '#3F8E43' // Success Green
   },
   {
     id: 'values',
@@ -49,12 +51,13 @@ const DEFAULT_PURPOSES = [
       en: 'Delivering safe, high-quality, and innovative FM solutions that consistently exceed client expectations.',
       ar: 'تقديم حلول إدارة مرافق آمنة وعالية الجودة ومبتكرة تفوق توقعات العملاء باستمرار.'
     },
-    color: '#6359A6'
+    color: '#6658A6' // Purple Accent
   }
 ];
 
 export default function MissionVision({ content }: { content?: any }) {
   const { language, isRTL, t } = useLanguage();
+  const { theme } = useTheme();
   const sectionRef = useRef<HTMLElement>(null);
   const isInView = useInView(sectionRef, { once: true, margin: "-100px" });
 
@@ -84,12 +87,12 @@ export default function MissionVision({ content }: { content?: any }) {
         number: `0${index + 1}`,
         title: { en: item.title_en, ar: item.title_ar },
         content: { en: item.content_en, ar: item.content_ar },
-        color: item.color || (index === 0 ? '#1373B9' : index === 1 ? '#3E813E' : '#6359A6')
+        color: item.color || (index === 0 ? '#1A75BB' : index === 1 ? '#3F8E43' : '#6658A6')
       }))
     : DEFAULT_PURPOSES;
 
   return (
-    <section ref={sectionRef} className={`${styles.section} ${isRTL ? styles.rtl : ''}`}>
+    <section ref={sectionRef} className={`${styles.section} ${isRTL ? styles.rtl : ''}`} data-theme={theme}>
       {/* Background Animated Vision 2030 Lines */}
       <motion.div className={styles.backgroundCurves} style={{ opacity }}>
         <motion.div style={{ y: y1 }} className={styles.curveWrapper}>
@@ -97,8 +100,8 @@ export default function MissionVision({ content }: { content?: any }) {
             d={isRTL ? "M1400 300 Q 1050 500, 700 300 T 0 300" : "M0 300 Q 350 100, 700 300 T 1400 300"} 
             viewBox="0 0 1400 600"
             duration={5}
-            opacity={0.12}
-            strokeWidth={2}
+            opacity={0.08}
+            strokeWidth={1.5}
           />
         </motion.div>
         <motion.div style={{ y: y2 }} className={styles.curveWrapperOffset}>
@@ -107,8 +110,8 @@ export default function MissionVision({ content }: { content?: any }) {
             viewBox="0 0 1400 400"
             duration={8}
             delay={1}
-            opacity={0.08}
-            strokeWidth={1.5}
+            opacity={0.05}
+            strokeWidth={1}
           />
         </motion.div>
         <motion.div style={{ y: y3 }} className={styles.curveWrapperFloating}>
@@ -116,45 +119,32 @@ export default function MissionVision({ content }: { content?: any }) {
             d="M0 400 C 350 450, 700 350, 1050 450 C 1400 350, 1400 400, 1400 400" 
             viewBox="0 0 1400 600"
             duration={10}
-            opacity={0.05}
-            strokeWidth={1}
+            opacity={0.03}
+            strokeWidth={0.8}
           />
         </motion.div>
       </motion.div>
 
       <div className={styles.container}>
         <div className={styles.headerRow}>
-          <motion.div 
-            className={styles.sectionHeader}
-            initial={{ opacity: 0, y: 30 }}
-            animate={isInView ? { opacity: 1, y: 0 } : {}}
-            transition={{ duration: 0.8 }}
-          >
-            <div className={styles.preHeader}>
-              <LogoBeam width="80px" />
-              <span className={styles.labelSpan}>{language === 'ar' ? 'رسالتنا وقيمنا' : 'OUR PURPOSE'}</span>
+          <ScrollReveal direction="up" duration={0.8}>
+            <div className={styles.sectionHeader}>
+              <div className={styles.preHeader}>
+                <LogoBeam width="80px" />
+                <span className={styles.labelSpan}>{language === 'ar' ? 'رسالتنا وقيمنا' : 'OUR PURPOSE'}</span>
+              </div>
+              <h2 className={styles.mainTitle}>
+                {language === 'ar' ? 'القيم التي تقودنا' : 'VALUES THAT DRIVE US'}
+              </h2>
             </div>
-            <h2 className={styles.mainTitle}>
-              <BlurText 
-                text={language === 'ar' ? 'القيم التي تقودنا' : 'VALUES THAT DRIVE US'}
-                delay={50}
-                animateBy="words"
-                direction="top"
-              />
-            </h2>
-          </motion.div>
+          </ScrollReveal>
         </div>
 
         <div className={styles.contentLayout}>
-          {/* Left Column: About Us Interlink (Previously Talent Box) */}
-          <motion.div 
-            className={styles.orbitColumn}
-            initial={{ opacity: 0, x: isRTL ? 50 : -50 }}
-            animate={isInView ? { opacity: 1, x: 0 } : {}}
-            transition={{ duration: 1, delay: 0.4 }}
-          >
-            <Link href="/about-us">
-              <div className={`${styles.talentExcellence} ${styles.interlinkBox}`}>
+          {/* Left Column: About Us Interlink */}
+          <ScrollReveal direction="left" delay={0.2} className={styles.aboutBoxColumn}>
+            <Link href="/about-us" className={styles.aboutLinkWrapper}>
+              <div className={`${styles.talentExcellence}`}>
                 <div className={styles.talentVisual}>
                   <img 
                     src="/images/vision/leadership.png" 
@@ -165,39 +155,38 @@ export default function MissionVision({ content }: { content?: any }) {
                 </div>
                 <div className={styles.talentInfo}>
                   <div className={styles.talentTag}>
-                    <div className={styles.multiLabels}>
-                      <span className={styles.leadershipLabel}>{language === 'ar' ? 'اكتشف المزيد' : 'DISCOVER MORE'}</span>
-                    </div>
+                    <span className={styles.leadershipLabel}>
+                      {language === 'ar' ? 'اكتشف إرثنا' : 'DISCOVER OUR LEGACY'}
+                    </span>
                   </div>
-                  <h3 className={styles.talentTitle}>{language === 'ar' ? 'تعرف علينا' : 'About QNC'}</h3>
+                  <h3 className={styles.talentTitle}>
+                    {language === 'ar' ? 'عن قدرات الوطنية' : 'About QNC'}
+                  </h3>
                   <p className={styles.talentText}>
-                    {t('about_description').substring(0, 100)}...
+                    {language === 'ar' 
+                      ? 'اكتشف إرثنا والتزامنا بالتميز في إدارة المرافق.'
+                      : 'Discover our legacy and commitment to facility management excellence.'}
                   </p>
                   <div className={styles.learnMoreLink}>
-                    <span>{language === 'ar' ? 'عرض التفاصيل' : 'Learn More'}</span>
+                    <span>{language === 'ar' ? 'تعرف على المزيد' : 'Learn More'}</span>
                     <span className={styles.arrow}>→</span>
                   </div>
                 </div>
               </div>
             </Link>
-          </motion.div>
+          </ScrollReveal>
 
           {/* Right Column: Moving Swap Cards */}
-          <motion.div 
-            className={styles.cardsColumn}
-            initial={{ opacity: 0, x: isRTL ? -50 : 50 }}
-            animate={isInView ? { opacity: 1, x: 0 } : {}}
-            transition={{ duration: 1, delay: 0.6 }}
-          >
+          <ScrollReveal direction="right" delay={0.4} className={styles.cardsColumn}>
             <div className={styles.swapContainer}>
               <CardSwap
-                width={isMobile ? "100%" : 480}
-                height={isMobile ? 350 : 350}
-                cardDistance={isMobile ? 0 : 70}
-                verticalDistance={isMobile ? 0 : 80}
-                delay={3000}
+                width={isMobile ? "90%" : 480}
+                height={isMobile ? 380 : 400}
+                cardDistance={isMobile ? 12 : 50}
+                verticalDistance={isMobile ? 15 : 60}
+                delay={6000}
                 pauseOnHover={true}
-                skewAmount={isMobile ? 0 : 2}
+                skewAmount={isMobile ? 0 : 1}
               >
                 {purposes.map((item, index) => (
                   <Card 
@@ -234,7 +223,7 @@ export default function MissionVision({ content }: { content?: any }) {
                 ))}
               </CardSwap>
             </div>
-          </motion.div>
+          </ScrollReveal>
         </div>
       </div>
     </section>

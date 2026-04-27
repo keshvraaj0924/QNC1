@@ -4,15 +4,28 @@ import { useState } from 'react';
 import Header from '@/components/layout/Header/Header';
 import Footer from '@/components/layout/Footer/Footer';
 import PageWrapper from '@/components/layout/PageWrapper/PageWrapper';
-import { motion } from 'framer-motion';
+import ScrollReveal from '@/components/modern/ScrollReveal';
 import styles from './Contact.module.css';
 import { useLanguage } from '@/context/LanguageContext';
+import { motion, useScroll, useTransform } from 'framer-motion';
+import { useRef } from 'react';
+import Image from 'next/image';
 
 export default function ContactPage() {
   const { language, t } = useLanguage();
   const [form, setForm] = useState({ name: '', email: '', message: '' });
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [success, setSuccess] = useState(false);
+
+  const containerRef = useRef(null);
+  const { scrollYProgress } = useScroll({
+    target: containerRef,
+    offset: ["start start", "end start"]
+  });
+
+  const y = useTransform(scrollYProgress, [0, 1], ["0%", "30%"]);
+  const opacity = useTransform(scrollYProgress, [0, 0.8], [1, 0]);
+  const scale = useTransform(scrollYProgress, [0, 1], [1, 1.1]);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -36,30 +49,38 @@ export default function ContactPage() {
   };
 
   return (
-    <main className={styles.main}>
+    <main className={styles.main} ref={containerRef}>
       <Header />
-      <PageWrapper>
+      <PageWrapper noPadding={true}>
         <section className={styles.heroSection}>
-          <motion.h1 
-            initial={{ opacity: 0, y: 50 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 1.2, ease: [0.76, 0, 0.24, 1] }}
-            className={styles.title}
-          >
-            {t('contact_title')}
-          </motion.h1>
+          <div className={styles.imageOverlay} />
+          <motion.div style={{ y, scale }} className={styles.heroImageContainer}>
+            <Image 
+              src="/assets/images/showcase-hero-v2.png"
+              alt="Contact QNC"
+              fill
+              className={styles.heroImage}
+              priority
+            />
+          </motion.div>
+          <motion.div style={{ opacity }} className={styles.container}>
+            <ScrollReveal direction="up" duration={1.2}>
+              <h1 className={styles.title}>
+                {t('contact_title')}
+              </h1>
+            </ScrollReveal>
+          </motion.div>
         </section>
 
         <section className={styles.splitSection}>
           <div className={styles.container}>
             
             {/* Left: Contact Info */}
-            <motion.div 
+            <ScrollReveal 
               className={styles.infoCol}
-              initial={{ opacity: 0, x: -50 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 1 }}
+              direction="left"
+              delay={0.2}
+              duration={1}
             >
               <h2 className={styles.subTitle}>{t('contact_sub')}</h2>
               <div className={styles.contactBlock}>
@@ -75,15 +96,14 @@ export default function ContactPage() {
                 <p dir="ltr" className="ltr-content">+966 13 000 0000</p>
               </div>
 
-            </motion.div>
+            </ScrollReveal>
 
             {/* Right: Form */}
-            <motion.div 
+            <ScrollReveal 
               className={styles.formCol}
-              initial={{ opacity: 0, x: 50 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 1, delay: 0.2 }}
+              direction="right"
+              delay={0.4}
+              duration={1}
             >
               {!success ? (
                 <form className={styles.form} onSubmit={handleSubmit}>
@@ -132,7 +152,7 @@ export default function ContactPage() {
                    <p>Your message has been sent successfully. Our team will contact you soon.</p>
                 </div>
               )}
-            </motion.div>
+            </ScrollReveal>
 
           </div>
         </section>

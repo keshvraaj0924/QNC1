@@ -276,3 +276,28 @@
     box-shadow: 20px 0 50px rgba(0, 0, 0, 0.5);
   }
 }
+
+@media (max-width: 768px) {
+  .topHeader {
+    padding: 0 20px;
+    height: 70px;
+  }
+  .pageContainer {
+    padding: 20px;
+  }
+  .headerBreadcrumbs {
+    font-size: 12px;
+  }
+}
+
+@media (max-width: 480px) {
+  .sidebar {
+    width: 240px;
+  }
+  .logoArea {
+    padding: 30px 20px;
+  }
+  .nav {
+    padding: 0 10px;
+  }
+}

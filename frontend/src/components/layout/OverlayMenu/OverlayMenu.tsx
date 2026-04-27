@@ -25,11 +25,11 @@ export default function OverlayMenu({ isOpen, onClose }: { isOpen: boolean; onCl
     hidden: { opacity: 0 },
     visible: { 
       opacity: 1,
-      transition: { duration: 0.8, ease: [0.76, 0, 0.24, 1] }
+      transition: { duration: 0.4, ease: [0.76, 0, 0.24, 1] }
     },
     exit: { 
       opacity: 0,
-      transition: { duration: 0.6, ease: [0.76, 0, 0.24, 1] }
+      transition: { duration: 0.3, ease: [0.76, 0, 0.24, 1] }
     }
   };
 
@@ -37,13 +37,13 @@ export default function OverlayMenu({ isOpen, onClose }: { isOpen: boolean; onCl
     hidden: { opacity: 0 },
     visible: {
       opacity: 1,
-      transition: { staggerChildren: 0.08, delayChildren: 0.2 }
+      transition: { staggerChildren: 0.05, delayChildren: 0.1 }
     }
   };
 
   const itemVariants: any = {
-    hidden: { opacity: 0, y: 30 },
-    visible: { opacity: 1, y: 0, transition: { duration: 0.6, ease: 'easeOut' } }
+    hidden: { opacity: 0, y: 15 },
+    visible: { opacity: 1, y: 0, transition: { duration: 0.4, ease: 'easeOut' } }
   };
 
   const activeMenuLink = menuLinks.find((l) => l.name.en === activeLink);
@@ -164,7 +164,28 @@ export default function OverlayMenu({ isOpen, onClose }: { isOpen: boolean; onCl
                            <Link href="/showcase" className={styles.contextLink} onClick={onClose}>{t('nav_showcase')} ↗</Link>
                          </>
                        )}
-                    </motion.div>
+                       {activeLink === 'Careers' && (
+                         <>
+                           <h4 className={styles.contextTitle}>{t('nav_careers')}</h4>
+                           <p className={styles.contextDesc}>{language === 'en' ? 'Join our elite team of facility management professionals and shape the future of operational excellence.' : 'انضم إلى فريقنا المتميز من محترفي إدارة المرافق وساهم في تشكيل مستقبل التميز التشغيلي.'}</p>
+                           <Link href="/careers" className={styles.contextLink} onClick={onClose}>{t('nav_careers')} ↗</Link>
+                         </>
+                       )}
+                       {activeLink === 'About Us' && (
+                         <>
+                           <h4 className={styles.contextTitle}>{t('nav_about')}</h4>
+                           <p className={styles.contextDesc}>{t('section_about_desc')}</p>
+                           <Link href="/about-us" className={styles.contextLink} onClick={onClose}>{t('nav_about')} ↗</Link>
+                         </>
+                       )}
+                       {activeLink === 'News & Events' && (
+                         <>
+                           <h4 className={styles.contextTitle}>{t('nav_news')}</h4>
+                           <p className={styles.contextDesc}>{language === 'en' ? 'Stay updated with the latest insights, project milestones, and corporate events from QNC.' : 'ابق على اطلاع بآخر الرؤى، وإنجازات المشاريع، وفعاليات الشركة من قدرات الوطنية.'}</p>
+                           <Link href="/news" className={styles.contextLink} onClick={onClose}>{t('nav_news')} ↗</Link>
+                         </>
+                       )}
+                     </motion.div>
                   )}
                 </motion.div>
               </AnimatePresence>

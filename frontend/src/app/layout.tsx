@@ -7,12 +7,11 @@ const outfit = Outfit({ subsets: ["latin"], variable: '--font-outfit' });
 const syne = Syne({ subsets: ["latin"], variable: '--font-syne' });
 const cairo = Cairo({ subsets: ["arabic"], variable: '--font-cairo' });
 
-import SmoothScroll from '@/components/layout/SmoothScroll/SmoothScroll';
-import ModernCursor from '@/components/layout/ModernCursor/ModernCursor';
 import { ThemeProvider } from "@/context/ThemeContext";
 import { SettingsProvider } from "@/context/SettingsContext";
 import ScrollNavigation from '@/components/layout/ScrollNavigation/ScrollNavigation';
 import LogoPreloader from '@/components/layout/Preloader/LogoPreloader';
+import ClientWrappers from "@/components/layout/ClientWrappers";
 
 export const metadata: Metadata = {
   title: "Qudrat National Company (QNC)",
@@ -31,11 +30,10 @@ export default function RootLayout({
         <SettingsProvider>
           <ThemeProvider>
             <LanguageProvider>
-              <SmoothScroll>
-                <ModernCursor />
+              <ClientWrappers>
                 <ScrollNavigation />
                 {children}
-              </SmoothScroll>
+              </ClientWrappers>
             </LanguageProvider>
           </ThemeProvider>
         </SettingsProvider>

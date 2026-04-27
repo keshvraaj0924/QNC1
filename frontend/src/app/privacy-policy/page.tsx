@@ -3,7 +3,9 @@
 import Header from '@/components/layout/Header/Header';
 import Footer from '@/components/layout/Footer/Footer';
 import PageWrapper from '@/components/layout/PageWrapper/PageWrapper';
-import { motion } from 'framer-motion';
+import { motion, useScroll, useTransform } from 'framer-motion';
+import { useRef } from 'react';
+import Image from 'next/image';
 import styles from './Legal.module.css';
 
 import { useLanguage } from '@/context/LanguageContext';
@@ -13,26 +15,48 @@ export default function PrivacyPolicyPage() {
   const { language, t } = useLanguage();
   const lang = language as 'en' | 'ar';
 
+  const containerRef = useRef(null);
+  const { scrollYProgress } = useScroll({
+    target: containerRef,
+    offset: ["start start", "end start"]
+  });
+
+  const y = useTransform(scrollYProgress, [0, 1], ["0%", "30%"]);
+  const opacity = useTransform(scrollYProgress, [0, 0.5], [1, 0]);
+  const scale = useTransform(scrollYProgress, [0, 1], [1, 1.1]);
+
   return (
-    <main className={styles.main}>
+    <main className={styles.main} ref={containerRef}>
       <Header />
-      <PageWrapper>
+      <PageWrapper noPadding={true}>
         <section className={styles.heroSection}>
-          <motion.h1 
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 1.2, ease: [0.76, 0, 0.24, 1] }}
-            className={styles.title}
-          >
-            {t('nav_privacy')}
-          </motion.h1>
-          <motion.div 
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ delay: 0.4, duration: 1 }}
-            className={styles.metaData}
-          >
-            <p className={styles.lastUpdated}>Effective Date: 18/05/2025</p>
+          <div className={styles.imageOverlay} />
+          <motion.div style={{ y, scale }} className={styles.heroImageContainer}>
+            <Image 
+              src="/assets/images/qnc_legacy_branding.png"
+              alt="Privacy Policy"
+              fill
+              className={styles.heroImage}
+              priority
+            />
+          </motion.div>
+          <motion.div style={{ opacity }} className={styles.heroContent}>
+            <motion.h1 
+              initial={{ opacity: 0, y: 30 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 1.2, ease: [0.76, 0, 0.24, 1] }}
+              className={styles.title}
+            >
+              {t('nav_privacy')}
+            </motion.h1>
+            <motion.div 
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ delay: 0.4, duration: 1 }}
+              className={styles.metaData}
+            >
+              <p className={styles.lastUpdated}>Effective Date: 18/05/2025</p>
+            </motion.div>
           </motion.div>
         </section>
 

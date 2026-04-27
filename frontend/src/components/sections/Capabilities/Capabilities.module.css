@@ -1,8 +1,8 @@
 .kineticSection {
   position: relative;
   width: 100%;
-  background-color: #050505;
-  color: #fff;
+  background-color: var(--background);
+  color: var(--foreground);
   overflow: visible; /* Ensure pinning markers/shadows aren't clipped */
   z-index: 50; /* Higher than Map section */
 }
@@ -79,7 +79,7 @@
   text-transform: uppercase;
   font-family: var(--font-syne), sans-serif;
   margin-top: 0.5rem;
-  color: #fff; /* Default */
+  color: var(--foreground); /* Default */
   transition: color 0.4s ease;
   line-height: 1; /* Added to keep header compact */
 }
@@ -159,7 +159,7 @@
   box-shadow: 0 40px 80px rgba(0,0,0,0.5);
   position: relative;
   border: 1px solid rgba(255, 255, 255, 0.1);
-  background: #111;
+  background: var(--card-bg);
 }
 
 .cardVisual {
@@ -324,7 +324,7 @@
   font-size: clamp(3rem, 10vw, 8rem);
   font-weight: 900;
   font-family: var(--font-syne), sans-serif;
-  color: #fff;
+  color: var(--foreground);
   position: relative;
   text-shadow: 0.05em 0 0 #cba152, -0.025em -0.05em 0 #675EA7;
   animation: glitch 1s infinite;
@@ -498,7 +498,7 @@
 
   .glitchText {
     font-size: 2.2rem !important; /* Premium size for mobile category title */
-    color: #fff !important;
+    color: var(--foreground) !important;
     text-shadow: 0.05em 0 0 #cba152, -0.025em -0.05em 0 #675EA7;
     animation: glitch 1s infinite !important;
   }

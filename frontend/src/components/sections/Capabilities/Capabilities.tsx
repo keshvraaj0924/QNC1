@@ -10,6 +10,8 @@ if (typeof window !== 'undefined') {
   gsap.registerPlugin(ScrollTrigger);
 }
 
+import { servicesData } from '@/data/content';
+
 /**
  * Service Data Definition
  */
@@ -25,20 +27,32 @@ interface Service {
   slug: string;
 }
 
-const ALL_SERVICES: Service[] = [
-  { id: '01', slug: 'hvac-services', titleEn: 'HVAC', titleAr: 'التكييف والتهوية', descEn: 'Maintenance and servicing of heating, ventilation, and air conditioning systems.', descAr: 'صيانة أنظمة التكييف والتهوية.', type: 'HARD', icon: 'Thermometer', image: '/assets/QNCHardandSoft/Gemini_Generated_Image_rdhr24rdhr24rdhr.png' },
-  { id: '02', slug: 'mep-engineering', titleEn: 'MEP', titleAr: 'الكهروميكانيكية', descEn: 'Integrated maintenance for Mechanical, Electrical, and Plumbing systems.', descAr: 'صيانة الأنظمة الميكانيكية والكهربائية والسباكة.', type: 'HARD', icon: 'Zap', image: '/assets/QNCHardandSoft/Gemini_Generated_Image_5wljv05wljv05wlj.png' },
-  { id: '03', slug: 'civil-construction', titleEn: 'Civil Works', titleAr: 'الأعمال المدنية', descEn: 'General repair and maintenance to keep building structures safe.', descAr: 'الإصلاح العام للحفاظ على هياكل المباني.', type: 'HARD', icon: 'HardHat', image: '/assets/QNCHardandSoft/Gemini_Generated_Image_gqph12gqph12gqph.png' },
-  { id: '04', slug: 'low-current-systems', titleEn: 'Low Current', titleAr: 'التيار المنخفض', descEn: 'Support for CCTV, access control, and fire alarm systems.', descAr: 'دعم أنظمة الدوائر التلفزيونية والإنذار.', type: 'HARD', icon: 'Radio', image: '/assets/QNCHardandSoft/Gemini_Generated_Image_d84ktdd84ktdd84k.png' },
-  { id: '05', slug: 'renovation-and-fitout', titleEn: 'Renovation', titleAr: 'التجديد والتجهيز', descEn: 'Upgrade and interior modification works.', descAr: 'أعمال الترقية والتعديل الداخلي.', type: 'HARD', icon: 'Hammer', image: '/assets/QNCHardandSoft/Gemini_Generated_Image_vlm0khvlm0khvlm0.png' },
-  { id: '06', slug: 'third-party-management', titleEn: '3rd Party', titleAr: 'إدارة الموردين', descEn: 'Coordination and oversight of specialized external vendors.', descAr: 'التنسيق والإشراف على الموردين الخارجيين.', type: 'HARD', icon: 'Users', image: '/assets/QNCHardandSoft/Gemini_Generated_Image_7r05vk7r05vk7r05.png' },
-  { id: '07', slug: 'housekeeping-and-maintenance', titleEn: 'Housekeeping', titleAr: 'التنظيف والدعم', descEn: 'Daily cleaning and office support services.', descAr: 'خدمات التنظيف اليومي والدعم المكتبي.', type: 'SOFT', icon: 'Sparkles', image: '/assets/QNCHardandSoft/Gemini_Generated_Image_j529vdj529vdj529.png' },
-  { id: '08', slug: 'catering-services', titleEn: 'Catering', titleAr: 'خدمات الإعاشة', descEn: 'Quality food services and hospitality catering.', descAr: 'خدمات غذائية وضيافة مخصصة.', type: 'SOFT', icon: 'Coffee', image: '/assets/QNCHardandSoft/Gemini_Generated_Image_p1kxf7p1kxf7p1kx.png' },
-  { id: '09', slug: 'facade-cleaning', titleEn: 'Facade Clean', titleAr: 'تنظيف الواجهات', descEn: 'Specialized high-rise and glass cleaning.', descAr: 'تنظيف النوافذ والواجهات الزجاجية.', type: 'SOFT', icon: 'Wind', image: '/assets/QNCHardandSoft/Gemini_Generated_Image_1aoqjk1aoqjk1aoq.png' },
-  { id: '10', slug: 'landscaping-services', titleEn: 'Landscaping', titleAr: 'تنسيق الحدائق', descEn: 'Design and maintenance of greenery outdoor spaces.', descAr: 'تصميم وصيانة المساحات الخضراء.', type: 'SOFT', icon: 'TreePine', image: '/assets/QNCHardandSoft/Gemini_Generated_Image_pz9pukpz9pukpz9p.png' },
-  { id: '11', slug: 'pest-control-management', titleEn: 'Pest Control', titleAr: 'مكافحة الحشرات', descEn: 'Expert treatment and prevention services.', descAr: 'خدمات العلاج والوقاية المتخصصة.', type: 'SOFT', icon: 'ShieldAlert', image: '/assets/QNCHardandSoft/Gemini_Generated_Image_g1rmqug1rmqug1rm.png' },
-  { id: '12', slug: 'facility-help-desk', titleEn: 'Help Desk', titleAr: 'مكتب المساعدة', descEn: 'Central hub for tracking all facility requests.', descAr: 'مركز لتسجيل ومتابعة طلبات المنشأة.', type: 'SOFT', icon: 'Headphones', image: '/assets/QNCHardandSoft/Gemini_Generated_Image_2r7fg2r7fg2r7fg2.png' }
-];
+const ICON_MAP: Record<string, string> = {
+  'hvac-services': 'Thermometer',
+  'mep-engineering': 'Zap',
+  'civil-construction': 'HardHat',
+  'low-current-systems': 'Radio',
+  'renovation-and-fitout': 'Hammer',
+  'third-party-management': 'Users',
+  'housekeeping-and-maintenance': 'Sparkles',
+  'catering-services': 'Coffee',
+  'facade-cleaning': 'Wind',
+  'landscaping-services': 'TreePine',
+  'pest-control-management': 'ShieldAlert',
+  'facility-help-desk': 'Headphones'
+};
+
+const ALL_SERVICES: Service[] = servicesData.map((s, idx) => ({
+  id: (idx + 1).toString().padStart(2, '0'),
+  slug: s.slug,
+  titleEn: s.title.en,
+  titleAr: s.title.ar,
+  descEn: s.description.en,
+  descAr: s.description.ar,
+  type: s.category.toUpperCase() as 'HARD' | 'SOFT',
+  icon: ICON_MAP[s.slug] || 'Settings',
+  image: s.image
+}));
 
 const HARD_SERVICES: Service[] = ALL_SERVICES.filter(s => s.type === 'HARD');
 const SOFT_SERVICES: Service[] = ALL_SERVICES.filter(s => s.type === 'SOFT');

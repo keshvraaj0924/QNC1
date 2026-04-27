@@ -9,6 +9,10 @@ import { Briefcase, MapPin, Building2, Upload, Send, CheckCircle2, Loader2, X } 
 import styles from './Careers.module.css';
 import { useLanguage } from '@/context/LanguageContext';
 import { adminApi } from '@/services/adminApi';
+import ScrollReveal from '@/components/modern/ScrollReveal';
+import { useScroll, useTransform } from 'framer-motion';
+import { useRef } from 'react';
+import Image from 'next/image';
 
 export default function CareersPage() {
   const { language, t } = useLanguage();
@@ -23,15 +27,68 @@ export default function CareersPage() {
   const [submitted, setSubmitted] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
+  const containerRef = useRef(null);
+  const { scrollYProgress } = useScroll({
+    target: containerRef,
+    offset: ["start start", "end start"]
+  });
+
+  const y = useTransform(scrollYProgress, [0, 1], ["0%", "30%"]);
+  const opacity = useTransform(scrollYProgress, [0, 0.8], [1, 0]);
+  const scale = useTransform(scrollYProgress, [0, 1], [1, 1.1]);
+
+  const STATIC_ROLES = [
+    {
+      id: 'st-01',
+      title_en: 'Facility Manager',
+      title_ar: 'مدير مرافق',
+      department_en: 'Operations',
+      department_ar: 'العمليات',
+      location_en: 'Al-Khobar',
+      location_ar: 'الخبر',
+      description_en: 'Leading total facility management operations for major industrial projects.',
+      description_ar: 'قيادة عمليات إدارة المرافق الشاملة للمشاريع الصناعية الكبرى.'
+    },
+    {
+      id: 'st-02',
+      title_en: 'HVAC Technician',
+      title_ar: 'فني تكييف وتبريد',
+      department_en: 'Maintenance',
+      department_ar: 'الصيانة',
+      location_en: 'Jeddah',
+      location_ar: 'جدة',
+      description_en: 'Specialized maintenance and repair of industrial HVAC systems.',
+      description_ar: 'صيانة وإصلاح أنظمة التكييف والتهوية الصناعية المتخصصة.'
+    },
+    {
+      id: 'st-03',
+      title_en: 'HSE Officer',
+      title_ar: 'مسؤول صحة وسلامة',
+      department_en: 'Compliance',
+      department_ar: 'الامتثال',
+      location_en: 'NEOM',
+      location_ar: 'نيوم',
+      description_en: 'Ensuring strict adherence to health, safety, and environmental standards.',
+      description_ar: 'ضمان الالتزام الصارم بمعايير الصحة والسلامة والبيئة.'
+    }
+  ];
+
   useEffect(() => {
     const fetchRoles = async () => {
       try {
         const data = await adminApi.getPublicContent();
-        if (data.careers?.open_roles) {
+        if (data.careers?.open_roles && data.careers.open_roles.length > 0) {
           setRoles(data.careers.open_roles);
+        } else {
+          setRoles(STATIC_ROLES);
         }
-      } catch (err) {
-        console.error('Failed to load careers:', err);
+      } catch (err: any) {
+        if (err.message === 'NETWORK_ERROR') {
+          console.warn('Backend offline, using static fallback.');
+        } else {
+          console.error('Failed to load careers:', err);
+        }
+        setRoles(STATIC_ROLES);
       } finally {
         setLoading(false);
       }
@@ -54,12 +111,15 @@ export default function CareersPage() {
     submitData.append('resume', file);
 
     try {
-      const res = await fetch('http://localhost:4000/api/v1/public/apply', {
+      const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL || 'http://localhost:4000'}/api/v1/public/apply`, {
         method: 'POST',
         body: submitData,
       });
 
-      if (!res.ok) throw new Error('Submission failed');
+      if (!res.ok) {
+        const data = await res.json().catch(() => ({}));
+        throw new Error(data.error || 'Submission failed');
+      }
       
       setSubmitted(true);
       setTimeout(() => {
@@ -68,8 +128,12 @@ export default function CareersPage() {
         setFormData({ name: '', email: '' });
         setFile(null);
       }, 3000);
-    } catch (err) {
-      setError('Failed to submit application. Please try again.');
+    } catch (err: any) {
+      if (err.name === 'TypeError') {
+        setError(language === 'en' ? 'Server is currently offline. Please try again later.' : 'الخادم غير متصل حالياً. يرجى المحاولة لاحقاً.');
+      } else {
+        setError(err.message || 'Failed to submit application.');
+      }
     } finally {
       setIsSubmitting(false);
     }
@@ -78,77 +142,87 @@ export default function CareersPage() {
   if (loading) return <div className={styles.loader}><Loader2 className={styles.spin} size={40} /></div>;
 
   return (
-    <main className={styles.main}>
+    <main className={styles.main} ref={containerRef}>
       <Header />
-      <PageWrapper>
+      <PageWrapper noPadding={true}>
         <section className={styles.heroSection}>
-          <div className={styles.heroContent}>
-            <motion.h1 
-              initial={{ opacity: 0, y: 30 }}
-              animate={{ opacity: 1, y: 0 }}
-              className={styles.title}
-            >
-              {language === 'en' ? 'Careers at QNC' : 'الوظائف في قدرات الوطنية'}
-            </motion.h1>
-            <motion.p 
-              initial={{ opacity: 0, y: 30 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.1 }}
-              className={styles.subtitle}
-            >
-              {language === 'en' 
-                ? 'Join an industry leader in Total Facilities Management and help shape the future of Saudi Arabia.'
-                : 'انضم إلى شركة رائدة في مجال إدارة المرافق المتكاملة وساهم في تشكيل مستقبل المملكة العربية السعودية.'}
-            </motion.p>
-          </div>
+          <div className={styles.imageOverlay} />
+          <motion.div style={{ y, scale }} className={styles.heroImageContainer}>
+            <Image 
+              src="/assets/images/qudrat-clients_0032_Layer-2.jpg"
+              alt="Careers at QNC"
+              fill
+              className={styles.heroImage}
+              priority
+            />
+          </motion.div>
+          <motion.div style={{ opacity }} className={styles.heroContent}>
+            <ScrollReveal direction="up" duration={1}>
+              <h1 className={styles.title}>
+                {language === 'en' ? 'Careers at QNC' : 'الوظائف في قدرات الوطنية'}
+              </h1>
+            </ScrollReveal>
+            <ScrollReveal direction="up" delay={0.2} duration={1}>
+              <p className={styles.subtitle}>
+                {language === 'en' 
+                  ? 'Join an industry leader in Total Facilities Management and help shape the future of Saudi Arabia.'
+                  : 'انضم إلى شركة رائدة في مجال إدارة المرافق المتكاملة وساهم في تشكيل مستقبل المملكة العربية السعودية.'}
+              </p>
+            </ScrollReveal>
+          </motion.div>
         </section>
 
         <section className={styles.rolesSection}>
           <div className={styles.container}>
-            <div className={styles.sectionHeader}>
+            <ScrollReveal direction="up" className={styles.sectionHeader}>
               <h2 className={styles.sectionTitle}>
                 {language === 'en' ? 'Open Opportunities' : 'الفرص الحالية'}
               </h2>
               <div className={styles.titleUnderline} />
-            </div>
+            </ScrollReveal>
 
             <div className={styles.rolesGrid}>
-              {roles.map((role) => (
-                <motion.div 
+              {roles.map((role, idx) => (
+                <ScrollReveal 
                   key={role.id}
-                  className={styles.roleCard}
-                  whileHover={{ y: -5 }}
+                  direction="up"
+                  delay={0.1 * idx}
                 >
-                  <div className={styles.roleHeader}>
-                    <Briefcase className={styles.roleIcon} size={24} />
-                    <h3 className={styles.roleTitle}>
-                      {language === 'en' ? role.title_en : role.title_ar}
-                    </h3>
-                  </div>
-                  
-                  <div className={styles.roleMeta}>
-                    <div className={styles.metaItem}>
-                      <Building2 size={16} />
-                      <span>{language === 'en' ? role.department_en : role.department_ar}</span>
-                    </div>
-                    <div className={styles.metaItem}>
-                      <MapPin size={16} />
-                      <span>{language === 'en' ? role.location_en : role.location_ar}</span>
-                    </div>
-                  </div>
-
-                  <p className={styles.roleDesc}>
-                    {language === 'en' ? role.description_en : role.description_ar}
-                  </p>
-
-                  <button 
-                    className={styles.applyBtn}
-                    onClick={() => setSelectedRole(role)}
-                    data-cursor="hover"
+                  <motion.div 
+                    className={styles.roleCard}
+                    whileHover={{ y: -10, borderColor: 'var(--qnc-gold)' }}
                   >
-                    {language === 'en' ? 'Apply Now' : 'قدم الآن'}
-                  </button>
-                </motion.div>
+                    <div className={styles.roleHeader}>
+                      <Briefcase className={styles.roleIcon} size={24} />
+                      <h3 className={styles.roleTitle}>
+                        {language === 'en' ? role.title_en : role.title_ar}
+                      </h3>
+                    </div>
+                    
+                    <div className={styles.roleMeta}>
+                      <div className={styles.metaItem}>
+                        <Building2 size={16} />
+                        <span>{language === 'en' ? role.department_en : role.department_ar}</span>
+                      </div>
+                      <div className={styles.metaItem}>
+                        <MapPin size={16} />
+                        <span>{language === 'en' ? role.location_en : role.location_ar}</span>
+                      </div>
+                    </div>
+
+                    <p className={styles.roleDesc}>
+                      {language === 'en' ? role.description_en : role.description_ar}
+                    </p>
+
+                    <button 
+                      className={styles.applyBtn}
+                      onClick={() => setSelectedRole(role)}
+                      data-cursor="hover"
+                    >
+                      {language === 'en' ? 'Apply Now' : 'قدم الآن'}
+                    </button>
+                  </motion.div>
+                </ScrollReveal>
               ))}
             </div>
           </div>

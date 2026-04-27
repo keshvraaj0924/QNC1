@@ -9,43 +9,60 @@ import { ArrowRight, Calendar, Tag } from 'lucide-react';
 import Header from '@/components/layout/Header/Header';
 import Footer from '@/components/layout/Footer/Footer';
 
+import ScrollReveal from '@/components/modern/ScrollReveal';
+import { useScroll, useTransform } from 'framer-motion';
+import { useRef } from 'react';
+import Image from 'next/image';
+
 export default function NewsHub() {
   const { language, t } = useLanguage();
   const isRTL = language === 'ar';
 
+  const containerRef = useRef(null);
+  const { scrollYProgress } = useScroll({
+    target: containerRef,
+    offset: ["start start", "end start"]
+  });
+
+  const y = useTransform(scrollYProgress, [0, 1], ["0%", "30%"]);
+  const opacity = useTransform(scrollYProgress, [0, 0.8], [1, 0]);
+  const scale = useTransform(scrollYProgress, [0, 1], [1, 1.1]);
+
   return (
-    <main className={styles.main} dir={isRTL ? 'rtl' : 'ltr'}>
+    <main className={styles.main} dir={isRTL ? 'rtl' : 'ltr'} ref={containerRef}>
       <Header />
       
       {/* Hero Section */}
       <section className={styles.hero}>
-        <div className={styles.heroContent}>
-          <motion.span 
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            className={styles.kicker}
-          >
-            {isRTL ? 'آخر التحديثات' : 'LATEST UPDATES'}
-          </motion.span>
-          <motion.h1 
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.1 }}
-            className={styles.title}
-          >
-            {isRTL ? 'الأخبار والفعاليات' : 'News & Events'}
-          </motion.h1>
-          <motion.p 
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.2 }}
-            className={styles.description}
-          >
-            {isRTL 
-              ? 'ابق على اطلاع بآخر التطورات والشراكات والإنجازات في شركة قدرات الوطنية.' 
-              : 'Stay updated with the latest developments, partnerships, and milestones at Qudrat National Company.'}
-          </motion.p>
-        </div>
+        <div className={styles.imageOverlay} />
+        <motion.div style={{ y, scale }} className={styles.heroImageContainer}>
+          <Image 
+            src="/assets/images/alef360.png"
+            alt="News"
+            fill
+            className={styles.heroImage}
+            priority
+          />
+        </motion.div>
+        <motion.div style={{ opacity }} className={styles.heroContent}>
+          <ScrollReveal direction="up" duration={0.8}>
+            <span className={styles.kicker}>
+              {isRTL ? 'آخر التحديثات' : 'LATEST UPDATES'}
+            </span>
+          </ScrollReveal>
+          <ScrollReveal direction="up" delay={0.1} duration={0.8}>
+            <h1 className={styles.title}>
+              {isRTL ? 'الأخبار والفعاليات' : 'News & Events'}
+            </h1>
+          </ScrollReveal>
+          <ScrollReveal direction="up" delay={0.2} duration={0.8}>
+            <p className={styles.description}>
+              {isRTL 
+                ? 'ابق على اطلاع بآخر التطورات والشراكات والإنجازات في شركة قدرات الوطنية.' 
+                : 'Stay updated with the latest developments, partnerships, and milestones at Qudrat National Company.'}
+            </p>
+          </ScrollReveal>
+        </motion.div>
         <div className={styles.heroGradient} />
       </section>
 
@@ -54,12 +71,10 @@ export default function NewsHub() {
         <div className={styles.container}>
           <div className={styles.newsGrid}>
             {newsData.map((item, idx) => (
-              <motion.article 
+              <ScrollReveal 
                 key={item.slug}
-                initial={{ opacity: 0, y: 40 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: idx * 0.1 }}
+                direction="up"
+                delay={idx * 0.1}
                 className={styles.newsCard}
               >
                 <Link href={`/news/${item.slug}`} className={styles.cardLink}>
@@ -87,7 +102,7 @@ export default function NewsHub() {
                     </span>
                   </div>
                 </Link>
-              </motion.article>
+              </ScrollReveal>
             ))}
           </div>
         </div>

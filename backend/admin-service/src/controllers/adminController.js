@@ -221,12 +221,14 @@ export const updateContent = async (req, res) => {
   try {
     const { key, data, autoTranslateSource } = req.body;
     let content = await DbService.getContent();
+    let responseMsg = 'Content updated successfully';
     
     // Check if key is a service or a top-level key
     if (content.services[key]) {
       let updatedData = { ...content.services[key], ...data };
       if (autoTranslateSource) {
         updatedData = await TranslateService.syncLanguages(updatedData, autoTranslateSource);
+        responseMsg = `Service "${updatedData.title_en}" updated and synchronized to ${autoTranslateSource === 'en' ? 'Arabic' : 'English'}`;
       }
       content.services[key] = updatedData;
     } else {
@@ -234,14 +236,25 @@ export const updateContent = async (req, res) => {
       let updatedData = data;
       if (autoTranslateSource) {
         updatedData = await TranslateService.syncLanguages(data, autoTranslateSource);
+        responseMsg = `Section "${key}" updated and translated successfully`;
       }
       content[key] = updatedData;
     }
 
     await DbService.saveContent(content);
-    res.json({ message: 'Saved successfully', data: content[key] || content.services[key] });
+    res.json({ 
+      success: true,
+      message: responseMsg, 
+      data: content[key] || content.services[key],
+      timestamp: new Date().toISOString()
+    });
   } catch (err) {
-    res.status(500).json({ error: 'Server error: ' + err.message });
+    console.error('Update Content Error:', err);
+    res.status(500).json({ 
+      success: false,
+      error: 'Failed to update content',
+      details: err.message 
+    });
   }
 };
 

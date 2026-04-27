@@ -8,12 +8,13 @@ import { useLanguage } from '@/context/LanguageContext';
 import LogoBeam from '@/components/modern/LogoBeam';
 import MotionCurve from '@/components/modern/MotionCurve';
 import BlurText from '@/components/modern/BlurText';
+import { useTheme } from '@/context/ThemeContext';
 
 export default function NationalVision({ content }: { content?: any }) {
   const { language, t } = useLanguage();
+  const { theme } = useTheme();
   const [isModalOpen, setIsModalOpen] = useState(false);
   const containerRef = useRef<HTMLDivElement>(null);
-  const isInView = useInView(containerRef, { once: true, amount: 0.3 });
 
   // Prevent background scrolling when modal is open
   useEffect(() => {
@@ -27,30 +28,9 @@ export default function NationalVision({ content }: { content?: any }) {
     };
   }, [isModalOpen]);
   
-  /* Removed count-up logic for 2030 as it is replaced by logo image */
-  
   const title = language === 'en' ? (content?.title_en || t('vision_title')) : (content?.title_ar || t('vision_title'));
   const description = language === 'en' ? (content?.description_en || t('vision_description')) : (content?.description_ar || t('vision_description'));
   const imageArch = content?.image_arch || '/images/vision/architecture.png';
-  const imageLeadership = content?.image_leadership || '/images/vision/leadership.png';
-
-  const words = title.split(' ');
-
-  const containerVariants = {
-    hidden: { opacity: 0 },
-    show: {
-      opacity: 1,
-      transition: {
-        staggerChildren: 0.05,
-        delayChildren: 0.2,
-      },
-    },
-  };
-
-  const wordVariants: any = {
-    hidden: { y: '100%', opacity: 0 },
-    show: { y: 0, opacity: 1, transition: { duration: 1, ease: [0.16, 1, 0.3, 1] } },
-  };
 
   const { scrollYProgress } = useScroll({
     target: containerRef,
@@ -61,7 +41,7 @@ export default function NationalVision({ content }: { content?: any }) {
   const statsY = useTransform(scrollYProgress, [0, 1], [0, -40]);
 
   return (
-    <section ref={containerRef} className={styles.section}>
+    <section ref={containerRef} className={styles.section} data-theme={theme}>
       <div className={styles.container}>
         <div className={styles.grid}>
           

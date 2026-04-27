@@ -7,9 +7,13 @@ import OverlayMenu from '../OverlayMenu/OverlayMenu';
 import { useLanguage } from '@/context/LanguageContext';
 import { useTheme } from '@/context/ThemeContext';
 import { useSiteLogo } from '@/hooks/useSiteLogo';
+import { usePathname } from 'next/navigation';
 import { Sun, Moon } from 'lucide-react';
 
 export default function Header() {
+  const pathname = usePathname();
+  const isHome = pathname === '/' || pathname === '/en' || pathname === '/ar' || pathname === '/en/' || pathname === '/ar/';
+  
   const [scrolled, setScrolled] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
   const { language, toggleLanguage, t } = useLanguage();
@@ -25,11 +29,13 @@ export default function Header() {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
+  const headerClass = `${styles.header} ${scrolled || isHome ? styles.scrolled : ''} ${isHome ? styles.homeHeader : ''}`;
+
 
 
   return (
     <>
-      <header className={`${styles.header} ${scrolled ? styles.scrolled : ''}`}>
+      <header className={headerClass}>
         <div className={styles.container}>
           <div className={styles.logo} data-cursor="hover">
             <Link href="/">
@@ -43,11 +49,12 @@ export default function Header() {
               onClick={toggleLanguage}
               data-cursor="hover"
             >
-              <span style={{ 
-                fontSize: '1.1rem', 
-                fontWeight: 600, 
-                fontFamily: language === 'en' ? 'var(--font-cairo)' : 'var(--font-inter)' 
-              }}>
+              <span 
+                className={styles.langText}
+                style={{ 
+                  fontFamily: language === 'en' ? 'var(--font-cairo)' : 'var(--font-inter)' 
+                }}
+              >
                 {language === 'en' ? 'عربي' : 'EN'}
               </span>
             </button>

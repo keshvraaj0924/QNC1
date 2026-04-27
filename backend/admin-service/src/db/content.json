@@ -1,193 +1,151 @@
 {
   "services": {
-    "facilities-management": {
-      "title_en": "Facilities Management",
-      "title_ar": "إدارة المرافق",
-      "description_en": "Full site construction and services (Camps & Tents). Qudrat accelerates through maintaining facilities and managing projects.",
-      "description_ar": "بناء المواقع والخدمات الكاملة (المخيمات والخيام). شركة قدرات تتفوق في صيانة المرافق وإدارة المشاريع الإنشائية.",
-      "image": "http://localhost:4000/uploads/1774868675052-01_facilities.png",
+    "hvac-services": {
+      "title_en": "HVAC",
+      "title_ar": "التكييف والتهوية",
+      "description_en": "Precision-engineered climate control utilizing 'Q-Intelligence' predictive monitoring for mission-critical industrial efficiency.",
+      "description_ar": "التحكم في المناخ المصمم بدقة باستخدام مراقبة 'Q-Intelligence' التنبؤية للكفاءة الصناعية للمهام الحرجة.",
+      "image": "/assets/images/services/hvac.png",
       "features": [
-        {
-          "en": "Kingdom-wide Camp Logistics",
-          "ar": "الخدمات اللوجستية للمخيمات على مستوى المملكة"
-        },
-        {
-          "en": "Preventative Maintenance",
-          "ar": "بروتوكولات الصيانة الوقائية"
-        }
+        { "en": "Q-Intelligence 24/7 Remote Monitoring", "ar": "مراقبة Q-Intelligence عن بعد على مدار الساعة" },
+        { "en": "IoT-Driven Predictive Diagnostics", "ar": "التشخيص التنبؤي المدفوع بإنترنت الأشياء" },
+        { "en": "High-Efficiency Chiller Plant Overhauls", "ar": "عمرات محطات المبردات عالية الكفاءة" }
       ]
     },
-    "catering-services": {
-      "title_en": "Catering Services",
-      "title_ar": "خدمات الإعاشة",
-      "description_en": "Qudrat National provides smart and proficient catering services for mega-projects across KSA.",
-      "description_ar": "تقدم قدرات الوطنية خدمات إعاشة ذكية ومحترفة للمشاريع العملاقة في جميع أنحاء المملكة.",
-      "image": "http://localhost:4000/uploads/1774868712939-10_catering.png",
+    "mep-engineering": {
+      "title_en": "MEP",
+      "title_ar": "الكهروميكانيكية",
+      "description_en": "Integrated maintenance and support for Mechanical, Electrical, and Plumbing systems, powered by 'Q-Sync' for seamless utility resilience.",
+      "description_ar": "صيانة ودعم متكامل للأنظمة الميكانيكية والكهربائية والسباكة، مدعومة بـ 'Q-Sync' لمرونة المرافق السلسة.",
+      "image": "/assets/images/services/mep.png",
       "features": [
-        {
-          "en": "Large-scale Workforce Feeding",
-          "ar": "حلول إطعام القوى العاملة واسعة النطاق"
-        },
-        {
-          "en": "ISO Hygiene Compliance",
-          "ar": "الامتثال لمعايير الجودة والآيزو"
-        }
+        { "en": "High-Voltage Q-Sync Power Grids", "ar": "شبكات طاقة عالية الجهد Q-Sync" },
+        { "en": "Fire Life Safety (FLS) Assurance", "ar": "تأمين سلامة الأرواح من الحرائق (FLS)" },
+        { "en": "Industrial Water Treatment Systems", "ar": "أنظمة معالجة المياه الصناعية" }
+      ]
+    },
+    "civil-construction": {
+      "title_en": "Civil Works",
+      "title_ar": "الأعمال المدنية",
+      "description_en": "Specialized structural fortification and maintenance to ensure mission-critical asset integrity via 'Q-Shield' engineering.",
+      "description_ar": "تحصين وصيانة هيكلية متخصصة لضمان سلامة الأصول للمهام الحرجة عبر هندسة 'Q-Shield'.",
+      "image": "/assets/images/services/civil.png",
+      "features": [
+        { "en": "Q-Shield Structural Fortification", "ar": "تحصين Q-Shield الهيكلي" },
+        { "en": "Aviation & Industrial Epoxy Solutions", "ar": "حلول الإيبوكسي للطيران والصناعة" },
+        { "en": "HCIS Structural Risk Audits", "ar": "تدقيق المخاطر الهيكلية بمعايير HCIS" }
+      ]
+    },
+    "low-current-systems": {
+      "title_en": "Low Current",
+      "title_ar": "التيار المنخفض",
+      "description_en": "Advanced support for CCTV, access control, and fire security within a cyber-hardened 'Q-Secure' ecosystem.",
+      "description_ar": "دعم متقدم للدوائر التلفزيونية المغلقة، والتحكم في الوصول، والأمن من الحرائق ضمن نظام 'Q-Secure' المحصن سيبرانياً.",
+      "image": "/assets/images/services/lowcurrent.png",
+      "features": [
+        { "en": "Q-Secure Security Logic", "ar": "منطق الأمن Q-Secure" },
+        { "en": "HCIS-Certified Access Control", "ar": "التحكم في الوصول المعتمد من HCIS" },
+        { "en": "Q-Intelligence Video Analytics", "ar": "تحليلات فيديو Q-Intelligence" }
+      ]
+    },
+    "renovation-and-fitout": {
+      "title_en": "Renovation",
+      "title_ar": "التجديد والتجهيز",
+      "description_en": "High-end interior modification and functional upgrades executed through the 'Q-Design' ergonomic framework.",
+      "description_ar": "تعديلات داخلية راقية وترقيات وظيفية يتم تنفيذها من خلال إطار العمل المريح 'Q-Design'.",
+      "image": "/assets/images/services/renovation.png",
+      "features": [
+        { "en": "Q-Design Space Ergonomics", "ar": "بيئة العمل المكانية Q-Design" },
+        { "en": "Live-Operation Renovation Logic", "ar": "منطق التجديد أثناء التشغيل المباشر" },
+        { "en": "High-End Sustainable Fit-outs", "ar": "تجهيزات راقية ومستدامة" }
+      ]
+    },
+    "third-party-management": {
+      "title_en": "3rd Party",
+      "title_ar": "إدارة الموردين",
+      "description_en": "Strategic oversight of specialized external vendors to ensure uncompromising service compliance through 'Q-Vendor' analytics.",
+      "description_ar": "إشراف استراتيجي على الموردين الخارجيين المتخصصين لضمان الامتثال للخدمة دون تهاون من خلال تحليلات 'Q-Vendor'.",
+      "image": "/assets/images/services/3rdparty.png",
+      "features": [
+        { "en": "Q-Vendor Consolidated SLAs", "ar": "اتفاقيات مستوى الخدمة الموحدة Q-Vendor" },
+        { "en": "Unified Performance Reporting", "ar": "تقارير الأداء الموحدة" },
+        { "en": "Strategic Vendor Risk Vetting", "ar": "فحص مخاطر الموردين الاستراتيجي" }
       ]
     },
     "housekeeping-and-maintenance": {
-      "title_en": "Housekeeping & Maintenance",
-      "title_ar": "النظافة والصيانة",
-      "description_en": "Professional housekeeping activities effectively aligned with Saudi Quality marks.",
-      "description_ar": "أنشطة تدبير منزلي احترافية تتماشى بفعالية مع علامات الجودة السعودية.",
-      "image": "http://localhost:4000/uploads/1774868719759-02_housekeeping.png",
+      "title_en": "Housekeeping",
+      "title_ar": "خدمات النظافة",
+      "description_en": "Advanced sanitation and clinical support services maintaining elite workplace purity through 'Q-Soft' bio-safe protocols.",
+      "description_ar": "خدمات الصرف الصحي المتقدمة ودعم العيادات التي تحافظ على نقاء مكان العمل من خلال بروتوكولات 'Q-Soft' الآمنة حيوياً.",
+      "image": "/assets/images/services/housekeeping.png",
       "features": [
-        {
-          "en": "Industrial Deep Cleaning",
-          "ar": "التنظيف العميق للمنشآت الصناعية"
-        },
-        {
-          "en": "Janitorial Operations",
-          "ar": "عمليات النظافة التخصصية"
-        }
+        { "en": "Q-Soft Clinical Sanitation", "ar": "التطهير السريري Q-Soft" },
+        { "en": "High-End Hospitality Standards", "ar": "معايير الضيافة الراقية" },
+        { "en": "Bio-Safe Cleaning Solutions", "ar": "حلول تنظيف آمنة حيوياً" }
       ]
     },
-    "laundry-services": {
-      "title_en": "Laundry Services",
-      "title_ar": "خدمات المغاسل",
-      "description_en": "Industrial laundry services providing extra-care for remote outposts.",
-      "description_ar": "خدمات غسيل صناعية توفر رعاية فائقة للمواقع البعيدة والنائية.",
-      "image": "http://localhost:4000/uploads/1774868725755-03_laundry.png",
+    "catering-services": {
+      "title_en": "Catering",
+      "title_ar": "خدمات التموين",
+      "description_en": "High-fidelity food service and on-site support enhancing workforce vitality and executive dining experiences.",
+      "description_ar": "خدمة طعام عالية الدقة ودعم في الموقع لتعزيز حيوية القوى العاملة وتجارب تناول الطعام التنفيذية.",
+      "image": "/assets/images/services/catering.png",
       "features": [
-        {
-          "en": "Industrial Wash Cycles",
-          "ar": "دورات غسيل صناعية عالية الطاقة"
-        },
-        {
-          "en": "Daily Camp Delivery",
-          "ar": "شبكات التوصيل اليومية للمخيمات"
-        }
+        { "en": "Gourmet Executive Dining", "ar": "تناول طعام تنفيذي فاخر" },
+        { "en": "HACCP-Certified Food Safety", "ar": "سلامة الغذاء المعتمدة من HACCP" },
+        { "en": "Industrial Workforce Nutrition", "ar": "تغذية القوى العاملة الصناعية" }
       ]
     },
-    "water-and-sanitation-solutions": {
-      "title_en": "Water & Sanitation Solutions",
-      "title_ar": "حلول المياه والصرف الصحي",
-      "description_en": "Meeting Catering Hygiene Standard (CHS) requirements across Saudi Arabia.",
-      "description_ar": "تلبية متطلبات معايير نظافة الإعاشة (CHS) في جميع أنحاء المملكة العربية السعودية.",
-      "image": "http://localhost:4000/uploads/1774868732308-04_water.png",
+    "facade-cleaning": {
+      "title_en": "Facade Cleaning",
+      "title_ar": "تنظيف الواجهات",
+      "description_en": "Specialized high-access building envelope maintenance using 'Q-Vision' safety-first architectural cleaning protocols.",
+      "description_ar": "صيانة متخصصة لغلاف المباني عالية الوصول باستخدام بروتوكولات التنظيف المعماري 'Q-Vision' التي تعطي الأولوية للسلامة.",
+      "image": "/assets/images/services/facade.png",
       "features": [
-        {
-          "en": "Potable Water Supply",
-          "ar": "خطوط إمداد المياه الصالح للشرب"
-        },
-        {
-          "en": "Waste Pumping",
-          "ar": "ضخ النفايات في المواقع النائية"
-        }
+        { "en": "Q-Vision High-Access Safety", "ar": "سلامة الوصول العالي Q-Vision" },
+        { "en": "Rope Access & BMU Specialists", "ar": "متخصصو الوصول بالحبال ووحدات BMU" },
+        { "en": "Non-Corrosive Solar Cleaning", "ar": "تنظيف الألواح الشمسية غير المسبب للتآكل" }
+      ]
+    },
+    "landscaping-services": {
+      "title_en": "Landscaping",
+      "title_ar": "تنسيق الحدائق",
+      "description_en": "Ecological maintenance and systemic irrigation that sustain elite green spaces via the 'Q-Green' environmental framework.",
+      "description_ar": "صيانة بيئية وري منهجي يحافظ على المساحات الخضراء المتميزة عبر إطار العمل البيئي 'Q-Green'.",
+      "image": "/assets/images/services/landscaping.png",
+      "features": [
+        { "en": "Q-Green Precision Irrigation", "ar": "الري الدقيق Q-Green" },
+        { "en": "Native Flora Ecosystem Design", "ar": "تصميم النظام البيئي للنباتات المحلية" },
+        { "en": "Seasonal Floral Management", "ar": "إدارة الزهور الموسمية" }
       ]
     },
     "pest-control-management": {
-      "title_en": "Pest Control Management",
-      "title_ar": "إدارة مكافحة الحشرات",
-      "description_en": "Best practices treatments and safe correct use of pesticides.",
-      "description_ar": "أفضل ممارسات العلاج والاستخدام الآمن والصحيح لمبيدات الآفات.",
-      "image": "http://localhost:4000/uploads/1774868738652-05_pest.png",
+      "title_en": "Pest Control",
+      "title_ar": "مكافحة الحشرات",
+      "description_en": "Responsive bio-mapping and preventive mitigation to ensure a sterile, compliant environment using 'Q-Bio' logic.",
+      "description_ar": "رسم خرائط بيولوجية استجابة وتخفيف وقائي لضمان بيئة معقمة ومتوافقة باستخدام منطق 'Q-Bio'.",
+      "image": "/assets/images/services/pestcontrol.png",
       "features": [
-        {
-          "en": "Desert Eradication",
-          "ar": "استراتيجيات الإبادة في البيئة الصحراوية"
-        },
-        {
-          "en": "Infrastructure Audits",
-          "ar": "عمليات تدقيق روتينية للبنية التحتية"
-        }
+        { "en": "Q-Bio Non-Toxic IPM Logic", "ar": "منطق Q-Bio IPM غير السام" },
+        { "en": "Real-time Biological Audits", "ar": "عمليات تدقيق بيولوجية فورية" },
+        { "en": "Industrial Termite Barriers", "ar": "حواجز النمل الأبيض الصناعية" }
       ]
     },
-    "manpower-head-hunting": {
-      "title_en": "Manpower Head Hunting",
-      "title_ar": "استقطاب القوى العاملة",
-      "description_en": "Sourcing out multi-nationalities supporting Vision 2030 development.",
-      "description_ar": "توظيف جنسيات متعددة لدعم تطوير رؤية 2030.",
-      "image": "http://localhost:4000/uploads/1774868745948-07_manpower.png",
+    "facility-help-desk": {
+      "title_en": "Help Desk",
+      "title_ar": "مكتب المساعدة",
+      "description_en": "Centralized 'Q-Command' hub for real-time resource orchestration and mission-critical response coordination.",
+      "description_ar": "مركز 'Q-Command' المركزي لتنسيق الموارد في الوقت الفعلي وتنسيق الاستجابة للمهام الحرجة.",
+      "image": "/assets/images/services/helpdesk.png",
       "features": [
-        {
-          "en": "International Sourcing",
-          "ar": "توفير العمالة الدولية"
-        },
-        {
-          "en": "Saudization Compliance",
-          "ar": "استشارية الامتثال لنطاقات (السعودة)"
-        }
-      ]
-    },
-    "logistics-and-transportation": {
-      "title_en": "Logistics And Transportation",
-      "title_ar": "الخدمات اللوجستية والنقل",
-      "description_en": "End-to-End supply chain management for diversified sectors across the Kingdom.",
-      "description_ar": "إدارة سلاسل الإمداد الشاملة لمختلف القطاعات في جميع أنحاء المملكة.",
-      "image": "http://localhost:4000/uploads/1774868832858-06_logistics.png",
-      "features": [
-        {
-          "en": "Machinery Transport",
-          "ar": "أساطيل نقل المعدات الثقيلة"
-        },
-        {
-          "en": "Remote Access Networks",
-          "ar": "شبكات الوصول للمواقع النائية"
-        }
-      ]
-    },
-    "water-and-fuel-supply": {
-      "title_en": "Water and Fuel Supply",
-      "title_ar": "توريد المياه والوقود",
-      "description_en": "Ensuring water and fuel delivery right at the doorstep of your project.",
-      "description_ar": "ضمان توصيل المياه والوقود مباشرة إلى عتبة مشروعك.",
-      "image": "http://localhost:4000/uploads/1774868759630-08_fuel.png",
-      "features": [
-        {
-          "en": "Bulk Fuel Delivery",
-          "ar": "تسليم الوقود بالجملة"
-        },
-        {
-          "en": "Emergency Resupplies",
-          "ar": "إعادة التموين في حالات الطوارئ"
-        }
-      ]
-    },
-    "health-risk-assessment": {
-      "title_en": "Health Risk Assessment",
-      "title_ar": "تقييم المخاطر الصحية",
-      "description_en": "Comprehensive site-specific hazard mapping and crisis management structuring.",
-      "description_ar": "رسم خرائط شاملة للمخاطر الخاصة بالموقع وهيكلة إدارة الأزمات.",
-      "image": "http://localhost:4000/uploads/1774868767399-09_health.png",
-      "features": [
-        {
-          "en": "Hazard Mapping",
-          "ar": "رسم خرائط المخاطر"
-        },
-        {
-          "en": "Crisis Management",
-          "ar": "هيكلة إدارة الأزمات"
-        }
-      ]
-    },
-    "medical-services-health-care": {
-      "title_en": "Medical Services & Health Care",
-      "title_ar": "الخدمات الطبية والرعاية الصحية",
-      "description_en": "Experience and skills to manage the daily care in remote operational zones.",
-      "description_ar": "الخبرة والمهارات لإدارة الرعاية اليومية في مناطق العمليات النائية.",
-      "image": "http://localhost:4000/uploads/1774868775465-11_medical.png",
-      "features": [
-        {
-          "en": "Remote Clinics",
-          "ar": "نشر العيادات الميدانية"
-        },
-        {
-          "en": "24/7 EMT Services",
-          "ar": "خدمات الطوارئ الطبية على مدار الساعة"
-        }
+        { "en": "Q-Command 24/7 Intelligent Hub", "ar": "مركز ذكاء Q-Command على مدار الساعة" },
+        { "en": "CAFM-Integrated Work Logic", "ar": "منطق عمل متكامل مع CAFM" },
+        { "en": "Performance Data Dashboards", "ar": "لوحات معلومات بيانات الأداء" }
       ]
     }
   },
+
   "clients": [
     {
       "src": "http://localhost:4000/uploads/1774792144299-CPECC.png",
@@ -356,13 +314,18 @@
       "title_ar": "الدقة والاحترافية",
       "video_url": "http://localhost:4000/uploads/1775373993966-C0469.MP4"
     },
+    "stats": [
+      { "count": 25, "label_en": "Years of Excellence", "label_ar": "عام من التميز", "suffix": "+" },
+      { "count": 1500, "label_en": "Employees", "label_ar": "موظف", "suffix": "+" },
+      { "count": 50, "label_en": "Major Projects", "label_ar": "مشروع رئيسي", "suffix": "+" }
+    ],
     "mission_vision": [
       {
         "id": "vision",
         "title_en": "Vision",
         "title_ar": "رؤيتنا",
-        "content_en": "To be the nationwide premier Total Integrated Facility Management (TIFM) partner in Saudi Arabia, innovating sustainable and efficient solutions that set new industry benchmarks.",
-        "content_ar": "أن نكون الشريك الرائد على مستوى المملكة في الإدارة المتكاملة للمرافق (TIFM) في المملكة العربية السعودية، من خلال ابتكار حلول مستدامة وفعالة تضع معايير جديدة للصناعة.",
+        "content_en": "To be the nationwide premier Total Integrated Facility Management (TIFM) partner in Saudi Arabia.",
+        "content_ar": "أن نكون الشريك الرائد على مستوى المملكة في الإدارة المتكاملة للمرافق (TIFM).",
         "color": "#1A75BB"
       },
       {
@@ -372,14 +335,6 @@
         "content_en": "Uphold safety standards and quality assurance in delivering services that exceed client expectations.",
         "content_ar": "الحفاظ على معايير السلامة وضمان الجودة في تقديم الخدمات التي تفوق توقعات العملاء.",
         "color": "#3F8E43"
-      },
-      {
-        "id": "values",
-        "title_en": "Values",
-        "title_ar": "قيمنا",
-        "content_en": "Delivering safe, high-quality, and innovative FM solutions that consistently exceed client expectations.",
-        "content_ar": "تقديم حلول إدارة مرافق آمنة وعالية الجودة ومبتكرة تفوق توقعات العملاء باستمرار.",
-        "color": "#CBA152"
       }
     ],
     "vision": {
@@ -626,6 +581,43 @@
     "capabilities": {
       "title_en": "Enterprise Capabilities",
       "title_ar": "قدرات المؤسسة"
+    },
+    "intelligent_ecosystem": {
+      "title_en": "Intelligent Ecosystem",
+      "title_ar": "النظام البيئي الذكي",
+      "subtitle_en": "Seamless integration of technology and human expertise.",
+      "subtitle_ar": "تكامل سلس بين التكنولوجيا والخبرة البشرية.",
+      "items": [
+        {
+          "title_en": "Digital Command",
+          "title_ar": "القيادة الرقمية",
+          "desc_en": "Real-time monitoring and analytics.",
+          "desc_ar": "المراقبة والتحليلات في الوقت الفعلي."
+        },
+        {
+          "title_en": "Integrated Operations",
+          "title_ar": "العمليات المتكاملة",
+          "desc_en": "End-to-end service management.",
+          "desc_ar": "إدارة الخدمات الشاملة."
+        }
+      ]
+    },
+    "partners_group": {
+      "title_en": "Partners & Group Relations",
+      "title_ar": "الشركاء وعلاقات المجموعة",
+      "subtitle_en": "Global synergy, local impact.",
+      "subtitle_ar": "تآزر عالمي، أثر محلي.",
+      "groups": [
+        { "name": "Alef 360", "logo": "http://localhost:4000/uploads/alef-logo.png", "link": "#" },
+        { "name": "QNC Logistics", "logo": "http://localhost:4000/uploads/qnc-logo.png", "link": "#" }
+      ]
+    },
+    "alef360": {
+      "title_en": "Alef 360",
+      "title_ar": "ألف 360",
+      "content_en": "Driving sustainable growth through innovation and technology.",
+      "content_ar": "دفع النمو المستدام من خلال الابتكار والتكنولوجيا.",
+      "image": "http://localhost:4000/uploads/alef-preview.jpg"
     }
   },
   "about": {

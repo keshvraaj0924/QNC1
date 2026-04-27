@@ -9,17 +9,25 @@ const LogoPreloader = () => {
   const videoRef = useRef<HTMLVideoElement>(null);
 
   useEffect(() => {
+    // Check if preloader has already run in this session
+    const hasRun = sessionStorage.getItem('qnc_preloader_run');
+    if (hasRun === 'true') {
+      setIsVisible(false);
+      return;
+    }
+
     // Lock scroll when preloader is active
     if (isVisible) {
       document.body.style.overflow = 'hidden';
     } else {
       document.body.style.overflow = '';
+      sessionStorage.setItem('qnc_preloader_run', 'true');
     }
 
     // Backup timer in case video fails to fire onEnded (e.g. browser policy)
     const backupTimer = setTimeout(() => {
       handleTransition();
-    }, 6000); // Most logo animations are 3-5s
+    }, 3000); // Reduced from 6s to 3s for snappier feel
 
     return () => {
       document.body.style.overflow = '';

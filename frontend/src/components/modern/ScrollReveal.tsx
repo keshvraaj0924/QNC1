@@ -5,50 +5,56 @@ import { ReactNode } from 'react';
 
 interface ScrollRevealProps {
   children: ReactNode;
+  direction?: 'up' | 'down' | 'left' | 'right' | 'none';
   delay?: number;
-  direction?: 'up' | 'down' | 'left' | 'right';
-  distance?: number;
   duration?: number;
+  distance?: number;
   className?: string;
+  style?: React.CSSProperties;
   once?: boolean;
 }
 
 export default function ScrollReveal({
   children,
-  delay = 0,
   direction = 'up',
-  distance = 50,
-  duration = 0.8,
+  delay = 0,
+  duration = 1.2,
+  distance = 80,
   className = '',
-  once = true,
+  style = {},
+  once = true
 }: ScrollRevealProps) {
   const directions = {
     up: { y: distance },
     down: { y: -distance },
     left: { x: distance },
     right: { x: -distance },
+    none: {}
   };
 
   return (
     <motion.div
       initial={{ 
         opacity: 0, 
-        filter: 'blur(10px)',
-        ...directions[direction]
+        filter: 'blur(15px)',
+        scale: 0.92,
+        ...directions[direction] 
       }}
       whileInView={{ 
         opacity: 1, 
         filter: 'blur(0px)',
+        scale: 1,
         x: 0, 
         y: 0 
       }}
-      viewport={{ once }}
+      viewport={{ once, amount: 0.15 }}
       transition={{
-        duration,
-        delay,
-        ease: [0.21, 1.11, 0.81, 0.99], // Custom premium cubic-bezier
+        duration: duration,
+        delay: delay,
+        ease: [0.22, 1, 0.36, 1] // Premium Quintic Ease-Out
       }}
       className={className}
+      style={style}
     >
       {children}
     </motion.div>

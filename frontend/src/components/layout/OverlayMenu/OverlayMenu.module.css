@@ -13,11 +13,11 @@
 }
 
 :global([data-theme="dark"]) .overlay {
-  background-color: rgba(10, 10, 10, 0.98);
+  background-color: var(--background-overlay);
 }
 
 :global([data-theme="light"]) .overlay {
-  background-color: rgba(248, 249, 250, 0.98);
+  background-color: var(--background-overlay);
 }
 
 .overlayHeader {
@@ -40,8 +40,8 @@
   cursor: pointer;
   padding: 0.5rem 1rem;
   border-radius: 30px;
-  background: rgba(255, 255, 255, 0.03);
-  border: 1px solid rgba(255, 255, 255, 0.05);
+  background: var(--glass-overlay);
+  border: 1px solid var(--card-border);
   transition: all 0.3s ease;
 }
 
@@ -66,7 +66,7 @@
 .toggleTrack {
   width: 48px;
   height: 24px;
-  background: rgba(255, 255, 255, 0.1);
+  background: var(--glass-overlay);
   border-radius: 12px;
   position: relative;
   padding: 2px;
@@ -80,7 +80,7 @@
 .toggleThumb {
   width: 20px;
   height: 20px;
-  background: #fff;
+  background: var(--card-bg);
   border-radius: 50%;
   box-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
 }
@@ -188,7 +188,7 @@
 
 [dir="rtl"] .featuredNewsColumn {
   border-left: none;
-  border-right: 1px solid rgba(255, 255, 255, 0.1);
+  border-right: 1px solid var(--border-color);
   padding-left: 0;
   padding-right: 4rem;
 }
@@ -200,6 +200,9 @@
 
 .subPagesColumn {
   padding-top: 1rem;
+  position: sticky;
+  top: 1rem;
+  height: fit-content;
 }
 
 .subGrid {
@@ -222,7 +225,7 @@
   font-weight: 700;
   opacity: 0.9;
   margin-bottom: 0.5rem;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  border-bottom: 1px solid var(--border-color);
   padding-bottom: 0.75rem;
   width: 100%;
 }
@@ -322,8 +325,11 @@
 .featuredNewsColumn {
   display: flex;
   flex-direction: column;
-  border-left: 1px solid rgba(255, 255, 255, 0.1);
+  border-left: 1px solid var(--border-color);
   padding-left: 4rem;
+  position: sticky;
+  top: 1rem;
+  height: fit-content;
 }
 
 .featuredTitle {

@@ -74,11 +74,17 @@ export default function HomeContent({ content }: { content: any }) {
 
         <RegionalPresence />
 
-        <IntelligentEcosystem />
+        <ScrollReveal delay={0.2}>
+          <IntelligentEcosystem />
+        </ScrollReveal>
 
-        <PartnersGroup />
+        <ScrollReveal delay={0.2}>
+          <PartnersGroup />
+        </ScrollReveal>
 
-        <Alef360 />
+        <ScrollReveal delay={0.2}>
+          <Alef360 />
+        </ScrollReveal>
         
         <ScrollReveal delay={0.3}>
           <MajorClients content={clients} />

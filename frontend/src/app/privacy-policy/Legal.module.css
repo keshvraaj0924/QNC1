@@ -5,8 +5,43 @@
 }
 
 .heroSection {
-  padding: 15rem 5% 5rem 5%;
-  border-bottom: 1px solid rgba(255,255,255,0.1);
+  position: relative;
+  height: 40vh;
+  min-height: 400px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  text-align: center;
+}
+
+.heroImageContainer {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 120%;
+  z-index: 1;
+  will-change: transform;
+}
+
+.heroImage {
+  object-fit: cover;
+}
+
+.imageOverlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(to bottom, rgba(0,0,0,0.6), rgba(0,0,0,0.9));
+  z-index: 2;
+}
+
+.heroContent {
+  position: relative;
+  z-index: 3;
 }
 
 .title {
@@ -14,6 +49,7 @@
   font-weight: 800;
   letter-spacing: -0.03em;
   margin: 0 0 1rem 0;
+  color: #ffffff; /* Force visibility on dark hero bg */
 }
 
 .lastUpdated {
@@ -52,7 +88,7 @@
   display: block;
   padding-left: 1.5rem;
   margin-bottom: 0.25rem;
-  color: #fff;
+  color: var(--foreground);
   opacity: 0.9;
 }
 
@@ -61,7 +97,7 @@
   line-height: 1.8;
   opacity: 0.9;
   margin-bottom: 1.5rem;
-  color: #fff;
+  color: var(--foreground);
   font-weight: 400;
 }
 

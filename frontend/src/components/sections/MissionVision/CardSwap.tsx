@@ -120,13 +120,24 @@ const CardSwap: React.FC<CardSwapProps> = ({
       const tl = gsap.timeline();
       tlRef.current = tl;
 
+      const isMobile = window.innerWidth < 768;
+      const swipeX = isMobile ? 60 : 120;
+      const swipeY = isMobile ? -40 : -80;
+      
+      // 1. Move front card out of the stack with a slight arc
       tl.to(elFront, {
-        y: '+=500',
-        duration: config.durDrop,
-        ease: config.ease
+        x: `+=${swipeX}`,
+        y: `+=${swipeY}`,
+        rotation: 5,
+        opacity: 0,
+        scale: 1.05,
+        duration: config.durDrop * 0.5,
+        ease: "power2.out"
       });
 
-      tl.addLabel('promote', `-=${config.durDrop * config.promoteOverlap}`);
+      tl.addLabel('promote', `-=${config.durDrop * 0.2}`);
+
+      // 2. Promote other cards forward
       rest.forEach((idx, i) => {
         const el = refs[idx].current;
         if (!el) return;
@@ -138,30 +149,34 @@ const CardSwap: React.FC<CardSwapProps> = ({
             x: slot.x,
             y: slot.y,
             z: slot.z,
+            scale: 1,
+            opacity: 1,
             duration: config.durMove,
-            ease: config.ease
+            ease: "back.out(1.2)"
           },
-          `promote+=${i * 0.15}`
+          `promote+=${i * 0.05}`
         );
       });
 
+      // 3. Bring original front card to the very back of the stack
       const backSlot = makeSlot(refs.length - 1, cardDistance, verticalDistance, refs.length);
-      tl.addLabel('return', `promote+=${config.durMove * config.returnDelay}`);
-      tl.call(
-        () => {
-          if (elFront) gsap.set(elFront, { zIndex: backSlot.zIndex });
-        },
-        undefined,
-        'return'
-      );
+      tl.addLabel('return', `promote+=${config.durMove * 0.4}`);
+      
+      tl.set(elFront, { 
+        zIndex: backSlot.zIndex,
+        rotation: 0
+      }, 'return');
+      
       tl.to(
         elFront,
         {
           x: backSlot.x,
           y: backSlot.y,
           z: backSlot.z,
+          opacity: 1,
+          scale: 1,
           duration: config.durReturn,
-          ease: config.ease
+          ease: "power2.inOut"
         },
         'return'
       );
@@ -173,25 +188,28 @@ const CardSwap: React.FC<CardSwapProps> = ({
 
     intervalRef.current = window.setInterval(swap, delay);
 
+    const pause = () => {
+      tlRef.current?.pause();
+      clearInterval(intervalRef.current);
+    };
+    const resume = () => {
+      tlRef.current?.play();
+      intervalRef.current = window.setInterval(swap, delay);
+    };
+
     if (pauseOnHover && container.current) {
-      const node = container.current;
-      const pause = () => {
-        tlRef.current?.pause();
-        clearInterval(intervalRef.current);
-      };
-      const resume = () => {
-        tlRef.current?.play();
-        intervalRef.current = window.setInterval(swap, delay);
-      };
-      node.addEventListener('mouseenter', pause);
-      node.addEventListener('mouseleave', resume);
-      return () => {
-        node.removeEventListener('mouseenter', pause);
-        node.removeEventListener('mouseleave', resume);
-        clearInterval(intervalRef.current);
-      };
+      container.current.addEventListener('mouseenter', pause);
+      container.current.addEventListener('mouseleave', resume);
     }
-    return () => clearInterval(intervalRef.current);
+
+    return () => {
+      clearInterval(intervalRef.current);
+      tlRef.current?.kill();
+      if (pauseOnHover && container.current) {
+        container.current.removeEventListener('mouseenter', pause);
+        container.current.removeEventListener('mouseleave', resume);
+      }
+    };
   }, { scope: container, dependencies: [cardDistance, verticalDistance, delay, pauseOnHover, skewAmount, easing] });
 
   const rendered = childArr.map((child, i) => {

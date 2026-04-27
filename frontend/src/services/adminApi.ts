@@ -1,17 +1,37 @@
-const API_BASE = 'http://localhost:4000/api/v1/admin';
+const BACKEND_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:4000';
+const API_BASE = `${BACKEND_URL}/api/v1/admin`;
+const PUBLIC_BASE = `${BACKEND_URL}/api/v1/public`;
+
+/**
+ * Robust fetch wrapper to handle network failures gracefully.
+ */
+async function safeFetch(url: string, options: RequestInit = {}) {
+  try {
+    const res = await fetch(url, options);
+    if (!res.ok) {
+      const data = await res.json().catch(() => ({}));
+      throw new Error(data.error || `HTTP error! status: ${res.status}`);
+    }
+    return res.json();
+  } catch (error: any) {
+    if (error.name === 'TypeError') {
+      console.warn(`[API] Network error at ${url}. Backend might be down.`);
+      throw new Error('NETWORK_ERROR');
+    }
+    throw error;
+  }
+}
 
 export const adminApi = {
   async login(username: any, password: any) {
-    const res = await fetch(`${API_BASE}/login`, {
+    const data = await safeFetch(`${API_BASE}/login`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ username, password })
     });
-    const data = await res.json();
-    if (!res.ok) throw new Error(data.error || 'Login failed');
     
     // Store session
-    if (typeof window !== 'undefined') {
+    if (typeof window !== 'undefined' && data.token) {
       localStorage.setItem('qnc_admin_token', data.token);
       localStorage.setItem('qnc_admin_user', JSON.stringify(data.user));
     }
@@ -29,47 +49,38 @@ export const adminApi = {
 
   async getUsers() {
     const headers = await this.getAuthHeaders();
-    const res = await fetch(`${API_BASE}/users`, { headers });
-    const data = await res.json();
-    if (!res.ok) throw new Error(data.error || 'Failed to fetch users');
-    return data;
+    return safeFetch(`${API_BASE}/users`, { headers });
   },
 
   async createUser(userData: any) {
     const headers = await this.getAuthHeaders();
-    const res = await fetch(`${API_BASE}/users`, {
+    return safeFetch(`${API_BASE}/users`, {
       method: 'POST',
       headers,
       body: JSON.stringify(userData)
     });
-    return res.json();
   },
 
   async forgotPassword(email: any) {
-    const res = await fetch(`${API_BASE}/forgot-password`, {
+    return safeFetch(`${API_BASE}/forgot-password`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ email })
     });
-    return res.json();
   },
 
   async getContent() {
     const headers = await this.getAuthHeaders();
-    const res = await fetch(`${API_BASE}/content`, { headers });
-    const data = await res.json();
-    if (!res.ok) throw new Error(data.error || 'Failed to fetch content');
-    return data;
+    return safeFetch(`${API_BASE}/content`, { headers });
   },
 
   async updateContent(key: any, data: any, autoTranslateSource?: string) {
     const headers = await this.getAuthHeaders();
-    const res = await fetch(`${API_BASE}/content`, {
+    return safeFetch(`${API_BASE}/content`, {
       method: 'POST',
       headers,
       body: JSON.stringify({ key, data, autoTranslateSource })
     });
-    return res.json();
   },
 
   async uploadImage(file: File) {
@@ -82,10 +93,10 @@ export const adminApi = {
       headers: { 'Authorization': `Bearer ${token}` },
       body: formData
     });
+    
     if (!res.ok) {
-      let errMsg = 'Upload failed';
-      try { const d = await res.json(); errMsg = d.error || errMsg; } catch {}
-      throw new Error(errMsg);
+      const d = await res.json().catch(() => ({}));
+      throw new Error(d.error || 'Upload failed');
     }
     return res.json();
   },
@@ -102,73 +113,55 @@ export const adminApi = {
       headers: { 'Authorization': `Bearer ${token}` },
       body: formData
     });
+    
     if (!res.ok) {
-      let errMsg = 'Bulk upload failed';
-      try { const d = await res.json(); errMsg = d.error || errMsg; } catch {}
-      throw new Error(errMsg);
+      const d = await res.json().catch(() => ({}));
+      throw new Error(d.error || 'Bulk upload failed');
     }
     return res.json();
   },
 
   // Public Access
   async getPublicService(slug: string) {
-    const res = await fetch(`http://localhost:4000/api/v1/public/services/${slug}`, {
+    return safeFetch(`${PUBLIC_BASE}/services/${slug}`, {
       cache: 'no-store'
     });
-    if (!res.ok) throw new Error('Service not found');
-    return res.json();
   },
 
   async getPublicContent() {
-    const res = await fetch(`http://localhost:4000/api/v1/public/content`, {
+    return safeFetch(`${PUBLIC_BASE}/content`, {
       cache: 'no-store'
     });
-    if (!res.ok) throw new Error('Failed to fetch content');
-    return res.json();
   },
 
   async changePassword(currentPassword: any, newPassword: any) {
     const headers = await this.getAuthHeaders();
-    const res = await fetch(`${API_BASE}/change-password`, {
+    return safeFetch(`${API_BASE}/change-password`, {
       method: 'POST',
       headers,
       body: JSON.stringify({ currentPassword, newPassword })
     });
-    return res.json();
   },
 
   async resetPassword(token: string, newPassword: any) {
-    const res = await fetch(`${API_BASE}/reset-password`, {
+    return safeFetch(`${API_BASE}/reset-password`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ token, newPassword })
     });
-    const data = await res.json();
-    if (!res.ok) throw new Error(data.error || 'Reset failed');
-    return data;
   },
 
-  // News & Events CRUD Stubs
   async getNews() {
-    // In a real scenario, this would fetch from /api/v1/admin/news
-    // For now, we will expose the integrated News module in the Content Editor
     const headers = await this.getAuthHeaders();
-    const res = await fetch(`${API_BASE}/news`, { headers });
-    if (!res.ok) {
-       // If backend doesn't support news endpoint yet, we return mock/local fallback
-       return null;
-    }
-    return res.json();
+    return safeFetch(`${API_BASE}/news`, { headers }).catch(() => null);
   },
 
   async updateNews(newsData: any) {
     const headers = await this.getAuthHeaders();
-    const res = await fetch(`${API_BASE}/news`, {
+    return safeFetch(`${API_BASE}/news`, {
       method: 'POST',
       headers,
       body: JSON.stringify(newsData)
     });
-    if (!res.ok) throw new Error('Failed to update news');
-    return res.json();
   }
 };

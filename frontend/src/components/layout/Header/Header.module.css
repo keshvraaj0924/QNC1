@@ -4,20 +4,35 @@
   left: 0;
   width: 100%;
   z-index: 1000;
-  padding: clamp(1rem, 2vh, 1.8rem) 0;
-  transition: var(--header-transition);
-  background-color: transparent;
-  color: white;
+  padding: clamp(1.2rem, 3vh, 2rem) 0;
+  transition: all 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+  background-color: transparent !important;
+  color: #ffffff !important;
+  border-bottom: 1px solid rgba(255, 255, 255, 0);
 }
 
 .header.scrolled {
-  background-color: var(--header-bg-solid);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
-  color: var(--foreground);
+  background-color: rgba(255, 255, 255, 0.98) !important;
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  color: #0a0a0a !important;
   padding: 0.8rem 0;
-  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.15);
-  border-bottom: 1px solid var(--border-color);
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.08);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+}
+
+.homeHeader {
+  background-color: #ffffff !important;
+  color: #0a0a0a !important;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.05) !important;
+}
+
+/* Force dark text for visibility on white background in ALL modes when header is solid */
+.header.scrolled button, 
+.header.scrolled a,
+.homeHeader button,
+.homeHeader a {
+  color: #0a0a0a !important;
 }
 
 .container {
@@ -27,6 +42,12 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
+}
+
+@media (max-width: 768px) {
+  .container {
+    padding: 0 1.25rem;
+  }
 }
 
 .logo {
@@ -41,7 +62,8 @@
 .logoImage {
   height: clamp(50px, 8vh, 90px);
   width: auto;
-  transition: transform 0.4s cubic-bezier(0.76, 0, 0.24, 1);
+  transition: all 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+  /* Filter removed to ensure logo is always 'perfect' brand colors as requested */
 }
 
 .logoImage:hover {
@@ -92,13 +114,17 @@
   display: flex;
   align-items: center;
   gap: 0.5rem;
-  font-weight: 600;
-  font-size: 0.9rem;
   background: none;
   border: none;
   color: inherit;
   cursor: pointer;
   transition: all 0.4s cubic-bezier(0.76, 0, 0.24, 1);
+}
+
+.langText {
+  font-size: clamp(0.95rem, 2vw, 1.1rem);
+  font-weight: 600;
+  line-height: 1;
 }
 
 .themeBtn {

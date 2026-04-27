@@ -1,7 +1,7 @@
 'use client';
 
 import { motion, useInView } from 'framer-motion';
-import { useRef } from 'react';
+import { useRef, useId } from 'react';
 
 interface MotionCurveProps {
   d: string;
@@ -29,8 +29,10 @@ export default function MotionCurve({
   useGradient = true,
 }: MotionCurveProps) {
   const ref = useRef(null);
+  const uniqueId = useId().replace(/:/g, '');
   const isInView = useInView(ref, { once: true, amount: 0.2 });
-  const gradientId = `curveGradient-${d.length}-${strokeWidth}`;
+  const gradientId = `curveGradient-${uniqueId}`;
+  const glowId = `glow-${uniqueId}`;
 
   return (
     <div 
@@ -56,7 +58,7 @@ export default function MotionCurve({
               <stop offset="50%" stopColor="#3E813E" />
               <stop offset="100%" stopColor="#6359A6" />
             </linearGradient>
-            <filter id="glow">
+            <filter id={glowId}>
               <feGaussianBlur stdDeviation="2" result="coloredBlur"/>
               <feMerge>
                 <feMergeNode in="coloredBlur"/>
@@ -72,7 +74,7 @@ export default function MotionCurve({
           stroke={useGradient ? `url(#${gradientId})` : "var(--qnc-gold)"}
           strokeWidth={strokeWidth}
           strokeLinecap="round"
-          filter={useGradient ? "url(#glow)" : "none"}
+          filter={useGradient ? `url(#${glowId})` : "none"}
           initial={{ pathLength: 0, opacity: 0 }}
           animate={isInView ? { pathLength: 1, opacity } : {}}
           transition={{ duration, delay, ease: "easeInOut" }}
