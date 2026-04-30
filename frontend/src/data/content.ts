@@ -62,8 +62,8 @@ export const servicesData: ServiceDetails[] = [
       { en: 'Enhanced Workforce Thermal Comfort', ar: 'تعزيز الراحة الحرارية للقوى العاملة' },
       { en: 'Predictive Leakage & Gas Detection', ar: 'كشف التسرب والغاز التنبؤي' }
     ],
-    image: '/assets/images/services/hvac.png',
-    secondaryImage: '/assets/images/services/hvac.png'
+    image: '/assets/images/services/ai_v2/optimized/hvac_realistic_1777542673105.webp',
+    secondaryImage: '/assets/images/services/ai_v2/optimized/hvac_realistic_1777542673105.webp'
   },
   {
     slug: 'mep-engineering',
@@ -100,8 +100,8 @@ export const servicesData: ServiceDetails[] = [
       { en: 'Enhanced Grid Stability Index', ar: 'تحسين مؤشر استقرار الشبكة' },
       { en: 'Predictive Load-Balancing Logic', ar: 'منطق موازنة الأحمال التنبؤي' }
     ],
-    image: '/assets/images/services/mep.png',
-    secondaryImage: '/assets/images/services/mep.png'
+    image: '/assets/images/services/ai_v2/optimized/mep_realistic_1777542701469.webp',
+    secondaryImage: '/assets/images/services/ai_v2/optimized/mep_realistic_1777542701469.webp'
   },
   {
     slug: 'civil-construction',
@@ -138,8 +138,8 @@ export const servicesData: ServiceDetails[] = [
       { en: 'Aesthetic & Functional Integrity', ar: 'السلامة الجمالية والوظيفية' },
       { en: 'Rapid Restoration Protocols', ar: 'بروتوكولات الترميم السريع' }
     ],
-    image: '/assets/images/services/civil.png',
-    secondaryImage: '/assets/images/services/civil.png'
+    image: '/assets/images/services/ai_v2/optimized/civil_realistic_1777542716510.webp',
+    secondaryImage: '/assets/images/services/ai_v2/optimized/civil_realistic_1777542716510.webp'
   },
   {
     slug: 'low-current-systems',
@@ -176,8 +176,8 @@ export const servicesData: ServiceDetails[] = [
       { en: 'Cyber-Hardened Perimeter Protection', ar: 'حماية المحيط المحصنة سيبرانياً' },
       { en: 'Real-Time Incident Visualization', ar: 'تصور الحوادث في الوقت الفعلي' }
     ],
-    image: '/assets/images/services/lowcurrent.png',
-    secondaryImage: '/assets/images/services/lowcurrent.png'
+    image: '/assets/images/services/ai_v2/optimized/low_current_realistic_v2_1777543486496.webp',
+    secondaryImage: '/assets/images/services/ai_v2/optimized/low_current_realistic_v2_1777543486496.webp'
   },
   {
     slug: 'renovation-and-fitout',
@@ -214,8 +214,8 @@ export const servicesData: ServiceDetails[] = [
       { en: 'LEED-Compliant Finishings', ar: 'تشطيبات متوافقة مع LEED' },
       { en: 'Ergonomic Excellence', ar: 'التميز في بيئة العمل' }
     ],
-    image: '/assets/images/services/renovation.png',
-    secondaryImage: '/assets/images/services/renovation.png'
+    image: '/assets/images/services/ai_v2/optimized/renovation_realistic_1777542764622.webp',
+    secondaryImage: '/assets/images/services/ai_v2/optimized/renovation_realistic_1777542764622.webp'
   },
   {
     slug: 'third-party-management',
@@ -252,8 +252,8 @@ export const servicesData: ServiceDetails[] = [
       { en: 'Consolidated Procurement Analytics', ar: 'تحليلات المشتريات الموحدة' },
       { en: 'Transparent KPI Tracking', ar: 'تتبع مؤشرات الأداء الرئيسية بشفافية' }
     ],
-    image: '/assets/images/services/3rdparty.png',
-    secondaryImage: '/assets/images/services/3rdparty.png'
+    image: '/assets/images/services/ai_v2/optimized/third_party_realistic_1777542780545.webp',
+    secondaryImage: '/assets/images/services/ai_v2/optimized/third_party_realistic_1777542780545.webp'
   },
 
   // SOFT SERVICES
@@ -292,8 +292,8 @@ export const servicesData: ServiceDetails[] = [
       { en: 'Micro-Biological Purity Assurance', ar: 'تأمين النقاء الميكروبيولوجي' },
       { en: 'Sensory Experience Management', ar: 'إدارة التجربة الحسية' }
     ],
-    image: '/assets/images/services/housekeeping.png',
-    secondaryImage: '/assets/images/services/housekeeping.png'
+    image: '/assets/images/services/ai_v2/optimized/housekeeping_realistic_v2_1777543471816.webp',
+    secondaryImage: '/assets/images/services/ai_v2/optimized/housekeeping_realistic_v2_1777543471816.webp'
   },
   {
     slug: 'catering-services',
@@ -330,8 +330,8 @@ export const servicesData: ServiceDetails[] = [
       { en: 'Health-Driven Performance Menus', ar: 'قوائم أداء مدفوعة بالصحة' },
       { en: 'Seamless Large-Scale Deployment', ar: 'نشر واسع النطاق وبشكل سلس' }
     ],
-    image: '/assets/images/services/catering.png',
-    secondaryImage: '/assets/images/services/catering.png'
+    image: '/assets/images/services/ai_v2/optimized/catering_realistic_1777542812101.webp',
+    secondaryImage: '/assets/images/services/ai_v2/optimized/catering_realistic_1777542812101.webp'
   },
   {
     slug: 'facade-cleaning',
@@ -368,8 +368,8 @@ export const servicesData: ServiceDetails[] = [
       { en: 'Enhanced Thermal Efficiency', ar: 'تعزيز الكفاءة الحرارية' },
       { en: 'Architectural Value Preservation', ar: 'الحفاظ على القيمة المعمارية' }
     ],
-    image: '/assets/images/services/facade.png',
-    secondaryImage: '/assets/images/services/facade.png'
+    image: '/assets/images/services/ai_v2/optimized/FacdeCleaning.webp',
+    secondaryImage: '/assets/images/services/ai_v2/optimized/FacdeCleaning.webp'
   },
   {
     slug: 'landscaping-services',
@@ -406,8 +406,8 @@ export const servicesData: ServiceDetails[] = [
       { en: 'Psychological Wellness Spaces', ar: 'مساحات الرفاهية النفسية' },
       { en: 'Strategic Environmental Branding', ar: 'العلامة التجارية البيئية الاستراتيجية' }
     ],
-    image: '/assets/images/services/landscaping.png',
-    secondaryImage: '/assets/images/services/landscaping.png'
+    image: '/assets/images/services/ai_v2/optimized/landscaping_realistic_1777542871619.webp',
+    secondaryImage: '/assets/images/services/ai_v2/optimized/landscaping_realistic_1777542871619.webp'
   },
   {
     slug: 'pest-control-management',
@@ -444,8 +444,8 @@ export const servicesData: ServiceDetails[] = [
       { en: 'Predictive Infestation Mitigation', ar: 'التخفيف التنبؤي من الإصابة' },
       { en: 'Autonomous Bio-Mapping Integrity', ar: 'سلامة رسم الخرائط البيولوجية المستقلة' }
     ],
-    image: '/assets/images/services/pestcontrol.png',
-    secondaryImage: '/assets/images/services/pestcontrol.png'
+    image: '/assets/images/services/ai_v2/optimized/pest_control_realistic_v2_1777543502716.webp',
+    secondaryImage: '/assets/images/services/ai_v2/optimized/pest_control_realistic_v2_1777543502716.webp'
   },
   {
     slug: 'facility-help-desk',
@@ -482,8 +482,8 @@ export const servicesData: ServiceDetails[] = [
       { en: 'Transparent SLA Performance', ar: 'أداء شفاف لاتفاقية مستوى الخدمة' },
       { en: 'Predictive Resource Orchestration', ar: 'تنسيق الموارد التنبؤي' }
     ],
-    image: '/assets/images/services/helpdesk.png',
-    secondaryImage: '/assets/images/services/helpdesk.png'
+    image: '/assets/images/services/ai_v2/optimized/help_desk_realistic_v2_1777543453973.webp',
+    secondaryImage: '/assets/images/services/ai_v2/optimized/help_desk_realistic_v2_1777543453973.webp'
   },
 ];
 

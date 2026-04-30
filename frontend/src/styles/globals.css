@@ -127,19 +127,27 @@ body {
   position: relative;
 }
 
-/* Cinematic Noise Overlay */
+/* Cinematic Noise Overlay — CSS-only, zero network cost */
 body::after {
   content: "";
   position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background-image: url("https://grainy-gradients.vercel.app/noise.svg");
-  opacity: 0.05;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background-image: repeating-conic-gradient(
+    rgba(0,0,0,0) 0% 25%, 
+    rgba(130,130,130,0.03) 0% 50%
+  );
+  background-size: 4px 4px;
+  opacity: 0.6;
   pointer-events: none;
   z-index: 9999;
-  filter: contrast(150%) brightness(100%);
+  animation: noiseShift 0.5s steps(2) infinite;
+}
+
+@keyframes noiseShift {
+  to { transform: translate(2px, -1px); }
 }
 
 .text-sub {
@@ -411,12 +419,4 @@ html[lang="en"] button {
   unicode-bidi: embed;
 }
 
-/* Global cursor suppression for custom cursor experience */
-* {
-  cursor: none !important;
-}
-
-/* Ensure interactive elements also don't show OS cursor */
-a, button, input, textarea, select {
-  cursor: none !important;
-}
+/* Global cursor suppression handled by @media (pointer: fine) above */

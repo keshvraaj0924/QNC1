@@ -55,8 +55,7 @@
 }
 
 .modernGlass {
-  background: rgba(255, 255, 255, 0.03);
-  backdrop-filter: blur(25px) saturate(200%);
+  background: rgba(15, 15, 15, 0.9);
   border: 1px solid rgba(255, 255, 255, 0.1);
   padding: 25px;
   border-radius: 20px;

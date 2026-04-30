@@ -19,7 +19,7 @@ export default function ScrollReveal({
   direction = 'up',
   delay = 0,
   duration = 1.2,
-  distance = 80,
+  distance = 60,
   className = '',
   style = {},
   once = true
@@ -36,13 +36,11 @@ export default function ScrollReveal({
     <motion.div
       initial={{ 
         opacity: 0, 
-        filter: 'blur(15px)',
-        scale: 0.92,
+        scale: 0.97,
         ...directions[direction] 
       }}
       whileInView={{ 
         opacity: 1, 
-        filter: 'blur(0px)',
         scale: 1,
         x: 0, 
         y: 0 
@@ -51,7 +49,7 @@ export default function ScrollReveal({
       transition={{
         duration: duration,
         delay: delay,
-        ease: [0.22, 1, 0.36, 1] // Premium Quintic Ease-Out
+        ease: [0.22, 1, 0.36, 1]
       }}
       className={className}
       style={style}

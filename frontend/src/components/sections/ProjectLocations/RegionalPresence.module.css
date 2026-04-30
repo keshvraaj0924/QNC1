@@ -88,7 +88,6 @@
   display: flex;
   align-items: center;
   justify-content: flex-start;
-  perspective: 2500px;
 }
 
 .mapSvg {
@@ -134,17 +133,13 @@
 }
 
 .infoCard {
-  background: rgba(12, 14, 18, 0.45);
-  backdrop-filter: blur(50px) saturate(200%);
-  -webkit-backdrop-filter: blur(50px) saturate(200%);
+  background: rgba(12, 14, 18, 0.88);
   border: 1px solid rgba(255, 255, 255, 0.08);
   border-radius: 40px;
-  padding: 50px; /* Reduced padding to help content fit */
+  padding: 50px;
   width: 100%;
   max-width: 580px;
-  box-shadow: 
-    0 50px 120px rgba(0, 0, 0, 0.9),
-    inset 0 0 0 1px rgba(255, 255, 255, 0.03);
+  box-shadow: 0 40px 80px rgba(0, 0, 0, 0.7);
 }
 
 [data-theme='light'] .infoCard {

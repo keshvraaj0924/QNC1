@@ -42,7 +42,7 @@ const placeNow = (el: HTMLElement, slot: any, skew: number) =>
     skewY: skew,
     transformOrigin: 'center center',
     zIndex: slot.zIndex,
-    force3D: true
+
   });
 
 interface CardSwapProps {

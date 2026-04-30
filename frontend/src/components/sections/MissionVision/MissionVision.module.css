@@ -116,8 +116,7 @@
   align-items: center;
   gap: 4rem;
   padding: 3.5rem 4rem;
-  background: linear-gradient(135deg, rgba(8, 8, 8, 0.9) 0%, rgba(203, 161, 82, 0.05) 100%);
-  backdrop-filter: blur(25px);
+  background: linear-gradient(135deg, rgba(8, 8, 8, 0.95) 0%, rgba(203, 161, 82, 0.05) 100%);
   border: 1.5px solid rgba(203, 161, 82, 0.3);
   border-radius: 32px;
   width: 100%;
@@ -243,10 +242,7 @@
   position: absolute;
   width: 150%;
   height: 150%;
-  background: radial-gradient(circle at center, rgba(99, 89, 166, 0.2), transparent 70%);
-  z-index: 1;
-  pointer-events: none;
-  filter: blur(40px);
+  background: radial-gradient(circle at center, rgba(99, 89, 166, 0.15), transparent 70%);
 }
 
 .rtl .orbitColumn {

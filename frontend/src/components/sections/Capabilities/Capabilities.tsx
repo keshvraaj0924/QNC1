@@ -92,6 +92,7 @@ function ServiceRail({ type, services, language, isRTL, t, theme, hideMainHeader
   
   const frameRefs = useRef<(HTMLDivElement | null)[]>([]);
   const visualRefs = useRef<(HTMLDivElement | null)[]>([]);
+  const visualBgRefs = useRef<(HTMLDivElement | null)[]>([]);
   const infoRefs = useRef<(HTMLDivElement | null)[]>([]);
 
   useLayoutEffect(() => {
@@ -119,44 +120,38 @@ function ServiceRail({ type, services, language, isRTL, t, theme, hideMainHeader
         scrollTrigger: {
           trigger: sectionRef.current,
           start: isMobile ? "top 80%" : "top top",
-          end: isMobile ? "bottom 20%" : `+=${services.length * 80}%`,
+          end: isMobile ? "bottom 20%" : `+=${services.length * 85}%`,
           pin: !isMobile,
           pinSpacing: !isMobile,
           snap: !isMobile ? {
-            snapTo: 1 / (services.length + 0.5), // Offset for title sequence
-            duration: { min: 0.2, max: 0.4 },
-            delay: 0.05,
-            ease: "power1.inOut"
+            snapTo: "labelsDirectional",
+            duration: { min: 0.2, max: 0.5 },
+            delay: 0.1,
+            ease: "power2.inOut"
           } : undefined,
-          scrub: 0.5,
+          scrub: 1,
           anticipatePin: 1,
         }
       });
 
-      // Center and Hold Phase Title
+      // 1. Initial Phase Title sequence (Slot 0)
       tl.fromTo(titleRef.current, 
-        { opacity: 0, scale: 0.8, yPercent: 50 },
-        { opacity: 1, scale: 1, yPercent: 0, duration: 2, ease: "power2.out" }
-      );
-
-      if (!isMobile) {
-        // Stay in center for a while
-        tl.to(titleRef.current, { duration: 1.5 });
-      } else {
-        // Shorter hold for mobile flow
-        tl.to(titleRef.current, { duration: 0.8 });
-      }
-
-      // Fade out as content comes in (Unified for all viewports)
-      tl.to(titleRef.current, { 
+        { opacity: 0, scale: 0.8, yPercent: 30 },
+        { opacity: 1, scale: 1, yPercent: 0, duration: 1.5, ease: "power2.out" }
+      )
+      .addLabel('title-active')
+      .to(titleRef.current, { 
+        duration: 0.8 // Short hold before transition
+      })
+      .to(titleRef.current, { 
         opacity: 0, 
-        yPercent: -40, 
+        yPercent: -30, 
         scale: 0.95, 
-        duration: 0.8,
+        duration: 0.6,
         ease: "power2.in"
       });
 
-      // Cards
+      // 2. Service Cards (Slots 1 to services.length)
       services.forEach((service: any, index: number) => {
         const frame = frameRefs.current[index];
         const visual = visualRefs.current[index];
@@ -164,38 +159,44 @@ function ServiceRail({ type, services, language, isRTL, t, theme, hideMainHeader
 
         if (!frame || !visual || !info) return;
 
-        // Desktop settled positions: offset left/right
-        // Mobile settled positions: perfectly center (handled by simple fade)
         const settleX_Visual = isMobile ? 0 : (isRTL ? 25 : -25);
         const settleX_Info = isMobile ? 0 : (isRTL ? -25 : 25);
         
-        // Vertical offsets: disabled for stable flow standard scrolling
         const fromY_Visual = isMobile ? 20 : 0; 
         const fromY_Info = isMobile ? 40 : 0; 
 
-        tl.fromTo(frame, { opacity: 0 }, { opacity: 1, duration: 0.6 }, index === 0 ? "-=1.5" : "-=1.2")
+        // Each card slot
+        tl.fromTo(frame, 
+            { opacity: 0 }, 
+            { opacity: 1, duration: 0.4 }, 
+            `-=${index === 0 ? 0.3 : 0.2}`
+          )
           .fromTo(visual, 
             { 
-              xPercent: isMobile ? 0 : (isRTL ? -100 : 100), 
+              xPercent: isMobile ? 0 : (isRTL ? -80 : 80), 
               yPercent: fromY_Visual,
-              rotateY: isMobile ? 0 : (isRTL ? 45 : -45), 
               opacity: 0,
-              scale: 0.8
+              scale: 0.9
             },
             { 
               xPercent: settleX_Visual, 
               yPercent: 0,
-              rotateY: 0, 
               opacity: 1, 
               scale: 1,
-              duration: 1, 
-              ease: "power3.out" 
+              duration: 0.8, 
+              ease: "power3.out",
+
             },
-            index === 0 ? "-=1.5" : "-=0.8"
+            "-=0.3"
+          )
+          .fromTo(visualBgRefs.current[index],
+            { scale: 1.4 },
+            { scale: 1, duration: 2, ease: "power2.out" },
+            "-=0.8"
           )
           .fromTo(info,
             { 
-              xPercent: isMobile ? 0 : (isRTL ? 100 : -100), 
+              xPercent: isMobile ? 0 : (isRTL ? 80 : -80), 
               yPercent: fromY_Info,
               opacity: 0 
             },
@@ -203,25 +204,33 @@ function ServiceRail({ type, services, language, isRTL, t, theme, hideMainHeader
               xPercent: settleX_Info, 
               yPercent: 0,
               opacity: 1, 
-              duration: 1, 
-              ease: "power3.out" 
+              duration: 0.8, 
+              ease: "power3.out",
+
             },
-            "-=0.8"
+            "-=0.6"
           )
-          .to([visual, info], { duration: 0.8 }) 
+          .addLabel(`card-${index}-active`)
+          // Stay phase
+          .to([visual, info], { duration: 1.2 }) 
+          // Exit phase
           .to(visual, { 
-            xPercent: isMobile ? 0 : (isRTL ? 150 : -150), 
-            yPercent: isMobile ? -50 : 0,
+            xPercent: isMobile ? 0 : (isRTL ? 120 : -120), 
+            yPercent: isMobile ? -30 : 0,
             opacity: 0, 
-            duration: 0.8 
+            duration: 0.6,
+            ease: "power2.in",
+
           })
           .to(info, { 
-            xPercent: isMobile ? 0 : (isRTL ? -150 : 150), 
-            yPercent: isMobile ? 50 : 0,
+            xPercent: isMobile ? 0 : (isRTL ? -120 : 120), 
+            yPercent: isMobile ? 30 : 0,
             opacity: 0, 
-            duration: 0.8 
-          }, "-=0.8")
-          .to(frame, { opacity: 0, duration: 0.3 }, "-=0.3");
+            duration: 0.6,
+            ease: "power2.in",
+
+          }, "-=0.6")
+          .to(frame, { opacity: 0, duration: 0.2 }, "-=0.2");
       });
 
       tl.to(progressRef.current, { scaleX: 1, duration: tl.duration(), ease: "none" }, 0);
@@ -273,7 +282,11 @@ function ServiceRail({ type, services, language, isRTL, t, theme, hideMainHeader
             <div key={service.id} ref={el => { frameRefs.current[idx] = el; }} className={styles.kineticCardFrame}>
               <div ref={el => { visualRefs.current[idx] = el; }} className={styles.visualPart}>
                 <div className={styles.floatingCard}>
-                  <div className={styles.cardVisual} style={{ backgroundImage: `url(${service.image})` }} />
+                  <div 
+                    ref={el => { visualBgRefs.current[idx] = el; }} 
+                    className={styles.cardVisual} 
+                    style={{ backgroundImage: `url(${service.image})` }} 
+                  />
                   <div className={styles.cardGlow} />
                 </div>
               </div>

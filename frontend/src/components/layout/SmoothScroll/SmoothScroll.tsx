@@ -11,13 +11,14 @@ export default function SmoothScroll({ children }: { children: ReactNode }) {
   const lenisRef = useRef<Lenis | null>(null);
 
   useEffect(() => {
+    // Premium Smooth Scroll Initialization
     const lenis = new Lenis({
-      duration: 1.2, // Reduced from 1.8 for a snappier, more responsive feel
+      duration: 1.2,
       easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
       orientation: 'vertical',
       gestureOrientation: 'vertical',
       smoothWheel: true,
-      wheelMultiplier: 1.0, 
+      wheelMultiplier: 1,
       touchMultiplier: 2,
       infinite: false,
     });
@@ -25,40 +26,36 @@ export default function SmoothScroll({ children }: { children: ReactNode }) {
     lenisRef.current = lenis;
 
     // Connect Lenis to GSAP ScrollTrigger
-    lenis.on('scroll', (e) => {
-      ScrollTrigger.update();
-      // Save scroll position for Home page
-      if (window.location.pathname === '/') {
-        sessionStorage.setItem('qnc_last_scroll', e.scroll.toString());
-      }
+    lenis.on('scroll', ScrollTrigger.update);
+
+    gsap.ticker.add((time) => {
+      lenis.raf(time * 1000);
     });
 
-    // Handle initial scroll restoration and top-scroll
-    const handleInitialScroll = () => {
+    gsap.ticker.lagSmoothing(500, 33);
+
+    // Scroll Restoration
+    if (window.location.pathname === '/') {
+      const savedScroll = sessionStorage.getItem('qnc_last_scroll');
+      if (savedScroll) {
+        lenis.scrollTo(parseInt(savedScroll), { immediate: true });
+      }
+    }
+
+    const handleScroll = () => {
       if (window.location.pathname === '/') {
-        const savedScroll = sessionStorage.getItem('qnc_last_scroll');
-        if (savedScroll) {
-          lenis.scrollTo(parseInt(savedScroll), { immediate: true });
-        }
-      } else {
-        lenis.scrollTo(0, { immediate: true });
+        sessionStorage.setItem('qnc_last_scroll', window.scrollY.toString());
       }
     };
 
-    // Run on mount
-    setTimeout(handleInitialScroll, 100);
-
-    const updateLenis = (time: number) => {
-      lenis.raf(time * 1000);
-    };
-
-    gsap.ticker.add(updateLenis);
-
-    gsap.ticker.lagSmoothing(0);
+    window.addEventListener('scroll', handleScroll, { passive: true });
 
     return () => {
       lenis.destroy();
-      gsap.ticker.remove(updateLenis);
+      gsap.ticker.remove((time) => {
+        lenis.raf(time * 1000);
+      });
+      window.removeEventListener('scroll', handleScroll);
     };
   }, []);
 

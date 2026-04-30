@@ -3,8 +3,9 @@
   width: 100%;
   background-color: var(--background);
   color: var(--foreground);
-  overflow: visible; /* Ensure pinning markers/shadows aren't clipped */
-  z-index: 50; /* Higher than Map section */
+  overflow: visible;
+  z-index: 50;
+  contain: layout style;
 }
 
 .stickyTrack {
@@ -131,23 +132,23 @@
   position: absolute;
   width: 95%;
   max-width: 1300px;
-  height: 50vh; /* Constrained height */
-  perspective: 2000px;
+  height: 50vh;
   opacity: 0;
   display: flex;
   align-items: center;
   justify-content: center;
-  transition: transform 0.3s ease;
+  will-change: opacity;
+  transform: translateZ(0);
 }
 
 .visualPart {
   flex: 1;
   height: 100%;
   position: relative;
-  transform-style: preserve-3d;
   display: flex;
   justify-content: center;
   align-items: center;
+  will-change: transform, opacity;
 }
 
 .floatingCard {
@@ -185,7 +186,8 @@
   justify-content: center;
   align-items: center;
   padding: 40px;
-  opacity: 0; /* Animated in GSAP */
+  opacity: 0;
+  will-change: transform, opacity;
 }
 
 .modernizedBox {
@@ -206,9 +208,7 @@
 }
 
 .modernizedBox:hover {
-  background: rgba(203, 161, 82, 0.05);
   border-color: var(--gold);
-  transform: translateY(-10px) scale(1.02);
 }
 
 .modernizedBox::before {

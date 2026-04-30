@@ -1,7 +1,7 @@
 'use client';
 
 import { motion, useScroll, useTransform, useSpring } from 'framer-motion';
-import { useRef, useState, useEffect } from 'react';
+import { useRef, useCallback, useEffect } from 'react';
 import styles from './Hero.module.css';
 import { useLanguage } from '@/context/LanguageContext';
 import Link from 'next/link';
@@ -10,21 +10,21 @@ import MagnetButton from '@/components/modern/MagnetButton';
 
 /**
  * Enhanced Modern Hero Component
- * Featuring parallax effects, cinematic transitions, and responsive design
+ * Featuring parallax effects, cinematic transitions, and responsive design.
+ * Performance-optimized: no dynamic blur, throttled mouse, GPU-composited layers.
  */
 export default function Hero({ content }: { content?: any }) {
   const { language, isRTL, t } = useLanguage();
   const containerRef = useRef<HTMLDivElement>(null);
-  const [mousePos, setMousePos] = useState({ x: 0, y: 0 });
-  
+
   // Content mapping from CMS props
-  const videoUrl = content?.video_url || '/assets/videos/Industrial_Documentary_Video_Prompt_Generation.mp4';
-  const title = language === 'en' 
-    ? (content?.title_en || t('hero_title')) 
+  const videoUrl = content?.video_url || '/assets/videos/qnc-hero-montage.mp4';
+  const title = language === 'en'
+    ? (content?.title_en || t('hero_title'))
     : (content?.title_ar || t('hero_title'));
-    
-  const label = language === 'en' 
-    ? (content?.label_en || t('hero_label')) 
+
+  const label = language === 'en'
+    ? (content?.label_en || t('hero_label'))
     : (content?.label_ar || t('hero_label'));
 
   const { scrollYProgress } = useScroll({
@@ -32,64 +32,63 @@ export default function Hero({ content }: { content?: any }) {
     offset: ["start start", "end start"]
   });
 
-  // Parallax and Scroll Effects
-  const y = useTransform(scrollYProgress, [0, 1], [0, 300]);
-  const opacity = useTransform(scrollYProgress, [0, 0.5], [1, 0]);
-  const scale = useTransform(scrollYProgress, [0, 1], [1, 1.1]);
-  const blur = useTransform(scrollYProgress, [0, 0.5], [0, 10]);
+  // GPU-friendly transforms (translate + opacity only, no blur/filter)
+  const y = useTransform(scrollYProgress, [0, 1], [0, 200]);
+  const opacity = useTransform(scrollYProgress, [0, 0.6], [1, 0]);
+  const videoOpacity = useTransform(scrollYProgress, [0, 0.5], [1, 0.3]);
 
-  // Spring physics for mouse interaction
-  const springConfig = { damping: 25, stiffness: 150 };
+  // Spring physics for mouse interaction — throttled via RAF
+  const springConfig = { damping: 30, stiffness: 120 };
   const mouseX = useSpring(0, springConfig);
   const mouseY = useSpring(0, springConfig);
 
-  useEffect(() => {
-    const handleMouseMove = (e: MouseEvent) => {
-      const { clientX, clientY } = e;
-      const moveX = (clientX - window.innerWidth / 2) / 25;
-      const moveY = (clientY - window.innerHeight / 2) / 25;
+  const rafId = useRef<number>(0);
+
+  const handleMouseMove = useCallback((e: MouseEvent) => {
+    if (rafId.current) return; // Skip if RAF pending
+    rafId.current = requestAnimationFrame(() => {
+      const moveX = (e.clientX - window.innerWidth / 2) / 30;
+      const moveY = (e.clientY - window.innerHeight / 2) / 30;
       mouseX.set(moveX);
       mouseY.set(moveY);
-      setMousePos({ x: clientX, y: clientY });
-    };
-    window.addEventListener('mousemove', handleMouseMove);
-    return () => window.removeEventListener('mousemove', handleMouseMove);
+      rafId.current = 0;
+    });
   }, [mouseX, mouseY]);
+
+  useEffect(() => {
+    window.addEventListener('mousemove', handleMouseMove, { passive: true });
+    return () => {
+      window.removeEventListener('mousemove', handleMouseMove);
+      if (rafId.current) cancelAnimationFrame(rafId.current);
+    };
+  }, [handleMouseMove]);
 
   return (
     <section ref={containerRef} className={`${styles.heroSection} ${isRTL ? styles.rtl : ''}`}>
-      {/* Cinematic Background Layer */}
-      <motion.div 
+      {/* Cinematic Background Layer — GPU composited, no dynamic filters */}
+      <motion.div
         className={styles.bgContainer}
-        style={{ scale, filter: useTransform(blur, (b) => `blur(${b}px)`) }}
+        style={{ opacity: videoOpacity }}
       >
         <video
           autoPlay
           muted
           loop
           playsInline
+          preload="auto"
           className={styles.bgVideo}
           src={videoUrl}
         />
         <div className={styles.overlay} />
       </motion.div>
 
-      {/* Interactive Light Layer */}
-      <motion.div 
-        className={styles.mouseGlow}
-        style={{ 
-          x: mousePos.x - 400, 
-          y: mousePos.y - 400 
-        }}
-      />
-
       {/* Content Layer */}
-      <motion.div 
+      <motion.div
         className={styles.contentWrapper}
         style={{ y, opacity }}
       >
         <div className={styles.content}>
-          <motion.div 
+          <motion.div
             className={styles.labelWrapper}
             initial={{ opacity: 0, x: isRTL ? 30 : -30 }}
             animate={{ opacity: 1, x: 0 }}
@@ -104,7 +103,7 @@ export default function Hero({ content }: { content?: any }) {
             className={styles.titleContainer}
           >
             <h1 className={styles.title}>
-              <BlurText 
+              <BlurText
                 text={title}
                 delay={50}
                 animateBy="words"
@@ -113,7 +112,7 @@ export default function Hero({ content }: { content?: any }) {
             </h1>
           </motion.div>
 
-          <motion.div 
+          <motion.div
             className={styles.ctaWrapper}
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
@@ -131,7 +130,7 @@ export default function Hero({ content }: { content?: any }) {
         </div>
 
         {/* Floating Side Info */}
-        <motion.div 
+        <motion.div
           className={styles.sideInfo}
           initial={{ opacity: 0, x: isRTL ? -50 : 50 }}
           animate={{ opacity: 1, x: 0 }}
@@ -153,7 +152,7 @@ export default function Hero({ content }: { content?: any }) {
       </motion.div>
 
       {/* Scroll Indicator */}
-      <motion.div 
+      <motion.div
         className={styles.scrollIndicator}
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
@@ -161,7 +160,7 @@ export default function Hero({ content }: { content?: any }) {
       >
         <span className={styles.scrollText}>{t('hero_scroll')}</span>
         <div className={styles.scrollLine}>
-          <motion.div 
+          <motion.div
             className={styles.scrollProgress}
             animate={{ y: [0, 50, 0] }}
             transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}

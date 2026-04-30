@@ -177,12 +177,15 @@ export default function RegionalPresence() {
     const mm = gsap.matchMedia();
 
     mm.add("(min-width: 1025px)", () => {
+      let lastStage: Stage = 'OVERVIEW';
+      let lastHubIdx: number = -1;
+
       ScrollTrigger.create({
         trigger: sectionRef.current,
         start: 'top top',
-        end: `+=${REGIONS_DATA.length * 300}%`,
+        end: `+=${REGIONS_DATA.length * 150}%`,
         pin: true,
-        scrub: 1.5,
+        scrub: true,
         anticipatePin: 1,
         onUpdate: (self) => {
           const totalStages = REGIONS_DATA.length;
@@ -195,20 +198,29 @@ export default function RegionalPresence() {
           const [zX, zY, zW, zH] = hub.zoomViewBox.split(' ').map(Number);
           const [oX, oY, oW, oH] = OVERVIEW_VIEWBOX.split(' ').map(Number);
 
-          setActiveHubIndex(hubIdx);
-
+          let newStage: Stage = 'OVERVIEW';
           if (localProgress < 0.15) {
-            setActiveStage('OVERVIEW');
-            vbX.set(oX); vbY.set(oY); vbW.set(oW); vbH.set(oH);
+            newStage = 'OVERVIEW';
           } else if (localProgress < 0.45) {
-            setActiveStage('ZOOMING');
-            vbX.set(zX); vbY.set(zY); vbW.set(zW); vbH.set(zH);
+            newStage = 'ZOOMING';
           } else if (localProgress < 0.85) {
-            setActiveStage('REGION_ACTIVE');
-            vbX.set(zX); vbY.set(zY); vbW.set(zW); vbH.set(zH);
+            newStage = 'REGION_ACTIVE';
           } else {
-            setActiveStage('ZOOMING_OUT');
-            vbX.set(oX); vbY.set(oY); vbW.set(oW); vbH.set(oH);
+            newStage = 'ZOOMING_OUT';
+          }
+
+          if (newStage !== lastStage || hubIdx !== lastHubIdx) {
+            lastStage = newStage;
+            lastHubIdx = hubIdx;
+
+            setActiveStage(newStage);
+            setActiveHubIndex(hubIdx);
+
+            if (newStage === 'OVERVIEW' || newStage === 'ZOOMING_OUT') {
+              vbX.set(oX); vbY.set(oY); vbW.set(oW); vbH.set(oH);
+            } else {
+              vbX.set(zX); vbY.set(zY); vbW.set(zW); vbH.set(zH);
+            }
           }
         }
       });
@@ -249,14 +261,15 @@ export default function RegionalPresence() {
       {/* Cinematic Background Layer */}
       <div className={styles.immersiveBgContainer}>
         <AnimatePresence mode="wait">
-          {activeStage === 'REGION_ACTIVE' && (
+          {isImmersive && (
             <motion.div 
               key={activeHub.id}
-              initial={{ opacity: 0, scale: 1.1 }}
-              animate={{ opacity: 0.6, scale: 1 }}
-              exit={{ opacity: 0, scale: 1.05 }}
-              transition={{ duration: 1.2, ease: "easeOut" }}
+              initial={{ opacity: 0, scale: 1.1, filter: 'blur(10px)' }}
+              animate={{ opacity: 0.6, scale: 1, filter: 'blur(0px)' }}
+              exit={{ opacity: 0, scale: 1.05, filter: 'blur(5px)' }}
+              transition={{ duration: 1.5, ease: [0.16, 1, 0.3, 1] }}
               className={styles.bgImageLayer}
+              style={{ willChange: "opacity, transform, filter" }}
               // Removed placeholder.jpg to fix 404. Relying on the inner <img> for dynamic content.
             >
               {/* Fallback for generated images located in artifacts path during dev */}
